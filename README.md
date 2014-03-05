@@ -28,11 +28,27 @@ Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 monitoringRules = (MonitoringRules) jaxbUnmarshaller.unmarshal(xmlFileURL);
 ```
 
+## Convert Java Object to XML
+
+Example:
+```java
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import it.polimi.modaclouds.qos_models.MonitoringRules;
+...
+JAXBContext jaxbContext = JAXBContext.newInstance(MonitoringRules.class);
+Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+jaxbMarshaller.marshal(customer, System.out);
+```
+
 Click [here](http://deib-polimi.github.io/modaclouds-qos-models/) to see the Javadoc.
 
-#Maven repository
+#Installation
 
-Add this to your repositories for releases:
+The library is released on deib-polimi maven repository on GitHub.
+
+Releases repository:
 ```xml
 <repositories>
 	...
@@ -44,7 +60,7 @@ Add this to your repositories for releases:
 </repositories>
 ```
 
-Add this to your repositories for snapshots:
+Snapshots repository:
 ```xml
 <repositories>
 	...
