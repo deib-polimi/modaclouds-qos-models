@@ -34,18 +34,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for actions complex type.
+ * <p>Java class for monitoredTargets complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="actions">
+ * &lt;complexType name="monitoredTargets">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="action" type="{http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema}action" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="monitoredTarget" type="{http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema}monitoredTarget" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="useParentActions" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *       &lt;attribute name="useParentTargets" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -54,71 +54,71 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "actions", propOrder = {
-    "actions"
+@XmlType(name = "monitoredTargets", propOrder = {
+    "monitoredTargets"
 })
-public class Actions {
+public class MonitoredTargets {
 
-    @XmlElement(name = "action")
-    protected List<Action> actions;
-    @XmlAttribute(name = "useParentActions")
-    protected Boolean useParentActions;
+    @XmlElement(name = "monitoredTarget")
+    protected List<MonitoredTarget> monitoredTargets;
+    @XmlAttribute(name = "useParentTargets")
+    protected Boolean useParentTargets;
 
     /**
-     * Gets the value of the actions property.
+     * Gets the value of the monitoredTargets property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actions property.
+     * This is why there is not a <CODE>set</CODE> method for the monitoredTargets property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getActions().add(newItem);
+     *    getMonitoredTargets().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Action }
+     * {@link MonitoredTarget }
      * 
      * 
      */
-    public List<Action> getActions() {
-        if (actions == null) {
-            actions = new ArrayList<Action>();
+    public List<MonitoredTarget> getMonitoredTargets() {
+        if (monitoredTargets == null) {
+            monitoredTargets = new ArrayList<MonitoredTarget>();
         }
-        return this.actions;
+        return this.monitoredTargets;
     }
 
     /**
-     * Gets the value of the useParentActions property.
+     * Gets the value of the useParentTargets property.
      * 
      * @return
      *     possible object is
      *     {@link Boolean }
      *     
      */
-    public boolean isUseParentActions() {
-        if (useParentActions == null) {
+    public boolean isUseParentTargets() {
+        if (useParentTargets == null) {
             return false;
         } else {
-            return useParentActions;
+            return useParentTargets;
         }
     }
 
     /**
-     * Sets the value of the useParentActions property.
+     * Sets the value of the useParentTargets property.
      * 
      * @param value
      *     allowed object is
      *     {@link Boolean }
      *     
      */
-    public void setUseParentActions(Boolean value) {
-        this.useParentActions = value;
+    public void setUseParentTargets(Boolean value) {
+        this.useParentTargets = value;
     }
 
 }

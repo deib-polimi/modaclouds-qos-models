@@ -17,11 +17,14 @@
        limitations under the License.
 
 -->
-<aggregateFunctions xmlns="http://www.modaclouds.eu/xsd/1.0/aggregate_functions_schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/aggregate_functions_schema https://raw.github.com/deib-polimi/modaclouds-monitoring-rules/v1.0/metamodels/commons/aggregate_functions_schema.xsd">
-	<aggregateFunction nParams="0">average</aggregateFunction>
-	<aggregateFunction nParams="1">percentile</aggregateFunction>
-	<aggregateFunction nParams="1">whitebox_prediction</aggregateFunction>
-	<aggregateFunction nParams="1">blackbox_prediction</aggregateFunction>
-	<aggregateFunction nParams="0">max</aggregateFunction>
-	<aggregateFunction nParams="0">min</aggregateFunction>
+<aggregateFunctions
+	xmlns="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema ../commons/aggregate_functions_schema.xsd">
+	<aggregateFunction numOfArguments="0">average</aggregateFunction>
+	<aggregateFunction numOfArguments="1">percentile</aggregateFunction>
+	<aggregateFunction numOfArguments="1">whitebox_prediction</aggregateFunction>
+	<aggregateFunction numOfArguments="1">blackbox_prediction</aggregateFunction>
+	<aggregateFunction numOfArguments="0">max</aggregateFunction>
+	<aggregateFunction numOfArguments="0">min</aggregateFunction>
 </aggregateFunctions>

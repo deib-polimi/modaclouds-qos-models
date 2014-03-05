@@ -34,14 +34,14 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for aggregateFunction complex type.
+ * <p>Java class for availableAction complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="aggregateFunction">
+ * &lt;complexType name="availableAction">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema>aggFunString">
+ *     &lt;extension base="&lt;http://www.modaclouds.eu/xsd/2.0/actions_schema>actionString">
  *       &lt;attribute name="numOfArguments" use="required" type="{http://www.w3.org/2001/XMLSchema}nonNegativeInteger" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
@@ -51,10 +51,10 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "aggregateFunction", namespace = "http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema", propOrder = {
+@XmlType(name = "availableAction", namespace = "http://www.modaclouds.eu/xsd/2.0/actions_schema", propOrder = {
     "value"
 })
-public class AggregateFunction {
+public class AvailableAction {
 
     @XmlValue
     protected String value;

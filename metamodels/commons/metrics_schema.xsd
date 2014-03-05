@@ -18,20 +18,31 @@
 
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
+	targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1">
 	<xs:element name="metrics">
 		<xs:annotation>
 			<xs:documentation>A list of metrics</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="metric" type="mt:metricString" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="metric" type="mt:metricString"
+					minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="metrics" />
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:simpleType name="metricString">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
+			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

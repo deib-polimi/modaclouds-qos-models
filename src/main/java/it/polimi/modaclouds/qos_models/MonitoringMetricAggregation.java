@@ -30,25 +30,25 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for action complex type.
+ * <p>Java class for monitoringMetricAggregation complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="action">
+ * &lt;complexType name="monitoringMetricAggregation">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="parameter" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="targetRuleID" type="{http://www.w3.org/2001/XMLSchema}IDREF" />
- *       &lt;attribute name="actionID" use="required" type="{http://www.modaclouds.eu/xsd/2.0/actions_schema}actionString" />
+ *       &lt;attribute name="useParentFields" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *       &lt;attribute name="groupingCategory" type="{http://www.modaclouds.eu/xsd/1.0/grouping_categories_schema}groupCatString" />
+ *       &lt;attribute name="aggregateFunction" type="{http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema}aggFunString" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -57,20 +57,20 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "action", propOrder = {
+@XmlType(name = "monitoringMetricAggregation", propOrder = {
     "parameters"
 })
-public class Action {
+public class MonitoringMetricAggregation {
 
     @XmlElement(name = "parameter")
     @XmlSchemaType(name = "anySimpleType")
     protected List<Object> parameters;
-    @XmlAttribute(name = "targetRuleID")
-    @XmlIDREF
-    @XmlSchemaType(name = "IDREF")
-    protected Object targetRuleID;
-    @XmlAttribute(name = "actionID", required = true)
-    protected String actionID;
+    @XmlAttribute(name = "useParentFields")
+    protected Boolean useParentFields;
+    @XmlAttribute(name = "groupingCategory")
+    protected String groupingCategory;
+    @XmlAttribute(name = "aggregateFunction")
+    protected String aggregateFunction;
 
     /**
      * Gets the value of the parameters property.
@@ -102,51 +102,79 @@ public class Action {
     }
 
     /**
-     * Gets the value of the targetRuleID property.
+     * Gets the value of the useParentFields property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link Boolean }
      *     
      */
-    public Object getTargetRuleID() {
-        return targetRuleID;
+    public boolean isUseParentFields() {
+        if (useParentFields == null) {
+            return false;
+        } else {
+            return useParentFields;
+        }
     }
 
     /**
-     * Sets the value of the targetRuleID property.
+     * Sets the value of the useParentFields property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link Boolean }
      *     
      */
-    public void setTargetRuleID(Object value) {
-        this.targetRuleID = value;
+    public void setUseParentFields(Boolean value) {
+        this.useParentFields = value;
     }
 
     /**
-     * Gets the value of the actionID property.
+     * Gets the value of the groupingCategory property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getActionID() {
-        return actionID;
+    public String getGroupingCategory() {
+        return groupingCategory;
     }
 
     /**
-     * Sets the value of the actionID property.
+     * Sets the value of the groupingCategory property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setActionID(String value) {
-        this.actionID = value;
+    public void setGroupingCategory(String value) {
+        this.groupingCategory = value;
+    }
+
+    /**
+     * Gets the value of the aggregateFunction property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAggregateFunction() {
+        return aggregateFunction;
+    }
+
+    /**
+     * Sets the value of the aggregateFunction property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAggregateFunction(String value) {
+        this.aggregateFunction = value;
     }
 
 }

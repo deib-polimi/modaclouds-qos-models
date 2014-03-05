@@ -20,7 +20,7 @@
 <monitoringRules
 	xmlns="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema https://raw.github.com/deib-polimi/modaclouds-monitoring-rules/v1.0/metamodels/monitoring/monitoring_rules_schema.xsd">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema ../monitoringrules/monitoring_rules_schema.xsd">
 	<monitoringRule id="mr-61310618-1da0-4c7a-aa1b-14a2a45d8a70"
 		label="ResponseTime" metricName="response_time"
 		relatedQosConstraintId="c1" startEnabled="true" timeStep="60"

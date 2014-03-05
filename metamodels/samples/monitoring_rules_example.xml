@@ -20,7 +20,7 @@
 <monitoringRules
 	xmlns="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema https://raw.github.com/deib-polimi/modaclouds-monitoring-rules/v1.0/metamodels/monitoring/monitoring_rules_schema.xsd">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema ../monitoringrules/monitoring_rules_schema.xsd">
 	<monitoringRule id="mr_1" label="CPU Utilization Rule"
 		metricName="cpu_utilization" relatedQosConstraintId="qs_1" timeStep="60"
 		timeWindow="60" startEnabled="true" samplingProbability="1"

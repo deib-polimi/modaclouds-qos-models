@@ -17,12 +17,12 @@
        limitations under the License.
 
 -->
-<actions xmlns="http://www.modaclouds.eu/xsd/1.0/actions_schema"
+<availableActions xmlns="http://www.modaclouds.eu/xsd/2.0/actions_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/actions_schema https://raw.github.com/deib-polimi/modaclouds-monitoring-rules/v1.0/metamodels/monitoring/actions_schema.xsd">
-	<action nParams="0">notify_violation</action>
-	<action nParams="0">enable_monitoring_rule</action>
-	<action nParams="0">disable_monitoring_rule</action>
-	<action nParams="1">set_sampling_probability</action>
-	<action nParams="1">set_sampling_time</action>
-</actions>
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/actions_schema ../monitoringrules/actions_schema.xsd">
+	<availableAction numOfArguments="0">notify_violation</availableAction>
+	<availableAction numOfArguments="0">enable_monitoring_rule</availableAction>
+	<availableAction numOfArguments="0">disable_monitoring_rule</availableAction>
+	<availableAction numOfArguments="1">set_sampling_probability</availableAction>
+	<availableAction numOfArguments="1">set_sampling_time</availableAction>
+</availableActions>

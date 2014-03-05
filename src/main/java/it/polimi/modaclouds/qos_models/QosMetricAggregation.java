@@ -30,22 +30,23 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for actions complex type.
+ * <p>Java class for qosMetricAggregation complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="actions">
+ * &lt;complexType name="qosMetricAggregation">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="action" type="{http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema}action" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="parameter" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="useParentActions" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *       &lt;attribute name="aggregateFunction" type="{http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema}aggFunString" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -54,71 +55,68 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "actions", propOrder = {
-    "actions"
+@XmlType(name = "qosMetricAggregation", namespace = "http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema", propOrder = {
+    "parameters"
 })
-public class Actions {
+public class QosMetricAggregation {
 
-    @XmlElement(name = "action")
-    protected List<Action> actions;
-    @XmlAttribute(name = "useParentActions")
-    protected Boolean useParentActions;
+    @XmlElement(name = "parameter")
+    @XmlSchemaType(name = "anySimpleType")
+    protected List<Object> parameters;
+    @XmlAttribute(name = "aggregateFunction")
+    protected String aggregateFunction;
 
     /**
-     * Gets the value of the actions property.
+     * Gets the value of the parameters property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actions property.
+     * This is why there is not a <CODE>set</CODE> method for the parameters property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getActions().add(newItem);
+     *    getParameters().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Action }
+     * {@link Object }
      * 
      * 
      */
-    public List<Action> getActions() {
-        if (actions == null) {
-            actions = new ArrayList<Action>();
+    public List<Object> getParameters() {
+        if (parameters == null) {
+            parameters = new ArrayList<Object>();
         }
-        return this.actions;
+        return this.parameters;
     }
 
     /**
-     * Gets the value of the useParentActions property.
+     * Gets the value of the aggregateFunction property.
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link String }
      *     
      */
-    public boolean isUseParentActions() {
-        if (useParentActions == null) {
-            return false;
-        } else {
-            return useParentActions;
-        }
+    public String getAggregateFunction() {
+        return aggregateFunction;
     }
 
     /**
-     * Sets the value of the useParentActions property.
+     * Sets the value of the aggregateFunction property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Boolean }
+     *     {@link String }
      *     
      */
-    public void setUseParentActions(Boolean value) {
-        this.useParentActions = value;
+    public void setAggregateFunction(String value) {
+        this.aggregateFunction = value;
     }
 
 }

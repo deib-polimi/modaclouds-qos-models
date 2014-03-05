@@ -18,70 +18,126 @@
 
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mo="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:af="http://www.modaclouds.eu/xsd/1.0/aggregate_functions_schema" xmlns:gc="http://www.modaclouds.eu/xsd/1.0/grouping_categories_schema" xmlns:ac="http://www.modaclouds.eu/xsd/1.0/actions_schema" targetNamespace="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" elementFormDefault="qualified">
-	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema" schemaLocation="../commons/metrics_schema.xsd"/>
-	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/aggregate_functions_schema" schemaLocation="../commons/aggregate_functions_schema.xsd"/>
-	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/grouping_categories_schema" schemaLocation="grouping_categories_schema.xsd"/>
-	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/actions_schema" schemaLocation="actions_schema.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mo="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema"
+	xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:af="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
+	xmlns:gc="http://www.modaclouds.eu/xsd/1.0/grouping_categories_schema"
+	xmlns:ac="http://www.modaclouds.eu/xsd/2.0/actions_schema"
+	targetNamespace="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema"
+	elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	jaxb:version="2.1">
+	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
+		schemaLocation="../commons/metrics_schema.xsd" />
+	<xs:import
+		namespace="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
+		schemaLocation="../commons/aggregate_functions_schema.xsd" />
+	<xs:import
+		namespace="http://www.modaclouds.eu/xsd/1.0/grouping_categories_schema"
+		schemaLocation="grouping_categories_schema.xsd" />
+	<xs:import namespace="http://www.modaclouds.eu/xsd/2.0/actions_schema"
+		schemaLocation="actions_schema.xsd" />
 	<xs:element name="monitoringRules">
-	<xs:annotation>
+		<xs:annotation>
 			<xs:documentation>A list of Monitoring Rules</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="monitoringRule" type="mo:monitoringRule" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="monitoringRule" type="mo:monitoringRule"
+					minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="monitoringRules" />
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="monitoringRule">
 		<xs:sequence>
-			<xs:element name="monitoredTargets" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="monitoredTarget" minOccurs="0" maxOccurs="unbounded">
-							<xs:complexType>
-								<xs:attribute name="id" type="xs:string"/>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-					<xs:attribute name="useParentTargets" type="xs:boolean" use="optional" default="false"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="metricAggregation" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="parameter" type="xs:anySimpleType" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-					<xs:attribute name="useParentFields" type="xs:boolean" use="optional" default="false"/>
-					<xs:attribute name="groupingCategory" type="gc:groupCatString"/>
-					<xs:attribute name="aggregateFunction" type="af:aggFunString"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="condition" type="xs:string" minOccurs="0"/>
-			<xs:element name="actions" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="action" type="ac:action" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-					<xs:attribute name="useParentActions" type="xs:boolean" use="optional" default="false"/>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="monitoredTargets" type="mo:monitoredTargets"
+				minOccurs="0" />
+			<xs:element name="metricAggregation" type="mo:monitoringMetricAggregation"
+				minOccurs="0" />
+			<xs:element name="condition" type="xs:string" minOccurs="0" />
+			<xs:element name="actions" type="mo:actions" minOccurs="0" />
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:ID" use="required"/>
-		<xs:attribute name="label" type="xs:string" use="required"/>
-		<xs:attribute name="relatedQosConstraintId" type="xs:string"/>
-		<xs:attribute name="parentMonitoringRuleId" type="xs:IDREF"/>
-		<xs:attribute name="metricName" type="mt:metricString"/>
-		<xs:attribute name="timeStep" type="xs:int" use="optional"/>
-		<xs:attribute name="timeWindow" type="xs:int" use="optional"/>
-		<xs:attribute name="startEnabled" type="xs:boolean"/>
-		<xs:attribute name="samplingTime" type="xs:int"/>
-		<xs:attribute name="samplingProbability" type="mo:probability"/>
+		<xs:attribute name="id" type="xs:ID" use="required" />
+		<xs:attribute name="label" type="xs:string" use="required" />
+		<xs:attribute name="relatedQosConstraintId" type="xs:string" />
+		<xs:attribute name="parentMonitoringRuleId" type="xs:IDREF" />
+		<xs:attribute name="metricName" type="mt:metricString" />
+		<xs:attribute name="timeStep" type="xs:int" use="optional" />
+		<xs:attribute name="timeWindow" type="xs:int" use="optional" />
+		<xs:attribute name="startEnabled" type="xs:boolean" />
+		<xs:attribute name="samplingTime" type="xs:int" />
+		<xs:attribute name="samplingProbability" type="mo:probability" />
 	</xs:complexType>
 	<xs:simpleType name="probability">
 		<xs:restriction base="xs:float">
-			<xs:maxInclusive value="1"/>
-			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1" />
+			<xs:minInclusive value="0" />
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="monitoredTargets">
+		<xs:sequence>
+			<xs:element name="monitoredTarget" type="mo:monitoredTarget"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="monitoredTargets" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="useParentTargets" type="xs:boolean"
+			use="optional" default="false" />
+	</xs:complexType>
+	<xs:complexType name="monitoredTarget">
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="monitoringMetricAggregation">
+		<xs:sequence>
+			<xs:element name="parameter" type="xs:anySimpleType"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="parameters" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="useParentFields" type="xs:boolean"
+			use="optional" default="false" />
+		<xs:attribute name="groupingCategory" type="gc:groupCatString" />
+		<xs:attribute name="aggregateFunction" type="af:aggFunString" />
+	</xs:complexType>
+	<xs:complexType name="actions">
+		<xs:sequence>
+			<xs:element name="action" type="mo:action" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="actions" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="useParentActions" type="xs:boolean"
+			use="optional" default="false" />
+	</xs:complexType>
+	<xs:complexType name="action">
+		<xs:sequence>
+			<xs:element name="parameter" type="xs:anySimpleType"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="parameters" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="targetRuleID" type="xs:IDREF" use="optional" />
+		<xs:attribute name="actionID" type="ac:actionString" use="required" />
+	</xs:complexType>
 </xs:schema>

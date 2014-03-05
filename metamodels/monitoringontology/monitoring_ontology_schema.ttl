@@ -5,24 +5,30 @@
 
 mo:VM
       a       rdfs:Class ;
-      rdfs:subClassOf mo:Service ;
+      rdfs:subClassOf mo:ExternalComponent ;
       mo:isIn mo:Location .
+
+mo:CloudProvider
+      a       rdfs:Class ;
+      mo:offers mo:ExternalComponent .
 
 mo:Zone
       a       rdfs:Class ;
       rdfs:subClassOf mo:Location ;
       mo:isIn mo:Region .
 
-mo:Service
+mo:ExternalComponent
       a       rdfs:Class ;
-      mo:requires mo:Service .
-
-mo:Provider
-      a       rdfs:Class ;
-      mo:offers mo:Service .
+      rdfs:subClassOf mo:Component .
 
 mo:Location
       a       rdfs:Class .
+
+mo:InternalComponent
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:Component ;
+      mo:provides mo:Method ;
+      mo:requires mo:Component .
 
 mo:Region
       a       rdfs:Class ;
@@ -32,7 +38,9 @@ mo:Method
       a       rdfs:Class ;
       mo:calls mo:Method .
 
-mo:Component
+mo:PaaSService
       a       rdfs:Class ;
-      rdfs:subClassOf mo:Service ;
-      mo:provides mo:Method .
+      rdfs:subClassOf mo:ExternalComponent .
+
+mo:Component
+      a       rdfs:Class .

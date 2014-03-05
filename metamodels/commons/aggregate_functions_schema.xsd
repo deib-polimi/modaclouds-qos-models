@@ -18,26 +18,39 @@
 
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:af="http://www.modaclouds.eu/xsd/1.0/aggregate_functions_schema" targetNamespace="http://www.modaclouds.eu/xsd/1.0/aggregate_functions_schema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:af="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jaxb:version="2.1">
 	<xs:element name="aggregateFunctions">
 		<xs:annotation>
 			<xs:documentation>A list of aggregating functions</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="aggregateFunction" type="af:aggregateFunction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="aggregateFunction" type="af:aggregateFunction"
+					minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="aggregateFunctions" />
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:simpleType name="aggFunString">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
+			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="aggregateFunction">
 		<xs:simpleContent>
 			<xs:extension base="af:aggFunString">
-				<xs:attribute name="nParams" type="xs:nonNegativeInteger" use="required"/>
+				<xs:attribute name="numOfArguments" type="xs:nonNegativeInteger"
+					use="required" />
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>

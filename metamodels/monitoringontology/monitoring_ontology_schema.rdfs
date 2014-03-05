@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:mo="http://www.modaclouds.eu/rdfs/1.0/monitoring/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/VM">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/ExternalComponent"/>
+    </rdfs:subClassOf>
+    <mo:isIn>
+      <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Location"/>
+    </mo:isIn>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/CloudProvider">
+    <mo:offers>
+      <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/ExternalComponent"/>
+    </mo:offers>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Zone">
+    <mo:isIn>
+      <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Region"/>
+    </mo:isIn>
+    <rdfs:subClassOf rdf:resource="http://www.modaclouds.eu/rdfs/1.0/monitoring/Location"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/ExternalComponent">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Component"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Region">
+    <rdfs:subClassOf rdf:resource="http://www.modaclouds.eu/rdfs/1.0/monitoring/Location"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/InternalComponent">
+    <mo:requires rdf:resource="http://www.modaclouds.eu/rdfs/1.0/monitoring/Component"/>
+    <mo:provides>
+      <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Method"/>
+    </mo:provides>
+    <rdfs:subClassOf rdf:resource="http://www.modaclouds.eu/rdfs/1.0/monitoring/Component"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/Method">
+    <mo:calls rdf:resource="http://www.modaclouds.eu/rdfs/1.0/monitoring/Method"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.modaclouds.eu/rdfs/1.0/monitoring/PaaSService">
+    <rdfs:subClassOf rdf:resource="http://www.modaclouds.eu/rdfs/1.0/monitoring/ExternalComponent"/>
+  </rdfs:Class>
+</rdf:RDF>
