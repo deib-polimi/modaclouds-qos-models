@@ -3,3 +3,5 @@
 .project
 .DS_Store
 /target
+/src/main/java/it/polimi/modaclouds/qos_models/*.java
+/src/main/java/META-INF/sun-jaxb.episode
