@@ -60,6 +60,11 @@
 			<artifactId>jena-core</artifactId>
 			<version>2.11.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>0.6.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -182,6 +187,20 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
+							<args>
+								<arg>-XtoString</arg>
+								<arg>-Xequals</arg>
+								<arg>-XhashCode</arg>
+								<arg>-Xcopyable</arg>
+								<arg>-Xmergeable</arg>
+							</args>
+							<plugins>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics</artifactId>
+									<version>0.6.5</version>
+								</plugin>
+							</plugins>
 							<extension>true</extension>
 							<schemaDirectory>${project.basedir}/metamodels</schemaDirectory>
 							<schemaIncludes>
@@ -189,8 +208,27 @@
 								<include>monitoringrules/*.xsd</include>
 								<include>qosconstraints/*.xsd</include>
 							</schemaIncludes>
-							<generatePackage>it.polimi.modaclouds.qos_models</generatePackage>
-							<generateDirectory>${project.basedir}/src/main/java</generateDirectory>
+							<generatePackage>it.polimi.modaclouds.qos_models.schema</generatePackage>
+							<generateDirectory>${project.build.directory}/generated-sources/jaxb2</generateDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/jaxb2</source>
+							</sources>
 						</configuration>
 					</execution>
 				</executions>

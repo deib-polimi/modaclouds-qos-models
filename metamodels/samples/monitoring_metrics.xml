@@ -19,7 +19,7 @@
 -->
 <metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema https://raw.github.com/deib-polimi/modaclouds-monitoring-rules/v1.0/metamodels/commons/metrics_schema.xsd">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema ../commons/metrics_schema.xsd">
 	<metric>cpu_utilization</metric>
 	<metric>response_time</metric>
 	<metric>aborted_connections</metric>
