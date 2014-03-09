@@ -65,7 +65,16 @@
 		<xs:attribute name="id" type="xs:ID" use="required" />
 		<xs:attribute name="label" type="xs:string" use="required" />
 		<xs:attribute name="relatedQosConstraintId" type="xs:string" />
-		<xs:attribute name="parentMonitoringRuleId" type="xs:IDREF" />
+		<xs:attribute name="parentMonitoringRuleId" type="xs:IDREF">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:property name="parentMonitoringRule">
+						<jaxb:baseType
+							name="MonitoringRule" />
+					</jaxb:property>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="metricName" type="mt:metricString" />
 		<xs:attribute name="timeStep" type="xs:int" use="optional" />
 		<xs:attribute name="timeWindow" type="xs:int" use="optional" />
