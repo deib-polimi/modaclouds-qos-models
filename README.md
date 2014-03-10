@@ -1,45 +1,30 @@
 MODAClouds QoS Models
 ==========================
 
+This library contains all QoS Models necessary for MODAClouds QoS Analysis and Monitoring Tools. Java classes are automatically generated from XML schemas by the JAXB Maven Plugin.
+Helpers for serialization and deserialization are also provided.
+
 #Usage
-
-The classes are automatically generated from the XML schemas in metamodels folder.
-
-Add jaxb dependencies to your project:
-```xml
-<dependency>
-	<groupId>javax.xml.bind</groupId>
-	<artifactId>jaxb-api</artifactId>
-	<version>2.2.11</version>
-</dependency>
-```
 
 ## Convert XML to Java Object
 
 Example:
 ```java
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import it.polimi.modaclouds.qos_models.MonitoringRules;
+import it.polimi.modaclouds.qos_models.util.XMLHelper;
+import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 ...
-URL xmlFileURL = new URL("https://raw.github.com/deib-polimi/modaclouds-qos-models/v1.0-alpha/metamodels/samples/monitoring_rules_example.xml");
-JAXBContext jaxbContext = JAXBContext.newInstance(MonitoringRules.class);
-Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-monitoringRules = (MonitoringRules) jaxbUnmarshaller.unmarshal(xmlFileURL);
+URL monitoringRulesURL = new URL("path/to/monitoringRules.xml");
+MonitoringRules monitoringRules = XMLHelper.deserialize(monitoringRulesURL, MonitoringRules.class);
 ```
 
 ## Convert Java Object to XML
 
 Example:
 ```java
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import it.polimi.modaclouds.qos_models.MonitoringRules;
+import it.polimi.modaclouds.qos_models.util.XMLHelper;
+import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 ...
-JAXBContext jaxbContext = JAXBContext.newInstance(MonitoringRules.class);
-Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-jaxbMarshaller.marshal(customer, System.out);
+XMLHelper.serialize(monitoringRules, MonitoringRules.class, System.out);
 ```
 
 Click [here](http://deib-polimi.github.io/modaclouds-qos-models/) to see the Javadoc.
