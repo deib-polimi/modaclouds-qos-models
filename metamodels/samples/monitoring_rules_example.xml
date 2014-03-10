@@ -28,11 +28,11 @@
 		<monitoredTargets>
 			<monitoredTarget id="tr_1" />
 		</monitoredTargets>
-		<metricAggregation groupingCategory="region"
+		<metricAggregation groupingCategoryName="region"
 			aggregateFunction="average" />
 		<condition>METRIC &gt;= 0.6</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_2" label="Percentile Monitoring Rule"
@@ -42,13 +42,13 @@
 		<monitoredTargets>
 			<monitoredTarget id="tr_2" />
 		</monitoredTargets>
-		<metricAggregation groupingCategory="provider"
+		<metricAggregation groupingCategoryName="cloud_provider"
 			aggregateFunction="percentile">
 			<parameter>95</parameter>
 		</metricAggregation>
 		<condition>METRIC &gt;= 1</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_3" label="Gold Percentile Monitoring Rule"
@@ -56,9 +56,9 @@
 		<monitoredTargets>
 			<monitoredTarget id="tr_3" />
 		</monitoredTargets>
-		<metricAggregation useParentFields="true" />
+		<metricAggregation inherited="true" />
 		<condition>METRIC &gt;= 0.3</condition>
-		<actions useParentActions="true" />
+		<actions inherited="true" />
 	</monitoringRule>
 	<monitoringRule id="mr_4" label="Unhealthy Cloud"
 		timeStep="60" startEnabled="true" timeWindow="300"
@@ -67,7 +67,7 @@
 		<metricAggregation />
 		<condition>maxOccurrence(mr_1,0) &amp;&amp; minOccurrence(mr_3,3)</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_5" label="Frontend average response time"
@@ -76,23 +76,23 @@
 		<monitoredTargets>
 			<monitoredTarget id="tr_3" />
 		</monitoredTargets>
-		<metricAggregation groupingCategory="provider"
+		<metricAggregation groupingCategoryName="cloud_provider"
 			aggregateFunction="average" />
 		<condition>METRIC &gt;= 300</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_6"
 		label="Fine grain frontend average response time"
 		parentMonitoringRuleId="mr_5" startEnabled="false"
 		samplingProbability="1" samplingTime="5">
-		<monitoredTargets useParentTargets="true" />
-		<metricAggregation useParentFields="true"
-			groupingCategory="method" />
+		<monitoredTargets inherited="true" />
+		<metricAggregation inherited="true"
+			groupingCategoryName="method" />
 		<condition>parentCondition</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_7" label="Enable fine grain RT"
@@ -100,7 +100,7 @@
 		samplingProbability="1" samplingTime="5">
 		<condition>minOccurrence(mr_5,5)</condition>
 		<actions>
-			<action targetRuleID="mr_6" actionID="enable_monitoring_rule" />
+			<action targetRuleID="mr_6" name="enable_monitoring_rule" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_8" label="Disable fine grain RT"
@@ -108,7 +108,7 @@
 		samplingProbability="1" samplingTime="5">
 		<condition>maxOccurrence(mr_5,0)</condition>
 		<actions>
-			<action targetRuleID="mr_6" actionID="disable_monitoring_rule" />
+			<action targetRuleID="mr_6" name="disable_monitoring_rule" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_9" label="ResponseTime"
@@ -118,12 +118,12 @@
 		<monitoredTargets>
 			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
-		<metricAggregation groupingCategory="provider"
+		<metricAggregation groupingCategoryName="cloud_provider"
 			aggregateFunction="average" />
 		<condition>METRIC &gt; 2000</condition>
 		<actions>
-			<action actionID="notify_violation" />
-			<action actionID="set_sampling_probability" targetRuleID="mr_8">
+			<action name="notify_violation" />
+			<action name="set_sampling_probability" targetRuleID="mr_8">
 				<parameter>1.0</parameter>
 			</action>
 		</actions>

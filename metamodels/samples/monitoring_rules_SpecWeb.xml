@@ -28,11 +28,11 @@
 		<monitoredTargets>
 			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
-		<metricAggregation groupingCategory="provider"
+		<metricAggregation groupingCategoryName="cloud_provider"
 			aggregateFunction="average" />
-		<condition>METRIC &gt; 2000</condition>
+		<condition>METRIC &gt; 2000.0</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr-57c0287c-fd59-4d19-8030-625395cd35bf"
@@ -42,13 +42,13 @@
 		<monitoredTargets>
 			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
-		<metricAggregation groupingCategory="provider"
+		<metricAggregation groupingCategoryName="cloud_provider"
 			aggregateFunction="percentile">
 			<parameter>95</parameter>
 		</metricAggregation>
-		<condition>METRIC &gt; 3000</condition>
+		<condition>METRIC &gt; 3000.0</condition>
 		<actions>
-			<action actionID="notify_violation" />
+			<action name="notify_violation" />
 		</actions>
 	</monitoringRule>
 </monitoringRules>

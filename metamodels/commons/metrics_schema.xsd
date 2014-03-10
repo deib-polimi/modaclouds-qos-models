@@ -18,22 +18,17 @@
 
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
-	targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
-	elementFormDefault="qualified" attributeFormDefault="unqualified"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema" elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
 	<xs:element name="metrics">
 		<xs:annotation>
 			<xs:documentation>A list of metrics</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="metric" type="mt:metricString"
-					minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="metric" type="mt:metric" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:appinfo>
-							<jaxb:property name="metrics" />
+							<jaxb:property name="metrics"/>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
@@ -42,7 +37,24 @@
 	</xs:element>
 	<xs:simpleType name="metricString">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*" />
+			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="metric">
+		<xs:simpleContent>
+			<xs:extension base="mt:metricString">
+				<xs:attribute name="defaultTimeStep" type="xs:positiveInteger"/>
+				<xs:attribute name="defaultTimeWindow" type="xs:positiveInteger"/>
+				<xs:attribute name="defaultSamplingTime" type="xs:positiveInteger"/>
+				<xs:attribute name="defaultSamplingProbability">
+					<xs:simpleType>
+						<xs:restriction base="xs:float">
+							<xs:minInclusive value="0.0"/>
+							<xs:maxInclusive value="1.0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
 </xs:schema>

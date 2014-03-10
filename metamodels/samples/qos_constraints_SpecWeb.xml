@@ -24,7 +24,7 @@
 		should be lower than 2000ms -->
 	<constraint id="c1" name="ResponseTime">
 		<targetResourceIDRef>_GdmYEMhsEeKON4DtRoKCMw</targetResourceIDRef>
-		<metric>reponse_time</metric>
+		<metric>response_time</metric>
 		<metricAggregation aggregateFunction="average" />
 		<range>
 			<hasMaxValue>2000</hasMaxValue>

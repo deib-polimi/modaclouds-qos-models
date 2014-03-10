@@ -70,7 +70,7 @@
 	</xs:complexType>
 	<xs:complexType name="qosMetricAggregation">
 		<xs:sequence>
-			<xs:element name="parameter" type="xs:anySimpleType"
+			<xs:element name="parameter" type="xs:string"
 				minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:appinfo>
