@@ -68,7 +68,6 @@ public class MO {
 	
 	/* --- Monitoring Specific --- */
 	public static final Resource MonitoringDatum = resource("monitoring_datum");
-	public static final Resource Violation = resource("violation");
 	
 	public static final Property hasMetric = property("has_metric");
 	public static final Property isAbout = property("is_about");
