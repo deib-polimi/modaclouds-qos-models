@@ -22,33 +22,33 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema ../monitoringrules/monitoring_rules_schema.xsd">
 	<monitoringRule id="mr-61310618-1da0-4c7a-aa1b-14a2a45d8a70"
-		label="ResponseTime" metricName="response_time"
+		label="ResponseTime" metricName="ResponseTime"
 		relatedQosConstraintId="c1" startEnabled="true" timeStep="60"
 		timeWindow="60" samplingProbability="1" samplingTime="10">
 		<monitoredTargets>
 			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
-		<metricAggregation groupingCategoryName="cloud_provider"
-			aggregateFunction="average" />
+		<metricAggregation groupingCategoryName="CloudProvider"
+			aggregateFunction="Average" />
 		<condition>METRIC &gt; 2000.0</condition>
 		<actions>
-			<action name="notify_violation" />
+			<action name="NotifyViolation" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr-57c0287c-fd59-4d19-8030-625395cd35bf"
-		label="ResponseTime" metricName="response_time"
+		label="ResponseTime" metricName="ResponseTime"
 		relatedQosConstraintId="c2" startEnabled="true" timeStep="60"
 		timeWindow="60" samplingProbability="1" samplingTime="10">
 		<monitoredTargets>
 			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
-		<metricAggregation groupingCategoryName="cloud_provider"
-			aggregateFunction="percentile">
+		<metricAggregation groupingCategoryName="CloudProvider"
+			aggregateFunction="Percentile">
 			<parameter>95</parameter>
 		</metricAggregation>
 		<condition>METRIC &gt; 3000.0</condition>
 		<actions>
-			<action name="notify_violation" />
+			<action name="NotifyViolation" />
 		</actions>
 	</monitoringRule>
 </monitoringRules>

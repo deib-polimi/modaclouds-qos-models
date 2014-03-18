@@ -30,7 +30,7 @@ public class MO {
 
     protected static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
     protected static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
-    protected static final String knowledgeBaseURL = "http://localhost:3030/modaclouds/kb/";
+    protected static final String knowledgeBaseURL = "http://localhost:3030/modaclouds/kb/data";
 
     public static String getStreamsURI() {
         return streamsURI;
@@ -44,38 +44,37 @@ public class MO {
         return knowledgeBaseURL;
     }
 
-    private static Resource resource(String local) {
+    public static Resource getResource(String local) {
         return ResourceFactory.createResource(URI + local);
     }
 
-    private static Property property(String local) {
+    public static Property getProperty(String local) {
         return ResourceFactory.createProperty(URI + local);
     }
+    
+    public static final String Component = "Component";
+    public static final String ExternalComponent = "ExternalComponent";
+    public static final String InternalComponent = "InternalComponent";
+    public static final String CloudProvider = "CloudProvider";
+    public static final String PaaSService = "PaaSService";
+    public static final String VM = "VM";
+    public static final String Method = "Method";
+    public static final String Location = "Location";
+    public static final String Region = "Region";
+    public static final String Zone = "Zone";
 
-
-    /* --- System Specific --- */
-    public static final Resource Component = resource("component");
-    public static final Resource ExternalComponent = resource("external_component");
-    public static final Resource InternalComponent = resource("internal_component");
-    public static final Resource CloudProvider = resource("cloud_provider");
-    public static final Resource PaasService = resource("paas_service");
-    public static final Resource VM = resource("vm");
-    public static final Resource Method = resource("method");
-    public static final Resource Location = resource("location");
-    public static final Resource Region = resource("region");
-    public static final Resource Zone = resource("zone");
-
-    public static final Property requires = property("requires");
-    public static final Property provides = property("provides");
-    public static final Property calls = property("calls");
-    public static final Property offers = property("offers");
-    public static final Property isIn = property("is_in");
+    public static final String requires = "requires";
+    public static final String provides = "provides";
+    public static final String calls = "calls";
+    public static final String offers = "offers";
+    public static final String isIn = "isIn";
 
     /* --- Monitoring Specific --- */
-    public static final Resource MonitoringDatum = resource("monitoring_datum");
+    public static final String MonitoringDatum = "MonitoringDatum";
 
-    public static final Property hasMetric = property("has_metric");
-    public static final Property isAbout = property("is_about");
-    public static final Property hasValue = property("has_value");
+    public static final String hasMetric = "hasMetric";
+    public static final String isAbout = "isAbout";
+    public static final String hasValue = "hasValue";
+
 
 }

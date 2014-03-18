@@ -18,7 +18,7 @@ package it.polimi.modaclouds.qos_models.util;
 
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.List;
+import java.util.Collection;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -28,7 +28,7 @@ import org.apache.commons.jxpath.JXPathContext;
 
 public class XMLHelper {
 
-	public static <T> T getElementByID(List<T> elements, String id) {
+	public static <T> T getElementByID(Collection<T> elements, String id) {
 		for (T element : elements) {
 			if (JXPathContext.newContext(element).getValue("id").equals(id))
 				return element;
@@ -36,7 +36,7 @@ public class XMLHelper {
 		return null;
 	}
 
-	public static <T> boolean containsId(List<T> elements, String id) {
+	public static <T> boolean containsId(Collection<T> elements, String id) {
 		return getElementByID(elements, id) != null;
 	}
 

@@ -21,6 +21,6 @@
 	xmlns="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
 	xs:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema ../commons/aggregate_functions_schema.xsd">
-	<aggregateFunction numOfArguments="0">average</aggregateFunction>
-	<aggregateFunction numOfArguments="1">percentile</aggregateFunction>
+	<aggregateFunction numOfArguments="0">Average</aggregateFunction>
+	<aggregateFunction numOfArguments="1">Percentile</aggregateFunction>
 </aggregateFunctions>

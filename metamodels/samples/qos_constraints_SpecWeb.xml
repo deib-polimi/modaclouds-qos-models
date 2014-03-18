@@ -24,8 +24,8 @@
 		should be lower than 2000ms -->
 	<constraint id="c1" name="ResponseTime">
 		<targetResourceIDRef>_GdmYEMhsEeKON4DtRoKCMw</targetResourceIDRef>
-		<metric>response_time</metric>
-		<metricAggregation aggregateFunction="average" />
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Average" />
 		<range>
 			<hasMaxValue>2000</hasMaxValue>
 		</range>
@@ -34,8 +34,8 @@
 		should be lower than 3000ms -->
 	<constraint id="c2" name="ResponseTime">
 		<targetResourceIDRef>_GdmYEMhsEeKON4DtRoKCMw</targetResourceIDRef>
-		<metric>response_time</metric>
-		<metricAggregation aggregateFunction="percentile">
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Percentile">
 			<parameter>95</parameter>
 		</metricAggregation>
 		<range>
@@ -45,7 +45,7 @@
 	<!-- meaning: the application should not run on Azure -->
 	<constraint id="c3" name="notAzure">
 		<targetResourceIDRef>m1</targetResourceIDRef>
-		<metric>provider</metric>
+		<metric>Provider</metric>
 		<range>
 			<outSet>
 				<value>Azure</value>
@@ -55,7 +55,7 @@
 	<!-- meaning: the application should run only on Amazon or Flexi (or both) -->
 	<constraint id="c4" name="choice of providers">
 		<targetResourceIDRef>m1</targetResourceIDRef>
-		<metric>provider</metric>
+		<metric>Provider</metric>
 		<range>
 			<inSet>
 				<value>Amazon</value>
@@ -67,7 +67,7 @@
 		traffic. -->
 	<constraint id="c6" name="minimum Workload partitioning">
 		<targetResourceIDRef>m1</targetResourceIDRef>
-		<metric>workload_distribution</metric>
+		<metric>WorkloadDistribution</metric>
 		<range>
 			<hasMinValue>20</hasMinValue>
 		</range>
@@ -76,7 +76,7 @@
 	<!-- meaning: the application should run at least on 2 providers -->
 	<constraint id="c7" name="minimum providers">
 		<targetResourceIDRef>m1</targetResourceIDRef>
-		<metric>provider</metric>
+		<metric>Provider</metric>
 		<range>
 			<hasMinValue>2</hasMinValue>
 		</range>
@@ -84,7 +84,7 @@
 	<!-- meaning: the application should run at most on 3 providers -->
 	<constraint id="c8" name="minimum providers">
 		<targetResourceIDRef>m1</targetResourceIDRef>
-		<metric>provider</metric>
+		<metric>Provider</metric>
 		<range>
 			<hasMaxValue>3</hasMaxValue>
 		</range>
@@ -92,7 +92,7 @@
 	<!-- meaning: at least 30% of the workload has to be processed by Amazon -->
 	<constraint id="c9" name="Minimum workload on Amazon">
 		<targetResourceIDRef>Amazon</targetResourceIDRef>
-		<metric>workload_distribution</metric>
+		<metric>WorkloadDistribution</metric>
 		<range>
 			<hasMinValue>30</hasMinValue>
 		</range>
