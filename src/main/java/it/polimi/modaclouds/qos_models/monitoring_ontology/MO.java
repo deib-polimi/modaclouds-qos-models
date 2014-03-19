@@ -30,7 +30,7 @@ public class MO {
 
     protected static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
     protected static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
-    protected static final String knowledgeBaseURL = "http://localhost:3030/modaclouds/kb/data";
+    protected static final String knowledgeBaseDataURL = "http://localhost:3030/modaclouds/kb/data";
 
     public static String getStreamsURI() {
         return streamsURI;
@@ -40,8 +40,8 @@ public class MO {
         return URI;
     }
 
-    public static String getKnowledgeBaseURL() {
-        return knowledgeBaseURL;
+    public static String getKnowledgeBaseDataURL() {
+        return knowledgeBaseDataURL;
     }
 
     public static Resource getResource(String local) {
