@@ -16,6 +16,8 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.net.URL;
+
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
@@ -30,7 +32,8 @@ public class MO {
 
     protected static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
     protected static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
-    protected static final String knowledgeBaseDataURL = "http://localhost:3030/modaclouds/kb/data";
+    protected static final String kbURLSuffix = "/modaclouds/kb";
+    protected static String knowledgeBaseURL = "http://localhost:3030" + kbURLSuffix;
 
     public static String getStreamsURI() {
         return streamsURI;
@@ -40,8 +43,16 @@ public class MO {
         return URI;
     }
 
+    protected static String getKnowledgeBaseURL() {
+        return knowledgeBaseURL;
+    }
+    
+    public static void setKnowledgeBaseURL(URL url) {
+    	knowledgeBaseURL = url.toString() + kbURLSuffix;
+    }
+    
     public static String getKnowledgeBaseDataURL() {
-        return knowledgeBaseDataURL;
+        return knowledgeBaseURL + "/data";
     }
 
     public static Resource getResource(String local) {
