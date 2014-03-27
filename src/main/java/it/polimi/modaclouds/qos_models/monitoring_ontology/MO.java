@@ -18,32 +18,100 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import java.net.URL;
 
+import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
-/**
- * This class contains the monitoring ontology java representation
- *
- * @author miglie
- *
- */
 public class MO {
+	
+	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
+    public static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
+    public static final String kbURLSuffix = "/modaclouds/kb";
+    private static String knowledgeBaseURL = "http://localhost:3030" + kbURLSuffix;
 
-    protected static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
-    protected static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
-    protected static final String kbURLSuffix = "/modaclouds/kb";
-    protected static String knowledgeBaseURL = "http://localhost:3030" + kbURLSuffix;
+	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
+	// *** System *** //
+	public static OntClass component = makeClass(Vocabulary.Component);
+	public static OntClass vm = makeClass(Vocabulary.VM);
+	public static OntClass paasService = makeClass(Vocabulary.PaaSService);
+	public static OntClass location = makeClass(Vocabulary.Location);
+	public static OntClass internalComponent = makeClass(Vocabulary.InternalComponent);
+	public static OntClass externalComponent = makeClass(Vocabulary.ExternalComponent);
+	public static OntClass method = makeClass(Vocabulary.Method);
 
-    public static String getStreamsURI() {
-        return streamsURI;
-    }
+	public static Property hasProvider = makeProperty(Vocabulary.hasProvider);
+	public static Property requires = makeProperty(Vocabulary.requires);
+	public static Property isIn = makeProperty(Vocabulary.isIn);
+	public static Property provides = makeProperty(Vocabulary.provides);
+	public static Property calls = makeProperty(Vocabulary.calls);
+	public static Property hasNCPU = makeProperty(Vocabulary.hasNCPU);
+	public static Property hasName = makeProperty(Vocabulary.hasName);
+	public static Property hasPath = makeProperty(Vocabulary.hasPath);
+	public static Property hasType = makeProperty(Vocabulary.hasType);
+	public static Property hasURL = makeProperty(Vocabulary.hasURL);
 
-    public static String getURI() {
-        return URI;
-    }
+	// *** Monitoring *** /
+	public static OntClass monitoringComponent = makeClass(Vocabulary.MonitoringComponent);
+	public static OntClass monitorableResource = makeClass(Vocabulary.MonitorableResource);
+	public static OntClass sda = makeClass(Vocabulary.StatisticalDataAnalyzer);
+	public static OntClass dc = makeClass(Vocabulary.DataCollector);
+	public static OntClass parameter = makeClass(Vocabulary.Parameter);
+	public static OntClass monitoringDatum = makeClass(Vocabulary.MonitoringDatum);
+	public static OntClass sdaFactory = makeClass(Vocabulary.SDAFactory);
+	public static OntClass dcFactory = makeClass(Vocabulary.DCFactory);
 
-    protected static String getKnowledgeBaseURL() {
+	public static Property isAbout = makeProperty(Vocabulary.isAbout);
+	public static Property hasParameter = makeProperty(Vocabulary.hasParameter);
+	public static Property hasTargetResource = makeProperty(Vocabulary.hasTargetResource);
+	public static Property instantiates = makeProperty(Vocabulary.instantiates);
+	public static Property hasMetric = makeProperty(Vocabulary.hasMetric);
+	public static Property hasValue = makeProperty(Vocabulary.hasValue);
+	public static Property hasTimestamp = makeProperty(Vocabulary.hasTargetResource);
+	public static Property hasPeriod = makeProperty(Vocabulary.hasPeriod);
+	public static Property hasMethod = makeProperty(Vocabulary.hasMethod);
+	public static Property hasReturnedMetric = makeProperty(Vocabulary.hasReturnedMetric);
+	public static Property hasTargetMetric = makeProperty(Vocabulary.hasTargetMetric);
+	public static Property isStarted = makeProperty(Vocabulary.isStarted);
+	public static Property isEnabled = makeProperty(Vocabulary.isEnabled);
+	public static Property hasCollectedMetric = makeProperty(Vocabulary.hasCollectedMetric);
+
+	static {
+		model.setNsPrefix("mo", URI);
+		externalComponent.addProperty(RDFS.subClassOf, component);
+		vm.addProperty(RDFS.subClassOf, externalComponent);
+		paasService.addProperty(RDFS.subClassOf, externalComponent);
+		vm.addProperty(isIn, location);
+		location.addProperty(isIn, location);
+		component.addProperty(RDFS.subClassOf, monitorableResource);
+		monitoringDatum.addProperty(isAbout, monitorableResource);
+		internalComponent.addProperty(requires, component);
+		internalComponent.addProperty(RDFS.subClassOf, component);
+		internalComponent.addProperty(provides, method);
+		method.addProperty(calls, method);
+		method.addProperty(RDFS.subClassOf, monitorableResource);
+		monitoringComponent.addProperty(RDFS.subClassOf, internalComponent);
+		sdaFactory.addProperty(RDFS.subClassOf, monitoringComponent);
+		dcFactory.addProperty(RDFS.subClassOf, monitoringComponent);
+		sdaFactory.addProperty(instantiates, sda);
+		sda.addProperty(hasTargetResource, monitorableResource);
+		sda.addProperty(hasParameter, parameter);
+		dcFactory.addProperty(instantiates, dc);
+		dc.addProperty(hasTargetResource, monitorableResource);
+		dc.addProperty(hasParameter, parameter);
+	}
+
+	private static Property makeProperty(String string) {
+		return model.createProperty(URI + string);
+	}
+
+	private static OntClass makeClass(String string) {
+		return model.createClass(URI + string);
+	}
+
+    public static String getKnowledgeBaseURL() {
         return knowledgeBaseURL;
     }
     
@@ -55,55 +123,6 @@ public class MO {
         return knowledgeBaseURL + "/data";
     }
 
-    public static Resource getResource(String local) {
-        return ResourceFactory.createResource(URI + local);
-    }
+   
 
-    public static Property getProperty(String local) {
-        return ResourceFactory.createProperty(URI + local);
-    }
-    
-    public static final String Component = "Component";
-    public static final String ExternalComponent = "ExternalComponent";
-    public static final String InternalComponent = "InternalComponent";
-    public static final String PaaSService = "PaaSService";
-    public static final String VM = "VM";
-    public static final String Method = "Method";
-    public static final String Location = "Location";
-    
-    public static final String hasProvider = "hasProvider";
-    public static final String requires = "requires";
-    public static final String provides = "provides";
-    public static final String calls = "calls";
-    public static final String isIn = "isIn";
-    public static final String hasNCPU = "hasNCPU";
-    public static final String hasName = "hasName";
-    public static final String hasPath = "hasPath";
-    public static final String hasType = "hasType";
-    public static final String hasURL = "hasURL";
-
-    /* --- Monitoring Specific --- */
-    public static final String MonitoringDatum = "MonitoringDatum";
-    public static final String SDAFactory = "SDAFactory";
-    public static final String DCFactory = "DCFactory";
-    public static final String StatisticalDataAnalyzer = "StatisticalDataAnalyzer";
-    public static final String DataCollector = "DataCollector";
-    public static final String Parameter = "Parameter";
-    public static final String MonitoringComponent = "MonitoringComponent";
-    public static final String MonitorableResource = "MonitorableResource";
-
-    public static final String isAbout = "isAbout";
-    public static final String hasParameter = "hasParameter";
-    public static final String hasTargetResource = "hasTargetResource";
-    public static final String instantiates = "instantiates";
-    public static final String hasMetric = "hasMetric";
-    public static final String hasValue = "hasValue";
-    public static final String hasTimestamp = "hasTimestamp";
-    public static final String hasPeriod = "hasPeriod";
-    public static final String hasMethod = "hasMethod";
-    public static final String hasReturnedMetric = "hasReturnedMetric";
-    public static final String hasTargetMetric = "hasTargetMetric";
-    public static final String isStarted = "isStarted";
-    public static final String isEnabled = "isEnabled";
-    public static final String hasCollectedMetric = "hasCollectedMetric";
 }
