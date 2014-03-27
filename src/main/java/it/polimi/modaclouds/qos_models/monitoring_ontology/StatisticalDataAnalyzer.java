@@ -18,7 +18,7 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import java.util.List;
 
-public abstract class StatisticalDataAnalyzer extends MonitoringComponent{
+public class StatisticalDataAnalyzer extends MonitoringComponent{
 	
 	private String period;
 	private String method;
