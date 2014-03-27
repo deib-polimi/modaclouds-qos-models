@@ -18,4 +18,31 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class Parameter extends KBEntity{
 
+	private String name;
+	private String value;
+
+	public Parameter() {
+	}
+	
+	public Parameter(String name, String value) {
+		this.setName(name);
+		this.setValue(value);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 }
