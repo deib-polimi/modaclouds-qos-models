@@ -82,10 +82,20 @@ public class MO {
 
     /* --- Monitoring Specific --- */
     public static final String MonitoringDatum = "MonitoringDatum";
+    public static final String StatisticalDataAnalyzer = "StatisticalDataAnalyzer";
+    public static final String DataCollector = "DataCollector";
+    public static final String Parameter = "Parameter";
+    public static final String MonitoringComponent = "MonitoringComponent";
+    public static final String MonitorableResource = "MonitorableResource";
 
     public static final String hasMetric = "hasMetric";
     public static final String isAbout = "isAbout";
     public static final String hasValue = "hasValue";
+    public static final String hasParameter = "hasParameter";
+    public static final String collects = "collects";
+    public static final String hasTargetResource = "hasTargetResource";
+    
+	
 
 
 }
