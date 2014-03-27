@@ -66,34 +66,30 @@ public class MO {
     public static final String Component = "Component";
     public static final String ExternalComponent = "ExternalComponent";
     public static final String InternalComponent = "InternalComponent";
-    public static final String CloudProvider = "CloudProvider";
     public static final String PaaSService = "PaaSService";
     public static final String VM = "VM";
     public static final String Method = "Method";
     public static final String Location = "Location";
-    public static final String Region = "Region";
-    public static final String Zone = "Zone";
-
+    
     public static final String requires = "requires";
     public static final String provides = "provides";
     public static final String calls = "calls";
-    public static final String offers = "offers";
     public static final String isIn = "isIn";
 
     /* --- Monitoring Specific --- */
     public static final String MonitoringDatum = "MonitoringDatum";
+    public static final String SDAFactory = "SDAFactory";
+    public static final String DCFactory = "DCFactory";
     public static final String StatisticalDataAnalyzer = "StatisticalDataAnalyzer";
     public static final String DataCollector = "DataCollector";
     public static final String Parameter = "Parameter";
     public static final String MonitoringComponent = "MonitoringComponent";
     public static final String MonitorableResource = "MonitorableResource";
 
-    public static final String hasMetric = "hasMetric";
     public static final String isAbout = "isAbout";
-    public static final String hasValue = "hasValue";
     public static final String hasParameter = "hasParameter";
-    public static final String collects = "collects";
     public static final String hasTargetResource = "hasTargetResource";
+    public static final String instantiates = "instantiates";
     
 	
 
