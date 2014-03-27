@@ -71,10 +71,16 @@ public class MO {
     public static final String Method = "Method";
     public static final String Location = "Location";
     
+    public static final String hasProvider = "hasProvider";
     public static final String requires = "requires";
     public static final String provides = "provides";
     public static final String calls = "calls";
     public static final String isIn = "isIn";
+    public static final String hasNCPU = "hasNCPU";
+    public static final String hasName = "hasName";
+    public static final String hasPath = "hasPath";
+    public static final String hasType = "hasType";
+    public static final String hasURL = "hasURL";
 
     /* --- Monitoring Specific --- */
     public static final String MonitoringDatum = "MonitoringDatum";
@@ -92,8 +98,12 @@ public class MO {
     public static final String instantiates = "instantiates";
     public static final String hasMetric = "hasMetric";
     public static final String hasValue = "hasValue";
-    
-	
-
-
+    public static final String hasTimestamp = "hasTimestamp";
+    public static final String hasPeriod = "hasPeriod";
+    public static final String hasMethod = "hasMethod";
+    public static final String hasReturnedMetric = "hasReturnedMetric";
+    public static final String hasTargetMetric = "hasTargetMetric";
+    public static final String isStarted = "isStarted";
+    public static final String isEnabled = "isEnabled";
+    public static final String hasCollectedMetric = "hasCollectedMetric";
 }
