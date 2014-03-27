@@ -90,6 +90,8 @@ public class MO {
     public static final String hasParameter = "hasParameter";
     public static final String hasTargetResource = "hasTargetResource";
     public static final String instantiates = "instantiates";
+    public static final String hasMetric = "hasMetric";
+    public static final String hasValue = "hasValue";
     
 	
 
