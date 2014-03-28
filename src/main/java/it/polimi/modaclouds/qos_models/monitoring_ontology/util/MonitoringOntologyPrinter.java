@@ -16,8 +16,15 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology.util;
 
-public class OFBizOntologyPrinter {
-	
-	
+import it.polimi.modaclouds.qos_models.monitoring_ontology.MO;
 
+import java.util.UUID;
+
+public class MonitoringOntologyPrinter {
+
+	public static void main(String[] args) {
+		// System.out.println("<?xml version=\"1.0\"?>");
+		// m.write(System.out, "RDF/XML-ABBREV");
+		MO.model.write(System.out, "TURTLE");
+	}
 }

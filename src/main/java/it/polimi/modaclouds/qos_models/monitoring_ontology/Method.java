@@ -22,6 +22,13 @@ public class Method extends MonitorableResource {
 	
 	private List<Method> calledMethods;
 	private String path;
+	
+	public Method() {
+	}
+
+	public Method(String path) {
+		this.path = path;
+	}
 
 	public List<Method> getCalledMethods() {
 		return calledMethods;

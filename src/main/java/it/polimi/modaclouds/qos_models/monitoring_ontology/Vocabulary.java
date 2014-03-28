@@ -19,7 +19,7 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 public class Vocabulary {
 
     
-    
+	public static final String CloudProvider = "CloudProvider";
     public static final String Component = "Component";
     public static final String ExternalComponent = "ExternalComponent";
     public static final String InternalComponent = "InternalComponent";
@@ -27,6 +27,7 @@ public class Vocabulary {
     public static final String VM = "VM";
     public static final String Method = "Method";
     public static final String Location = "Location";
+    
     
     public static final String hasProvider = "hasProvider";
     public static final String requires = "requires";

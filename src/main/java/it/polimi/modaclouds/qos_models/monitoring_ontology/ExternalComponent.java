@@ -18,14 +18,14 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class ExternalComponent extends Component {
 
-	private String provider;
+	private String cloudProvider;
 
-	public String getProvider() {
-		return provider;
+	public String getCloudProvider() {
+		return cloudProvider;
 	}
 
-	public void setProvider(String provider) {
-		this.provider = provider;
+	public void setCloudProvider(String cloudProvider) {
+		this.cloudProvider = cloudProvider;
 	}
 	
 	

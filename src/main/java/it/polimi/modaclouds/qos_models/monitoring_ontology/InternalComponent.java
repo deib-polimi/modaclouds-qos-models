@@ -16,6 +16,7 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InternalComponent extends Component{
@@ -37,6 +38,18 @@ public class InternalComponent extends Component{
 
 	public void setProvidedMethods(List<Method> providedMethods) {
 		this.providedMethods = providedMethods;
+	}
+
+	public void addRequiredComponent(Component component) {
+		if (requiredComponents == null)
+			requiredComponents = new ArrayList<Component>();
+		requiredComponents.add(component);
+	}
+
+	public void addProvidedMethod(Method method) {
+		if (providedMethods == null)
+			providedMethods = new ArrayList<Method>();
+		providedMethods.add(method);
 	}
 	
 
