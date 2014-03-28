@@ -34,11 +34,11 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="workloadPartition">
-		<xs:attribute name="hour" type="xs:integer" use="required"/>
+		<xs:attribute name="hour" type="xs:int" use="required"/>
 		<xs:attribute name="value" type="multiex:percentage" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="percentage">
-		<xs:restriction base="xs:integer">
+		<xs:restriction base="xs:int">
 			<xs:minInclusive value="0"/>
 			<xs:maxInclusive value="100"/>
 		</xs:restriction>

@@ -47,12 +47,12 @@
 		<xs:attribute name="scenarioId" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="closedWorkloadElement">
-		<xs:attribute name="hour" type="xs:integer" use="required"/>
+		<xs:attribute name="hour" type="xs:int" use="required"/>
 		<xs:attribute name="thinkTime" type="xs:float" use="required"/>
-		<xs:attribute name="population" type="xs:integer" use="required"/>
+		<xs:attribute name="population" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="openWorkloadElement">
-		<xs:attribute name="hour" type="xs:integer" use="required"/>
-		<xs:attribute name="population" type="xs:integer" use="required"/>
+		<xs:attribute name="hour" type="xs:int" use="required"/>
+		<xs:attribute name="population" type="xs:int" use="required"/>
 	</xs:complexType>
 </xs:schema>

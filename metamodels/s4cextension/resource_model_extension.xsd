@@ -63,7 +63,7 @@
 		<!--Must be the same  ID of the resourceContainer in Palladio-->
 	</xs:complexType>
 	<xs:complexType name="replicaElement">
-		<xs:attribute name="hour" type="xs:integer" use="required"/>
-		<xs:attribute name="value" type="xs:integer" use="required"/>
+		<xs:attribute name="hour" type="xs:int" use="required"/>
+		<xs:attribute name="value" type="xs:int" use="required"/>
 	</xs:complexType>
 </xs:schema>
