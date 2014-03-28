@@ -16,9 +16,10 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class StatisticalDataAnalyzer extends MonitoringComponent{
+public class StatisticalDataAnalyzer extends KBEntity{
 	
 	private String period;
 	private String method;
@@ -71,6 +72,11 @@ public class StatisticalDataAnalyzer extends MonitoringComponent{
 	}
 	public void setParameters(List<Parameter> parameters) {
 		this.parameters = parameters;
+	}
+	public void addParameter(Parameter parameter) {
+		if (parameters == null)
+			parameters = new ArrayList<Parameter>();
+		parameters.add(parameter);
 	}
 	public List<MonitorableResource> getTargetResources() {
 		return targetResources;
