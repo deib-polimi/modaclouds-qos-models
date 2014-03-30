@@ -33,19 +33,23 @@
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="default" type="xs:IDREF">
-				<xs:annotation>
-					<xs:appinfo>
-						<jaxb:property>
-							<jaxb:baseType name="AvailableAction"/>
-						</jaxb:property>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="availableAction">
-		<xs:attribute name="numOfArguments" type="xs:nonNegativeInteger" use="required"/>
+		<xs:sequence>
+			<xs:element name="requiredParameter" type="ac:actString" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="requiredParameters"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute name="name" type="xs:ID" use="required"/>
 	</xs:complexType>
+	<xs:simpleType name="actString">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

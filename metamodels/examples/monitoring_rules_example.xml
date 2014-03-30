@@ -32,7 +32,9 @@
 			aggregateFunction="Average" />
 		<condition>METRIC &gt;= 0.6</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">CpuUtilizationViolation</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_2" label="Percentile Monitoring Rule"
@@ -44,11 +46,13 @@
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Percentile">
-			<parameter>95</parameter>
+			<parameter name="thPercentile">95</parameter>
 		</metricAggregation>
 		<condition>METRIC &gt;= 1</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">ResponseTimePercViolation</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_3" label="Gold Percentile Monitoring Rule"
@@ -60,14 +64,16 @@
 		<condition>METRIC &gt;= 0.3</condition>
 		<actions inherited="true" />
 	</monitoringRule>
-	<monitoringRule id="mr_4" label="Unhealthy Cloud"
+	<monitoringRule id="mr_4" label="Unhealthy Network"
 		timeStep="60" startEnabled="true" timeWindow="300"
 		samplingProbability="1" samplingTime="5">
 		<monitoredTargets />
 		<metricAggregation />
-		<condition>maxOccurrence(mr_1,0) &amp;&amp; minOccurrence(mr_3,3)</condition>
+		<condition>maxOccurrence(CpuUtilizationViolation,0) &amp;&amp; minOccurrence(ResponseTimePercViolation,3)</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">UnealthyNetwork</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_5" label="Frontend average response time"
@@ -80,7 +86,9 @@
 			aggregateFunction="Average" />
 		<condition>METRIC &gt;= 300</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">ResponseTimeAverageViolation</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_6"
@@ -92,13 +100,15 @@
 			groupingCategoryName="Method" />
 		<condition>parentCondition</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">ResponseTimeMethodViolation</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_7" label="Enable fine grain RT"
 		timeWindow="300" startEnabled="true" timeStep="60"
 		samplingProbability="1" samplingTime="5">
-		<condition>minOccurrence(mr_5,5)</condition>
+		<condition>minOccurrence(ResponseTimeAverageViolation,5)</condition>
 		<actions>
 			<action targetRuleID="mr_6" name="EnableMonitoringRule" />
 		</actions>
@@ -106,15 +116,14 @@
 	<monitoringRule id="mr_8" label="Disable fine grain RT"
 		timeWindow="300" startEnabled="true" timeStep="60"
 		samplingProbability="1" samplingTime="5">
-		<condition>maxOccurrence(mr_5,0)</condition>
+		<condition>maxOccurrence(ResponseTimeAverageViolation,0)</condition>
 		<actions>
 			<action targetRuleID="mr_6" name="DisableMonitoringRule" />
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr_9" label="ResponseTime"
-		metricName="ResponseTime" relatedQosConstraintId="qs_10"
-		startEnabled="true" timeStep="60" timeWindow="60" samplingProbability="1"
-		samplingTime="10">
+		metricName="ResponseTime" relatedQosConstraintId="qs_10" startEnabled="true"
+		timeStep="60" timeWindow="60" samplingProbability="1" samplingTime="10">
 		<monitoredTargets>
 			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
@@ -122,9 +131,11 @@
 			aggregateFunction="Average" />
 		<condition>METRIC &gt; 2000</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">RT2Violation</parameter>
+			</action>
 			<action name="SetSamplingProbability" targetRuleID="mr_8">
-				<parameter>1.0</parameter>
+				<parameter name="probability">1.0</parameter>
 			</action>
 		</actions>
 	</monitoringRule>

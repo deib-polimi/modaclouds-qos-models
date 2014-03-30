@@ -32,7 +32,9 @@
 			aggregateFunction="Average" />
 		<condition>METRIC &gt; 2000.0</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">ResponseTimeAvgViolation</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 	<monitoringRule id="mr-57c0287c-fd59-4d19-8030-625395cd35bf"
@@ -44,11 +46,13 @@
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Percentile">
-			<parameter>95</parameter>
+			<parameter name="thPercentile">95</parameter>
 		</metricAggregation>
 		<condition>METRIC &gt; 3000.0</condition>
 		<actions>
-			<action name="NotifyViolation" />
+			<action name="OutputMetric">
+				<parameter name="name">ResponseTimePercViolation</parameter>
+			</action>
 		</actions>
 	</monitoringRule>
 </monitoringRules>
