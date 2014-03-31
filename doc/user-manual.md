@@ -12,10 +12,11 @@ It is stored and represent the schema of the MODAClouds Knowledge Base (refer to
 Version 1 of the monitoring ontology expressed is formally defined in TURTLE format at the following [link](https://github.com/deib-polimi/modaclouds-qos-models/blob/v1.0/metamodels/monitoringontology/monitoring_core_ontology.ttl).
 Here is a graphical representation:
 
-![monitoring ontology](img/ontology.pdf "Monitoring Ontology").
+![monitoring ontology](img/ontology.png "Monitoring Ontology").
 
-The ontology has been recently adapted to the ongoing devel- opment of CloudML2.0
-which is currently synchronizing with TOSCA. Here is a short description of main entities:
+The ontology has been recently adapted to the ongoing development of [CloudML2.0](http://cloudml.org/)
+which is currently synchronizing with 
+[TOSCA](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca). Here is a short description of main entities:
 - a Component is whatever running artifact that can be located with an URL. 
 The type property is used so to describe the different types of instances 
 (e.g.: FrontendVM, BackendVM) according to the MODACloudsML language;
