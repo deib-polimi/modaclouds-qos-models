@@ -8,7 +8,7 @@ The QoS Models is a library containing all metamodels necessary to describe qos-
 and monitoring ontology together with their java representation.
 
 Please refer to deliverable [D6.3.2](http://www.modaclouds.eu/publications/public-deliverables/) 
-to understand the role of this component in the MODAClouds Monitoring Platform.
+to better understand the role of this component in the MODAClouds Monitoring Platform.
 
 Additional Features:
 - Serialization and deserialization between XML and Java objects.
