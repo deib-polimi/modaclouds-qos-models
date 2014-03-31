@@ -12,7 +12,7 @@ It is stored and represent the schema of the MODAClouds Knowledge Base (refer to
 Version 1 of the monitoring ontology expressed is formally defined in TURTLE format at the following [link](https://github.com/deib-polimi/modaclouds-qos-models/blob/v1.0/metamodels/monitoringontology/monitoring_core_ontology.ttl).
 Here is a graphical representation:
 
-![monitoring ontology](img/ontology.png "Monitoring Ontology").
+![monitoring ontology](img/ontology.jpg "Monitoring Ontology").
 
 The ontology has been recently adapted to the ongoing development of [CloudML2.0](http://cloudml.org/)
 which is currently synchronizing with 
