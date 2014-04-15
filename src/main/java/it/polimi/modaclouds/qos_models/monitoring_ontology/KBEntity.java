@@ -16,6 +16,8 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -26,21 +28,77 @@ public class KBEntity {
 	private Logger logger = LoggerFactory
 			.getLogger(this.getClass().getName());
 	
-	private String id;
+	private String shortURI;
+	private String uri;
 	
 	public KBEntity() {
-		this.id = UUID.randomUUID().toString();
+		String id = UUID.randomUUID().toString();
+		this.shortURI = MO.prefix + ":" + id;
+		this.uri = MO.URI + id;
 	}
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+	public String getShortURI() {
+		return shortURI;
 	}
 	
-	public KBEntity copyPaste2Provider(String provider) {
-		KBEntity newEntity = null;
+	public String getShortClassURI() {
+		return MO.prefix + ":" + this.getClass().getSimpleName();
+	}
+	
+	public String getClassURI() {
+		return MO.URI + this.getClass().getSimpleName();
+	}
+
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+		try {
+			URI theUri = new URI(uri);
+			String[] segments = theUri.getPath().split("/");
+			String id = segments[segments.length - 1];
+			this.shortURI = MO.prefix + ":" + id;
+		} catch (URISyntaxException e) {
+			logger.error("Error while setting short uri", e);
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((shortURI == null) ? 0 : shortURI.hashCode());
+		result = prime * result + ((uri == null) ? 0 : uri.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		KBEntity other = (KBEntity) obj;
+		if (shortURI == null) {
+			if (other.shortURI != null)
+				return false;
+		} else if (!shortURI.equals(other.shortURI))
+			return false;
+		if (uri == null) {
+			if (other.uri != null)
+				return false;
+		} else if (!uri.equals(other.uri))
+			return false;
+		return true;
+	}
+	
+//	public KBEntity copyPaste2Provider(String provider) {
+//		KBEntity newEntity = null;
 //		try {
 //			Class<? extends KBEntity> clazz = this.getClass();
 //			newEntity = clazz.newInstance();
@@ -53,6 +111,8 @@ public class KBEntity {
 //		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 //			logger.error("Error copy-pasting KBEntity to provider",e);
 //		}
-		return newEntity;
-	}
+//		return newEntity;
+//	}
+
+	
 }

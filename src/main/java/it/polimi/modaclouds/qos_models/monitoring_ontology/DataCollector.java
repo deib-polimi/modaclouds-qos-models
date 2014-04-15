@@ -16,21 +16,21 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.util.List;
+import java.util.Set;
 
 public class DataCollector extends KBEntity {
 
 	private boolean enabled;
 	private String collectedMetric;
-	private List<Parameter> parameters;
-	private List<MonitorableResource> targetResources;
+	private Set<Parameter> parameters;
+	private Set<MonitorableResource> targetResources;
 	private String type;
 
-	public List<Parameter> getParameters() {
+	public Set<Parameter> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(List<Parameter> parameters) {
+	public void setParameters(Set<Parameter> parameters) {
 		this.parameters = parameters;
 	}
 
@@ -50,11 +50,11 @@ public class DataCollector extends KBEntity {
 		this.collectedMetric = collectedMetric;
 	}
 
-	public List<MonitorableResource> getTargetResources() {
+	public Set<MonitorableResource> getTargetResources() {
 		return targetResources;
 	}
 
-	public void setTargetResources(List<MonitorableResource> targetResources) {
+	public void setTargetResources(Set<MonitorableResource> targetResources) {
 		this.targetResources = targetResources;
 	}
 
@@ -64,6 +64,55 @@ public class DataCollector extends KBEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((collectedMetric == null) ? 0 : collectedMetric.hashCode());
+		result = prime * result + (enabled ? 1231 : 1237);
+		result = prime * result
+				+ ((parameters == null) ? 0 : parameters.hashCode());
+		result = prime * result
+				+ ((targetResources == null) ? 0 : targetResources.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DataCollector other = (DataCollector) obj;
+		if (collectedMetric == null) {
+			if (other.collectedMetric != null)
+				return false;
+		} else if (!collectedMetric.equals(other.collectedMetric))
+			return false;
+		if (enabled != other.enabled)
+			return false;
+		if (parameters == null) {
+			if (other.parameters != null)
+				return false;
+		} else if (!parameters.equals(other.parameters))
+			return false;
+		if (targetResources == null) {
+			if (other.targetResources != null)
+				return false;
+		} else if (!targetResources.equals(other.targetResources))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
 	}
 	
 	

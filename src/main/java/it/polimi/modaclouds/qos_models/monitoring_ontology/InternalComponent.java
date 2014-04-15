@@ -16,40 +16,75 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InternalComponent extends Component{
 
-	private List<Component> requiredComponents;
-	private List<Method> providedMethods;
+	private Set<Component> requiredComponents;
+	private Set<Method> providedMethods;
 
-	public List<Component> getRequiredComponents() {
+	public Set<Component> getRequiredComponents() {
 		return requiredComponents;
 	}
 
-	public void setRequiredComponents(List<Component> requiredComponents) {
+	public void setRequiredComponents(Set<Component> requiredComponents) {
 		this.requiredComponents = requiredComponents;
 	}
 
-	public List<Method> getProvidedMethods() {
+	public Set<Method> getProvidedMethods() {
 		return providedMethods;
 	}
 
-	public void setProvidedMethods(List<Method> providedMethods) {
+	public void setProvidedMethods(Set<Method> providedMethods) {
 		this.providedMethods = providedMethods;
 	}
 
 	public void addRequiredComponent(Component component) {
 		if (requiredComponents == null)
-			requiredComponents = new ArrayList<Component>();
+			requiredComponents = new HashSet<Component>();
 		requiredComponents.add(component);
 	}
 
 	public void addProvidedMethod(Method method) {
 		if (providedMethods == null)
-			providedMethods = new ArrayList<Method>();
+			providedMethods = new HashSet<Method>();
 		providedMethods.add(method);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((providedMethods == null) ? 0 : providedMethods.hashCode());
+		result = prime
+				* result
+				+ ((requiredComponents == null) ? 0 : requiredComponents
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InternalComponent other = (InternalComponent) obj;
+		if (providedMethods == null) {
+			if (other.providedMethods != null)
+				return false;
+		} else if (!providedMethods.equals(other.providedMethods))
+			return false;
+		if (requiredComponents == null) {
+			if (other.requiredComponents != null)
+				return false;
+		} else if (!requiredComponents.equals(other.requiredComponents))
+			return false;
+		return true;
 	}
 	
 

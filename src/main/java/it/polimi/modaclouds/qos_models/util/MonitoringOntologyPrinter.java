@@ -14,29 +14,17 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package it.polimi.modaclouds.qos_models.monitoring_ontology;
+package it.polimi.modaclouds.qos_models.util;
 
-import java.util.Set;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.MO;
 
-public class DCFactory extends MonitoringComponent {
+import java.util.UUID;
 
-	private Set<DataCollector> instantiatedDCs;
-	private Set<String> availableMetrics;
+public class MonitoringOntologyPrinter {
 
-	public Set<DataCollector> getInstantiatedDCs() {
-		return instantiatedDCs;
+	public static void main(String[] args) {
+		// System.out.println("<?xml version=\"1.0\"?>");
+		// m.write(System.out, "RDF/XML-ABBREV");
+		MO.model.write(System.out, "TURTLE");
 	}
-
-	public void setInstantiatedDCs(Set<DataCollector> instantiatedDCs) {
-		this.instantiatedDCs = instantiatedDCs;
-	}
-
-	public Set<String> getAvailableMetrics() {
-		return availableMetrics;
-	}
-
-	public void setAvailableMetrics(Set<String> availableMetrics) {
-		this.availableMetrics = availableMetrics;
-	} 
-	
 }

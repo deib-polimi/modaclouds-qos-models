@@ -14,17 +14,17 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package it.polimi.modaclouds.qos_models.monitoring_ontology.util;
+package it.polimi.modaclouds.qos_models.monitoring_rules;
 
-import it.polimi.modaclouds.qos_models.monitoring_ontology.MO;
 
-import java.util.UUID;
+public class RuleValidationException extends Exception {
 
-public class MonitoringOntologyPrinter {
-
-	public static void main(String[] args) {
-		// System.out.println("<?xml version=\"1.0\"?>");
-		// m.write(System.out, "RDF/XML-ABBREV");
-		MO.model.write(System.out, "TURTLE");
+	public RuleValidationException(String message) {
+		super(message);
 	}
+
+	public RuleValidationException(String message, Exception e) {
+		super(message,e);
+	}
+
 }

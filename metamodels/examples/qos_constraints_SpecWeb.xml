@@ -36,7 +36,7 @@
 		<targetResourceIDRef>_GdmYEMhsEeKON4DtRoKCMw</targetResourceIDRef>
 		<metric>ResponseTime</metric>
 		<metricAggregation aggregateFunction="Percentile">
-			<parameter>95</parameter>
+			<parameter name="thPercentile">95</parameter>
 		</metricAggregation>
 		<range>
 			<hasMaxValue>3000</hasMaxValue>

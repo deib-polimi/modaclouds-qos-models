@@ -22,6 +22,7 @@ public class MonitoringDatum extends KBEntity {
 	private String metric;
 	private String value;
 	private String timeStamp;
+	
 	public MonitorableResource getResource() {
 		return resource;
 	}
@@ -45,6 +46,49 @@ public class MonitoringDatum extends KBEntity {
 	}
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((metric == null) ? 0 : metric.hashCode());
+		result = prime * result
+				+ ((resource == null) ? 0 : resource.hashCode());
+		result = prime * result
+				+ ((timeStamp == null) ? 0 : timeStamp.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MonitoringDatum other = (MonitoringDatum) obj;
+		if (metric == null) {
+			if (other.metric != null)
+				return false;
+		} else if (!metric.equals(other.metric))
+			return false;
+		if (resource == null) {
+			if (other.resource != null)
+				return false;
+		} else if (!resource.equals(other.resource))
+			return false;
+		if (timeStamp == null) {
+			if (other.timeStamp != null)
+				return false;
+		} else if (!timeStamp.equals(other.timeStamp))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
 	}
 
 	

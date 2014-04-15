@@ -16,17 +16,17 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StatisticalDataAnalyzer extends KBEntity{
 	
-	private String period;
+	private int period;
 	private String method;
 	private String returnedMetric;
 	private String targetMetric;
-	private List<MonitorableResource> targetResources;
-	private List<Parameter> parameters;
+	private Set<MonitorableResource> targetResources;
+	private Set<Parameter> parameters;
 	private String type;
 	private boolean started;
 	
@@ -43,10 +43,10 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	public void setStarted(boolean started) {
 		this.started = started;
 	}
-	public String getPeriod() {
+	public int getPeriod() {
 		return period;
 	}
-	public void setPeriod(String period) {
+	public void setPeriod(int period) {
 		this.period = period;
 	}
 	public String getMethod() {
@@ -67,22 +67,85 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	public void setTargetMetric(String targetMetric) {
 		this.targetMetric = targetMetric;
 	}
-	public List<Parameter> getParameters() {
+	public Set<Parameter> getParameters() {
 		return parameters;
 	}
-	public void setParameters(List<Parameter> parameters) {
+	public void setParameters(Set<Parameter> parameters) {
 		this.parameters = parameters;
 	}
 	public void addParameter(Parameter parameter) {
 		if (parameters == null)
-			parameters = new ArrayList<Parameter>();
+			parameters = new HashSet<Parameter>();
 		parameters.add(parameter);
 	}
-	public List<MonitorableResource> getTargetResources() {
+	public Set<MonitorableResource> getTargetResources() {
 		return targetResources;
 	}
-	public void setTargetResources(List<MonitorableResource> targetResources) {
+	public void setTargetResources(Set<MonitorableResource> targetResources) {
 		this.targetResources = targetResources;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((method == null) ? 0 : method.hashCode());
+		result = prime * result
+				+ ((parameters == null) ? 0 : parameters.hashCode());
+		result = prime * result + period;
+		result = prime * result
+				+ ((returnedMetric == null) ? 0 : returnedMetric.hashCode());
+		result = prime * result + (started ? 1231 : 1237);
+		result = prime * result
+				+ ((targetMetric == null) ? 0 : targetMetric.hashCode());
+		result = prime * result
+				+ ((targetResources == null) ? 0 : targetResources.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StatisticalDataAnalyzer other = (StatisticalDataAnalyzer) obj;
+		if (method == null) {
+			if (other.method != null)
+				return false;
+		} else if (!method.equals(other.method))
+			return false;
+		if (parameters == null) {
+			if (other.parameters != null)
+				return false;
+		} else if (!parameters.equals(other.parameters))
+			return false;
+		if (period != other.period)
+			return false;
+		if (returnedMetric == null) {
+			if (other.returnedMetric != null)
+				return false;
+		} else if (!returnedMetric.equals(other.returnedMetric))
+			return false;
+		if (started != other.started)
+			return false;
+		if (targetMetric == null) {
+			if (other.targetMetric != null)
+				return false;
+		} else if (!targetMetric.equals(other.targetMetric))
+			return false;
+		if (targetResources == null) {
+			if (other.targetResources != null)
+				return false;
+		} else if (!targetResources.equals(other.targetResources))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
 	}
 	
 	

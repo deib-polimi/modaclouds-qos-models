@@ -16,18 +16,45 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.util.List;
+import java.util.Set;
 
-public class SDAFactory extends MonitoringComponent {
+public class SDAFactory extends DataAnalyzer {
 	
-	private List<StatisticalDataAnalyzer> instantiatedSDAs;
+	private Set<StatisticalDataAnalyzer> instantiatedSDAs;
 
-	public List<StatisticalDataAnalyzer> getInstantiatedSDAs() {
+	public Set<StatisticalDataAnalyzer> getInstantiatedSDAs() {
 		return instantiatedSDAs;
 	}
 
-	public void setInstantiatedSDAs(List<StatisticalDataAnalyzer> instantiatedSDAs) {
+	public void setInstantiatedSDAs(Set<StatisticalDataAnalyzer> instantiatedSDAs) {
 		this.instantiatedSDAs = instantiatedSDAs;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime
+				* result
+				+ ((instantiatedSDAs == null) ? 0 : instantiatedSDAs.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SDAFactory other = (SDAFactory) obj;
+		if (instantiatedSDAs == null) {
+			if (other.instantiatedSDAs != null)
+				return false;
+		} else if (!instantiatedSDAs.equals(other.instantiatedSDAs))
+			return false;
+		return true;
 	}
 
 }

@@ -1,59 +1,72 @@
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix mo:    <http://www.modaclouds.eu/rdfs/1.0/monitoring/> .
-@prefix owl:   <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mo:      <http://www.modaclouds.eu/rdfs/1.0/monitoring/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-mo:Location  a   rdfs:Class ;
-        mo:isIn  mo:Location .
-
-mo:Method  a             rdfs:Class ;
-        rdfs:subClassOf  mo:MonitorableResource ;
-        mo:calls         mo:Method .
-
-mo:SDAFactory  a         rdfs:Class ;
-        rdfs:subClassOf  mo:MonitoringComponent ;
-        mo:instantiates  mo:StatisticalDataAnalyzer .
+mo:VM
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:ExternalComponent ;
+      mo:location mo:Location .
 
 mo:MonitoringComponent
-        a                rdfs:Class ;
-        rdfs:subClassOf  mo:InternalComponent .
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:InternalComponent .
 
-mo:Parameter  a  rdfs:Class .
+mo:DCFactory
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:MonitoringComponent ;
+      mo:instantiatedDC mo:DataCollector .
 
-mo:DCFactory  a          rdfs:Class ;
-        rdfs:subClassOf  mo:MonitoringComponent ;
-        mo:instantiates  mo:DataCollector .
+mo:DataCollector
+      a       rdfs:Class ;
+      mo:parameter mo:Parameter ;
+      mo:targetResource mo:MonitorableResource .
 
-mo:Component  a          rdfs:Class ;
-        rdfs:subClassOf  mo:MonitorableResource .
+mo:Parameter
+      a       rdfs:Class .
 
-mo:MonitoringDatum  a  rdfs:Class ;
-        mo:isAbout  mo:MonitorableResource .
-
-mo:StatisticalDataAnalyzer
-        a                     rdfs:Class ;
-        mo:hasParameter       mo:Parameter ;
-        mo:hasTargetResource  mo:MonitorableResource .
-
-mo:ExternalComponent  a  rdfs:Class ;
-        rdfs:subClassOf  mo:Component .
-
-mo:DataCollector  a           rdfs:Class ;
-        mo:hasParameter       mo:Parameter ;
-        mo:hasTargetResource  mo:MonitorableResource .
+mo:ExternalComponent
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:Component .
 
 mo:MonitorableResource
-        a       rdfs:Class .
+      a       rdfs:Class .
 
-mo:PaaSService  a        rdfs:Class ;
-        rdfs:subClassOf  mo:ExternalComponent .
+mo:InternalComponent
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:Component ;
+      mo:providedMethod mo:Method ;
+      mo:requiredComponent
+              mo:Component .
 
-mo:VM   a                rdfs:Class ;
-        rdfs:subClassOf  mo:ExternalComponent ;
-        mo:isIn          mo:Location .
+mo:MonitoringDatum
+      a       rdfs:Class ;
+      mo:aboutResource mo:MonitorableResource .
 
-mo:InternalComponent  a  rdfs:Class ;
-        rdfs:subClassOf  mo:Component ;
-        mo:provides      mo:Method ;
-        mo:requires      mo:Component .
+mo:StatisticalDataAnalyzer
+      a       rdfs:Class ;
+      mo:parameter mo:Parameter ;
+      mo:targetResource mo:MonitorableResource .
+
+mo:Location
+      a       rdfs:Class ;
+      mo:location mo:Location .
+
+mo:Method
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:MonitorableResource ;
+      mo:calledMethod mo:Method .
+
+mo:SDAFactory
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:MonitoringComponent ;
+      mo:instantiatedDC mo:StatisticalDataAnalyzer .
+
+mo:PaaSService
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:ExternalComponent .
+
+mo:Component
+      a       rdfs:Class ;
+      rdfs:subClassOf mo:MonitorableResource .

@@ -43,12 +43,12 @@
 	<xs:complexType name="aggregateFunction">
 		<xs:sequence>
 			<xs:element name="requiredParameter" type="af:aggFunString" minOccurs="0" maxOccurs="unbounded">
-			<xs:annotation>
-						<xs:appinfo>
-							<jaxb:property name="requiredParameters"/>
-						</xs:appinfo>
-					</xs:annotation>
-					</xs:element>
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="requiredParameters"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="name" use="required"/>
 	</xs:complexType>

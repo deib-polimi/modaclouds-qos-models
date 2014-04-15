@@ -16,47 +16,38 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-public class Component extends MonitorableResource{
+import java.util.List;
+import java.util.Set;
 
-	private boolean started;
-	private String type;
-	private String url;
+public class AvailableAggregateFunction extends KBEntity {
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 	
-
-	public boolean isStarted() {
-		return started;
+	private String name;
+	private Set<String> requiredParameters;
+	
+	public String getName() {
+		return name;
 	}
-
-	public void setStarted(boolean started) {
-		this.started = started;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getUrl() {
-		return url;
+	public Set<String> getRequiredParameters() {
+		return requiredParameters;
 	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public void setRequiredParameters(Set<String> requiredParameters) {
+		this.requiredParameters = requiredParameters;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + (started ? 1231 : 1237);
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime
+				* result
+				+ ((requiredParameters == null) ? 0 : requiredParameters
+						.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -65,20 +56,17 @@ public class Component extends MonitorableResource{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Component other = (Component) obj;
-		if (started != other.started)
-			return false;
-		if (type == null) {
-			if (other.type != null)
+		AvailableAggregateFunction other = (AvailableAggregateFunction) obj;
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!type.equals(other.type))
+		} else if (!name.equals(other.name))
 			return false;
-		if (url == null) {
-			if (other.url != null)
+		if (requiredParameters == null) {
+			if (other.requiredParameters != null)
 				return false;
-		} else if (!url.equals(other.url))
+		} else if (!requiredParameters.equals(other.requiredParameters))
 			return false;
 		return true;
 	}
-	
 }

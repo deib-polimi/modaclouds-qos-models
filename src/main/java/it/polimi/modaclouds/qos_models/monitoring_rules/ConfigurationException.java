@@ -14,29 +14,12 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package it.polimi.modaclouds.qos_models.monitoring_ontology;
+package it.polimi.modaclouds.qos_models.monitoring_rules;
 
-import java.util.Set;
+public class ConfigurationException extends Exception {
 
-public class DCFactory extends MonitoringComponent {
-
-	private Set<DataCollector> instantiatedDCs;
-	private Set<String> availableMetrics;
-
-	public Set<DataCollector> getInstantiatedDCs() {
-		return instantiatedDCs;
+	public ConfigurationException(String message) {
+		super(message);
 	}
 
-	public void setInstantiatedDCs(Set<DataCollector> instantiatedDCs) {
-		this.instantiatedDCs = instantiatedDCs;
-	}
-
-	public Set<String> getAvailableMetrics() {
-		return availableMetrics;
-	}
-
-	public void setAvailableMetrics(Set<String> availableMetrics) {
-		this.availableMetrics = availableMetrics;
-	} 
-	
 }

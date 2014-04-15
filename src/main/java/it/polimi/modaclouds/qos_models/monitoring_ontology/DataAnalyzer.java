@@ -16,44 +16,29 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-public class Component extends MonitorableResource{
+import java.util.Set;
 
-	private boolean started;
-	private String type;
-	private String url;
+public class DataAnalyzer extends MonitoringComponent {
 
-	public String getType() {
-		return type;
+	private Set<AvailableAggregateFunction> availableAggregateFunctions;
+
+	public Set<AvailableAggregateFunction> getAvailableAggregateFunctions() {
+		return availableAggregateFunctions;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-
-	public boolean isStarted() {
-		return started;
-	}
-
-	public void setStarted(boolean started) {
-		this.started = started;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public void setAvailableAggregateFunctions(
+			Set<AvailableAggregateFunction> availableAggregateFunctions) {
+		this.availableAggregateFunctions = availableAggregateFunctions;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + (started ? 1231 : 1237);
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime
+				* result
+				+ ((availableAggregateFunctions == null) ? 0
+						: availableAggregateFunctions.hashCode());
 		return result;
 	}
 
@@ -65,20 +50,14 @@ public class Component extends MonitorableResource{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Component other = (Component) obj;
-		if (started != other.started)
-			return false;
-		if (type == null) {
-			if (other.type != null)
+		DataAnalyzer other = (DataAnalyzer) obj;
+		if (availableAggregateFunctions == null) {
+			if (other.availableAggregateFunctions != null)
 				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		if (url == null) {
-			if (other.url != null)
-				return false;
-		} else if (!url.equals(other.url))
+		} else if (!availableAggregateFunctions
+				.equals(other.availableAggregateFunctions))
 			return false;
 		return true;
 	}
-	
+
 }
