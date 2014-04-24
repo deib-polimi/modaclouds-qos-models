@@ -19,16 +19,9 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 public class Component extends MonitorableResource{
 
 	private boolean started;
-	private String type;
+	
 	private String url;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
+	
 	
 
 	public boolean isStarted() {
@@ -52,7 +45,6 @@ public class Component extends MonitorableResource{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + (started ? 1231 : 1237);
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
@@ -68,11 +60,6 @@ public class Component extends MonitorableResource{
 		Component other = (Component) obj;
 		if (started != other.started)
 			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
 		if (url == null) {
 			if (other.url != null)
 				return false;
@@ -80,5 +67,7 @@ public class Component extends MonitorableResource{
 			return false;
 		return true;
 	}
+
+	
 	
 }

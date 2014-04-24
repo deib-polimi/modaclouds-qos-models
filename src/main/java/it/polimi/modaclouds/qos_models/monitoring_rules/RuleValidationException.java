@@ -27,4 +27,8 @@ public class RuleValidationException extends Exception {
 		super(message,e);
 	}
 
+	public RuleValidationException(Exception e) {
+		super(e);
+	}
+
 }

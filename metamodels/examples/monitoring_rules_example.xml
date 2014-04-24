@@ -26,7 +26,7 @@
 		timeWindow="60" startEnabled="true" samplingProbability="1"
 		samplingTime="5">
 		<monitoredTargets>
-			<monitoredTarget id="tr_1" />
+			<monitoredTarget klass="tr_1" />
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="Region"
 			aggregateFunction="Average" />
@@ -42,7 +42,7 @@
 		startEnabled="true" timeWindow="60" samplingProbability="1"
 		samplingTime="5">
 		<monitoredTargets>
-			<monitoredTarget id="tr_2" />
+			<monitoredTarget klass="tr_2" />
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Percentile">
@@ -58,7 +58,7 @@
 	<monitoringRule id="mr_3" label="Gold Percentile Monitoring Rule"
 		parentMonitoringRuleId="mr_2" samplingProbability="1" samplingTime="5">
 		<monitoredTargets>
-			<monitoredTarget id="tr_3" />
+			<monitoredTarget klass="tr_3" />
 		</monitoredTargets>
 		<metricAggregation inherited="true" />
 		<condition>METRIC &gt;= 0.3</condition>
@@ -80,7 +80,7 @@
 		metricName="ResponseTime" relatedQosConstraintId="qs_3" startEnabled="true"
 		timeStep="60" timeWindow="60" samplingProbability="1" samplingTime="5">
 		<monitoredTargets>
-			<monitoredTarget id="tr_3" />
+			<monitoredTarget klass="tr_3" />
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Average" />
@@ -125,7 +125,7 @@
 		metricName="ResponseTime" relatedQosConstraintId="qs_10" startEnabled="true"
 		timeStep="60" timeWindow="60" samplingProbability="1" samplingTime="10">
 		<monitoredTargets>
-			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
+			<monitoredTarget klass="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Average" />

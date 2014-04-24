@@ -80,7 +80,7 @@ public class MonitoringRuleFactory {
 
 		MonitoredTargets targets = new MonitoredTargets();
 		MonitoredTarget target = new MonitoredTarget();
-		target.setId(relatedConstraint.getTargetResourceIDRef());
+		target.setKlass(relatedConstraint.getTargetResourceIDRef());
 		targets.getMonitoredTargets().add(target);
 		monitoringRule.setMonitoredTargets(targets);
 

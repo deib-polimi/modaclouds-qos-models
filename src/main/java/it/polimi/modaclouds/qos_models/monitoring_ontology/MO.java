@@ -23,6 +23,7 @@ import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class MO {
@@ -132,6 +133,14 @@ public class MO {
 	
 	public static String getKnowledgeBaseQueryURL() {
 		return knowledgeBaseURL + "/query";
+	}
+
+	public static String shortForm(Property property) {
+		return prefix+":"+property.getLocalName();
+	}
+	
+	public static String shortForm(OntClass ontClass) {
+		return prefix+":"+ontClass.getLocalName();
 	}
    
 

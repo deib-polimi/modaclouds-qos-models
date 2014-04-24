@@ -20,44 +20,17 @@ import java.util.Set;
 
 public class DataAnalyzer extends MonitoringComponent {
 
-	private Set<AvailableAggregateFunction> availableAggregateFunctions;
+//	private Set<AvailableAggregateFunction> availableAggregateFunctions;
+//
+//	public Set<AvailableAggregateFunction> getAvailableAggregateFunctions() {
+//		return availableAggregateFunctions;
+//	}
+//
+//	public void setAvailableAggregateFunctions(
+//			Set<AvailableAggregateFunction> availableAggregateFunctions) {
+//		this.availableAggregateFunctions = availableAggregateFunctions;
+//	}
 
-	public Set<AvailableAggregateFunction> getAvailableAggregateFunctions() {
-		return availableAggregateFunctions;
-	}
-
-	public void setAvailableAggregateFunctions(
-			Set<AvailableAggregateFunction> availableAggregateFunctions) {
-		this.availableAggregateFunctions = availableAggregateFunctions;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((availableAggregateFunctions == null) ? 0
-						: availableAggregateFunctions.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DataAnalyzer other = (DataAnalyzer) obj;
-		if (availableAggregateFunctions == null) {
-			if (other.availableAggregateFunctions != null)
-				return false;
-		} else if (!availableAggregateFunctions
-				.equals(other.availableAggregateFunctions))
-			return false;
-		return true;
-	}
+	
 
 }

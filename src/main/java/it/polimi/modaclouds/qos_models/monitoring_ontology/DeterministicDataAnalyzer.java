@@ -16,6 +16,6 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-public class DeterministicDataAnalyzer extends KBEntity {
+public class DeterministicDataAnalyzer extends DataAnalyzer {
 
 }

@@ -16,6 +16,7 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class DataCollector extends KBEntity {
@@ -36,6 +37,12 @@ public class DataCollector extends KBEntity {
 
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public void addParameter(Parameter parameter) {
+		if (parameters == null)
+			parameters = new HashSet<Parameter>();
+		parameters.add(parameter);
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -113,6 +120,12 @@ public class DataCollector extends KBEntity {
 		} else if (!type.equals(other.type))
 			return false;
 		return true;
+	}
+
+	public void addTargetResource(MonitorableResource targetResource) {
+		if (targetResources == null)
+			targetResources = new HashSet<MonitorableResource>();
+		targetResources.add(targetResource);
 	}
 	
 	

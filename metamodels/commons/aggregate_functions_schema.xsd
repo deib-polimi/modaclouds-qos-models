@@ -51,5 +51,12 @@
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="name" use="required"/>
+		<xs:attribute name="computedBy" type="af:aggregator"/>
 	</xs:complexType>
+	<xs:simpleType name="aggregator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DeterministicDataAnalyzer"/>
+			<xs:enumeration value="StatisticalDataAnalyzer"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

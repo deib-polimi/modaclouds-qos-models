@@ -37,6 +37,7 @@ public class Vocabulary {
     public static final String numberOfCPUs = "numberOfCPUs";
     public static final String name = "name";
     public static final String path = "path";
+    public static final String klass = "klass";
     public static final String type = "type";
     public static final String url = "url";
 
@@ -45,6 +46,7 @@ public class Vocabulary {
     public static final String SDAFactory = "SDAFactory";
     public static final String DCFactory = "DCFactory";
     public static final String StatisticalDataAnalyzer = "StatisticalDataAnalyzer";
+    public static final String DeterministicDataAnalyzer = "DeterministicDataAnalyzer";
     public static final String DataCollector = "DataCollector";
     public static final String Parameter = "Parameter";
     public static final String MonitoringComponent = "MonitoringComponent";
@@ -65,4 +67,6 @@ public class Vocabulary {
     public static final String enabled = "enabled";
     public static final String collectedMetric = "collectedMetric";
 	public static final String instantiatedSDA = "instantiatedSDA";
+	public static final String samplingTime = "samplingTime";
+	public static final String samplingProbability = "samplingProbability";
 }

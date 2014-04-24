@@ -22,21 +22,14 @@ import java.util.Set;
 public class StatisticalDataAnalyzer extends KBEntity{
 	
 	private int period;
-	private String method;
+	private String aggregateFunction;
 	private String returnedMetric;
 	private String targetMetric;
 	private Set<MonitorableResource> targetResources;
 	private Set<Parameter> parameters;
-	private String type;
 	private boolean started;
 	
 	
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
 	public boolean isStarted() {
 		return started;
 	}
@@ -49,11 +42,11 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	public void setPeriod(int period) {
 		this.period = period;
 	}
-	public String getMethod() {
-		return method;
+	public String getAggregateFunction() {
+		return aggregateFunction;
 	}
-	public void setMethod(String method) {
-		this.method = method;
+	public void setAggregateFunction(String aggregateFunction) {
+		this.aggregateFunction = aggregateFunction;
 	}
 	public String getReturnedMetric() {
 		return returnedMetric;
@@ -88,7 +81,10 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((method == null) ? 0 : method.hashCode());
+		result = prime
+				* result
+				+ ((aggregateFunction == null) ? 0 : aggregateFunction
+						.hashCode());
 		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
 		result = prime * result + period;
@@ -99,7 +95,6 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				+ ((targetMetric == null) ? 0 : targetMetric.hashCode());
 		result = prime * result
 				+ ((targetResources == null) ? 0 : targetResources.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 	@Override
@@ -111,10 +106,10 @@ public class StatisticalDataAnalyzer extends KBEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		StatisticalDataAnalyzer other = (StatisticalDataAnalyzer) obj;
-		if (method == null) {
-			if (other.method != null)
+		if (aggregateFunction == null) {
+			if (other.aggregateFunction != null)
 				return false;
-		} else if (!method.equals(other.method))
+		} else if (!aggregateFunction.equals(other.aggregateFunction))
 			return false;
 		if (parameters == null) {
 			if (other.parameters != null)
@@ -139,11 +134,6 @@ public class StatisticalDataAnalyzer extends KBEntity{
 			if (other.targetResources != null)
 				return false;
 		} else if (!targetResources.equals(other.targetResources))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}

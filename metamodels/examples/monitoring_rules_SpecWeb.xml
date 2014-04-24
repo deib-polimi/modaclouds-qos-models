@@ -26,7 +26,7 @@
 		relatedQosConstraintId="c1" startEnabled="true" timeStep="60"
 		timeWindow="60" samplingProbability="1" samplingTime="10">
 		<monitoredTargets>
-			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
+			<monitoredTarget klass="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Average" />
@@ -42,7 +42,7 @@
 		relatedQosConstraintId="c2" startEnabled="true" timeStep="60"
 		timeWindow="60" samplingProbability="1" samplingTime="10">
 		<monitoredTargets>
-			<monitoredTarget id="_GdmYEMhsEeKON4DtRoKCMw" />
+			<monitoredTarget klass="_GdmYEMhsEeKON4DtRoKCMw" />
 		</monitoredTargets>
 		<metricAggregation groupingCategoryName="CloudProvider"
 			aggregateFunction="Percentile">

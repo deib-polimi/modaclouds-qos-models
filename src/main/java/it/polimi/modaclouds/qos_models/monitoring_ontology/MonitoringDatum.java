@@ -18,16 +18,16 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class MonitoringDatum extends KBEntity {
 	
-	private MonitorableResource resource;
+	private MonitorableResource aboutResource;
 	private String metric;
 	private String value;
 	private String timeStamp;
 	
-	public MonitorableResource getResource() {
-		return resource;
+	public MonitorableResource getAboutResource() {
+		return aboutResource;
 	}
-	public void setResource(MonitorableResource resource) {
-		this.resource = resource;
+	public void setResource(MonitorableResource aboutResource) {
+		this.aboutResource = aboutResource;
 	}
 	public String getMetric() {
 		return metric;
@@ -53,7 +53,7 @@ public class MonitoringDatum extends KBEntity {
 		int result = super.hashCode();
 		result = prime * result + ((metric == null) ? 0 : metric.hashCode());
 		result = prime * result
-				+ ((resource == null) ? 0 : resource.hashCode());
+				+ ((aboutResource == null) ? 0 : aboutResource.hashCode());
 		result = prime * result
 				+ ((timeStamp == null) ? 0 : timeStamp.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
@@ -73,10 +73,10 @@ public class MonitoringDatum extends KBEntity {
 				return false;
 		} else if (!metric.equals(other.metric))
 			return false;
-		if (resource == null) {
-			if (other.resource != null)
+		if (aboutResource == null) {
+			if (other.aboutResource != null)
 				return false;
-		} else if (!resource.equals(other.resource))
+		} else if (!aboutResource.equals(other.aboutResource))
 			return false;
 		if (timeStamp == null) {
 			if (other.timeStamp != null)
