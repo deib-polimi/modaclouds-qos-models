@@ -17,22 +17,23 @@
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class MonitorableResource extends KBEntity {
-	
-	private String klass;
 
-	public String getKlass() {
-		return klass;
+	private String id;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setKlass(String type) {
-		this.klass = type;
+	public void setId(String id) {
+		this.id = id;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((klass == null) ? 0 : klass.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -45,10 +46,10 @@ public class MonitorableResource extends KBEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		MonitorableResource other = (MonitorableResource) obj;
-		if (klass == null) {
-			if (other.klass != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!klass.equals(other.klass))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

@@ -37,7 +37,7 @@ public class Vocabulary {
     public static final String numberOfCPUs = "numberOfCPUs";
     public static final String name = "name";
     public static final String path = "path";
-    public static final String klass = "klass";
+//    public static final String clazz = "clazz";
     public static final String type = "type";
     public static final String url = "url";
 
