@@ -54,6 +54,7 @@ public class MO {
 	public static Property path = makeProperty(Vocabulary.path);
 	public static Property type = makeProperty(Vocabulary.type);
 	public static Property url = makeProperty(Vocabulary.url);
+	public static Property id = makeProperty(Vocabulary.id);
 
 	// *** Monitoring *** /
 	public static OntClass MonitoringComponent = makeClass(Vocabulary.MonitoringComponent);

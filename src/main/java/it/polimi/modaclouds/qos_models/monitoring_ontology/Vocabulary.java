@@ -69,4 +69,5 @@ public class Vocabulary {
 	public static final String instantiatedSDA = "instantiatedSDA";
 	public static final String samplingTime = "samplingTime";
 	public static final String samplingProbability = "samplingProbability";
+	public static final String id = "id";
 }
