@@ -22,11 +22,15 @@
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema
 	https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/commons/metrics_schema.xsd">
 	<metric name="CpuUtilization">
-		<requiredParameter defaultValue="10">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+		<requiredParameter>samplingTime</requiredParameter>
+		<requiredParameter>samplingProbability</requiredParameter>
+		<requiredParameter>categoryName</requiredParameter>
+		<requiredParameter>functionID</requiredParameter>
+		<requiredParameter>className</requiredParameter>
+		<requiredParameter>functionName</requiredParameter>
 	</metric>
 	<metric name="ResponseTime">
-		<requiredParameter defaultValue="10">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+		<requiredParameter>samplingTime</requiredParameter>
+		<requiredParameter>samplingProbability</requiredParameter>
 	</metric>
 </metrics>

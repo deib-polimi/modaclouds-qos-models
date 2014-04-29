@@ -25,7 +25,7 @@
 	<monitoringRule id="mr_1" label="CPU Utilization Rule"
 		startEnabled="true">
 		<monitoredTargets>
-			<monitoredTarget id="tr_1" />
+			<monitoredTarget id="tr_1" class="VM"/>
 		</monitoredTargets>
 		<collectedMetric inherited="false" metricName="CpuUtilization">
 			<parameter name="samplingProbability">1</parameter>
