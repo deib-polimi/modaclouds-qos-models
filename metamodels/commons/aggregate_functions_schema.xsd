@@ -37,12 +37,19 @@
 	</xs:element>
 	<xs:complexType name="aggregateFunction">
 		<xs:sequence>
-			<xs:element name="requiredParameter" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="requiredParameter" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:appinfo>
 						<jaxb:property name="requiredParameters"/>
 					</xs:appinfo>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="defaultValue" type="xs:string" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required"/>
