@@ -37,7 +37,7 @@
 	</xs:element>
 	<xs:complexType name="availableAction">
 		<xs:sequence>
-			<xs:element name="requiredParameter" type="ac:actString" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="requiredParameter" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:appinfo>
 						<jaxb:property name="requiredParameters"/>
@@ -45,11 +45,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="name" type="xs:ID" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
 	</xs:complexType>
-	<xs:simpleType name="actString">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
-		</xs:restriction>
-	</xs:simpleType>
 </xs:schema>

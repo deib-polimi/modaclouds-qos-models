@@ -18,7 +18,7 @@
 
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mo="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:af="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema" xmlns:gc="http://www.modaclouds.eu/xsd/2.0/grouping_categories_schema" xmlns:ac="http://www.modaclouds.eu/xsd/2.0/actions_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" xmlns:pa="http://www.modaclouds.eu/xsd/1.0/parameter_schema" elementFormDefault="qualified" jaxb:version="2.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mo="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:af="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema" xmlns:gc="http://www.modaclouds.eu/xsd/2.0/grouping_categories_schema" xmlns:ac="http://www.modaclouds.eu/xsd/2.0/actions_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:pa="http://www.modaclouds.eu/xsd/1.0/parameter_schema" targetNamespace="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" elementFormDefault="qualified" jaxb:version="2.1">
 	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema" schemaLocation="../commons/metrics_schema.xsd"/>
 	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/parameter_schema" schemaLocation="../commons/parameter_schema.xsd"/>
 	<xs:import namespace="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema" schemaLocation="../commons/aggregate_functions_schema.xsd"/>
@@ -43,6 +43,7 @@
 	<xs:complexType name="monitoringRule">
 		<xs:sequence>
 			<xs:element name="monitoredTargets" type="mo:monitoredTargets" minOccurs="0"/>
+			<xs:element name="collectedMetric" type="mo:collectedMetric" minOccurs="0"/>
 			<xs:element name="metricAggregation" type="mo:monitoringMetricAggregation" minOccurs="0"/>
 			<xs:element name="condition" type="xs:string" minOccurs="0"/>
 			<xs:element name="actions" type="mo:actions" minOccurs="0"/>
@@ -59,12 +60,7 @@
 				</xs:appinfo>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="metricName" type="mt:metricString"/>
-		<xs:attribute name="timeStep" type="xs:positiveInteger" use="optional"/>
-		<xs:attribute name="timeWindow" type="xs:positiveInteger" use="optional"/>
 		<xs:attribute name="startEnabled" type="xs:boolean"/>
-		<xs:attribute name="samplingTime" type="xs:positiveInteger"/>
-		<xs:attribute name="samplingProbability" type="mo:probability"/>
 	</xs:complexType>
 	<xs:simpleType name="probability">
 		<xs:restriction base="xs:float">
@@ -85,8 +81,20 @@
 		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="monitoredTarget">
-		<xs:attribute name="clazz" type="xs:string" use="required"/>
 		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="collectedMetric">
+		<xs:sequence>
+			<xs:element name="parameter" type="pa:parameter" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="parameters"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="metricName" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="monitoringMetricAggregation">
 		<xs:sequence>
@@ -99,7 +107,7 @@
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
-		<xs:attribute name="groupingCategoryName" type="xs:string"/>
+		<xs:attribute name="groupingClass" type="xs:string"/>
 		<xs:attribute name="aggregateFunction" type="af:aggFunString"/>
 	</xs:complexType>
 	<xs:complexType name="actions">

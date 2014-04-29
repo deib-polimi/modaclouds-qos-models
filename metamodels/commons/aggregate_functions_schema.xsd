@@ -35,14 +35,9 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:simpleType name="aggFunString">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:complexType name="aggregateFunction">
 		<xs:sequence>
-			<xs:element name="requiredParameter" type="af:aggFunString" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="requiredParameter" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:appinfo>
 						<jaxb:property name="requiredParameters"/>
@@ -50,7 +45,7 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="name" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="computedBy" type="af:aggregator"/>
 	</xs:complexType>
 	<xs:simpleType name="aggregator">

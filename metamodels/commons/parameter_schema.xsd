@@ -21,14 +21,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pa="http://www.modaclouds.eu/xsd/1.0/parameter_schema" targetNamespace="http://www.modaclouds.eu/xsd/1.0/parameter_schema" elementFormDefault="qualified">
 	<xs:complexType name="parameter">
 		<xs:simpleContent>
-			<xs:extension base="xs:anySimpleType">
-				<xs:attribute name="name" type="pa:simpleString" use="required"/>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string" use="required"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-	<xs:simpleType name="simpleString">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="[a-zA-Z_][a-zA-Z_0-9]*"/>
-		</xs:restriction>
-	</xs:simpleType>
 </xs:schema>
