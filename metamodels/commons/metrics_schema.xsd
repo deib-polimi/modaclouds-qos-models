@@ -18,21 +18,39 @@
 
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema" elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	jaxb:version="2.1">
 	<xs:element name="metrics">
 		<xs:annotation>
 			<xs:documentation>A list of metrics</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="metric" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="metric" type="mt:metric"
+					minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:appinfo>
-							<jaxb:property name="metrics"/>
+							<jaxb:property name="metrics" />
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="metric">
+		<xs:sequence>
+			<xs:element name="requiredParameter" type="xs:string"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="requiredParameters" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
 </xs:schema>
