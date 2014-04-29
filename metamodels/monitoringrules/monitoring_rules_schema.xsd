@@ -89,6 +89,7 @@
 	</xs:complexType>
 	<xs:complexType name="monitoredTarget">
 		<xs:attribute name="id" type="xs:string" use="required" />
+		<xs:attribute name="class" type="xs:string" use="required" />
 	</xs:complexType>
 	<xs:complexType name="collectedMetric">
 		<xs:sequence>
