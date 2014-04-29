@@ -21,8 +21,8 @@ import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
 import it.polimi.modaclouds.qos_models.schema.AvailableActions;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategories;
 import it.polimi.modaclouds.qos_models.schema.Metrics;
-import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
+import java.io.File;
 import java.net.URL;
 
 import javax.xml.bind.JAXBException;
@@ -51,10 +51,10 @@ public class Config {
 	private static final Logger logger = LoggerFactory.getLogger(Config.class); 
 	
 	private Config() throws ConfigurationException, JAXBException {
-		groupingCategoriesUrl = getClass().getResource(groupingCategoriesDefaultUrl);
-		monitoringAggregateFunctionsUrl = getClass().getResource(monitoringAggregateFunctionsDefaultUrl);
-		monitoringMetricsUrl = getClass().getResource(monitoringMetricsDefaultUrl);
-		monitoringActionsUrl = getClass().getResource(monitoringActionsDefaultUrl);
+		groupingCategoriesUrl = getURL(groupingCategoriesDefaultUrl);
+		monitoringAggregateFunctionsUrl = getURL(monitoringAggregateFunctionsDefaultUrl);
+		monitoringMetricsUrl = getURL(monitoringMetricsDefaultUrl);
+		monitoringActionsUrl = getURL(monitoringActionsDefaultUrl);
 
 		this.groupingCategories = XMLHelper.deserialize(groupingCategoriesUrl, GroupingCategories.class);
 		this.monitoringAggregateFunctions =  XMLHelper.deserialize(monitoringAggregateFunctionsUrl, AggregateFunctions.class);
@@ -137,6 +137,36 @@ public class Config {
 	 */
 	public URL getMonitoringActionsUrl() {
 		return monitoringActionsUrl;
+	}
+	
+	public static URL getURL(String URLName) {
+		boolean exists = false;
+		URL url = null;
+		try {
+			url = Config.class.getResource(URLName);
+			exists = new File(url.toURI()).exists();
+		} catch (Exception e) {
+			logger.error("Error checking if file exists from URLName", e);
+			exists = false;
+		}
+		if (exists)
+			return url;
+		else {
+			try {
+				String alternativeURLName = new File(Config.class
+						.getProtectionDomain().getCodeSource().getLocation()
+						.getPath()).getParent()
+						+ URLName;
+
+				url = new File(alternativeURLName).toURI().toURL();
+				exists = new File(url.toURI()).exists();
+			} catch (Exception e) {
+				logger.error("Error checking if file exists from alternativeURLName",
+						e);
+				exists = false;
+			}
+		}
+		return null;
 	}
 
 }

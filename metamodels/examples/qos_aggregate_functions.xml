@@ -20,9 +20,9 @@
 <aggregateFunctions
 	xmlns="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-	xs:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema ../commons/aggregate_functions_schema.xsd">
-	<aggregateFunction name="Average"/>
+	xs:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/commons/aggregate_functions_schema.xsd">
+	<aggregateFunction name="Average" />
 	<aggregateFunction name="Percentile">
-	 <requiredParameter>thPercentile</requiredParameter>
+		<requiredParameter>thPercentile</requiredParameter>
 	</aggregateFunction>
 </aggregateFunctions>

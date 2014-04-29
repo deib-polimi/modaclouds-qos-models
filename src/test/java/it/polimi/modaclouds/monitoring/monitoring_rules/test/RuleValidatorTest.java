@@ -16,26 +16,15 @@
  */
 package it.polimi.modaclouds.monitoring.monitoring_rules.test;
 
-import static org.junit.Assert.fail;
-import it.polimi.modaclouds.qos_models.monitoring_rules.RuleValidationException;
-import it.polimi.modaclouds.qos_models.monitoring_rules.RuleValidator;
-import it.polimi.modaclouds.qos_models.schema.MonitoringRule;
-import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
-import it.polimi.modaclouds.qos_models.util.XMLHelper;
-
-import java.util.UUID;
-
-import org.junit.Before;
-import org.junit.Test;
 
 public class RuleValidatorTest {
 
 	// private String monitoringRulesXMLString;
-	private RuleValidator validator;
-	private MonitoringRules monitoring_rules_SpecWeb;
-	private static final String monitoring_rules_SpecWeb_url = "/monitoring_rules_SpecWeb.xml";
-	private MonitoringRules monitoring_rules_example;
-	public static final String monitoring_rules_example_url = "/monitoring_rules_example.xml";
+//	private RuleValidator validator;
+//	private MonitoringRules monitoring_rules_SpecWeb;
+//	private static final String monitoring_rules_SpecWeb_url = "/monitoring_rules_SpecWeb.xml";
+//	private MonitoringRules monitoring_rules_example;
+//	public static final String monitoring_rules_example_url = "/monitoring_rules_example.xml";
 
 //	@Before
 //	public void init() {

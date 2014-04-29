@@ -31,13 +31,13 @@ import org.junit.Test;
 
 public class Constraint2RuleTest {
 
-	private static final String qos_constraints_SpecWeb_url = "/qos_constraints_SpecWeb.xml";
-	private static final String monitoring_rules_SpecWeb_url = "/monitoring_rules_SpecWeb.xml";
-
-	private MonitoringRuleFactory mrfactory;
-	private MonitoringRules monitoring_rules_SpecWeb;
-	private Constraints qos_constraints_SpecWeb;
-	private RuleValidator validator;
+//	private static final String qos_constraints_SpecWeb_url = "/qos_constraints_SpecWeb.xml";
+//	private static final String monitoring_rules_SpecWeb_url = "/monitoring_rules_SpecWeb.xml";
+//
+//	private MonitoringRuleFactory mrfactory;
+//	private MonitoringRules monitoring_rules_SpecWeb;
+//	private Constraints qos_constraints_SpecWeb;
+//	private RuleValidator validator;
 
 
 //	@Before

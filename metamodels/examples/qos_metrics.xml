@@ -19,15 +19,15 @@
 -->
 <metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema ../commons/metrics_schema.xsd">
-	<metric>CpuUtilization</metric>
-	<metric>ResponseTime</metric>
-	<metric>Replication</metric>
-	<metric>Ram</metric>
-	<metric>Availability</metric>
-	<metric>Cores</metric>
-	<metric>ResourceType</metric>
-	<metric>ServiceName</metric>
-	<metric>Provider</metric>
-	<metric>WorkloadDistribution</metric>
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/commons/metrics_schema.xsd">
+	<metric name="CpuUtilization" />
+	<metric name="ResponseTime" />
+	<metric name="Replication" />
+	<metric name="Ram" />
+	<metric name="Availability" />
+	<metric name="Cores" />
+	<metric name="ResourceType" />
+	<metric name="ServiceName" />
+	<metric name="Provider" />
+	<metric name="WorkloadDistribution" />
 </metrics>

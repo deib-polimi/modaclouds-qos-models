@@ -17,14 +17,16 @@
        limitations under the License.
 
 -->
-<aggregateFunctions
-	xmlns="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
+<metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema ../commons/aggregate_functions_schema.xsd">
-	<aggregateFunction name="Average" />
-	<aggregateFunction name="Percentile">
-		<requiredParameter>thPercentile</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="Max" />
-	<aggregateFunction name="Min" />
-</aggregateFunctions>
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema
+	https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/commons/metrics_schema.xsd">
+	<metric name="CpuUtilization">
+		<requiredParameter defaultValue="10">samplingTime</requiredParameter>
+		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+	</metric>
+	<metric name="ResponseTime">
+		<requiredParameter defaultValue="10">samplingTime</requiredParameter>
+		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+	</metric>
+</metrics>

@@ -51,6 +51,7 @@ public class Vocabulary {
     public static final String Parameter = "Parameter";
     public static final String MonitoringComponent = "MonitoringComponent";
     public static final String MonitorableResource = "MonitorableResource";
+    public static final String All = "All";
 
     public static final String aboutResource = "aboutResource";
     public static final String parameter = "parameter";
@@ -67,7 +68,10 @@ public class Vocabulary {
     public static final String enabled = "enabled";
     public static final String collectedMetric = "collectedMetric";
 	public static final String instantiatedSDA = "instantiatedSDA";
+	public static final String id = "id";
+	
 	public static final String samplingTime = "samplingTime";
 	public static final String samplingProbability = "samplingProbability";
-	public static final String id = "id";
+	public static final String timeWindow = "timeWindow";
+	public static final String timeStep = "timeStep";
 }

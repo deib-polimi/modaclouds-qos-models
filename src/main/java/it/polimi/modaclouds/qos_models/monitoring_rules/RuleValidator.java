@@ -80,11 +80,11 @@ public class RuleValidator {
 		if (targetRule.getId() == null)
 			throw new RuleValidationException("rule id is missing");
 
-		if (targetRule.getMetricName() != null)
+		if (targetRule.getCollectedMetric() != null)
 			validateMetricName(targetRule);
 
 		if (targetRule.getMetricAggregation() != null) {
-			if (targetRule.getMetricAggregation().getGroupingCategoryName() != null) {
+			if (targetRule.getMetricAggregation().getGroupingClass() != null) {
 				validateGroupingCategory(targetRule);
 			}
 			if (targetRule.getMetricAggregation().getAggregateFunction() != null) {
@@ -146,9 +146,9 @@ public class RuleValidator {
 			throws RuleValidationException {
 		if (rule == null)
 			throw new NullArgumentException("rule");
-		String metric = rule.getMetricName();
+		String metric = rule.getCollectedMetric().getMetricName();
 		for (Metric m : config.getMonitoringMetrics().getMetrics()) {
-			if (metric.equals(m.getValue()))
+			if (metric.equals(m.getName()))
 				return;
 		}
 		throw new RuleValidationException("Metric " + metric
@@ -197,7 +197,7 @@ public class RuleValidator {
 		if (rule == null)
 			throw new NullArgumentException("rule");
 		String groupingCategory = rule.getMetricAggregation()
-				.getGroupingCategoryName();
+				.getGroupingClass();
 		for (GroupingCategory gc : config.getGroupingCategories()
 				.getGroupingCategories()) {
 			if (gc.getName().equals(groupingCategory))
