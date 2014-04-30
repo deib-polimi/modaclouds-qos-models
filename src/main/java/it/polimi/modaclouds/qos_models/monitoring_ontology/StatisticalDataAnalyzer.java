@@ -21,7 +21,6 @@ import java.util.Set;
 
 public class StatisticalDataAnalyzer extends KBEntity{
 	
-	private int period;
 	private String aggregateFunction;
 	private String returnedMetric;
 	private String targetMetric;
@@ -35,12 +34,6 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	}
 	public void setStarted(boolean started) {
 		this.started = started;
-	}
-	public int getPeriod() {
-		return period;
-	}
-	public void setPeriod(int period) {
-		this.period = period;
 	}
 	public String getAggregateFunction() {
 		return aggregateFunction;
@@ -87,7 +80,6 @@ public class StatisticalDataAnalyzer extends KBEntity{
 						.hashCode());
 		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
-		result = prime * result + period;
 		result = prime * result
 				+ ((returnedMetric == null) ? 0 : returnedMetric.hashCode());
 		result = prime * result + (started ? 1231 : 1237);
@@ -115,8 +107,6 @@ public class StatisticalDataAnalyzer extends KBEntity{
 			if (other.parameters != null)
 				return false;
 		} else if (!parameters.equals(other.parameters))
-			return false;
-		if (period != other.period)
 			return false;
 		if (returnedMetric == null) {
 			if (other.returnedMetric != null)

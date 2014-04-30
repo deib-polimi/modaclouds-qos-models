@@ -74,4 +74,14 @@ public class Vocabulary {
 	public static final String samplingProbability = "samplingProbability";
 	public static final String timeWindow = "timeWindow";
 	public static final String timeStep = "timeStep";
+	
+	//metrics
+	public static final String CpuUtilization = "CpuUtilization";
+	
+	//actions
+	public static final String OutputMetric = "OutputMetric";
+	public static final String EnableMonitoringRule = "EnableMonitoringRule";
+	public static final String DisableMonitoringRule = "DisableMonitoringRule";
+	public static final String SetSamplingProbability = "SetSamplingProbability";
+	public static final String SetSamplingTime = "SetSamplingTime";
 }
