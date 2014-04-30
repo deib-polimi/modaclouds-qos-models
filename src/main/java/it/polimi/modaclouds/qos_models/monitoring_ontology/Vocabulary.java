@@ -70,11 +70,6 @@ public class Vocabulary {
 	public static final String instantiatedSDA = "instantiatedSDA";
 	public static final String id = "id";
 	
-	public static final String samplingTime = "samplingTime";
-	public static final String samplingProbability = "samplingProbability";
-	public static final String timeWindow = "timeWindow";
-	public static final String timeStep = "timeStep";
-	
 	//metrics
 	public static final String CpuUtilization = "CpuUtilization";
 	
@@ -84,4 +79,9 @@ public class Vocabulary {
 	public static final String DisableMonitoringRule = "DisableMonitoringRule";
 	public static final String SetSamplingProbability = "SetSamplingProbability";
 	public static final String SetSamplingTime = "SetSamplingTime";
+	
+	public static final String samplingTime = "samplingTime";
+	public static final String samplingProbability = "samplingProbability";
+	public static final String timeWindow = "timeWindow";
+	public static final String timeStep = "timeStep";
 }
