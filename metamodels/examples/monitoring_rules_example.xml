@@ -23,7 +23,7 @@
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema
 	https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/monitoringrules/monitoring_rules_schema.xsd">
 	<monitoringRule id="mr_1" label="CPU Utilization Rule"
-		startEnabled="true">
+		startEnabled="true" timeStep="60" timeWindow="60">
 		<monitoredTargets>
 			<monitoredTarget id="tr_1" class="VM"/>
 		</monitoredTargets>
@@ -33,8 +33,6 @@
 		</collectedMetric>
 		<metricAggregation groupingClass="Region"
 			aggregateFunction="Average">
-			<parameter name="timeStep">60</parameter>
-			<parameter name="timeWindow">60</parameter>
 		</metricAggregation>
 		<condition>METRIC &gt;= 0.6</condition>
 		<actions>
