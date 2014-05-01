@@ -9,7 +9,7 @@ resources hosting the application, the MODAClouds runtime platform, the applicat
 It is stored and represent the schema of the MODAClouds Knowledge Base (refer to Deliverable 
 [D6.3.2](http://www.modaclouds.eu/publications/public-deliverables/) for details).
 
-Version 1 of the monitoring ontology expressed is formally defined in TURTLE format at the following [link](https://github.com/deib-polimi/modaclouds-qos-models/blob/v1.0/metamodels/monitoringontology/monitoring_core_ontology.ttl).
+Version 1 of the monitoring ontology expressed is formally defined in TURTLE format at the following [link](https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/monitoringontology/monitoring_ontology.ttl).
 Here is a graphical representation:
 
 ![monitoring ontology](img/ontology.jpg "Monitoring Ontology").
@@ -37,7 +37,7 @@ A Monitoring Rule specify how incoming data have to be processed, what condition
  verified and what output should be produced by the monitoring platform.
 
 The metamodel of a monitoring rule is formally specified as an XML schema:
-[http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema](https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v1.0/metamodels/monitoringrules/monitoring_rules_schema.xsd).
+[http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema](https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/monitoringrules/monitoring_rules_schema.xsd).
 
 Here is a graphical representation of the schema:
 
