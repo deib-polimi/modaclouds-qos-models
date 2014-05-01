@@ -16,6 +16,9 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
+import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
+
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Collection;
@@ -54,6 +57,14 @@ public class XMLHelper {
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.marshal(object, resultStream);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T deserialize(InputStream resourceAsStream,
+			Class<T> targetClass) throws JAXBException {
+		T object = (T) JAXBContext.newInstance(targetClass)
+				.createUnmarshaller().unmarshal(resourceAsStream);
+		return object;
 	}
 
 	// /**
