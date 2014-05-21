@@ -58,7 +58,8 @@
 	<xs:simpleType name="aggregator">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="DeterministicDataAnalyzer"/>
-			<xs:enumeration value="StatisticalDataAnalyzer"/>
+			<xs:enumeration value="JAVAStatisticalDataAnalyzer"/>
+			<xs:enumeration value="MATLABStatisticalDataAnalyzer"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
