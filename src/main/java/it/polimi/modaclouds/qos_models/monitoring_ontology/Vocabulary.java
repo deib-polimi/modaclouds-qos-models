@@ -45,6 +45,8 @@ public class Vocabulary {
     public static final String MonitoringDatum = "MonitoringDatum";
     public static final String SDAFactory = "SDAFactory";
     public static final String DCFactory = "DCFactory";
+    public static final String JAVA_SDA = "JAVAStatisticalDataAnalyzer";
+    public static final String MATLAB_SDA = "MATLABStatisticalDataAnalyzer";
     public static final String StatisticalDataAnalyzer = "StatisticalDataAnalyzer";
     public static final String DeterministicDataAnalyzer = "DeterministicDataAnalyzer";
     public static final String DataCollector = "DataCollector";
@@ -84,4 +86,9 @@ public class Vocabulary {
 	public static final String samplingProbability = "samplingProbability";
 	public static final String timeWindow = "timeWindow";
 	public static final String timeStep = "timeStep";
+	public static final String forecastPeriod = "forecastPeriod";
+	public static final String order = "order";
+	public static final String autoregressive = "autoregressive";
+	public static final String movingAverage = "movingAverage";
+	
 }

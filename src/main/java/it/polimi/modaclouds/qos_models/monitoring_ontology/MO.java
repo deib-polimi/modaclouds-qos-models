@@ -99,7 +99,7 @@ public class MO {
 		MonitoringComponent.addProperty(RDFS.subClassOf, InternalComponent);
 		SDAFactory.addProperty(RDFS.subClassOf, MonitoringComponent);
 		DCFactory.addProperty(RDFS.subClassOf, MonitoringComponent);
-		SDAFactory.addProperty(instantiatedDC, StatisticalDataAnalyzer);
+		SDAFactory.addProperty(instantiatedSDA, StatisticalDataAnalyzer);
 		StatisticalDataAnalyzer.addProperty(targetResource, MonitorableResource);
 		StatisticalDataAnalyzer.addProperty(parameter, Parameter);
 		DCFactory.addProperty(instantiatedDC, DataCollector);

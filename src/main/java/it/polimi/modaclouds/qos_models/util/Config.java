@@ -31,44 +31,69 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Config {
-	
-	private static final String groupingCategoriesDefaultUrl = "/monitoring_grouping_categories.xml";
-	private static final String monitoringAggregateFunctionsDefaultUrl = "/monitoring_aggregate_functions.xml";
-	private static final String monitoringMetricsDefaultUrl = "/monitoring_metrics.xml";
-	private static final String monitoringActionsDefaultUrl = "/monitoring_actions.xml";
-	
+
+	private static GroupingCategories defaultGroupingCategories;
+	private static AggregateFunctions defaultMonitoringAggregateFunctions;
+	private static Metrics defaultMonitoringMetrics;
+	private static AvailableActions defaultMonitoringActions;
+
+	private static String groupingCategoriesDefaultUrl = "/monitoring_grouping_categories.xml";
+	private static String monitoringAggregateFunctionsDefaultUrl = "/monitoring_aggregate_functions.xml";
+	private static String monitoringMetricsDefaultUrl = "/monitoring_metrics.xml";
+	private static String monitoringActionsDefaultUrl = "/monitoring_actions.xml";
+
 	private URL groupingCategoriesUrl;
 	private URL monitoringAggregateFunctionsUrl;
 	private URL monitoringMetricsUrl;
 	private URL monitoringActionsUrl;
-	
+
 	private GroupingCategories groupingCategories;
 	private AggregateFunctions monitoringAggregateFunctions;
 	private Metrics monitoringMetrics;
 	private AvailableActions monitoringActions;
-	
+
 	private static Config _instance = null;
-	private static final Logger logger = LoggerFactory.getLogger(Config.class); 
-	
+	private static final Logger logger = LoggerFactory.getLogger(Config.class);
+
 	private Config() throws ConfigurationException, JAXBException {
 		groupingCategoriesUrl = getURL(groupingCategoriesDefaultUrl);
 		monitoringAggregateFunctionsUrl = getURL(monitoringAggregateFunctionsDefaultUrl);
 		monitoringMetricsUrl = getURL(monitoringMetricsDefaultUrl);
 		monitoringActionsUrl = getURL(monitoringActionsDefaultUrl);
 
-		this.groupingCategories = XMLHelper.deserialize(groupingCategoriesUrl, GroupingCategories.class);
-		this.monitoringAggregateFunctions =  XMLHelper.deserialize(monitoringAggregateFunctionsUrl, AggregateFunctions.class);
-		this.monitoringMetrics =  XMLHelper.deserialize(monitoringMetricsUrl, Metrics.class);
-		this.monitoringActions =  XMLHelper.deserialize(monitoringActionsUrl, AvailableActions.class);
+		this.groupingCategories = defaultGroupingCategories == null ? XMLHelper
+				.deserialize(groupingCategoriesUrl, GroupingCategories.class)
+				: defaultGroupingCategories;
+		this.monitoringAggregateFunctions = defaultMonitoringAggregateFunctions == null ? XMLHelper
+				.deserialize(monitoringAggregateFunctionsUrl,
+						AggregateFunctions.class)
+				: defaultMonitoringAggregateFunctions;
+		this.monitoringMetrics = defaultMonitoringMetrics == null ? XMLHelper
+				.deserialize(monitoringMetricsUrl, Metrics.class)
+				: defaultMonitoringMetrics;
+		this.monitoringActions = defaultMonitoringActions == null ? XMLHelper
+				.deserialize(monitoringActionsUrl, AvailableActions.class)
+				: defaultMonitoringActions;
 	}
-	
+
+	public static void setDefaultConfiguration(
+			GroupingCategories groupingCategories,
+			AggregateFunctions monitoringAggregateFunctions,
+			Metrics monitoringMetrics, AvailableActions monitoringActions) {
+		defaultGroupingCategories = groupingCategories;
+		defaultMonitoringActions = monitoringActions;
+		defaultMonitoringAggregateFunctions = monitoringAggregateFunctions;
+		defaultMonitoringMetrics = monitoringMetrics;
+	}
+
 	/**
 	 * 
 	 * @return
 	 * @throws ConfigurationException
 	 * @throws JAXBException
 	 */
-	public static Config getInstance() throws ConfigurationException, JAXBException {
+	public static Config getInstance() throws ConfigurationException,
+			JAXBException {
 		if (_instance == null) {
 			_instance = new Config();
 		}
@@ -106,7 +131,7 @@ public class Config {
 	public AvailableActions getMonitoringActions() {
 		return monitoringActions;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -138,7 +163,7 @@ public class Config {
 	public URL getMonitoringActionsUrl() {
 		return monitoringActionsUrl;
 	}
-	
+
 	public static URL getURL(String URLName) {
 		boolean exists = false;
 		URL url = null;
@@ -161,12 +186,49 @@ public class Config {
 				url = new File(alternativeURLName).toURI().toURL();
 				exists = new File(url.toURI()).exists();
 			} catch (Exception e) {
-				logger.error("Error checking if file exists from alternativeURLName",
+				logger.error(
+						"Error checking if file exists from alternativeURLName",
 						e);
 				exists = false;
 			}
 		}
 		return null;
+	}
+
+	public static String getGroupingCategoriesDefaultUrl() {
+		return groupingCategoriesDefaultUrl;
+	}
+
+	public static void setGroupingCategoriesDefaultUrl(
+			String groupingCategoriesDefaultUrl) {
+		Config.groupingCategoriesDefaultUrl = groupingCategoriesDefaultUrl;
+	}
+
+	public static String getMonitoringAggregateFunctionsDefaultUrl() {
+		return monitoringAggregateFunctionsDefaultUrl;
+	}
+
+	public static void setMonitoringAggregateFunctionsDefaultUrl(
+			String monitoringAggregateFunctionsDefaultUrl) {
+		Config.monitoringAggregateFunctionsDefaultUrl = monitoringAggregateFunctionsDefaultUrl;
+	}
+
+	public static String getMonitoringMetricsDefaultUrl() {
+		return monitoringMetricsDefaultUrl;
+	}
+
+	public static void setMonitoringMetricsDefaultUrl(
+			String monitoringMetricsDefaultUrl) {
+		Config.monitoringMetricsDefaultUrl = monitoringMetricsDefaultUrl;
+	}
+
+	public static String getMonitoringActionsDefaultUrl() {
+		return monitoringActionsDefaultUrl;
+	}
+
+	public static void setMonitoringActionsDefaultUrl(
+			String monitoringActionsDefaultUrl) {
+		Config.monitoringActionsDefaultUrl = monitoringActionsDefaultUrl;
 	}
 
 }

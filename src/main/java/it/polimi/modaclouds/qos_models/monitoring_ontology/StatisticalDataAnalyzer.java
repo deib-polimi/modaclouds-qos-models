@@ -26,8 +26,7 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	private String targetMetric;
 	private Set<MonitorableResource> targetResources;
 	private Set<Parameter> parameters;
-	private boolean started;
-	
+	private boolean started;	
 	
 	public boolean isStarted() {
 		return started;

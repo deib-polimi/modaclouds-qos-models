@@ -26,8 +26,11 @@ import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 import it.polimi.modaclouds.qos_models.util.Config;
 import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.JAXBException;
 
@@ -49,12 +52,46 @@ public class RuleValidator {
 	}
 
 	/**
+	 * Validate all rules
+	 * 
+	 * @param monitoringRules
+	 * @return the set of problems found during validation, or an empty set if
+	 *         the validation was successful
+	 */
+	public Set<Problem> validateAllRules(MonitoringRules monitoringRules) {
+		if (monitoringRules == null)
+			throw new NullArgumentException("monitoringRules");
+		Set<Problem> problems = new HashSet<Problem>();
+		List<MonitoringRule> rules = monitoringRules.getMonitoringRules();
+		List<MonitoringRule> otherRules = new ArrayList<MonitoringRule>(rules);
+		MonitoringRule previousRule = null;
+		for (MonitoringRule rule : rules) {
+			if (previousRule != null)
+				otherRules.add(previousRule);
+			otherRules.remove(rule);
+
+//			problems.addAll(valid)
+			
+			problems.addAll(validateInterdependency(rule, otherRules));
+
+			previousRule = rule;
+		}
+		return problems;
+	}
+
+	private Set<Problem> validateInterdependency(MonitoringRule rule,
+			List<MonitoringRule> otherRules) {
+		Set<Problem> problems = new HashSet<Problem>();
+
+		return problems;
+	}
+
+	/**
 	 * Validate the entire {@code targetRule} against the
 	 * {@code existingMonitoringRules}. The {@code targetRule} must not be part
-	 * of the {@code existingMonitoringRules}. If the rule is
-	 * already part of {@code existingMonitoringRules} use
-	 * {@link #postvalidateRule(MonitoringRule, MonitoringRules)}
-	 * instead.
+	 * of the {@code existingMonitoringRules}. If the rule is already part of
+	 * {@code existingMonitoringRules} use
+	 * {@link #postvalidateRule(MonitoringRule, MonitoringRules)} instead.
 	 * 
 	 * @param targetRule
 	 *            The rule to be validated
@@ -71,8 +108,7 @@ public class RuleValidator {
 			throw new NullArgumentException("targetRule");
 		if (existingMonitoringRules == null)
 			throw new NullArgumentException("existingMonitoringRules");
-		if (XMLHelper.containsId(existingMonitoringRules,
-				targetRule.getId()))
+		if (XMLHelper.containsId(existingMonitoringRules, targetRule.getId()))
 			throw new RuleValidationException("a monitoring rule with id "
 					+ targetRule.getId()
 					+ " already exists among existingMonitoringRules");
@@ -99,7 +135,7 @@ public class RuleValidator {
 			prevalidateCondition(targetRule, existingMonitoringRules);
 		}
 	}
-	
+
 	public void prevalidateRule(MonitoringRule targetRule,
 			MonitoringRules existingMonitoringRules)
 			throws RuleValidationException {
@@ -107,7 +143,8 @@ public class RuleValidator {
 			throw new NullArgumentException("targetRule");
 		if (existingMonitoringRules == null)
 			throw new NullArgumentException("existingMonitoringRules");
-		prevalidateRule(targetRule, existingMonitoringRules.getMonitoringRules());
+		prevalidateRule(targetRule,
+				existingMonitoringRules.getMonitoringRules());
 	}
 
 	/**
@@ -212,8 +249,7 @@ public class RuleValidator {
 	 * Validate the condition in the {@code targetRule}. {@code targetRule} must
 	 * not be part of the {@code existingMonitoringRules}. If the rule is
 	 * already part of {@code existingMonitoringRules} use
-	 * {@link #postvalidateCondition(MonitoringRule, MonitoringRules)}
-	 * instead.
+	 * {@link #postvalidateCondition(MonitoringRule, MonitoringRules)} instead.
 	 * 
 	 * @param targetRule
 	 * @param existingMonitoringRules
@@ -230,7 +266,7 @@ public class RuleValidator {
 		assert tree != null;
 		semanticValidation(tree, targetRule, existingMonitoringRules);
 	}
-	
+
 	public void prevalidateCondition(MonitoringRule targetRule,
 			MonitoringRules existingMonitoringRules)
 			throws RuleValidationException {
@@ -238,12 +274,14 @@ public class RuleValidator {
 			throw new NullArgumentException("targetRule");
 		if (existingMonitoringRules == null)
 			throw new NullArgumentException("existingMonitoringRules");
-		prevalidateCondition(targetRule, existingMonitoringRules.getMonitoringRules());
+		prevalidateCondition(targetRule,
+				existingMonitoringRules.getMonitoringRules());
 	}
 
 	/**
-	 * Validate the condition in the monitoring rule identified by {@code targetRuleId}. The monitoring rule must
-	 * be already part of the {@code monitoringRules}.
+	 * Validate the condition in the monitoring rule identified by
+	 * {@code targetRuleId}. The monitoring rule must be already part of the
+	 * {@code monitoringRules}.
 	 * 
 	 * @param targetRuleId
 	 * @param monitoringRules
@@ -288,8 +326,8 @@ public class RuleValidator {
 
 	/**
 	 * Validate the entire {@code targetRule} against the
-	 * {@code existingMonitoringRules}. The {@code targetRule} must be already part
-	 * of the {@code monitoringRules}.
+	 * {@code existingMonitoringRules}. The {@code targetRule} must be already
+	 * part of the {@code monitoringRules}.
 	 * 
 	 * @param targetRule
 	 * @param monitoringRules
@@ -308,9 +346,9 @@ public class RuleValidator {
 	}
 
 	/**
-	 * Validate the entire monitoring rule identified by {@code targetRuleId} against the
-	 * {@code monitoringRules}. The monitoring rule must be already part
-	 * of the {@code monitoringRules}.
+	 * Validate the entire monitoring rule identified by {@code targetRuleId}
+	 * against the {@code monitoringRules}. The monitoring rule must be already
+	 * part of the {@code monitoringRules}.
 	 * 
 	 * @param targetRuleId
 	 * @param monitoringRules
@@ -327,21 +365,6 @@ public class RuleValidator {
 					+ targetRuleId
 					+ " does not exists among existingMonitoringRules");
 		postvalidateRule(targetRule, monitoringRules);
-	}
-
-	/**
-	 * Validate entirely all rules through subsequent calls of {@link #postvalidateRule(MonitoringRule, MonitoringRules)}.
-	 * 
-	 * @param monitoringRules
-	 * @throws RuleValidationException
-	 */
-	public void validateAllRules(MonitoringRules monitoringRules)
-			throws RuleValidationException {
-		if (monitoringRules == null)
-			throw new NullPointerException();
-		for (MonitoringRule rule : monitoringRules.getMonitoringRules()) {
-			postvalidateRule(rule, monitoringRules);
-		}
 	}
 
 	private MonitoringRule getActualRuleInstance(MonitoringRule targetRule,
@@ -421,8 +444,7 @@ public class RuleValidator {
 				if (targetRule.getId().equals(occurenceMR_ID))
 					throw new RuleValidationException(
 							"A rule cannot check maxOccurrence on itself");
-				if (!XMLHelper.containsId(
-						existingMonitoringRules,
+				if (!XMLHelper.containsId(existingMonitoringRules,
 						occurenceMR_ID))
 					throw new RuleValidationException("Rule " + occurenceMR_ID
 							+ " does not exist");
@@ -430,7 +452,5 @@ public class RuleValidator {
 			}
 		}
 	}
-
-	
 
 }

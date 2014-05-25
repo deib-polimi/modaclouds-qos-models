@@ -21,6 +21,7 @@ import java.util.Set;
 public class SDAFactory extends DataAnalyzer {
 	
 	private Set<StatisticalDataAnalyzer> instantiatedSDAs;
+	private String type;
 
 	public Set<StatisticalDataAnalyzer> getInstantiatedSDAs() {
 		return instantiatedSDAs;
@@ -37,6 +38,7 @@ public class SDAFactory extends DataAnalyzer {
 		result = prime
 				* result
 				+ ((instantiatedSDAs == null) ? 0 : instantiatedSDAs.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -54,7 +56,20 @@ public class SDAFactory extends DataAnalyzer {
 				return false;
 		} else if (!instantiatedSDAs.equals(other.instantiatedSDAs))
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
