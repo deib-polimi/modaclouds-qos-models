@@ -24,27 +24,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class KBEntity {
-	
-	private Logger logger = LoggerFactory
-			.getLogger(this.getClass().getName());
-	
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
 	private String shortURI;
 	private String uri;
-	
+
 	public KBEntity() {
 		String id = UUID.randomUUID().toString();
 		this.shortURI = MO.prefix + ":" + id;
 		this.uri = MO.URI + id;
 	}
-	
+
 	public String getShortURI() {
 		return shortURI;
 	}
-	
+
 	public String getShortClassURI() {
 		return MO.prefix + ":" + this.getClass().getSimpleName();
 	}
-	
+
 	public String getClassURI() {
 		return MO.URI + this.getClass().getSimpleName();
 	}
@@ -54,15 +53,14 @@ public class KBEntity {
 	}
 
 	public void setUri(String uri) {
-		this.uri = uri;
 		try {
-			URI theUri = new URI(uri);
-			String[] segments = theUri.getPath().split("/");
-			String id = segments[segments.length - 1];
-			this.shortURI = MO.prefix + ":" + id;
+			new URI(uri);
 		} catch (URISyntaxException e) {
-			logger.error("Error while setting short uri", e);
+			throw new IllegalArgumentException("uri is not well formed uri");
 		}
+		this.uri = uri;
+		String id = uri.substring(uri.lastIndexOf("/")+1);
+		this.shortURI = MO.prefix + ":" + id;
 	}
 
 	@Override
@@ -96,23 +94,23 @@ public class KBEntity {
 			return false;
 		return true;
 	}
-	
-//	public KBEntity copyPaste2Provider(String provider) {
-//		KBEntity newEntity = null;
-//		try {
-//			Class<? extends KBEntity> clazz = this.getClass();
-//			newEntity = clazz.newInstance();
-//			Map<String,Object> properties = PropertyUtils.describe(this);
-//			for (String p: properties.keySet()) {
-//				if (p.equals("")) {
-//					
-//				}
-//			}
-//		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-//			logger.error("Error copy-pasting KBEntity to provider",e);
-//		}
-//		return newEntity;
-//	}
 
-	
+	// public KBEntity copyPaste2Provider(String provider) {
+	// KBEntity newEntity = null;
+	// try {
+	// Class<? extends KBEntity> clazz = this.getClass();
+	// newEntity = clazz.newInstance();
+	// Map<String,Object> properties = PropertyUtils.describe(this);
+	// for (String p: properties.keySet()) {
+	// if (p.equals("")) {
+	//
+	// }
+	// }
+	// } catch (InstantiationException | IllegalAccessException |
+	// InvocationTargetException | NoSuchMethodException e) {
+	// logger.error("Error copy-pasting KBEntity to provider",e);
+	// }
+	// return newEntity;
+	// }
+
 }
