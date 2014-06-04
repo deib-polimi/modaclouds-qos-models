@@ -17,7 +17,7 @@
        limitations under the License.
 
 -->
-<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿Gibbo (GB) -->
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mt="http://www.modaclouds.eu/xsd/1.0/metrics_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.modaclouds.eu/xsd/1.0/metrics_schema" elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
 	<xs:element name="metrics">
 		<xs:annotation>
