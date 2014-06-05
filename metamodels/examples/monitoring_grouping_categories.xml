@@ -32,5 +32,4 @@
 	<groupingCategory name="InternalComponent" />
 	<groupingCategory name="PaaSService" />
 	<groupingCategory name="VM" />
-	<groupingCategory name="all" />
 </groupingCategories>

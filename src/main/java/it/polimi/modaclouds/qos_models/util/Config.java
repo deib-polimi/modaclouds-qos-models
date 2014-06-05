@@ -16,14 +16,13 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
-import it.polimi.modaclouds.qos_models.monitoring_rules.ConfigurationException;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
 import it.polimi.modaclouds.qos_models.schema.AvailableActions;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategories;
 import it.polimi.modaclouds.qos_models.schema.Metrics;
 
-import java.io.File;
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javax.xml.bind.JAXBException;
 
@@ -34,49 +33,64 @@ public class Config {
 
 	private static GroupingCategories defaultGroupingCategories;
 	private static AggregateFunctions defaultMonitoringAggregateFunctions;
+	private static AggregateFunctions defaultQosAggregateFunctions;
 	private static Metrics defaultMonitoringMetrics;
+	private static Metrics defaultQosMetrics;
 	private static AvailableActions defaultMonitoringActions;
 
-	private static String groupingCategoriesDefaultUrl = "/monitoring_grouping_categories.xml";
-	private static String monitoringAggregateFunctionsDefaultUrl = "/monitoring_aggregate_functions.xml";
-	private static String monitoringMetricsDefaultUrl = "/monitoring_metrics.xml";
-	private static String monitoringActionsDefaultUrl = "/monitoring_actions.xml";
-
-	private URL groupingCategoriesUrl;
-	private URL monitoringAggregateFunctionsUrl;
-	private URL monitoringMetricsUrl;
-	private URL monitoringActionsUrl;
+	private static String groupingCategoriesDefaultLocation = "monitoring_grouping_categories.xml";
+	private static String monitoringAggregateFunctionsDefaultLocation = "monitoring_aggregate_functions.xml";
+	private static String qosAggregateFunctionsDefaultLocation = "qos_aggregate_functions.xml";
+	private static String monitoringMetricsDefaultLocation = "monitoring_metrics.xml";
+	private static String qosMetricsDefaultLocation = "qos_metrics.xml";
+	private static String monitoringActionsDefaultLocation = "monitoring_actions.xml";
 
 	private GroupingCategories groupingCategories;
 	private AggregateFunctions monitoringAggregateFunctions;
+	private AggregateFunctions qosAggregateFunctions;
 	private Metrics monitoringMetrics;
+	private Metrics qosMetrics;
 	private AvailableActions monitoringActions;
 
 	private static Config _instance = null;
 	private static final Logger logger = LoggerFactory.getLogger(Config.class);
 
-	private Config() throws ConfigurationException, JAXBException {
-		groupingCategoriesUrl = getURL(groupingCategoriesDefaultUrl);
-		monitoringAggregateFunctionsUrl = getURL(monitoringAggregateFunctionsDefaultUrl);
-		monitoringMetricsUrl = getURL(monitoringMetricsDefaultUrl);
-		monitoringActionsUrl = getURL(monitoringActionsDefaultUrl);
+	private Config() throws JAXBException, FileNotFoundException {
+		FileInputStream groupingCategoriesFile = new FileInputStream(
+				groupingCategoriesDefaultLocation);
+		FileInputStream monitoringAggregateFunctionsFile = new FileInputStream(
+				monitoringAggregateFunctionsDefaultLocation);
+		FileInputStream qosAggregateFunctionsFile = new FileInputStream(
+				qosAggregateFunctionsDefaultLocation);
+		FileInputStream monitoringMetricsFile = new FileInputStream(
+				monitoringMetricsDefaultLocation);
+		FileInputStream qosMetricsFile = new FileInputStream(
+				qosMetricsDefaultLocation);
+		FileInputStream monitoringActionsFile = new FileInputStream(
+				monitoringActionsDefaultLocation);
 
 		this.groupingCategories = defaultGroupingCategories == null ? XMLHelper
-				.deserialize(groupingCategoriesUrl, GroupingCategories.class)
+				.deserialize(groupingCategoriesFile, GroupingCategories.class)
 				: defaultGroupingCategories;
 		this.monitoringAggregateFunctions = defaultMonitoringAggregateFunctions == null ? XMLHelper
-				.deserialize(monitoringAggregateFunctionsUrl,
+				.deserialize(monitoringAggregateFunctionsFile,
+						AggregateFunctions.class)
+				: defaultMonitoringAggregateFunctions;
+		this.qosAggregateFunctions = defaultQosAggregateFunctions == null ? XMLHelper
+				.deserialize(qosAggregateFunctionsFile,
 						AggregateFunctions.class)
 				: defaultMonitoringAggregateFunctions;
 		this.monitoringMetrics = defaultMonitoringMetrics == null ? XMLHelper
-				.deserialize(monitoringMetricsUrl, Metrics.class)
+				.deserialize(monitoringMetricsFile, Metrics.class)
 				: defaultMonitoringMetrics;
+		this.qosMetrics = defaultQosMetrics == null ? XMLHelper.deserialize(
+				qosMetricsFile, Metrics.class) : defaultQosMetrics;
 		this.monitoringActions = defaultMonitoringActions == null ? XMLHelper
-				.deserialize(monitoringActionsUrl, AvailableActions.class)
+				.deserialize(monitoringActionsFile, AvailableActions.class)
 				: defaultMonitoringActions;
 	}
 
-	public static void setDefaultConfiguration(
+	public static void setDefaultConfiguration(Metrics qosMetrics, AggregateFunctions qosAggregateFunctions,
 			GroupingCategories groupingCategories,
 			AggregateFunctions monitoringAggregateFunctions,
 			Metrics monitoringMetrics, AvailableActions monitoringActions) {
@@ -84,15 +98,11 @@ public class Config {
 		defaultMonitoringActions = monitoringActions;
 		defaultMonitoringAggregateFunctions = monitoringAggregateFunctions;
 		defaultMonitoringMetrics = monitoringMetrics;
+		defaultQosMetrics = qosMetrics;
+		defaultQosAggregateFunctions = qosAggregateFunctions;
 	}
 
-	/**
-	 * 
-	 * @return
-	 * @throws ConfigurationException
-	 * @throws JAXBException
-	 */
-	public static Config getInstance() throws ConfigurationException,
+	public static Config getInstance() throws FileNotFoundException,
 			JAXBException {
 		if (_instance == null) {
 			_instance = new Config();
@@ -115,6 +125,10 @@ public class Config {
 	public AggregateFunctions getMonitoringAggregateFunctions() {
 		return monitoringAggregateFunctions;
 	}
+	
+	public AggregateFunctions getQosAggregateFunctions() {
+		return monitoringAggregateFunctions;
+	}
 
 	/**
 	 * 
@@ -122,6 +136,10 @@ public class Config {
 	 */
 	public Metrics getMonitoringMetrics() {
 		return monitoringMetrics;
+	}
+
+	public Metrics getQosMetrics() {
+		return qosMetrics;
 	}
 
 	/**
@@ -132,103 +150,157 @@ public class Config {
 		return monitoringActions;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public URL getGroupingCategoriesUrl() {
-		return groupingCategoriesUrl;
+	public static String getGroupingCategoriesDefaultLocation() {
+		return groupingCategoriesDefaultLocation;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public URL getMonitoringAggregateFunctionsUrl() {
-		return monitoringAggregateFunctionsUrl;
+	public static void setGroupingCategoriesDefaultLocation(
+			String groupingCategoriesDefaultLocation) {
+		Config.groupingCategoriesDefaultLocation = groupingCategoriesDefaultLocation;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public URL getMonitoringMetricsUrl() {
-		return monitoringMetricsUrl;
+	public static String getMonitoringAggregateFunctionsDefaultLocation() {
+		return monitoringAggregateFunctionsDefaultLocation;
+	}
+	
+	public static String getQosAggregateFunctionsDefaultLocation() {
+		return qosAggregateFunctionsDefaultLocation;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public URL getMonitoringActionsUrl() {
-		return monitoringActionsUrl;
+	public static void setMonitoringAggregateFunctionsDefaultLocation(
+			String monitoringAggregateFunctionsDefaultLocation) {
+		Config.monitoringAggregateFunctionsDefaultLocation = monitoringAggregateFunctionsDefaultLocation;
+	}
+	public static void setQosAggregateFunctionsDefaultLocation(
+			String qosAggregateFunctionsDefaultLocation) {
+		Config.qosAggregateFunctionsDefaultLocation = qosAggregateFunctionsDefaultLocation;
 	}
 
-	public static URL getURL(String URLName) {
-		boolean exists = false;
-		URL url = null;
-		try {
-			url = Config.class.getResource(URLName);
-			exists = new File(url.toURI()).exists();
-		} catch (Exception e) {
-			logger.error("Error checking if file exists from URLName", e);
-			exists = false;
-		}
-		if (exists)
-			return url;
-		else {
-			try {
-				String alternativeURLName = new File(Config.class
-						.getProtectionDomain().getCodeSource().getLocation()
-						.getPath()).getParent()
-						+ URLName;
-
-				url = new File(alternativeURLName).toURI().toURL();
-				exists = new File(url.toURI()).exists();
-			} catch (Exception e) {
-				logger.error(
-						"Error checking if file exists from alternativeURLName",
-						e);
-				exists = false;
-			}
-		}
-		return null;
+	public static String getMonitoringMetricsDefaultLocation() {
+		return monitoringMetricsDefaultLocation;
 	}
 
-	public static String getGroupingCategoriesDefaultUrl() {
-		return groupingCategoriesDefaultUrl;
+	public static String getQosMetricsDefaultLocation() {
+		return qosMetricsDefaultLocation;
 	}
 
-	public static void setGroupingCategoriesDefaultUrl(
-			String groupingCategoriesDefaultUrl) {
-		Config.groupingCategoriesDefaultUrl = groupingCategoriesDefaultUrl;
+	public static void setMonitoringMetricsDefaultLocation(
+			String monitoringMetricsDefaultLocation) {
+		Config.monitoringMetricsDefaultLocation = monitoringMetricsDefaultLocation;
 	}
 
-	public static String getMonitoringAggregateFunctionsDefaultUrl() {
-		return monitoringAggregateFunctionsDefaultUrl;
+	public static void setQosMetricsDefaultLocation(
+			String qosMetricsDefaultLocation) {
+		Config.qosMetricsDefaultLocation = qosMetricsDefaultLocation;
 	}
 
-	public static void setMonitoringAggregateFunctionsDefaultUrl(
-			String monitoringAggregateFunctionsDefaultUrl) {
-		Config.monitoringAggregateFunctionsDefaultUrl = monitoringAggregateFunctionsDefaultUrl;
+	public static String getMonitoringActionsDefaultLocation() {
+		return monitoringActionsDefaultLocation;
 	}
 
-	public static String getMonitoringMetricsDefaultUrl() {
-		return monitoringMetricsDefaultUrl;
+	public static void setMonitoringActionsDefaultLocation(
+			String monitoringActionsDefaultLocation) {
+		Config.monitoringActionsDefaultLocation = monitoringActionsDefaultLocation;
 	}
 
-	public static void setMonitoringMetricsDefaultUrl(
-			String monitoringMetricsDefaultUrl) {
-		Config.monitoringMetricsDefaultUrl = monitoringMetricsDefaultUrl;
-	}
+	// /**
+	// *
+	// * @return
+	// */
+	// public URL getGroupingCategoriesUrl() {
+	// return groupingCategoriesFile;
+	// }
+	//
+	// /**
+	// *
+	// * @return
+	// */
+	// public URL getMonitoringAggregateFunctionsUrl() {
+	// return monitoringAggregateFunctionsFile;
+	// }
+	//
+	// /**
+	// *
+	// * @return
+	// */
+	// public URL getMonitoringMetricsUrl() {
+	// return monitoringMetricsFile;
+	// }
+	//
+	// /**
+	// *
+	// * @return
+	// */
+	// public URL getMonitoringActionsUrl() {
+	// return monitoringActionsFile;
+	// }
 
-	public static String getMonitoringActionsDefaultUrl() {
-		return monitoringActionsDefaultUrl;
-	}
+	// public static URL getURL(String URLName) {
+	// boolean exists = false;
+	// URL url = null;
+	// try {
+	// url = Config.class.getResource(URLName);
+	// exists = new File(url.toURI()).exists();
+	// } catch (Exception e) {
+	// logger.error("Error checking if file exists from URLName", e);
+	// exists = false;
+	// }
+	// if (exists)
+	// return url;
+	// else {
+	// try {
+	// String alternativeURLName = new File(Config.class
+	// .getProtectionDomain().getCodeSource().getLocation()
+	// .getPath()).getParent()
+	// + URLName;
+	//
+	// url = new File(alternativeURLName).toURI().toURL();
+	// exists = new File(url.toURI()).exists();
+	// } catch (Exception e) {
+	// logger.error(
+	// "Error checking if file exists from alternativeURLName",
+	// e);
+	// exists = false;
+	// }
+	// }
+	// return null;
+	// }
 
-	public static void setMonitoringActionsDefaultUrl(
-			String monitoringActionsDefaultUrl) {
-		Config.monitoringActionsDefaultUrl = monitoringActionsDefaultUrl;
-	}
+	// public static String getGroupingCategoriesDefaultUrl() {
+	// return groupingCategoriesDefaultUrl;
+	// }
+
+	// public static void setGroupingCategoriesDefaultUrl(
+	// String groupingCategoriesDefaultUrl) {
+	// Config.groupingCategoriesDefaultUrl = groupingCategoriesDefaultUrl;
+	// }
+
+	// public static String getMonitoringAggregateFunctionsDefaultUrl() {
+	// return monitoringAggregateFunctionsDefaultUrl;
+	// }
+	//
+	// public static void setMonitoringAggregateFunctionsDefaultUrl(
+	// String monitoringAggregateFunctionsDefaultUrl) {
+	// Config.monitoringAggregateFunctionsDefaultUrl =
+	// monitoringAggregateFunctionsDefaultUrl;
+	// }
+	//
+	// public static String getMonitoringMetricsDefaultUrl() {
+	// return monitoringMetricsDefaultUrl;
+	// }
+	//
+	// public static void setMonitoringMetricsDefaultUrl(
+	// String monitoringMetricsDefaultUrl) {
+	// Config.monitoringMetricsDefaultUrl = monitoringMetricsDefaultUrl;
+	// }
+	//
+	// public static String getMonitoringActionsDefaultUrl() {
+	// return monitoringActionsDefaultUrl;
+	// }
+	//
+	// public static void setMonitoringActionsDefaultUrl(
+	// String monitoringActionsDefaultUrl) {
+	// Config.monitoringActionsDefaultUrl = monitoringActionsDefaultUrl;
+	// }
 
 }

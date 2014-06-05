@@ -16,19 +16,10 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_rules;
 
+public class ValidationException extends Exception {
 
-public class RuleValidationException extends Exception {
-
-	public RuleValidationException(String message) {
+	public ValidationException(String message) {
 		super(message);
-	}
-
-	public RuleValidationException(String message, Exception e) {
-		super(message,e);
-	}
-
-	public RuleValidationException(Exception e) {
-		super(e);
 	}
 
 }

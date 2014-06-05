@@ -55,6 +55,7 @@
 	<xs:complexType name="constraint">
 		<xs:sequence>
 			<xs:element name="targetResourceIDRef" type="xs:string" />
+			<xs:element name="targetClass" type="xs:string" minOccurs="0"/>
 			<xs:element name="metric" type="xs:string" />
 			<xs:element name="metricAggregation" type="cons:qosMetricAggregation"
 				minOccurs="0" />

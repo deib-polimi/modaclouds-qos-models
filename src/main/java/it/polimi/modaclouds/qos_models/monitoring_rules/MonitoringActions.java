@@ -16,7 +16,8 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_rules;
 
-public enum EnumErrorType {
-	INVALID_CLASS, INVALID_METRIC, MISSING_REQUIRED_PARAMETER, INVALID_AGGREGATE_FUNCTION, MISSING_REQUIRED_PARENT, MISSING_FIELD, INVALID_ACTION, CONDITION_LEXICAL_ERROR, CONDITION_SEMANTIC_ERROR
+public class MonitoringActions {
+
+	public static final String OUTPUT_METRIC = "OutputMetric";
 
 }

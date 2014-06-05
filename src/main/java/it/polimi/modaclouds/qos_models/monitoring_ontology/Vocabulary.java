@@ -53,7 +53,6 @@ public class Vocabulary {
     public static final String Parameter = "Parameter";
     public static final String MonitoringComponent = "MonitoringComponent";
     public static final String MonitorableResource = "MonitorableResource";
-    public static final String All = "All";
 
     public static final String aboutResource = "aboutResource";
     public static final String parameter = "parameter";

@@ -18,6 +18,7 @@ package it.polimi.modaclouds.qos_models.util;
 
 import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -48,6 +49,14 @@ public class XMLHelper {
 			throws JAXBException {
 		T object = (T) JAXBContext.newInstance(targetClass)
 				.createUnmarshaller().unmarshal(xmlUrl);
+		return object;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T deserialize(FileInputStream xmlPath, Class<T> targetClass)
+			throws JAXBException {
+		T object = (T) JAXBContext.newInstance(targetClass)
+				.createUnmarshaller().unmarshal(xmlPath);
 		return object;
 	}
 

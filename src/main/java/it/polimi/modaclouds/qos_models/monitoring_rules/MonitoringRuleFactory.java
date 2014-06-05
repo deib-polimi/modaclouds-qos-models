@@ -16,18 +16,23 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_rules;
 
-import it.polimi.modaclouds.qos_models.monitoring_ontology.Vocabulary;
+import it.polimi.modaclouds.qos_models.schema.Action;
+import it.polimi.modaclouds.qos_models.schema.Actions;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunction;
 import it.polimi.modaclouds.qos_models.schema.CollectedMetric;
+import it.polimi.modaclouds.qos_models.schema.Condition;
 import it.polimi.modaclouds.qos_models.schema.Constraint;
+import it.polimi.modaclouds.qos_models.schema.Constraints;
 import it.polimi.modaclouds.qos_models.schema.Metric;
 import it.polimi.modaclouds.qos_models.schema.MonitoredTarget;
 import it.polimi.modaclouds.qos_models.schema.MonitoredTargets;
 import it.polimi.modaclouds.qos_models.schema.MonitoringMetricAggregation;
 import it.polimi.modaclouds.qos_models.schema.MonitoringRule;
+import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 import it.polimi.modaclouds.qos_models.schema.Parameter;
 import it.polimi.modaclouds.qos_models.util.Config;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -43,83 +48,123 @@ public class MonitoringRuleFactory {
 			.getName());
 	private Config config;
 
-	public MonitoringRuleFactory() throws ConfigurationException, JAXBException {
+	public MonitoringRuleFactory() throws FileNotFoundException, JAXBException {
 		config = Config.getInstance();
 	}
 
-	public MonitoringRule makeRuleFromConstraint(Constraint relatedConstraint,
-			String ruleID) throws RuleValidationException {
+	public MonitoringRules makeRulesFromQoSConstraints(
+			Constraints qosConstraints) throws ValidationException {
+		MonitoringRules rules = new MonitoringRules();
+		for (Constraint c : qosConstraints.getConstraints()) {
+			rules.getMonitoringRules().add(makeRuleFromConstraint(c));
+		}
+		return rules;
+	}
+
+	public MonitoringRule makeRuleFromConstraint(Constraint qosConstraint,
+			String ruleID) throws ValidationException {
 		MonitoringRule monitoringRule = new MonitoringRule();
 		monitoringRule.setId(ruleID);
-		monitoringRule.setRelatedQosConstraintId(relatedConstraint.getId());
-		
-		List<Metric> availableMetrics = config.getMonitoringMetrics().getMetrics();
-		String metric = relatedConstraint.getMetric();
-		// to be refactored... code should be moved to rulevalidator
-		boolean found = false;
-		CollectedMetric collectedMetric = new CollectedMetric();
-		for (Metric m: availableMetrics) {
-			if (metric.equals(m.getName())) {
-				collectedMetric.setMetricName(m.getName());
-				collectedMetric.setInherited(false);
-				collectedMetric.getParameters().addAll(getDefaultParameters(m));
-				found = true;
-				break;
-			}
-		}
-		if (!found) throw new RuleValidationException("Metric " + metric + " is not listed in file " + config.getMonitoringMetricsUrl());
+		monitoringRule.setRelatedQosConstraintId(qosConstraint.getId());
+		monitoringRule.setTimeStep("60");
+		monitoringRule.setTimeWindow("60");
+
+		CollectedMetric collectedMetric = makeCollectedMetric(qosConstraint);
+		if (collectedMetric == null)
+			throw new ValidationException(qosConstraint.getMetric()
+					+ " is not a valid monitoring metric");
 		monitoringRule.setCollectedMetric(collectedMetric);
 
-		List<AggregateFunction> availableAggregateFunctions = config.getMonitoringAggregateFunctions().getAggregateFunctions();
-		String metricAggregation = relatedConstraint.getMetricAggregation().getAggregateFunction();
-		// to be refactored... code should be moved to rulevalidator
-		found = false;
-		MonitoringMetricAggregation monitoringMetricAggregation = new MonitoringMetricAggregation();
-		for (AggregateFunction af: availableAggregateFunctions) {
-			if (metricAggregation.equals(af.getName())) {
-				monitoringMetricAggregation.setAggregateFunction(af.getName());;
-				monitoringMetricAggregation.setGroupingClass(Vocabulary.All);
-				List<Parameter> defaultParameters = getDefaultParameters(af);
-				defaultParameters = mergeParameters(relatedConstraint.getMetricAggregation().getParameters(),defaultParameters);
-				monitoringMetricAggregation.getParameters().addAll(defaultParameters);
-				found = true;
-				break;
-			}
-		}
-		if (!found) throw new RuleValidationException("Aggregate function " + metricAggregation + " is not listed in file " + config.getMonitoringAggregateFunctionsUrl());
+		MonitoringMetricAggregation monitoringMetricAggregation = makeMetricAggregation(qosConstraint);
+		if (monitoringMetricAggregation == null)
+			throw new ValidationException(qosConstraint.getMetricAggregation()
+					.getAggregateFunction()
+					+ " is not a valid aggregate function");
 		monitoringRule.setMetricAggregation(monitoringMetricAggregation);
-
 
 		MonitoredTargets targets = new MonitoredTargets();
 		MonitoredTarget target = new MonitoredTarget();
-		target.setId(relatedConstraint.getTargetResourceIDRef());
+		target.setId(qosConstraint.getTargetResourceIDRef());
+		target.setClazz(qosConstraint.getTargetClass());
 		targets.getMonitoredTargets().add(target);
 		monitoringRule.setMonitoredTargets(targets);
 
-		Float maxValue = relatedConstraint.getRange().getHasMaxValue();
-		Float minValue = relatedConstraint.getRange().getHasMinValue();
-		String condition = "";
+		Float maxValue = qosConstraint.getRange().getHasMaxValue();
+		Float minValue = qosConstraint.getRange().getHasMinValue();
+		String conditionValue = "";
 		if (maxValue != null) {
-			condition += "METRIC > " + maxValue;
+			conditionValue += "METRIC > " + maxValue;
 		}
 
 		if (minValue != null) {
-			condition += (maxValue != null ? " && " : "") + "METRIC < "
+			conditionValue += (maxValue != null ? " && " : "") + "METRIC < "
 					+ minValue;
 		}
+		Condition condition = new Condition();
+		condition.setValue(conditionValue);
+		condition.setInherited(false);
 		monitoringRule.setCondition(condition);
-		
+
 		monitoringRule.setStartEnabled(true);
 
+		Action action = new Action();
+		action.setName(MonitoringActions.OUTPUT_METRIC);
+		Parameter p = new Parameter();
+		p.setName("name");
+		p.setValue("qosConstraint_" + qosConstraint.getId() + "_Violated");
+		action.getParameters().add(p);
+		Actions actions = new Actions();
+		actions.getActions().add(action);
+
+		monitoringRule.setActions(actions);
+
 		return monitoringRule;
+	}
+
+	private MonitoringMetricAggregation makeMetricAggregation(
+			Constraint qosConstraint) {
+		List<AggregateFunction> availableAggregateFunctions = config
+				.getMonitoringAggregateFunctions().getAggregateFunctions();
+		MonitoringMetricAggregation monitoringMetricAggregation = null;
+		for (AggregateFunction af : availableAggregateFunctions) {
+			if (qosConstraint.getMetricAggregation().getAggregateFunction()
+					.equals(af.getName())) {
+				monitoringMetricAggregation = new MonitoringMetricAggregation();
+				monitoringMetricAggregation.setAggregateFunction(af.getName());
+				List<Parameter> defaultParameters = getDefaultParameters(af);
+				defaultParameters = mergeParameters(qosConstraint
+						.getMetricAggregation().getParameters(),
+						defaultParameters);
+				monitoringMetricAggregation.getParameters().addAll(
+						defaultParameters);
+				break;
+			}
+		}
+		return monitoringMetricAggregation;
+	}
+
+	private CollectedMetric makeCollectedMetric(Constraint qosConstraint) {
+		List<Metric> availableMetrics = config.getMonitoringMetrics()
+				.getMetrics();
+		CollectedMetric collectedMetric = null;
+		for (Metric m : availableMetrics) {
+			if (qosConstraint.getMetric().equals(m.getName())) {
+				collectedMetric = new CollectedMetric();
+				collectedMetric.setMetricName(m.getName());
+				collectedMetric.setInherited(false);
+				collectedMetric.getParameters().addAll(getDefaultParameters(m));
+				break;
+			}
+		}
+		return collectedMetric;
 	}
 
 	private List<Parameter> mergeParameters(List<Parameter> parameters1,
 			List<Parameter> parameters2) {
 		List<Parameter> mergedParameters = new ArrayList<Parameter>(parameters1);
-		for (Parameter p2: parameters2) {
+		for (Parameter p2 : parameters2) {
 			boolean found = false;
-			for (Parameter p1: parameters1) {
+			for (Parameter p1 : parameters1) {
 				if (p2.getName().equals(p1.getName())) {
 					found = true;
 					break;
@@ -134,7 +179,8 @@ public class MonitoringRuleFactory {
 
 	private List<Parameter> getDefaultParameters(AggregateFunction af) {
 		List<Parameter> parameters = new ArrayList<Parameter>();
-		for (AggregateFunction.RequiredParameter rPar : af.getRequiredParameters()) {
+		for (AggregateFunction.RequiredParameter rPar : af
+				.getRequiredParameters()) {
 			if (rPar.getDefaultValue() != null) {
 				Parameter par = new Parameter();
 				par.setName(rPar.getValue());
@@ -159,7 +205,7 @@ public class MonitoringRuleFactory {
 	}
 
 	public MonitoringRule makeRuleFromConstraint(Constraint relatedConstraint)
-			throws RuleValidationException {
+			throws ValidationException {
 		return makeRuleFromConstraint(relatedConstraint, UUID.randomUUID()
 				.toString());
 	}

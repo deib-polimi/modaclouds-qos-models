@@ -51,7 +51,7 @@
 		<requiredParameter>forecastPeriod</requiredParameter>
 		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-		<aggregateFunction name="ForecastingTimeSeriesARiMA"
+		<aggregateFunction name="ForecastingTimeSeriesARIMA"
 		computedBy="MATLABStatisticalDataAnalyzer">
 		<requiredParameter>autoregressive</requiredParameter>
 		<requiredParameter>integrated</requiredParameter>
@@ -59,11 +59,26 @@
 		<requiredParameter>forecastPeriod</requiredParameter>
 		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-	<aggregateFunction name="Estimation" computedBy="MATLABStatisticalDataAnalyzer">
-		<requiredParameter>method</requiredParameter>
+	<aggregateFunction name="EstimationCI" computedBy="MATLABStatisticalDataAnalyzer">
 		<requiredParameter>window</requiredParameter>
 		<requiredParameter>nCPU</requiredParameter>
-		<requiredParameter>warmUp</requiredParameter>
+		<requiredParameter>CPUUtilTarget</requiredParameter>
+		<requiredParameter>returnedMetric</requiredParameter>
+	</aggregateFunction>
+	<aggregateFunction name="EstimationFCFS" computedBy="MATLABStatisticalDataAnalyzer">
+		<requiredParameter>window</requiredParameter>
+		<requiredParameter>nCPU</requiredParameter>
+		<requiredParameter>CPUUtilTarget</requiredParameter>
+		<requiredParameter>returnedMetric</requiredParameter>
+	</aggregateFunction>
+		<aggregateFunction name="EstimationUBO" computedBy="MATLABStatisticalDataAnalyzer">
+		<requiredParameter>window</requiredParameter>
+		<requiredParameter>CPUUtilTarget</requiredParameter>
+		<requiredParameter>returnedMetric</requiredParameter>
+	</aggregateFunction>
+		<aggregateFunction name="EstimationUBR" computedBy="MATLABStatisticalDataAnalyzer">
+		<requiredParameter>window</requiredParameter>
+		<requiredParameter>nCPU</requiredParameter>
 		<requiredParameter>CPUUtilTarget</requiredParameter>
 		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>

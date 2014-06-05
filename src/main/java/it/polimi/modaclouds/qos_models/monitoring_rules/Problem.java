@@ -16,28 +16,58 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_rules;
 
+
 public class Problem {
-	private String ruleId; 
+	private String id;
 	private String tagName;
 	private EnumErrorType error;
-	public String getRuleId() {
-		return ruleId;
+	private String description;
+
+	public Problem(String id, EnumErrorType error, String tagName) {
+		this.id = id;
+		this.error = error;
+		this.tagName = tagName;
 	}
-	public void setRuleId(String ruleId) {
-		this.ruleId = ruleId;
+
+	public Problem() {
 	}
+
+	public Problem(String id, EnumErrorType error, String tagName,
+			String description) {
+		this(id, error, tagName);
+		this.description = description;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setElementId(String id) {
+		this.id = id;
+	}
+
 	public String getTagName() {
 		return tagName;
 	}
+
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
 	}
+
 	public EnumErrorType getError() {
 		return error;
 	}
+
 	public void setError(EnumErrorType error) {
 		this.error = error;
 	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
-	
+	public String getDescription() {
+		return description;
+	}
+
 }
