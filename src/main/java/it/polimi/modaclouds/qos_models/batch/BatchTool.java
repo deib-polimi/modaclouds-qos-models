@@ -89,16 +89,16 @@ public class BatchTool {
 			System.err
 					.println("Could not locate input file: " + e.getMessage());
 		} catch (JAXBException e) {
-			System.err.println("Input file could not be parsed: "
-					+ e.getMessage());
+			System.err.println("Input file could not be parsed: ");
+			e.printStackTrace();
 		} catch (ValidationException e) {
 			System.err
-					.println("Error while creating monitoring rules from qos constraints: "
-							+ e.getMessage());
+					.println("Error while creating monitoring rules from qos constraints: ");
+			e.printStackTrace();
 		} catch (Exception e) {
 			System.err
-					.println("Unknown error: "
-							+ e.getMessage());
+					.println("Unknown error: ");
+			e.printStackTrace();
 		} finally {
 			if (inputFile != null) {
 				try {

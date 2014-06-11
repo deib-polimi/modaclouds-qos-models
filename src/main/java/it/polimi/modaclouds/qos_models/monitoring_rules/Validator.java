@@ -31,14 +31,11 @@ import it.polimi.modaclouds.qos_models.schema.Parameter;
 import it.polimi.modaclouds.qos_models.util.Config;
 import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.xml.bind.JAXBException;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -53,7 +50,7 @@ public class Validator {
 
 	private Config config;
 
-	public Validator() throws FileNotFoundException, JAXBException {
+	public Validator() throws ConfigurationException {
 		config = Config.getInstance();
 	}
 

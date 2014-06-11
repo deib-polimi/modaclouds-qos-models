@@ -32,12 +32,9 @@ import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 import it.polimi.modaclouds.qos_models.schema.Parameter;
 import it.polimi.modaclouds.qos_models.util.Config;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import javax.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +45,7 @@ public class MonitoringRuleFactory {
 			.getName());
 	private Config config;
 
-	public MonitoringRuleFactory() throws FileNotFoundException, JAXBException {
+	public MonitoringRuleFactory() throws ConfigurationException {
 		config = Config.getInstance();
 	}
 

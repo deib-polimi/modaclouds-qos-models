@@ -16,15 +16,13 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
+import it.polimi.modaclouds.qos_models.monitoring_rules.ConfigurationException;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
 import it.polimi.modaclouds.qos_models.schema.AvailableActions;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategories;
 import it.polimi.modaclouds.qos_models.schema.Metrics;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import javax.xml.bind.JAXBException;
+import java.net.URL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +36,12 @@ public class Config {
 	private static Metrics defaultQosMetrics;
 	private static AvailableActions defaultMonitoringActions;
 
-	private static String groupingCategoriesDefaultLocation = "monitoring_grouping_categories.xml";
-	private static String monitoringAggregateFunctionsDefaultLocation = "monitoring_aggregate_functions.xml";
-	private static String qosAggregateFunctionsDefaultLocation = "qos_aggregate_functions.xml";
-	private static String monitoringMetricsDefaultLocation = "monitoring_metrics.xml";
-	private static String qosMetricsDefaultLocation = "qos_metrics.xml";
-	private static String monitoringActionsDefaultLocation = "monitoring_actions.xml";
+	private static String groupingCategoriesDefaultLocation = "https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v2.0/metamodels/examples/monitoring_grouping_categories.xml";
+	private static String monitoringAggregateFunctionsDefaultLocation = "https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v2.0/metamodels/examples/monitoring_aggregate_functions.xml";
+	private static String qosAggregateFunctionsDefaultLocation = "https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v2.0/metamodels/examples/qos_aggregate_functions.xml";
+	private static String monitoringMetricsDefaultLocation = "https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v2.0/metamodels/examples/monitoring_metrics.xml";
+	private static String qosMetricsDefaultLocation = "https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v2.0/metamodels/examples/qos_metrics.xml";
+	private static String monitoringActionsDefaultLocation = "https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/v2.0/metamodels/examples/monitoring_actions.xml";
 
 	private GroupingCategories groupingCategories;
 	private AggregateFunctions monitoringAggregateFunctions;
@@ -55,42 +53,40 @@ public class Config {
 	private static Config _instance = null;
 	private static final Logger logger = LoggerFactory.getLogger(Config.class);
 
-	private Config() throws JAXBException, FileNotFoundException {
-		FileInputStream groupingCategoriesFile = new FileInputStream(
-				groupingCategoriesDefaultLocation);
-		FileInputStream monitoringAggregateFunctionsFile = new FileInputStream(
-				monitoringAggregateFunctionsDefaultLocation);
-		FileInputStream qosAggregateFunctionsFile = new FileInputStream(
-				qosAggregateFunctionsDefaultLocation);
-		FileInputStream monitoringMetricsFile = new FileInputStream(
-				monitoringMetricsDefaultLocation);
-		FileInputStream qosMetricsFile = new FileInputStream(
-				qosMetricsDefaultLocation);
-		FileInputStream monitoringActionsFile = new FileInputStream(
-				monitoringActionsDefaultLocation);
-
+	private Config() throws ConfigurationException {
+		try {
 		this.groupingCategories = defaultGroupingCategories == null ? XMLHelper
-				.deserialize(groupingCategoriesFile, GroupingCategories.class)
+				.deserialize(new URL(
+						groupingCategoriesDefaultLocation), GroupingCategories.class)
 				: defaultGroupingCategories;
 		this.monitoringAggregateFunctions = defaultMonitoringAggregateFunctions == null ? XMLHelper
-				.deserialize(monitoringAggregateFunctionsFile,
+				.deserialize(new URL(
+						monitoringAggregateFunctionsDefaultLocation),
 						AggregateFunctions.class)
 				: defaultMonitoringAggregateFunctions;
 		this.qosAggregateFunctions = defaultQosAggregateFunctions == null ? XMLHelper
-				.deserialize(qosAggregateFunctionsFile,
+				.deserialize(new URL(
+						qosAggregateFunctionsDefaultLocation),
 						AggregateFunctions.class)
 				: defaultMonitoringAggregateFunctions;
 		this.monitoringMetrics = defaultMonitoringMetrics == null ? XMLHelper
-				.deserialize(monitoringMetricsFile, Metrics.class)
+				.deserialize(new URL(
+						monitoringMetricsDefaultLocation), Metrics.class)
 				: defaultMonitoringMetrics;
 		this.qosMetrics = defaultQosMetrics == null ? XMLHelper.deserialize(
-				qosMetricsFile, Metrics.class) : defaultQosMetrics;
+				new URL(
+						qosMetricsDefaultLocation), Metrics.class) : defaultQosMetrics;
 		this.monitoringActions = defaultMonitoringActions == null ? XMLHelper
-				.deserialize(monitoringActionsFile, AvailableActions.class)
+				.deserialize(new URL(
+						monitoringActionsDefaultLocation), AvailableActions.class)
 				: defaultMonitoringActions;
+		}catch (Exception e) {
+			throw new ConfigurationException("Error while loading configuration files", e);
+		}
 	}
 
-	public static void setDefaultConfiguration(Metrics qosMetrics, AggregateFunctions qosAggregateFunctions,
+	public static void setDefaultConfiguration(Metrics qosMetrics,
+			AggregateFunctions qosAggregateFunctions,
 			GroupingCategories groupingCategories,
 			AggregateFunctions monitoringAggregateFunctions,
 			Metrics monitoringMetrics, AvailableActions monitoringActions) {
@@ -102,8 +98,7 @@ public class Config {
 		defaultQosAggregateFunctions = qosAggregateFunctions;
 	}
 
-	public static Config getInstance() throws FileNotFoundException,
-			JAXBException {
+	public static Config getInstance() throws ConfigurationException {
 		if (_instance == null) {
 			_instance = new Config();
 		}
@@ -125,7 +120,7 @@ public class Config {
 	public AggregateFunctions getMonitoringAggregateFunctions() {
 		return monitoringAggregateFunctions;
 	}
-	
+
 	public AggregateFunctions getQosAggregateFunctions() {
 		return monitoringAggregateFunctions;
 	}
@@ -162,7 +157,7 @@ public class Config {
 	public static String getMonitoringAggregateFunctionsDefaultLocation() {
 		return monitoringAggregateFunctionsDefaultLocation;
 	}
-	
+
 	public static String getQosAggregateFunctionsDefaultLocation() {
 		return qosAggregateFunctionsDefaultLocation;
 	}
@@ -171,6 +166,7 @@ public class Config {
 			String monitoringAggregateFunctionsDefaultLocation) {
 		Config.monitoringAggregateFunctionsDefaultLocation = monitoringAggregateFunctionsDefaultLocation;
 	}
+
 	public static void setQosAggregateFunctionsDefaultLocation(
 			String qosAggregateFunctionsDefaultLocation) {
 		Config.qosAggregateFunctionsDefaultLocation = qosAggregateFunctionsDefaultLocation;
