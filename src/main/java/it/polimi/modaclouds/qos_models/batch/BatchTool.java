@@ -38,6 +38,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.xml.sax.SAXException;
 
 public class BatchTool {
 
@@ -51,7 +52,7 @@ public class BatchTool {
 			CommandLine cmd = parser.parse(options, args);
 			if (cmd.getOptions().length != 1) {
 				System.err
-						.println("Parsing failed: Reason: one and only one option is required");
+				.println("Parsing failed: Reason: one and only one option is required");
 				formatter.printHelp("qos-models", options);
 			} else if (cmd.hasOption("h")) {
 				formatter.printHelp("qos-models", options);
@@ -87,17 +88,18 @@ public class BatchTool {
 			formatter.printHelp("qos-models", options);
 		} catch (FileNotFoundException e) {
 			System.err
-					.println("Could not locate input file: " + e.getMessage());
-		} catch (JAXBException e) {
-			System.err.println("Input file could not be parsed: ");
+			.println("Could not locate input file: " + e.getMessage());
+		} catch (JAXBException | SAXException e) {
+			System.err.println("Input file could not be parsed: ");			
 			e.printStackTrace();
 		} catch (ValidationException e) {
 			System.err
-					.println("Error while creating monitoring rules from qos constraints: ");
+			.println("Error while creating monitoring rules from qos constraints: ");
 			e.printStackTrace();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			System.err
-					.println("Unknown error: ");
+			.println("Unknown error: ");
 			e.printStackTrace();
 		} finally {
 			if (inputFile != null) {
@@ -139,7 +141,7 @@ public class BatchTool {
 				.withLongOpt("make-rules")
 				.withDescription(
 						"make monitoring rules from qos constraints in the given file")
-				.create("r"));
+						.create("r"));
 		return options;
 	}
 }

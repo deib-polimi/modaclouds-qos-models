@@ -16,19 +16,22 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
-import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Collection;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.xml.sax.SAXException;
 
 public class XMLHelper {
 
@@ -46,19 +49,32 @@ public class XMLHelper {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(URL xmlUrl, Class<T> targetClass)
-			throws JAXBException {
-		T object = (T) JAXBContext.newInstance(targetClass)
-				.createUnmarshaller().unmarshal(xmlUrl);
+			throws JAXBException, SAXException {
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = schemaFactory.newSchema(); 
+		Unmarshaller unmarshaller = JAXBContext.newInstance(targetClass)
+				.createUnmarshaller();
+		unmarshaller.setSchema(schema);
+		T object = (T) unmarshaller.unmarshal(xmlUrl);
 		return object;
 	}
-	
+
+
+
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(FileInputStream xmlPath, Class<T> targetClass)
-			throws JAXBException {
-		T object = (T) JAXBContext.newInstance(targetClass)
-				.createUnmarshaller().unmarshal(xmlPath);
+			throws JAXBException, SAXException {
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = schemaFactory.newSchema(); 
+		Unmarshaller unmarshaller = JAXBContext.newInstance(targetClass)
+				.createUnmarshaller();
+		unmarshaller.setSchema(schema);
+		T object = (T) unmarshaller.unmarshal(xmlPath);
 		return object;
 	}
+
+
+
 
 	public static <T> void serialize(T object, Class<T> sourceClass, OutputStream resultStream)
 			throws JAXBException {
