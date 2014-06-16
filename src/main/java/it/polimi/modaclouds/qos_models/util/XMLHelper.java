@@ -16,6 +16,11 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
+import it.polimi.modaclouds.qos_models.schema.Constraints;
+import it.polimi.modaclouds.qos_models.schema.MultiCloudExtensions;
+import it.polimi.modaclouds.qos_models.schema.ResourceModelExtension;
+import it.polimi.modaclouds.qos_models.schema.UsageModelExtensions;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -50,11 +55,11 @@ public class XMLHelper {
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(URL xmlUrl, Class<T> targetClass)
 			throws JAXBException, SAXException {
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Schema schema = schemaFactory.newSchema(); 
+//		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//		Schema schema = schemaFactory.newSchema(); 
 		Unmarshaller unmarshaller = JAXBContext.newInstance(targetClass)
 				.createUnmarshaller();
-		unmarshaller.setSchema(schema);
+//		unmarshaller.setSchema(schema);
 		T object = (T) unmarshaller.unmarshal(xmlUrl);
 		return object;
 	}
@@ -64,11 +69,11 @@ public class XMLHelper {
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(FileInputStream xmlPath, Class<T> targetClass)
 			throws JAXBException, SAXException {
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Schema schema = schemaFactory.newSchema(); 
+//		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//		Schema schema = schemaFactory.newSchema(); 
 		Unmarshaller unmarshaller = JAXBContext.newInstance(targetClass)
 				.createUnmarshaller();
-		unmarshaller.setSchema(schema);
+//		unmarshaller.setSchema(schema);
 		T object = (T) unmarshaller.unmarshal(xmlPath);
 		return object;
 	}
