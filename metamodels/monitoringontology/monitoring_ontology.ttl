@@ -42,7 +42,8 @@ mo:InternalComponent
 
 mo:MonitoringDatum
       a       rdfs:Class ;
-      mo:aboutResource mo:MonitorableResource .
+      mo:aboutResource mo:MonitorableResource ;
+      mo:dataCollector mo:DataCollector .
 
 mo:StatisticalDataAnalyzer
       a       rdfs:Class ;
@@ -61,7 +62,7 @@ mo:Method
 mo:SDAFactory
       a       rdfs:Class ;
       rdfs:subClassOf mo:MonitoringComponent ;
-      mo:instantiatedDC mo:StatisticalDataAnalyzer .
+      mo:instantiatedSDA mo:StatisticalDataAnalyzer .
 
 mo:PaaSService
       a       rdfs:Class ;

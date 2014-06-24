@@ -18,8 +18,6 @@ package it.polimi.modaclouds.qos_models.util;
 
 import it.polimi.modaclouds.qos_models.monitoring_ontology.MO;
 
-import java.util.UUID;
-
 public class MonitoringOntologyPrinter {
 
 	public static void main(String[] args) {

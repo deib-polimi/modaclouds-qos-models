@@ -69,6 +69,7 @@ public class Vocabulary {
     public static final String enabled = "enabled";
     public static final String collectedMetric = "collectedMetric";
 	public static final String instantiatedSDA = "instantiatedSDA";
+	public static final String dataCollector = "dataCollector";
 	public static final String id = "id";
 	
 	//metrics

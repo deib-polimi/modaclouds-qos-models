@@ -80,6 +80,7 @@ public class MO {
 	public static Property started = makeProperty(Vocabulary.started);
 	public static Property enabled = makeProperty(Vocabulary.enabled);
 	public static Property collectedMetric = makeProperty(Vocabulary.collectedMetric);
+	public static Property dataCollector = makeProperty(Vocabulary.dataCollector);
 	
 
 	static {
@@ -91,6 +92,7 @@ public class MO {
 		Location.addProperty(location, Location);
 		Component.addProperty(RDFS.subClassOf, MonitorableResource);
 		MonitoringDatum.addProperty(aboutResource, MonitorableResource);
+		MonitoringDatum.addProperty(dataCollector, DataCollector);
 		InternalComponent.addProperty(requiredComponent, Component);
 		InternalComponent.addProperty(RDFS.subClassOf, Component);
 		InternalComponent.addProperty(providedMethod, Method);
