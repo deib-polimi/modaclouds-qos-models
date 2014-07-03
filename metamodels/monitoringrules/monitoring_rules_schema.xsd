@@ -19,7 +19,7 @@
 -->
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿marco (polimi) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mo="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:pa="http://www.modaclouds.eu/xsd/1.0/parameter_schema" targetNamespace="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema" elementFormDefault="qualified" jaxb:version="2.1">
-	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/parameter_schema" schemaLocation="../commons/parameter_schema.xsd"/>
+	<xs:import namespace="http://www.modaclouds.eu/xsd/1.0/parameter_schema" schemaLocation="https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/commons/parameter_schema.xsd"/>
 	<xs:element name="monitoringRules">
 		<xs:annotation>
 			<xs:documentation>A list of Monitoring Rules</xs:documentation>
@@ -45,7 +45,7 @@
 			<xs:element name="actions" type="mo:actions" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required"/>
-		<xs:attribute name="label" type="xs:string" use="required"/>
+		<xs:attribute name="label" type="xs:string"/>
 		<xs:attribute name="relatedQosConstraintId" type="xs:string"/>
 		<xs:attribute name="parentMonitoringRuleId" type="xs:string">
 			<xs:annotation>
