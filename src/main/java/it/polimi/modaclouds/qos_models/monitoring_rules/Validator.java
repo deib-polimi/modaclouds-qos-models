@@ -189,7 +189,7 @@ public class Validator {
 
 	private Set<Problem> validateMissingFields(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
-		if (rule.getParentMonitoringRule() != null)
+		if (rule.getParentMonitoringRuleId() != null)
 			return problems;
 		if (rule.getTimeStep() == null)
 			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
@@ -202,15 +202,15 @@ public class Validator {
 
 	private Set<Problem> validateParentRequired(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
-		if (rule.getParentMonitoringRule() != null)
+		if (rule.getParentMonitoringRuleId() != null)
 			return problems;
 		if (rule.getCollectedMetric().isInherited())
 			problems.add(new Problem(rule.getId(),
 					EnumErrorType.MISSING_REQUIRED_PARENT, "collectedMetric"));
-		if (rule.getCondition().isInherited())
+		if (rule.getCondition()!=null && rule.getCondition().isInherited())
 			problems.add(new Problem(rule.getId(),
 					EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
-		if (rule.getMetricAggregation().isInherited())
+		if (rule.getMetricAggregation()!=null && rule.getMetricAggregation().isInherited())
 			problems.add(new Problem(rule.getId(),
 					EnumErrorType.MISSING_REQUIRED_PARENT, "metricAggregation"));
 		if (rule.getActions().isInherited())
@@ -387,6 +387,7 @@ public class Validator {
 	private Set<Problem> validateCondition(MonitoringRule rule,
 			List<MonitoringRule> otherRules) {
 		Set<Problem> problems = new HashSet<Problem>();
+		if (rule.getCondition()==null) return problems;
 		String condition = rule.getCondition().getValue();
 		if (condition != null) {
 			ANTLRInputStream input = new ANTLRInputStream(condition);
@@ -521,7 +522,7 @@ public class Validator {
 			String occurenceMR_ID;
 			switch (tree.getText()) {
 			case "parentCondition":
-				if (rule.getParentMonitoringRule() == null)
+				if (rule.getParentMonitoringRuleId() == null)
 					problems.add(new Problem(rule.getId(),
 							EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
 				break;

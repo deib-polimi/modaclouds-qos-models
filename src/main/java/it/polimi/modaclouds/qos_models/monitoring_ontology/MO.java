@@ -28,7 +28,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class MO {
 	
 	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
-    public static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
+//    public static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
     public static final String kbURLSuffix = "/modaclouds/kb";
     private static String knowledgeBaseURL = "http://localhost:3030" + kbURLSuffix;
     public static String prefix = "mo";
