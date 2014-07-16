@@ -34,7 +34,6 @@ public class DataCollector extends KBEntity {
 	private String monitoredMetric;
 	private Set<URI> parameters;
 	private Set<URI> monitoredResources;
-	private String targetType;
 
 	public Set<URI> getParameters() {
 		return parameters;
@@ -84,13 +83,6 @@ public class DataCollector extends KBEntity {
 		return MO.prefix;
 	}
 
-	public String getTargetType() {
-		return targetType;
-	}
-
-	public void setTargetType(String targetType) {
-		this.targetType = targetType;
-	}
 	
 	@Override
 	public int hashCode() {
@@ -104,8 +96,6 @@ public class DataCollector extends KBEntity {
 						.hashCode());
 		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
-		result = prime * result
-				+ ((targetType == null) ? 0 : targetType.hashCode());
 		return result;
 	}
 
@@ -132,11 +122,6 @@ public class DataCollector extends KBEntity {
 			if (other.parameters != null)
 				return false;
 		} else if (!parameters.equals(other.parameters))
-			return false;
-		if (targetType == null) {
-			if (other.targetType != null)
-				return false;
-		} else if (!targetType.equals(other.targetType))
 			return false;
 		return true;
 	}

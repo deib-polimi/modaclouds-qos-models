@@ -22,8 +22,6 @@ import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
 public class MonitorableResource extends KBEntity {
 	
-	
-
 	private String type;
 	
 	public MonitorableResource(String id) throws URISyntaxException {

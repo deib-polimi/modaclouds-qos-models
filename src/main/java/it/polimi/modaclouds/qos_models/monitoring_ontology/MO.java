@@ -56,17 +56,13 @@ public class MO {
 
 	public static Property aboutResource = makeProperty(Vocabulary.aboutResource);
 	public static Property parameter = makeProperty(Vocabulary.parameter);
-	public static Property targetResource = makeProperty(Vocabulary.targetResource);
+	public static Property monitoredResource = makeProperty(Vocabulary.monitoredResource);
 	public static Property metric = makeProperty(Vocabulary.metric);
 	public static Property value = makeProperty(Vocabulary.value);
 	public static Property timestamp = makeProperty(Vocabulary.timestamp);
-	public static Property period = makeProperty(Vocabulary.period);
-	public static Property method = makeProperty(Vocabulary.method);
 	public static Property returnedMetric = makeProperty(Vocabulary.returnedMetric);
 	public static Property targetMetric = makeProperty(Vocabulary.targetMetric);
-	public static Property enabled = makeProperty(Vocabulary.enabled);
-	public static Property collectedMetric = makeProperty(Vocabulary.collectedMetric);
-	public static Property dataCollector = makeProperty(Vocabulary.dataCollector);
+	public static Property collectedMetric = makeProperty(Vocabulary.monitoredMetric);
 	
 
 	static {
@@ -78,15 +74,14 @@ public class MO {
 		Location.addProperty(location, Location);
 		Component.addProperty(RDFS.subClassOf, MonitorableResource);
 		MonitoringDatum.addProperty(aboutResource, MonitorableResource);
-		MonitoringDatum.addProperty(dataCollector, DataCollector);
 		InternalComponent.addProperty(requiredComponent, Component);
 		InternalComponent.addProperty(RDFS.subClassOf, Component);
 		InternalComponent.addProperty(providedMethod, Method);
 		Method.addProperty(RDFS.subClassOf, MonitorableResource);
 		MonitoringComponent.addProperty(RDFS.subClassOf, InternalComponent);
-		StatisticalDataAnalyzer.addProperty(targetResource, MonitorableResource);
+		StatisticalDataAnalyzer.addProperty(monitoredResource, MonitorableResource);
 		StatisticalDataAnalyzer.addProperty(parameter, Parameter);
-		DataCollector.addProperty(targetResource, MonitorableResource);
+		DataCollector.addProperty(monitoredResource, MonitorableResource);
 		DataCollector.addProperty(parameter, Parameter);
 	}
 
