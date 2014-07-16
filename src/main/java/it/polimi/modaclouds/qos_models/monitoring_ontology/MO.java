@@ -16,8 +16,6 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URL;
-
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
@@ -28,9 +26,6 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class MO {
 	
 	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
-//    public static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
-    public static final String kbURLSuffix = "/modaclouds/kb";
-    private static String knowledgeBaseURL = "http://localhost:3030" + kbURLSuffix;
     public static String prefix = "mo";
 
 	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
@@ -47,12 +42,8 @@ public class MO {
 	public static Property requiredComponent = makeProperty(Vocabulary.requiredComponent);
 	public static Property location = makeProperty(Vocabulary.location);
 	public static Property providedMethod = makeProperty(Vocabulary.providedMethod);
-	public static Property calledMethod = makeProperty(Vocabulary.calledMethod);
-	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
 	public static Property name = makeProperty(Vocabulary.name);
-	public static Property path = makeProperty(Vocabulary.path);
 	public static Property type = makeProperty(Vocabulary.type);
-	public static Property url = makeProperty(Vocabulary.url);
 	public static Property id = makeProperty(Vocabulary.id);
 
 	// *** Monitoring *** /
@@ -62,14 +53,10 @@ public class MO {
 	public static OntClass DataCollector = makeClass(Vocabulary.DataCollector);
 	public static OntClass Parameter = makeClass(Vocabulary.Parameter);
 	public static OntClass MonitoringDatum = makeClass(Vocabulary.MonitoringDatum);
-	public static OntClass SDAFactory = makeClass(Vocabulary.SDAFactory);
-	public static OntClass DCFactory = makeClass(Vocabulary.DCFactory);
 
 	public static Property aboutResource = makeProperty(Vocabulary.aboutResource);
 	public static Property parameter = makeProperty(Vocabulary.parameter);
 	public static Property targetResource = makeProperty(Vocabulary.targetResource);
-	public static Property instantiatedDC = makeProperty(Vocabulary.instantiatedDC);
-	public static Property instantiatedSDA = makeProperty(Vocabulary.instantiatedSDA);
 	public static Property metric = makeProperty(Vocabulary.metric);
 	public static Property value = makeProperty(Vocabulary.value);
 	public static Property timestamp = makeProperty(Vocabulary.timestamp);
@@ -77,7 +64,6 @@ public class MO {
 	public static Property method = makeProperty(Vocabulary.method);
 	public static Property returnedMetric = makeProperty(Vocabulary.returnedMetric);
 	public static Property targetMetric = makeProperty(Vocabulary.targetMetric);
-	public static Property started = makeProperty(Vocabulary.started);
 	public static Property enabled = makeProperty(Vocabulary.enabled);
 	public static Property collectedMetric = makeProperty(Vocabulary.collectedMetric);
 	public static Property dataCollector = makeProperty(Vocabulary.dataCollector);
@@ -96,15 +82,10 @@ public class MO {
 		InternalComponent.addProperty(requiredComponent, Component);
 		InternalComponent.addProperty(RDFS.subClassOf, Component);
 		InternalComponent.addProperty(providedMethod, Method);
-		Method.addProperty(calledMethod, Method);
 		Method.addProperty(RDFS.subClassOf, MonitorableResource);
 		MonitoringComponent.addProperty(RDFS.subClassOf, InternalComponent);
-		SDAFactory.addProperty(RDFS.subClassOf, MonitoringComponent);
-		DCFactory.addProperty(RDFS.subClassOf, MonitoringComponent);
-		SDAFactory.addProperty(instantiatedSDA, StatisticalDataAnalyzer);
 		StatisticalDataAnalyzer.addProperty(targetResource, MonitorableResource);
 		StatisticalDataAnalyzer.addProperty(parameter, Parameter);
-		DCFactory.addProperty(instantiatedDC, DataCollector);
 		DataCollector.addProperty(targetResource, MonitorableResource);
 		DataCollector.addProperty(parameter, Parameter);
 	}
@@ -117,26 +98,7 @@ public class MO {
 		return model.createClass(URI + string);
 	}
 
-    public static String getKnowledgeBaseURL() {
-        return knowledgeBaseURL;
-    }
     
-    public static void setKnowledgeBaseURL(URL url) {
-    	knowledgeBaseURL = url.toString() + kbURLSuffix;
-    }
-    
-    public static String getKnowledgeBaseDataURL() {
-        return knowledgeBaseURL + "/data";
-    }
-
-	public static String getKnowledgeBaseUpdateURL() {
-		return knowledgeBaseURL + "/update";
-	}
-	
-	public static String getKnowledgeBaseQueryURL() {
-		return knowledgeBaseURL + "/query";
-	}
-
 	public static String shortForm(Property property) {
 		return prefix+":"+property.getLocalName();
 	}

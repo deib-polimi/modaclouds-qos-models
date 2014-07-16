@@ -16,75 +16,96 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DataCollector extends KBEntity {
+	
+	
 
-	private boolean enabled;
-	private String collectedMetric;
-	private Set<Parameter> parameters;
-	private Set<MonitorableResource> targetResources;
-	private String type;
+	public DataCollector() throws URISyntaxException {
+		super();
+	}
 
-	public Set<Parameter> getParameters() {
+	private String monitoredMetric;
+	private Set<URI> parameters;
+	private Set<URI> monitoredResources;
+	private String targetType;
+
+	public Set<URI> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(Set<Parameter> parameters) {
+	public void setParameters(Set<URI> parameters) {
 		this.parameters = parameters;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
-	}
 	
-	public void addParameter(Parameter parameter) {
+	public void addParameter(URI parameter) {
 		if (parameters == null)
-			parameters = new HashSet<Parameter>();
+			parameters = new HashSet<URI>();
 		parameters.add(parameter);
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getCollectedMetric() {
-		return collectedMetric;
+		return monitoredMetric;
 	}
 
 	public void setCollectedMetric(String collectedMetric) {
-		this.collectedMetric = collectedMetric;
+		this.monitoredMetric = collectedMetric;
 	}
 
-	public Set<MonitorableResource> getTargetResources() {
-		return targetResources;
+	public Set<URI> getTargetResources() {
+		return monitoredResources;
 	}
 
-	public void setTargetResources(Set<MonitorableResource> targetResources) {
-		this.targetResources = targetResources;
+	public void setTargetResources(Set<URI> targetResources) {
+		this.monitoredResources = targetResources;
 	}
 
-	public String getType() {
-		return type;
+	public void addTargetResource(URI targetResource) {
+		if (monitoredResources == null)
+			monitoredResources = new HashSet<URI>();
+		monitoredResources.add(targetResource);
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	@Override
+	public String getURIBase() {
+		return MO.URI;
 	}
 
+	@Override
+	public String getURIPrefix() {
+		return MO.prefix;
+	}
+
+	public String getTargetType() {
+		return targetType;
+	}
+
+	public void setTargetType(String targetType) {
+		this.targetType = targetType;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((collectedMetric == null) ? 0 : collectedMetric.hashCode());
-		result = prime * result + (enabled ? 1231 : 1237);
+				+ ((monitoredMetric == null) ? 0 : monitoredMetric.hashCode());
+		result = prime
+				* result
+				+ ((monitoredResources == null) ? 0 : monitoredResources
+						.hashCode());
 		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
 		result = prime * result
-				+ ((targetResources == null) ? 0 : targetResources.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+				+ ((targetType == null) ? 0 : targetType.hashCode());
 		return result;
 	}
 
@@ -97,38 +118,28 @@ public class DataCollector extends KBEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		DataCollector other = (DataCollector) obj;
-		if (collectedMetric == null) {
-			if (other.collectedMetric != null)
+		if (monitoredMetric == null) {
+			if (other.monitoredMetric != null)
 				return false;
-		} else if (!collectedMetric.equals(other.collectedMetric))
+		} else if (!monitoredMetric.equals(other.monitoredMetric))
 			return false;
-		if (enabled != other.enabled)
+		if (monitoredResources == null) {
+			if (other.monitoredResources != null)
+				return false;
+		} else if (!monitoredResources.equals(other.monitoredResources))
 			return false;
 		if (parameters == null) {
 			if (other.parameters != null)
 				return false;
 		} else if (!parameters.equals(other.parameters))
 			return false;
-		if (targetResources == null) {
-			if (other.targetResources != null)
+		if (targetType == null) {
+			if (other.targetType != null)
 				return false;
-		} else if (!targetResources.equals(other.targetResources))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
+		} else if (!targetType.equals(other.targetType))
 			return false;
 		return true;
 	}
-
-	public void addTargetResource(MonitorableResource targetResource) {
-		if (targetResources == null)
-			targetResources = new HashSet<MonitorableResource>();
-		targetResources.add(targetResource);
-	}
-	
-	
 	
 	
 }

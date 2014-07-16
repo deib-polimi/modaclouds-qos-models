@@ -16,24 +16,26 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class StatisticalDataAnalyzer extends KBEntity{
 	
+	
 	private String aggregateFunction;
 	private String returnedMetric;
 	private String targetMetric;
-	private Set<MonitorableResource> targetResources;
-	private Set<Parameter> parameters;
-	private boolean started;	
+	private Set<URI> targetResources;
+	private Set<URI> parameters;
 	
-	public boolean isStarted() {
-		return started;
+	public StatisticalDataAnalyzer() throws URISyntaxException {
+		super();
 	}
-	public void setStarted(boolean started) {
-		this.started = started;
-	}
+	
 	public String getAggregateFunction() {
 		return aggregateFunction;
 	}
@@ -52,23 +54,33 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	public void setTargetMetric(String targetMetric) {
 		this.targetMetric = targetMetric;
 	}
-	public Set<Parameter> getParameters() {
+	public Set<URI> getParameters() {
 		return parameters;
 	}
-	public void setParameters(Set<Parameter> parameters) {
+	public void setParameters(Set<URI> parameters) {
 		this.parameters = parameters;
 	}
-	public void addParameter(Parameter parameter) {
+	public void addParameter(URI parameter) {
 		if (parameters == null)
-			parameters = new HashSet<Parameter>();
+			parameters = new HashSet<URI>();
 		parameters.add(parameter);
 	}
-	public Set<MonitorableResource> getTargetResources() {
+	public Set<URI> getTargetResources() {
 		return targetResources;
 	}
-	public void setTargetResources(Set<MonitorableResource> targetResources) {
+	public void setTargetResources(Set<URI> targetResources) {
 		this.targetResources = targetResources;
 	}
+	
+	@Override
+	public String getURIBase() {
+		return MO.URI;
+	}
+	@Override
+	public String getURIPrefix() {
+		return MO.prefix;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -81,13 +93,13 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				+ ((parameters == null) ? 0 : parameters.hashCode());
 		result = prime * result
 				+ ((returnedMetric == null) ? 0 : returnedMetric.hashCode());
-		result = prime * result + (started ? 1231 : 1237);
 		result = prime * result
 				+ ((targetMetric == null) ? 0 : targetMetric.hashCode());
 		result = prime * result
 				+ ((targetResources == null) ? 0 : targetResources.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,8 +123,6 @@ public class StatisticalDataAnalyzer extends KBEntity{
 			if (other.returnedMetric != null)
 				return false;
 		} else if (!returnedMetric.equals(other.returnedMetric))
-			return false;
-		if (started != other.started)
 			return false;
 		if (targetMetric == null) {
 			if (other.targetMetric != null)

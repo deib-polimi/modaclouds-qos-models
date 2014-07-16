@@ -16,17 +16,25 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
 public class MonitoringDatum extends KBEntity {
 	
-	private MonitorableResource aboutResource;
+	public MonitoringDatum() throws URISyntaxException {
+		super();
+	}
+	private URI aboutResource;
 	private String metric;
 	private String value;
 	private String timeStamp;
 	
-	public MonitorableResource getAboutResource() {
+	public URI getAboutResource() {
 		return aboutResource;
 	}
-	public void setResource(MonitorableResource aboutResource) {
+	public void setResource(URI aboutResource) {
 		this.aboutResource = aboutResource;
 	}
 	public String getMetric() {
@@ -47,13 +55,22 @@ public class MonitoringDatum extends KBEntity {
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+	
+	@Override
+	public String getURIBase() {
+		return MO.URI;
+	}
+	@Override
+	public String getURIPrefix() {
+		return MO.prefix;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((metric == null) ? 0 : metric.hashCode());
 		result = prime * result
 				+ ((aboutResource == null) ? 0 : aboutResource.hashCode());
+		result = prime * result + ((metric == null) ? 0 : metric.hashCode());
 		result = prime * result
 				+ ((timeStamp == null) ? 0 : timeStamp.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
@@ -68,15 +85,15 @@ public class MonitoringDatum extends KBEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		MonitoringDatum other = (MonitoringDatum) obj;
-		if (metric == null) {
-			if (other.metric != null)
-				return false;
-		} else if (!metric.equals(other.metric))
-			return false;
 		if (aboutResource == null) {
 			if (other.aboutResource != null)
 				return false;
 		} else if (!aboutResource.equals(other.aboutResource))
+			return false;
+		if (metric == null) {
+			if (other.metric != null)
+				return false;
+		} else if (!metric.equals(other.metric))
 			return false;
 		if (timeStamp == null) {
 			if (other.timeStamp != null)

@@ -16,39 +16,49 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class InternalComponent extends Component{
 
-	private Set<Component> requiredComponents;
-	private Set<Method> providedMethods;
+	public InternalComponent(String id) throws URISyntaxException {
+		super(id);
+	}
+	
+	public InternalComponent() throws URISyntaxException {
+		super();
+	}
 
-	public Set<Component> getRequiredComponents() {
+	private Set<URI> requiredComponents;
+	private Set<URI> providedMethods;
+
+	public Set<URI> getRequiredComponents() {
 		return requiredComponents;
 	}
 
-	public void setRequiredComponents(Set<Component> requiredComponents) {
+	public void setRequiredComponents(Set<URI> requiredComponents) {
 		this.requiredComponents = requiredComponents;
 	}
 
-	public Set<Method> getProvidedMethods() {
+	public Set<URI> getProvidedMethods() {
 		return providedMethods;
 	}
 
-	public void setProvidedMethods(Set<Method> providedMethods) {
+	public void setProvidedMethods(Set<URI> providedMethods) {
 		this.providedMethods = providedMethods;
 	}
 
-	public void addRequiredComponent(Component component) {
+	public void addRequiredComponent(URI component) {
 		if (requiredComponents == null)
-			requiredComponents = new HashSet<Component>();
+			requiredComponents = new HashSet<URI>();
 		requiredComponents.add(component);
 	}
 
-	public void addProvidedMethod(Method method) {
+	public void addProvidedMethod(URI method) {
 		if (providedMethods == null)
-			providedMethods = new HashSet<Method>();
+			providedMethods = new HashSet<URI>();
 		providedMethods.add(method);
 	}
 
@@ -86,6 +96,8 @@ public class InternalComponent extends Component{
 			return false;
 		return true;
 	}
+
+	
 	
 
 	

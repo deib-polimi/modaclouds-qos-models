@@ -16,15 +16,21 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.net.URISyntaxException;
+
+import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+
 public class Parameter extends KBEntity{
 
 	private String name;
 	private String value;
 
-	public Parameter() {
+	public Parameter() throws URISyntaxException{
+		super();
 	}
 	
-	public Parameter(String name, String value) {
+	public Parameter(String name, String value) throws URISyntaxException {
+		super();
 		this.setName(name);
 		this.setValue(value);
 	}
@@ -74,6 +80,16 @@ public class Parameter extends KBEntity{
 		} else if (!value.equals(other.value))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String getURIBase() {
+		return MO.URI;
+	}
+
+	@Override
+	public String getURIPrefix() {
+		return MO.prefix;
 	}
 
 }
