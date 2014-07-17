@@ -51,26 +51,26 @@ public class DataCollector extends KBEntity {
 	}
 
 
-	public String getCollectedMetric() {
+	public String getMonitoredMetric() {
 		return monitoredMetric;
 	}
 
-	public void setCollectedMetric(String collectedMetric) {
-		this.monitoredMetric = collectedMetric;
+	public void setMonitoredMetric(String monitoredMetric) {
+		this.monitoredMetric = monitoredMetric;
 	}
 
-	public Set<URI> getTargetResources() {
+	public Set<URI> getMonitoredResources() {
 		return monitoredResources;
 	}
 
-	public void setTargetResources(Set<URI> targetResources) {
-		this.monitoredResources = targetResources;
+	public void setMonitoredResources(Set<URI> monitoredResources) {
+		this.monitoredResources = monitoredResources;
 	}
 
-	public void addTargetResource(URI targetResource) {
+	public void addMonitoredResource(URI monitoredResource) {
 		if (monitoredResources == null)
 			monitoredResources = new HashSet<URI>();
-		monitoredResources.add(targetResource);
+		monitoredResources.add(monitoredResource);
 	}
 
 	@Override
