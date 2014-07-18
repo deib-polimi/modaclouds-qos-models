@@ -54,7 +54,7 @@ public class MO {
 	public static OntClass Parameter = makeClass(Vocabulary.Parameter);
 	public static OntClass MonitoringDatum = makeClass(Vocabulary.MonitoringDatum);
 
-	public static Property aboutResource = makeProperty(Vocabulary.aboutResource);
+	public static Property resourceId = makeProperty(Vocabulary.resourceId);
 	public static Property parameter = makeProperty(Vocabulary.parameter);
 	public static Property monitoredResource = makeProperty(Vocabulary.monitoredResource);
 	public static Property metric = makeProperty(Vocabulary.metric);
@@ -73,7 +73,7 @@ public class MO {
 		VM.addProperty(location, Location);
 		Location.addProperty(location, Location);
 		Component.addProperty(RDFS.subClassOf, MonitorableResource);
-		MonitoringDatum.addProperty(aboutResource, MonitorableResource);
+		MonitoringDatum.addProperty(resourceId, MonitorableResource);
 		InternalComponent.addProperty(requiredComponent, Component);
 		InternalComponent.addProperty(RDFS.subClassOf, Component);
 		InternalComponent.addProperty(providedMethod, Method);

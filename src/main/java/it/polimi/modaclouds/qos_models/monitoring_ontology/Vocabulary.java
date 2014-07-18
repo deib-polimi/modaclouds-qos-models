@@ -44,7 +44,7 @@ public class Vocabulary {
     public static final String MonitoringComponent = "MonitoringComponent";
     public static final String MonitorableResource = "MonitorableResource";
 
-    public static final String aboutResource = "aboutResource";
+    public static final String resourceId = "resourceId";
     public static final String parameter = "parameter";
     public static final String monitoredResource = "monitoredResource";
     public static final String metric = "metric";
