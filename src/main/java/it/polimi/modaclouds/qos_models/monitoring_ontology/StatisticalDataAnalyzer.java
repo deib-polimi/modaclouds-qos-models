@@ -29,7 +29,7 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	private String aggregateFunction;
 	private String returnedMetric;
 	private String targetMetric;
-	private Set<URI> targetResources;
+	private Set<String> targetResourcesIds;
 	private Set<URI> parameters;
 	
 	public StatisticalDataAnalyzer() throws URISyntaxException {
@@ -65,11 +65,11 @@ public class StatisticalDataAnalyzer extends KBEntity{
 			parameters = new HashSet<URI>();
 		parameters.add(parameter);
 	}
-	public Set<URI> getTargetResources() {
-		return targetResources;
+	public Set<String> getTargetResourcesIds() {
+		return targetResourcesIds;
 	}
-	public void setTargetResources(Set<URI> targetResources) {
-		this.targetResources = targetResources;
+	public void setTargetResourcesIds(Set<String> targetResourcesIds) {
+		this.targetResourcesIds = targetResourcesIds;
 	}
 	
 	@Override
@@ -95,8 +95,10 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				+ ((returnedMetric == null) ? 0 : returnedMetric.hashCode());
 		result = prime * result
 				+ ((targetMetric == null) ? 0 : targetMetric.hashCode());
-		result = prime * result
-				+ ((targetResources == null) ? 0 : targetResources.hashCode());
+		result = prime
+				* result
+				+ ((targetResourcesIds == null) ? 0 : targetResourcesIds
+						.hashCode());
 		return result;
 	}
 
@@ -129,10 +131,10 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				return false;
 		} else if (!targetMetric.equals(other.targetMetric))
 			return false;
-		if (targetResources == null) {
-			if (other.targetResources != null)
+		if (targetResourcesIds == null) {
+			if (other.targetResourcesIds != null)
 				return false;
-		} else if (!targetResources.equals(other.targetResources))
+		} else if (!targetResourcesIds.equals(other.targetResourcesIds))
 			return false;
 		return true;
 	}

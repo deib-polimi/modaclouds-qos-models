@@ -56,7 +56,7 @@ public class MO {
 
 	public static Property resourceId = makeProperty(Vocabulary.resourceId);
 	public static Property parameter = makeProperty(Vocabulary.parameter);
-	public static Property monitoredResource = makeProperty(Vocabulary.monitoredResource);
+	public static Property monitoredResourceId = makeProperty(Vocabulary.monitoredResourceId);
 	public static Property metric = makeProperty(Vocabulary.metric);
 	public static Property value = makeProperty(Vocabulary.value);
 	public static Property timestamp = makeProperty(Vocabulary.timestamp);
@@ -79,9 +79,9 @@ public class MO {
 		InternalComponent.addProperty(providedMethod, Method);
 		Method.addProperty(RDFS.subClassOf, MonitorableResource);
 		MonitoringComponent.addProperty(RDFS.subClassOf, InternalComponent);
-		StatisticalDataAnalyzer.addProperty(monitoredResource, MonitorableResource);
+		StatisticalDataAnalyzer.addProperty(monitoredResourceId, MonitorableResource);
 		StatisticalDataAnalyzer.addProperty(parameter, Parameter);
-		DataCollector.addProperty(monitoredResource, MonitorableResource);
+		DataCollector.addProperty(monitoredResourceId, MonitorableResource);
 		DataCollector.addProperty(parameter, Parameter);
 	}
 

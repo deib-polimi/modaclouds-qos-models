@@ -46,7 +46,7 @@ public class Vocabulary {
 
     public static final String resourceId = "resourceId";
     public static final String parameter = "parameter";
-    public static final String monitoredResource = "monitoredResource";
+    public static final String monitoredResourceId = "monitoredResourceId";
     public static final String metric = "metric";
     public static final String value = "value";
     public static final String timestamp = "timestamp";

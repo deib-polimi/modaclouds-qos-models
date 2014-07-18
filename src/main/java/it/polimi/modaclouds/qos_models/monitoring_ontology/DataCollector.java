@@ -33,7 +33,7 @@ public class DataCollector extends KBEntity {
 
 	private String monitoredMetric;
 	private Set<URI> parameters;
-	private Set<URI> monitoredResources;
+	private Set<String> monitoredResourceIds;
 
 	public Set<URI> getParameters() {
 		return parameters;
@@ -59,18 +59,18 @@ public class DataCollector extends KBEntity {
 		this.monitoredMetric = monitoredMetric;
 	}
 
-	public Set<URI> getMonitoredResources() {
-		return monitoredResources;
+	public Set<String> getMonitoredResourcesIds() {
+		return monitoredResourceIds;
 	}
 
-	public void setMonitoredResources(Set<URI> monitoredResources) {
-		this.monitoredResources = monitoredResources;
+	public void setMonitoredResourcesIds(Set<String> monitoredResourcesIds) {
+		this.monitoredResourceIds = monitoredResourcesIds;
 	}
 
-	public void addMonitoredResource(URI monitoredResource) {
-		if (monitoredResources == null)
-			monitoredResources = new HashSet<URI>();
-		monitoredResources.add(monitoredResource);
+	public void addMonitoredResource(String monitoredResourceId) {
+		if (monitoredResourceIds == null)
+			monitoredResourceIds = new HashSet<String>();
+		monitoredResourceIds.add(monitoredResourceId);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class DataCollector extends KBEntity {
 				+ ((monitoredMetric == null) ? 0 : monitoredMetric.hashCode());
 		result = prime
 				* result
-				+ ((monitoredResources == null) ? 0 : monitoredResources
+				+ ((monitoredResourceIds == null) ? 0 : monitoredResourceIds
 						.hashCode());
 		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
@@ -113,10 +113,10 @@ public class DataCollector extends KBEntity {
 				return false;
 		} else if (!monitoredMetric.equals(other.monitoredMetric))
 			return false;
-		if (monitoredResources == null) {
-			if (other.monitoredResources != null)
+		if (monitoredResourceIds == null) {
+			if (other.monitoredResourceIds != null)
 				return false;
-		} else if (!monitoredResources.equals(other.monitoredResources))
+		} else if (!monitoredResourceIds.equals(other.monitoredResourceIds))
 			return false;
 		if (parameters == null) {
 			if (other.parameters != null)
