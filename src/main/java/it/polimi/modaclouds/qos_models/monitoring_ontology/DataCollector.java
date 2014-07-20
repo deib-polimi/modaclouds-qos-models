@@ -20,12 +20,11 @@ import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DataCollector extends KBEntity {
-	
-	
 
 	public DataCollector() throws URISyntaxException {
 		super();
@@ -43,13 +42,11 @@ public class DataCollector extends KBEntity {
 		this.parameters = parameters;
 	}
 
-	
 	public void addParameter(URI parameter) {
 		if (parameters == null)
 			parameters = new HashSet<URI>();
 		parameters.add(parameter);
 	}
-
 
 	public String getMonitoredMetric() {
 		return monitoredMetric;
@@ -83,7 +80,6 @@ public class DataCollector extends KBEntity {
 		return MO.prefix;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -125,6 +121,17 @@ public class DataCollector extends KBEntity {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "DataCollector [monitoredMetric="
+				+ monitoredMetric
+				+ ", parameters="
+				+ parameters
+				+ ", monitoredResourceIds="
+				+ (monitoredResourceIds != null ? Arrays
+						.toString(monitoredResourceIds.toArray()) : "null")
+				+ "]";
+	}
+
 }
