@@ -1,4 +1,5 @@
 it.polimi.modaclouds.qos_models.batch
+it.polimi.modaclouds.qos_models.examples
 it.polimi.modaclouds.qos_models.monitoring_ontology
 it.polimi.modaclouds.qos_models.monitoring_rules
 it.polimi.modaclouds.qos_models.schema
