@@ -50,7 +50,7 @@ public class Vocabulary {
 //    public static final String timestamp = "timestamp";
 //    
 //    public static final String parameters = "parameters";
-//    public static final String monitoredResources = "monitoredResources";
+//    public static final String monitoredResourcesIds = "monitoredResourcesIds";
 //    public static final String monitoredMetric = "monitoredMetric";
 //    
 //    public static final String timestep = "timestep";

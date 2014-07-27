@@ -55,7 +55,7 @@ public class MO {
 	public static OntClass StatisticalDataAnalyzer = makeClass(Vocabulary.StatisticalDataAnalyzer);
 	public static OntClass DataCollector = makeClass(Vocabulary.DataCollector);
 //	public static OntClass Parameter = makeClass(Vocabulary.Parameter);
-	public static OntClass MonitoringDatum = makeClass(Vocabulary.MonitoringDatum);
+//	public static OntClass MonitoringDatum = makeClass(Vocabulary.MonitoringDatum);
 
 //	public static Property resource = makeProperty(Vocabulary.resource);
 //	public static Property parameter = makeProperty(Vocabulary.parameters);
