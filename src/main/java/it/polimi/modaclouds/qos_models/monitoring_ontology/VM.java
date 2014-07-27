@@ -17,37 +17,33 @@
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 public class VM extends ExternalComponent {
 	
-	public VM(String id) throws URISyntaxException {
-		super(id);
-	}
-	
-	public VM() throws URISyntaxException {
-		super();
-	}
-
+	private int numberOfCPUs;
 	private URI location;
-
+	
+	public int getNumberOfCPUs() {
+		return numberOfCPUs;
+	}
+	public void setNumberOfCPUs(int numberOfCPUs) {
+		this.numberOfCPUs = numberOfCPUs;
+	}
 	public URI getLocation() {
 		return location;
 	}
-
 	public void setLocation(URI location) {
 		this.location = location;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((location == null) ? 0 : location.hashCode());
+		result = prime * result + numberOfCPUs;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -62,7 +58,15 @@ public class VM extends ExternalComponent {
 				return false;
 		} else if (!location.equals(other.location))
 			return false;
+		if (numberOfCPUs != other.numberOfCPUs)
+			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "VM [numberOfCPUs=" + numberOfCPUs + ", location=" + location
+				+ "]";
 	}
 
 	

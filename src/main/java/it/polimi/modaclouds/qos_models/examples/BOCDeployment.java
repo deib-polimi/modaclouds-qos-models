@@ -17,58 +17,60 @@
 package it.polimi.modaclouds.qos_models.examples;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.CloudProvider;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.InternalComponent;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.VM;
 
-import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class BOCDeployment extends DeploymentModelFactory {
 
 	private final int nBLTiers = 3;
-	private final Logger logger = LoggerFactory.getLogger(BOCDeployment.class);
+//	private final Logger logger = LoggerFactory.getLogger(BOCDeployment.class);
 
 	@Override
 	public Set<KBEntity> getModel() {
 
 		Set<KBEntity> entities = new HashSet<KBEntity>();
-		try {
-			VM winVM = new VM("WinVM1");
-			entities.add(winVM);
-			winVM.setCloudProvider("Flexiant");
-			winVM.setType("WinVM");
 
-			InternalComponent tomcat = new InternalComponent("Tomcat1");
-			entities.add(tomcat);
-			tomcat.setType("Tomcat");
-			tomcat.addRequiredComponent(winVM.getUri());
+		CloudProvider flexiantCloud = new CloudProvider();
+		entities.add(flexiantCloud);
+		flexiantCloud.setId("Flexiant");
 
-			InternalComponent war = new InternalComponent("War1");
-			entities.add(war);
-			war.setType("War");
-			war.addRequiredComponent(tomcat.getUri());
+		VM winVM = new VM();
+		entities.add(winVM);
+		winVM.setId("WinVM1");
+		winVM.setType("WinVM");
+		winVM.setCloudProvider(flexiantCloud.getUri());
 
-			InternalComponent sqlDB = new InternalComponent("SQLDB1");
-			entities.add(sqlDB);
-			sqlDB.setType("SQLDB");
-			sqlDB.addRequiredComponent(winVM.getUri());
+		InternalComponent tomcat = new InternalComponent();
+		entities.add(tomcat);
+		tomcat.setId("Tomcat1");
+		tomcat.setType("Tomcat");
+		tomcat.addRequiredComponent(winVM.getUri());
 
-			for (int i = 0; i < nBLTiers; i++) {
-				InternalComponent bLTier = new InternalComponent("BLTier"+(i+1));
-				entities.add(bLTier);
-				bLTier.setType("BLTier");
-				bLTier.addRequiredComponent(sqlDB.getUri());
-				bLTier.addRequiredComponent(winVM.getUri());
+		InternalComponent war = new InternalComponent();
+		entities.add(war);
+		war.setId("War1");
+		war.setType("War");
+		war.addRequiredComponent(tomcat.getUri());
 
-				war.addRequiredComponent(bLTier.getUri());
-			}
-			
-		} catch (URISyntaxException e) {
-			logger.error("Error while creating model", e);
+		InternalComponent sqlDB = new InternalComponent();
+		entities.add(sqlDB);
+		sqlDB.setId("SQLDB1");
+		sqlDB.setType("SQLDB");
+		sqlDB.addRequiredComponent(winVM.getUri());
+
+		for (int i = 0; i < nBLTiers; i++) {
+			InternalComponent bLTier = new InternalComponent();
+			entities.add(bLTier);
+			bLTier.setId("BLTier" + (i + 1));
+			bLTier.setType("BLTier");
+			bLTier.addRequiredComponent(sqlDB.getUri());
+			bLTier.addRequiredComponent(winVM.getUri());
+
+			war.addRequiredComponent(bLTier.getUri());
 		}
 
 		return entities;

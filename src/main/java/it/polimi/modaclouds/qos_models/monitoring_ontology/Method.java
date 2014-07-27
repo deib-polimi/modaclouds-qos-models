@@ -16,13 +16,10 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URISyntaxException;
-
-
 public class Method extends MonitorableResource {
 
-	public Method(String appId, String methodType) throws URISyntaxException {
-		super(appId+"-"+methodType);
+	public Method(String applicationId, String methodType) {
+		setId(applicationId+"-"+methodType);
 		setType(methodType);
 	}
 	

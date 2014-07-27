@@ -16,21 +16,12 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URISyntaxException;
-
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
 public class MonitorableResource extends KBEntity {
 	
 	private String type;
-	
-	public MonitorableResource(String id) throws URISyntaxException {
-		super(id);
-	}
-	
-	public MonitorableResource() throws URISyntaxException {
-		super();
-	}
+	private String id;
 
 	public String getType() {
 		return type;
@@ -40,12 +31,25 @@ public class MonitorableResource extends KBEntity {
 		this.type = type;
 	}
 
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "MonitorableResource [type=" + type + ", id=" + id + "]";
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -59,6 +63,11 @@ public class MonitorableResource extends KBEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		MonitorableResource other = (MonitorableResource) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
@@ -67,15 +76,7 @@ public class MonitorableResource extends KBEntity {
 		return true;
 	}
 
-	@Override
-	public String getURIBase() {
-		return MO.URI;
-	}
-
-	@Override
-	public String getURIPrefix() {
-		return MO.prefix;
-	}
+	
 
 	
 }

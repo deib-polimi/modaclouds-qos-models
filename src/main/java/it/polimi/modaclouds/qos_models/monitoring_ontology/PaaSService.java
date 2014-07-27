@@ -20,12 +20,4 @@ import java.net.URISyntaxException;
 
 public class PaaSService extends ExternalComponent {
 
-	public PaaSService(String id) throws URISyntaxException {
-		super(id);
-	}
-	
-	public PaaSService() throws URISyntaxException {
-		super();
-	}
-
 }

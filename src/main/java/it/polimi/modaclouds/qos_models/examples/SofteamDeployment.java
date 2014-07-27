@@ -17,54 +17,55 @@
 package it.polimi.modaclouds.qos_models.examples;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.CloudProvider;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.InternalComponent;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.VM;
 
-import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class SofteamDeployment extends DeploymentModelFactory {
 
 	public static int numberOfAgents = 2;
-	private final Logger logger = LoggerFactory
-			.getLogger(SofteamDeployment.class);
+//	private final Logger logger = LoggerFactory
+//			.getLogger(SofteamDeployment.class);
 
 	@Override
 	public Set<KBEntity> getModel() {
 
 		Set<KBEntity> entities = new HashSet<KBEntity>();
-		try {
-			VM adminServer = new VM("AdministrationServer1");
-			adminServer.setCloudProvider("Amazon");
-			adminServer.setType("AdministrationServer");
-			entities.add(adminServer);
 
-			InternalComponent serverApp = new InternalComponent("ServerApp1");
-			serverApp.setType("ServerApp");
-			serverApp.addRequiredComponent(adminServer.getUri());
-			entities.add(serverApp);
+		CloudProvider amazonCloud = new CloudProvider();
+		entities.add(amazonCloud);
+		amazonCloud.setId("Amazon");
 
-			for (int i = 0; i < numberOfAgents; i++) {
-				VM mainAgent = new VM("MainAgent" + (i + 1));
-				mainAgent.setCloudProvider("Amazon");
-				mainAgent.setType("MainAgent");
-				entities.add(mainAgent);
+		VM adminServer = new VM();
+		entities.add(adminServer);
+		adminServer.setId("AdministrationServer1");
+		adminServer.setType("AdministrationServer");
+		adminServer.setCloudProvider(amazonCloud.getUri());
 
-				InternalComponent agentApp = new InternalComponent("agentApp"
-						+ (i + 1));
-				agentApp.setType("AgentApp");
-				agentApp.addRequiredComponent(mainAgent.getUri());
-				entities.add(agentApp);
+		InternalComponent serverApp = new InternalComponent();
+		serverApp.setType("ServerApp");
+		serverApp.setId("ServerApp1");
+		serverApp.addRequiredComponent(adminServer.getUri());
+		entities.add(serverApp);
 
-				serverApp.addRequiredComponent(agentApp.getUri());
-			}
+		for (int i = 0; i < numberOfAgents; i++) {
+			VM mainAgent = new VM();
+			mainAgent.setId("MainAgent" + (i + 1));
+			;
+			mainAgent.setCloudProvider(amazonCloud.getUri());
+			mainAgent.setType("MainAgent");
+			entities.add(mainAgent);
 
-		} catch (URISyntaxException e) {
-			logger.error("Error while creating model", e);
+			InternalComponent agentApp = new InternalComponent();
+			agentApp.setId("agentApp" + (i + 1));
+			agentApp.setType("AgentApp");
+			agentApp.addRequiredComponent(mainAgent.getUri());
+			entities.add(agentApp);
+
+			serverApp.addRequiredComponent(agentApp.getUri());
 		}
 
 		return entities;

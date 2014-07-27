@@ -18,34 +18,28 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class DataCollector extends KBEntity {
 
-	public DataCollector() throws URISyntaxException {
-		super();
-	}
-
 	private String monitoredMetric;
-	private Set<URI> parameters;
-	private Set<String> monitoredResourceIds;
-
-	public Set<URI> getParameters() {
+	private Map<String, String> parameters = new HashMap<String, String>();
+	private Set<String> monitoredResourcesIds = new HashSet<String>();
+	
+	public Map<String, String> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(Set<URI> parameters) {
+	public void setParameters(Map<String, String> parameters) {
 		this.parameters = parameters;
 	}
 
-	public void addParameter(URI parameter) {
-		if (parameters == null)
-			parameters = new HashSet<URI>();
-		parameters.add(parameter);
+	public void addParameter(String key, String value) {
+		parameters.put(key, value);
 	}
 
 	public String getMonitoredMetric() {
@@ -57,28 +51,17 @@ public class DataCollector extends KBEntity {
 	}
 
 	public Set<String> getMonitoredResourcesIds() {
-		return monitoredResourceIds;
+		return monitoredResourcesIds;
 	}
 
 	public void setMonitoredResourcesIds(Set<String> monitoredResourcesIds) {
-		this.monitoredResourceIds = monitoredResourcesIds;
+		this.monitoredResourcesIds = monitoredResourcesIds;
 	}
 
-	public void addMonitoredResource(String monitoredResourceId) {
-		if (monitoredResourceIds == null)
-			monitoredResourceIds = new HashSet<String>();
-		monitoredResourceIds.add(monitoredResourceId);
+	public void addMonitoredResourceId(String monitoredResourceId) {
+		monitoredResourcesIds.add(monitoredResourceId);
 	}
 
-	@Override
-	public String getURIBase() {
-		return MO.URI;
-	}
-
-	@Override
-	public String getURIPrefix() {
-		return MO.prefix;
-	}
 
 	@Override
 	public int hashCode() {
@@ -88,7 +71,7 @@ public class DataCollector extends KBEntity {
 				+ ((monitoredMetric == null) ? 0 : monitoredMetric.hashCode());
 		result = prime
 				* result
-				+ ((monitoredResourceIds == null) ? 0 : monitoredResourceIds
+				+ ((monitoredResourcesIds == null) ? 0 : monitoredResourcesIds
 						.hashCode());
 		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
@@ -109,10 +92,10 @@ public class DataCollector extends KBEntity {
 				return false;
 		} else if (!monitoredMetric.equals(other.monitoredMetric))
 			return false;
-		if (monitoredResourceIds == null) {
-			if (other.monitoredResourceIds != null)
+		if (monitoredResourcesIds == null) {
+			if (other.monitoredResourcesIds != null)
 				return false;
-		} else if (!monitoredResourceIds.equals(other.monitoredResourceIds))
+		} else if (!monitoredResourcesIds.equals(other.monitoredResourcesIds))
 			return false;
 		if (parameters == null) {
 			if (other.parameters != null)
@@ -124,14 +107,9 @@ public class DataCollector extends KBEntity {
 
 	@Override
 	public String toString() {
-		return "DataCollector [monitoredMetric="
-				+ monitoredMetric
-				+ ", parameters="
-				+ parameters
+		return "DataCollector [monitoredMetric=" + monitoredMetric
+				+ ", parameters=" + parameters.toString()
 				+ ", monitoredResourceIds="
-				+ (monitoredResourceIds != null ? Arrays
-						.toString(monitoredResourceIds.toArray()) : "null")
-				+ "]";
+				+ Arrays.toString(monitoredResourcesIds.toArray()) + "]";
 	}
-
 }

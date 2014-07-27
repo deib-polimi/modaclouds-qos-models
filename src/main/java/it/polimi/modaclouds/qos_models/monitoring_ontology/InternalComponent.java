@@ -17,51 +17,34 @@
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InternalComponent extends Component{
-
-	public InternalComponent(String id) throws URISyntaxException {
-		super(id);
-	}
+public class InternalComponent extends Component {
 	
-	public InternalComponent() throws URISyntaxException {
-		super();
-	}
-
-	private Set<URI> requiredComponents;
-	private Set<URI> providedMethods;
-
+	private Set<URI> requiredComponents = new HashSet<URI>();
+	private Set<URI> providedMethods = new HashSet<URI>();
+	
 	public Set<URI> getRequiredComponents() {
 		return requiredComponents;
 	}
-
 	public void setRequiredComponents(Set<URI> requiredComponents) {
 		this.requiredComponents = requiredComponents;
 	}
-
 	public Set<URI> getProvidedMethods() {
 		return providedMethods;
 	}
-
 	public void setProvidedMethods(Set<URI> providedMethods) {
 		this.providedMethods = providedMethods;
 	}
 
 	public void addRequiredComponent(URI component) {
-		if (requiredComponents == null)
-			requiredComponents = new HashSet<URI>();
 		requiredComponents.add(component);
 	}
 
 	public void addProvidedMethod(URI method) {
-		if (providedMethods == null)
-			providedMethods = new HashSet<URI>();
 		providedMethods.add(method);
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,7 +57,6 @@ public class InternalComponent extends Component{
 						.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -95,6 +77,12 @@ public class InternalComponent extends Component{
 		} else if (!requiredComponents.equals(other.requiredComponents))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "InternalComponent [requiredComponents=" + requiredComponents
+				+ ", providedMethods=" + providedMethods + "]";
 	}
 
 	

@@ -17,6 +17,7 @@
 package it.polimi.modaclouds.qos_models.examples;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.CloudProvider;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.InternalComponent;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.Method;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.VM;
@@ -30,39 +31,46 @@ import org.slf4j.LoggerFactory;
 
 public class OFBizDeployment extends DeploymentModelFactory {
 
-	private final Logger logger = LoggerFactory.getLogger(OFBizDeployment.class);
-	
+	private final Logger logger = LoggerFactory
+			.getLogger(OFBizDeployment.class);
+
 	@Override
 	public Set<KBEntity> getModel() {
 
 		Set<KBEntity> entities = new HashSet<KBEntity>();
 		try {
-			VM amazonFrontendVM;
 
-			amazonFrontendVM = new VM("FrontendVM1");
+			CloudProvider amazonCloud = new CloudProvider();
+			entities.add(amazonCloud);
+			amazonCloud.setId("Amazon");
 
+			VM amazonFrontendVM = new VM();
 			entities.add(amazonFrontendVM);
+			amazonFrontendVM.setId("FrontendVM1");
 			amazonFrontendVM.setType("FrontendVM");
-			amazonFrontendVM.setCloudProvider("Amazon");
+			amazonFrontendVM.setCloudProvider(amazonCloud.getUri());
 
-			VM amazonBackendVM = new VM("BackendVM1");
+			VM amazonBackendVM = new VM();
 			entities.add(amazonBackendVM);
+			amazonBackendVM.setId("BackendVM1");
 			amazonBackendVM.setType("BackendVM");
-			amazonBackendVM.setCloudProvider("Amazon");
+			amazonBackendVM.setCloudProvider(amazonCloud.getUri());
 
-			InternalComponent amazonJVM = new InternalComponent("JVM1");
+			InternalComponent amazonJVM = new InternalComponent();
 			entities.add(amazonJVM);
+			amazonJVM.setId("JVM1");
 			amazonJVM.setType("JVM");
 			amazonJVM.addRequiredComponent(amazonFrontendVM.getUri());
 
-			InternalComponent amazonMySQL = new InternalComponent("MySQL1");
+			InternalComponent amazonMySQL = new InternalComponent();
 			entities.add(amazonMySQL);
+			amazonMySQL.setId("MySQL1");
 			amazonMySQL.setType("MySQL");
 			amazonJVM.addRequiredComponent(amazonBackendVM.getUri());
 
-			InternalComponent amazonFrontend = new InternalComponent(
-					"Frontend1");
+			InternalComponent amazonFrontend = new InternalComponent();
 			entities.add(amazonFrontend);
+			amazonFrontend.setId("Frontend1");
 			amazonFrontend.setType("Frontend");
 			amazonFrontend.addRequiredComponent(amazonJVM.getUri());
 			amazonFrontend.addRequiredComponent(amazonMySQL.getUri());
@@ -87,12 +95,11 @@ public class OFBizDeployment extends DeploymentModelFactory {
 		return entities;
 	}
 
-	private Method addMethod(InternalComponent amazonFrontend, String methodType)
+	private Method addMethod(InternalComponent iComponent, String methodType)
 			throws URISyntaxException {
-		Method method = new Method(amazonFrontend.getId(), methodType);
-		amazonFrontend.addProvidedMethod(method.getUri());
+		Method method = new Method(iComponent.getId(), methodType);
+		iComponent.addProvidedMethod(method.getUri());
 		return method;
 	}
-
 
 }

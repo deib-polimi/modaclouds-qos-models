@@ -16,17 +16,8 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URISyntaxException;
 
 public class Component extends MonitorableResource{
-
-	public Component(String id) throws URISyntaxException {
-		super(id);
-	}
-
-	public Component() throws URISyntaxException {
-		super();
-	}
 
 	
 }

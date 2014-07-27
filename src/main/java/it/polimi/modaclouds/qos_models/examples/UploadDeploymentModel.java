@@ -38,8 +38,6 @@ public class UploadDeploymentModel {
 	public static void main(String[] args) {
 		try {
 			FusekiKBAPI kbAPI = new FusekiKBAPI(knowledgeBaseURL);
-			kbAPI.setURIBase(MO.URI);
-			kbAPI.setURIPrefix(MO.prefix);
 
 			Method m = currentModelFactory.getMethod("getModel");
 			Set<KBEntity> entities = (Set<KBEntity>) m

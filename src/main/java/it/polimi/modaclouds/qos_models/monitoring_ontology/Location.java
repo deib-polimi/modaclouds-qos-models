@@ -19,47 +19,28 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 public class Location extends KBEntity {
 	
-	public Location() throws URISyntaxException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	private String name;
 	private URI location;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public URI getLocation() {
 		return location;
 	}
+
 	public void setLocation(URI location) {
 		this.location = location;
 	}
-	
-	@Override
-	public String getURIBase() {
-		return MO.URI;
-	}
-	@Override
-	public String getURIPrefix() {
-		return MO.prefix;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,14 +55,13 @@ public class Location extends KBEntity {
 				return false;
 		} else if (!location.equals(other.location))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Location [location=" + location + "]";
 	}
 	
 	
-
 }

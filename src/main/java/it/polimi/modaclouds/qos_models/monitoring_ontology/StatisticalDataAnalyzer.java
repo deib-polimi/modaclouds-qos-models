@@ -18,24 +18,26 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class StatisticalDataAnalyzer extends KBEntity{
-	
-	
+public class StatisticalDataAnalyzer extends KBEntity {
+
+	private String timeStep;
 	private String aggregateFunction;
 	private String returnedMetric;
-	private String targetMetric;
-	private Set<String> targetResourcesIds;
-	private Set<URI> parameters;
+	private List<String> inputMetrics = new ArrayList<String>();
+	private List<String> inputResourcesIds = new ArrayList<String>();
+	private Map<String, String> parameters = new HashMap<String, String>();
 	
-	public StatisticalDataAnalyzer() throws URISyntaxException {
-		super();
+	public String getTimeStep() {
+		return timeStep;
 	}
-	
+	public void setTimeStep(String timeStep) {
+		this.timeStep = timeStep;
+	}
 	public String getAggregateFunction() {
 		return aggregateFunction;
 	}
@@ -48,39 +50,25 @@ public class StatisticalDataAnalyzer extends KBEntity{
 	public void setReturnedMetric(String returnedMetric) {
 		this.returnedMetric = returnedMetric;
 	}
-	public String getTargetMetric() {
-		return targetMetric;
+	public List<String> getInputMetrics() {
+		return inputMetrics;
 	}
-	public void setTargetMetric(String targetMetric) {
-		this.targetMetric = targetMetric;
+	public void setInputMetrics(List<String> inputMetrics) {
+		this.inputMetrics = inputMetrics;
 	}
-	public Set<URI> getParameters() {
+	public List<String> getInputResourcesIds() {
+		return inputResourcesIds;
+	}
+	public void setInputResourcesIds(List<String> inputResourcesIds) {
+		this.inputResourcesIds = inputResourcesIds;
+	}
+	public Map<String, String> getParameters() {
 		return parameters;
 	}
-	public void setParameters(Set<URI> parameters) {
+	public void setParameters(Map<String, String> parameters) {
 		this.parameters = parameters;
 	}
-	public void addParameter(URI parameter) {
-		if (parameters == null)
-			parameters = new HashSet<URI>();
-		parameters.add(parameter);
-	}
-	public Set<String> getTargetResourcesIds() {
-		return targetResourcesIds;
-	}
-	public void setTargetResourcesIds(Set<String> targetResourcesIds) {
-		this.targetResourcesIds = targetResourcesIds;
-	}
 	
-	@Override
-	public String getURIBase() {
-		return MO.URI;
-	}
-	@Override
-	public String getURIPrefix() {
-		return MO.prefix;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,18 +78,20 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				+ ((aggregateFunction == null) ? 0 : aggregateFunction
 						.hashCode());
 		result = prime * result
+				+ ((inputMetrics == null) ? 0 : inputMetrics.hashCode());
+		result = prime
+				* result
+				+ ((inputResourcesIds == null) ? 0 : inputResourcesIds
+						.hashCode());
+		result = prime * result
 				+ ((parameters == null) ? 0 : parameters.hashCode());
 		result = prime * result
 				+ ((returnedMetric == null) ? 0 : returnedMetric.hashCode());
 		result = prime * result
-				+ ((targetMetric == null) ? 0 : targetMetric.hashCode());
-		result = prime
-				* result
-				+ ((targetResourcesIds == null) ? 0 : targetResourcesIds
-						.hashCode());
+				+ ((timeStep == null) ? 0 : timeStep.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -116,6 +106,16 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				return false;
 		} else if (!aggregateFunction.equals(other.aggregateFunction))
 			return false;
+		if (inputMetrics == null) {
+			if (other.inputMetrics != null)
+				return false;
+		} else if (!inputMetrics.equals(other.inputMetrics))
+			return false;
+		if (inputResourcesIds == null) {
+			if (other.inputResourcesIds != null)
+				return false;
+		} else if (!inputResourcesIds.equals(other.inputResourcesIds))
+			return false;
 		if (parameters == null) {
 			if (other.parameters != null)
 				return false;
@@ -126,19 +126,23 @@ public class StatisticalDataAnalyzer extends KBEntity{
 				return false;
 		} else if (!returnedMetric.equals(other.returnedMetric))
 			return false;
-		if (targetMetric == null) {
-			if (other.targetMetric != null)
+		if (timeStep == null) {
+			if (other.timeStep != null)
 				return false;
-		} else if (!targetMetric.equals(other.targetMetric))
-			return false;
-		if (targetResourcesIds == null) {
-			if (other.targetResourcesIds != null)
-				return false;
-		} else if (!targetResourcesIds.equals(other.targetResourcesIds))
+		} else if (!timeStep.equals(other.timeStep))
 			return false;
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return "StatisticalDataAnalyzer [timeStep=" + timeStep
+				+ ", aggregateFunction=" + aggregateFunction
+				+ ", returnedMetric=" + returnedMetric + ", inputMetrics="
+				+ inputMetrics + ", inputResourcesIds=" + inputResourcesIds
+				+ ", parameters=" + parameters + "]";
+	}
+
 	
 
 }

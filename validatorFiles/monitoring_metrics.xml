@@ -233,7 +233,7 @@
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>		
-	<metric name="ResponseTime">
+	<metric name="ServiceTime">
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
 	<metric name="GeneralCost">

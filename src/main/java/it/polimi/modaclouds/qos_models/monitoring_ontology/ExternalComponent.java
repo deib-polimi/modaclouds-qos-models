@@ -16,25 +16,17 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URISyntaxException;
+import java.net.URI;
 
 public class ExternalComponent extends Component {
 
-	public ExternalComponent(String id) throws URISyntaxException {
-		super(id);
-	}
-	
-	public ExternalComponent() throws URISyntaxException {
-		super();
-	}
+	private URI cloudProvider;
 
-	private String cloudProvider;
-
-	public String getCloudProvider() {
+	public URI getCloudProvider() {
 		return cloudProvider;
 	}
 
-	public void setCloudProvider(String cloudProvider) {
+	public void setCloudProvider(URI cloudProvider) {
 		this.cloudProvider = cloudProvider;
 	}
 
@@ -63,6 +55,12 @@ public class ExternalComponent extends Component {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ExternalComponent [cloudProvider=" + cloudProvider + "]";
+	}
+
 	
 	
 }

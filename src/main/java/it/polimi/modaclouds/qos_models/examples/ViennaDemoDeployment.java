@@ -17,30 +17,30 @@
 package it.polimi.modaclouds.qos_models.examples;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.CloudProvider;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.VM;
 
-import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class ViennaDemoDeployment extends DeploymentModelFactory {
 
-	private final Logger logger = LoggerFactory.getLogger(ViennaDemoDeployment.class);
-	
+//	private final Logger logger = LoggerFactory
+//			.getLogger(ViennaDemoDeployment.class);
+
 	@Override
 	public Set<KBEntity> getModel() {
 		Set<KBEntity> entities = new HashSet<KBEntity>();
-		try {
-			VM amazonVM = new VM("FrontendVM1");
-			amazonVM.setType("FrontendVM");
-			amazonVM.setCloudProvider("Amazon");
-			entities.add(amazonVM);
-		} catch (URISyntaxException e) {
-			logger.error("Error while creating model", e);
-		}
+
+		CloudProvider amazonCloud = new CloudProvider();
+		entities.add(amazonCloud);
+		amazonCloud.setId("Amazon");
+
+		VM amazonVM = new VM();
+		amazonVM.setId("FrontendVM1");
+		amazonVM.setType("FrontendVM");
+		amazonVM.setCloudProvider(amazonCloud.getUri());
+		entities.add(amazonVM);
 
 		return entities;
 	}
