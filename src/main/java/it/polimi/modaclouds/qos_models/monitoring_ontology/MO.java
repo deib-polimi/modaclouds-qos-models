@@ -40,14 +40,13 @@ public class MO {
 	public static OntClass ExternalComponent = makeClass(Vocabulary.ExternalComponent);
 	public static OntClass Method = makeClass(Vocabulary.Method);
 
-//	public static Property cloudProvider = makeProperty(Vocabulary.cloudProvider);
-//	public static Property requiredComponents = makeProperty(Vocabulary.requiredComponents);
-//	public static Property location = makeProperty(Vocabulary.location);
-//	public static Property providedMethods = makeProperty(Vocabulary.providedMethods);
-//	public static Property name = makeProperty(Vocabulary.name);
-//	public static Property type = makeProperty(Vocabulary.type);
-//	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
-//	public static Property id = makeProperty(Vocabulary.id);
+	public static Property cloudProvider = makeProperty(Vocabulary.cloudProvider);
+	public static Property requiredComponents = makeProperty(Vocabulary.requiredComponents);
+	public static Property location = makeProperty(Vocabulary.location);
+	public static Property providedMethods = makeProperty(Vocabulary.providedMethods);
+	public static Property name = makeProperty(Vocabulary.name);
+	public static Property type = makeProperty(Vocabulary.type);
+	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
 
 	// *** Monitoring *** /
 //	public static OntClass MonitoringComponent = makeClass(Vocabulary.MonitoringComponent);
@@ -88,9 +87,9 @@ public class MO {
 //		DataCollector.addProperty(parameter, Parameter);
 	}
 
-//	private static Property makeProperty(String string) {
-//		return model.createProperty(URI + string);
-//	}
+	private static Property makeProperty(String string) {
+		return model.createProperty(URI + string);
+	}
 
 	private static OntClass makeClass(String string) {
 		return model.createClass(URI + string);
