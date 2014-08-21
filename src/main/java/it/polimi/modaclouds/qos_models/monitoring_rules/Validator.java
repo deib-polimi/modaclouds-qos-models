@@ -19,6 +19,7 @@ package it.polimi.modaclouds.qos_models.monitoring_rules;
 import it.polimi.modaclouds.qos_models.schema.Action;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunction;
 import it.polimi.modaclouds.qos_models.schema.AvailableAction;
+import it.polimi.modaclouds.qos_models.schema.CollectedMetric;
 import it.polimi.modaclouds.qos_models.schema.Constraint;
 import it.polimi.modaclouds.qos_models.schema.Constraints;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategory;
@@ -102,14 +103,17 @@ public class Validator {
 	private Set<Problem> validateMetricAggregation(Constraint c) {
 		Set<Problem> problems = new HashSet<Problem>();
 		boolean found = false;
-		for (AggregateFunction af : config.getQosAggregateFunctions().getAggregateFunctions()) {
-			if (af.getName().equals(c.getMetricAggregation().getAggregateFunction())) {
+		for (AggregateFunction af : config.getQosAggregateFunctions()
+				.getAggregateFunctions()) {
+			if (softEquals(af.getName(), c.getMetricAggregation()
+					.getAggregateFunction())) {
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			problems.add(new Problem(c.getId(), EnumErrorType.INVALID_AGGREGATE_FUNCTION,
+			problems.add(new Problem(c.getId(),
+					EnumErrorType.INVALID_AGGREGATE_FUNCTION,
 					"metricAggregation"));
 		}
 		return problems;
@@ -119,7 +123,7 @@ public class Validator {
 		Set<Problem> problems = new HashSet<Problem>();
 		boolean found = false;
 		for (Metric metric : config.getQosMetrics().getMetrics()) {
-			if (metric.getName().equals(c.getMetric())) {
+			if (softEquals(metric.getName(), c.getMetric())) {
 				found = true;
 				break;
 			}
@@ -134,8 +138,9 @@ public class Validator {
 	private Set<Problem> validateTargetClass(Constraint c) {
 		Set<Problem> problems = new HashSet<Problem>();
 		boolean found = false;
-		for (GroupingCategory gc : config.getGroupingCategories().getGroupingCategories()) {
-			if (gc.getName().equals(c.getTargetClass())) {
+		for (GroupingCategory gc : config.getGroupingCategories()
+				.getGroupingCategories()) {
+			if (softEquals(gc.getName(), c.getTargetClass())) {
 				found = true;
 				break;
 			}
@@ -157,7 +162,7 @@ public class Validator {
 			found = false;
 			for (AvailableAction availableAction : config
 					.getMonitoringActions().getAvailableActions()) {
-				if (ruleAction.getName().equals(availableAction.getName())) {
+				if (softEquals(ruleAction.getName(), availableAction.getName())) {
 					requiredParameters = availableAction
 							.getRequiredParameters();
 					found = true;
@@ -171,7 +176,7 @@ public class Validator {
 				for (String reqP : requiredParameters) {
 					found = false;
 					for (Parameter ruleP : ruleAction.getParameters()) {
-						if (reqP.equals(ruleP.getName())) {
+						if (softEquals(reqP, ruleP.getName())) {
 							found = true;
 							break;
 						}
@@ -207,10 +212,11 @@ public class Validator {
 		if (rule.getCollectedMetric().isInherited())
 			problems.add(new Problem(rule.getId(),
 					EnumErrorType.MISSING_REQUIRED_PARENT, "collectedMetric"));
-		if (rule.getCondition()!=null && rule.getCondition().isInherited())
+		if (rule.getCondition() != null && rule.getCondition().isInherited())
 			problems.add(new Problem(rule.getId(),
 					EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
-		if (rule.getMetricAggregation()!=null && rule.getMetricAggregation().isInherited())
+		if (rule.getMetricAggregation() != null
+				&& rule.getMetricAggregation().isInherited())
 			problems.add(new Problem(rule.getId(),
 					EnumErrorType.MISSING_REQUIRED_PARENT, "metricAggregation"));
 		if (rule.getActions().isInherited())
@@ -230,8 +236,8 @@ public class Validator {
 		if (rule.getMetricAggregation().getGroupingClass() != null) {
 			for (GroupingCategory clazz : config.getGroupingCategories()
 					.getGroupingCategories()) {
-				if (rule.getMetricAggregation().getGroupingClass()
-						.equals(clazz.getName())) {
+				if (softEquals(rule.getMetricAggregation().getGroupingClass(),
+						clazz.getName())) {
 					found = true;
 					break;
 				}
@@ -248,8 +254,8 @@ public class Validator {
 		if (rule.getMetricAggregation().getAggregateFunction() != null) {
 			for (AggregateFunction function : config
 					.getMonitoringAggregateFunctions().getAggregateFunctions()) {
-				if (rule.getMetricAggregation().getAggregateFunction()
-						.equals(function.getName())) {
+				if (softEquals(rule.getMetricAggregation()
+						.getAggregateFunction(), function.getName())) {
 					requiredParameters = function.getRequiredParameters();
 					found = true;
 					break;
@@ -267,7 +273,7 @@ public class Validator {
 						found = false;
 						for (Parameter ruleP : rule.getMetricAggregation()
 								.getParameters()) {
-							if (reqP.getValue().equals(ruleP.getName())) {
+							if (softEquals(reqP.getValue(),ruleP.getName())) {
 								found = true;
 								break;
 							}
@@ -308,7 +314,7 @@ public class Validator {
 			found = false;
 			for (GroupingCategory clazz : config.getGroupingCategories()
 					.getGroupingCategories()) {
-				if (target.getClazz().equals(clazz.getName())) {
+				if (softEquals(target.getClazz(),clazz.getName())) {
 					found = true;
 					break;
 				}
@@ -332,8 +338,7 @@ public class Validator {
 		boolean found = false;
 		List<RequiredParameter> requiredParameters = null;
 		for (Metric metric : config.getMonitoringMetrics().getMetrics()) {
-			if (metric.getName().equals(
-					rule.getCollectedMetric().getMetricName())) {
+			if (softEquals(metric.getName(), rule.getCollectedMetric().getMetricName())) {
 				requiredParameters = metric.getRequiredParameters();
 				found = true;
 				break;
@@ -342,11 +347,10 @@ public class Validator {
 		if (!found) {
 			for (MonitoringRule otherRule : otherRules) {
 				for (Action action : otherRule.getActions().getActions()) {
-					if (action.getName()
-							.equals(MonitoringActions.OUTPUT_METRIC)) {
-						if (rule.getCollectedMetric()
-								.getMetricName()
-								.equals(action.getParameters().get(0)
+					if (softEquals(action.getName()
+							,MonitoringActions.OUTPUT_METRIC)) {
+						if (softEquals(rule.getCollectedMetric()
+								.getMetricName(),action.getParameters().get(0)
 										.getValue())) {
 							found = true;
 							break;
@@ -366,7 +370,7 @@ public class Validator {
 					found = false;
 					for (Parameter ruleP : rule.getCollectedMetric()
 							.getParameters()) {
-						if (reqP.getValue().equals(ruleP.getName())) {
+						if (softEquals(reqP.getValue(),ruleP.getName())) {
 							found = true;
 							break;
 						}
@@ -387,7 +391,8 @@ public class Validator {
 	private Set<Problem> validateCondition(MonitoringRule rule,
 			List<MonitoringRule> otherRules) {
 		Set<Problem> problems = new HashSet<Problem>();
-		if (rule.getCondition()==null) return problems;
+		if (rule.getCondition() == null)
+			return problems;
 		String condition = rule.getCondition().getValue();
 		if (condition != null) {
 			ANTLRInputStream input = new ANTLRInputStream(condition);
@@ -547,5 +552,20 @@ public class Validator {
 		}
 		return problems;
 	}
+
+
+	private boolean softEquals(String name1, String name2) {
+		return name1.toLowerCase().equals(name2.toLowerCase());
+	}
+
+	public String getRequiredDataAnalyzer(String aggregateFunction) {
+		for (AggregateFunction af: config.getMonitoringAggregateFunctions().getAggregateFunctions()) {
+			if (softEquals(aggregateFunction, af.getName())) {
+				return af.getComputedBy().value();
+			}
+		}
+		return null;
+	}
+
 
 }

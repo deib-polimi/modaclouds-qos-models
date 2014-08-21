@@ -17,18 +17,17 @@
        limitations under the License.
 
 -->
-<availableActions xmlns="http://www.modaclouds.eu/xsd/2.0/actions_schema"
+<metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/actions_schema ../monitoringrules/actions_schema.xsd">
-	<availableAction name="OutputMetric">
-		<requiredParameter>name</requiredParameter>
-	</availableAction>
-	<availableAction name="EnableMonitoringRule" />
-	<availableAction name="DisableMonitoringRule" />
-	<availableAction name="SetSamplingProbability">
-		<requiredParameter>probability</requiredParameter>
-	</availableAction>
-	<availableAction name="SetSamplingTime">
-		<requiredParameter>time</requiredParameter>
-	</availableAction>
-</availableActions>
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema ../../../metamodels/commons/metrics_schema.xsd">
+	<metric name="CPUUtilization" />
+	<metric name="ResponseTime" />
+	<metric name="Replication" />
+	<metric name="Ram" />
+	<metric name="Availability" />
+	<metric name="Cores" />
+	<metric name="ResourceType" />
+	<metric name="ServiceName" />
+	<metric name="Provider" />
+	<metric name="WorkloadDistribution" />
+</metrics>

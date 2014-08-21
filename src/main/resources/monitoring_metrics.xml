@@ -20,7 +20,7 @@
 <metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema
-	../commons/metrics_schema.xsd">
+	../../../metamodels/commons/metrics_schema.xsd">
 	<metric name="CPUUtilization">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
@@ -233,7 +233,7 @@
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>		
-	<metric name="ServiceTime">
+	<metric name="ExecutionTime">
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
 	<metric name="GeneralCost">

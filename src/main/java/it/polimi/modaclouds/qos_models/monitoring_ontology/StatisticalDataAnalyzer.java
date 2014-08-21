@@ -68,6 +68,9 @@ public class StatisticalDataAnalyzer extends KBEntity {
 	public void setParameters(Map<String, String> parameters) {
 		this.parameters = parameters;
 	}
+	public void addParameter(String key, String value) {
+		parameters.put(key, value);
+	}
 	
 	@Override
 	public int hashCode() {
@@ -141,6 +144,9 @@ public class StatisticalDataAnalyzer extends KBEntity {
 				+ ", returnedMetric=" + returnedMetric + ", inputMetrics="
 				+ inputMetrics + ", inputResourcesIds=" + inputResourcesIds
 				+ ", parameters=" + parameters + "]";
+	}
+	public void addInputMetric(String metricName) {
+		inputMetrics.add(metricName);
 	}
 
 	

@@ -16,11 +16,9 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
-
 import java.net.URI;
 
-public class Location extends KBEntity {
+public class Location extends Resource {
 	
 	private URI location;
 

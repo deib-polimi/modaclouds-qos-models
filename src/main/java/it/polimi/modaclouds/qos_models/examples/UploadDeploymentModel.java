@@ -37,7 +37,7 @@ public class UploadDeploymentModel {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		try {
-			FusekiKBAPI kbAPI = new FusekiKBAPI(knowledgeBaseURL);
+			FusekiKBAPI kbAPI = new FusekiKBAPI(knowledgeBaseURL,"it.polimi.modaclouds.qos_models.monitoring_ontology");
 
 			Method m = currentModelFactory.getMethod("getModel");
 			Set<KBEntity> entities = (Set<KBEntity>) m

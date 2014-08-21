@@ -31,8 +31,9 @@ public class MO {
     public static String prefix = KBEntity.uriPrefix;
 
 	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
-	// *** System *** //
+	
 	public static OntClass Component = makeClass(Vocabulary.Component);
+	public static OntClass CloudProvider = makeClass(Vocabulary.CloudProvider);
 	public static OntClass VM = makeClass(Vocabulary.VM);
 	public static OntClass PaaSService = makeClass(Vocabulary.PaaSService);
 	public static OntClass Location = makeClass(Vocabulary.Location);
@@ -48,23 +49,7 @@ public class MO {
 	public static Property type = makeProperty(Vocabulary.type);
 	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
 
-	// *** Monitoring *** /
-//	public static OntClass MonitoringComponent = makeClass(Vocabulary.MonitoringComponent);
-	public static OntClass MonitorableResource = makeClass(Vocabulary.MonitorableResource);
-	public static OntClass StatisticalDataAnalyzer = makeClass(Vocabulary.StatisticalDataAnalyzer);
-	public static OntClass DataCollector = makeClass(Vocabulary.DataCollector);
-//	public static OntClass Parameter = makeClass(Vocabulary.Parameter);
-//	public static OntClass MonitoringDatum = makeClass(Vocabulary.MonitoringDatum);
-
-//	public static Property resource = makeProperty(Vocabulary.resource);
-//	public static Property parameter = makeProperty(Vocabulary.parameters);
-//	public static Property monitoredResources = makeProperty(Vocabulary.monitoredResources);
-//	public static Property metric = makeProperty(Vocabulary.metric);
-//	public static Property value = makeProperty(Vocabulary.value);
-//	public static Property timestamp = makeProperty(Vocabulary.timestamp);
-//	public static Property returnedMetric = makeProperty(Vocabulary.returnedMetric);
-//	public static Property targetMetric = makeProperty(Vocabulary.targetMetric);
-//	public static Property collectedMetric = makeProperty(Vocabulary.monitoredMetric);
+	public static OntClass Resource = makeClass(Vocabulary.Resource);
 	
 
 	static {
@@ -72,19 +57,11 @@ public class MO {
 		ExternalComponent.addProperty(RDFS.subClassOf, Component);
 		VM.addProperty(RDFS.subClassOf, ExternalComponent);
 		PaaSService.addProperty(RDFS.subClassOf, ExternalComponent);
-//		VM.addProperty(location, Location);
-//		Location.addProperty(location, Location);
-		Component.addProperty(RDFS.subClassOf, MonitorableResource);
-//		MonitoringDatum.addProperty(resource, MonitorableResource);
-//		InternalComponent.addProperty(requiredComponents, Component);
+		Component.addProperty(RDFS.subClassOf, Resource);
 		InternalComponent.addProperty(RDFS.subClassOf, Component);
-//		InternalComponent.addProperty(providedMethods, Method);
-		Method.addProperty(RDFS.subClassOf, MonitorableResource);
-//		MonitoringComponent.addProperty(RDFS.subClassOf, InternalComponent);
-//		StatisticalDataAnalyzer.addProperty(monitoredResources, MonitorableResource);
-//		StatisticalDataAnalyzer.addProperty(parameter, Parameter);
-//		DataCollector.addProperty(monitoredResources, MonitorableResource);
-//		DataCollector.addProperty(parameter, Parameter);
+		Method.addProperty(RDFS.subClassOf, Resource);
+		CloudProvider.addProperty(RDFS.subClassOf, Resource);
+		Location.addProperty(RDFS.subClassOf, Resource);
 	}
 
 	private static Property makeProperty(String string) {

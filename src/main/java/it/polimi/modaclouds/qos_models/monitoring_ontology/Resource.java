@@ -18,7 +18,7 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
-public class MonitorableResource extends KBEntity {
+public class Resource extends KBEntity {
 	
 	private String type;
 	private String id;
@@ -62,7 +62,7 @@ public class MonitorableResource extends KBEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MonitorableResource other = (MonitorableResource) obj;
+		Resource other = (Resource) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -17,7 +17,7 @@
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 
-public class Component extends MonitorableResource{
+public class Component extends Resource{
 
 	
 }

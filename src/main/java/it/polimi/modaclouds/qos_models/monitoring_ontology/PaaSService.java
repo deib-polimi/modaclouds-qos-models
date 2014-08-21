@@ -16,7 +16,6 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URISyntaxException;
 
 public class PaaSService extends ExternalComponent {
 

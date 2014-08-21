@@ -16,7 +16,7 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-public class Method extends MonitorableResource {
+public class Method extends Resource {
 
 	public Method(String applicationId, String methodType) {
 		setId(applicationId+"-"+methodType);

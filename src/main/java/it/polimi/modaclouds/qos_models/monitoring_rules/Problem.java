@@ -70,4 +70,10 @@ public class Problem {
 		return description;
 	}
 
+	@Override
+	public String toString() {
+		return "Problem [id=" + id + ", tagName=" + tagName + ", error="
+				+ error + ", description=" + description + "]";
+	}
+
 }
