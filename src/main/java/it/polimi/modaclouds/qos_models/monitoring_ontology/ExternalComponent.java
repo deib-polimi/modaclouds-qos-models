@@ -16,17 +16,16 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URI;
 
 public class ExternalComponent extends Component {
 
-	private URI cloudProvider;
+	private String cloudProvider;
 
-	public URI getCloudProvider() {
+	public String getCloudProvider() {
 		return cloudProvider;
 	}
 
-	public void setCloudProvider(URI cloudProvider) {
+	public void setCloudProvider(String cloudProvider) {
 		this.cloudProvider = cloudProvider;
 	}
 
@@ -58,7 +57,8 @@ public class ExternalComponent extends Component {
 
 	@Override
 	public String toString() {
-		return "ExternalComponent [cloudProvider=" + cloudProvider + "]";
+		return "ExternalComponent [cloudProvider=" + cloudProvider
+				+ ", getType()=" + getType() + ", getId()=" + getId() + "]";
 	}
 
 	

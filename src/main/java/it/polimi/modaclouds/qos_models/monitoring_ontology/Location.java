@@ -16,17 +16,16 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URI;
 
 public class Location extends Resource {
 	
-	private URI location;
+	private String location;
 
-	public URI getLocation() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocation(URI location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 
@@ -58,7 +57,8 @@ public class Location extends Resource {
 
 	@Override
 	public String toString() {
-		return "Location [location=" + location + "]";
+		return "Location [location=" + location + ", getType()=" + getType()
+				+ ", getId()=" + getId() + "]";
 	}
 	
 	

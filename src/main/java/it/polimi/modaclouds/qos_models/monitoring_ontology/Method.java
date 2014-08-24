@@ -22,5 +22,10 @@ public class Method extends Resource {
 		setId(applicationId+"-"+methodType);
 		setType(methodType);
 	}
+
+	@Override
+	public String toString() {
+		return "Method [getType()=" + getType() + ", getId()=" + getId() + "]";
+	}
 	
 }

@@ -14,13 +14,27 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package it.polimi.modaclouds.qos_models.examples;
+package it.polimi.modaclouds.qos_models.test;
 
-import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
+import static org.junit.Assert.fail;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.Resource;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.Vocabulary;
 
-import java.util.Set;
+import org.apache.commons.beanutils.BeanUtils;
+import org.junit.Test;
 
-public abstract class DeploymentModelFactory {
-	
-	public abstract Set<KBEntity> getModel();
+public class ResourceIdTest {
+
+	@Test
+	public void test() {
+		
+		try {
+			BeanUtils.getProperty(new Resource(), Vocabulary.resourceIdParameterName);
+		} catch (Exception e) {
+			System.out.println("Vacabulary is not aligned with Resource");
+			fail();
+		}
+		
+	}
+
 }

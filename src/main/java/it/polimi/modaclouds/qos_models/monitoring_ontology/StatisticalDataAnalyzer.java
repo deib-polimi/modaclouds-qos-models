@@ -16,15 +16,14 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StatisticalDataAnalyzer extends KBEntity {
+public class StatisticalDataAnalyzer {
 
+	private String id;
 	private String timeStep;
 	private String aggregateFunction;
 	private String returnedMetric;
@@ -75,11 +74,12 @@ public class StatisticalDataAnalyzer extends KBEntity {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime
 				* result
 				+ ((aggregateFunction == null) ? 0 : aggregateFunction
 						.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((inputMetrics == null) ? 0 : inputMetrics.hashCode());
 		result = prime
@@ -99,7 +99,7 @@ public class StatisticalDataAnalyzer extends KBEntity {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -108,6 +108,11 @@ public class StatisticalDataAnalyzer extends KBEntity {
 			if (other.aggregateFunction != null)
 				return false;
 		} else if (!aggregateFunction.equals(other.aggregateFunction))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (inputMetrics == null) {
 			if (other.inputMetrics != null)
@@ -139,7 +144,7 @@ public class StatisticalDataAnalyzer extends KBEntity {
 	
 	@Override
 	public String toString() {
-		return "StatisticalDataAnalyzer [timeStep=" + timeStep
+		return "StatisticalDataAnalyzer [id=" + id + ", timeStep=" + timeStep
 				+ ", aggregateFunction=" + aggregateFunction
 				+ ", returnedMetric=" + returnedMetric + ", inputMetrics="
 				+ inputMetrics + ", inputResourcesIds=" + inputResourcesIds
@@ -147,6 +152,12 @@ public class StatisticalDataAnalyzer extends KBEntity {
 	}
 	public void addInputMetric(String metricName) {
 		inputMetrics.add(metricName);
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	

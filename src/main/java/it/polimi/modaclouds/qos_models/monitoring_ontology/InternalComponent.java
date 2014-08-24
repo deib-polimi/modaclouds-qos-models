@@ -16,35 +16,40 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
 
 public class InternalComponent extends Component {
 	
-	private Set<URI> requiredComponents = new HashSet<URI>();
-	private Set<URI> providedMethods = new HashSet<URI>();
+	private Set<String> requiredComponents = new HashSet<String>();
+	private Set<String> providedMethods = new HashSet<String>();
 	
-	public Set<URI> getRequiredComponents() {
-		return requiredComponents;
-	}
-	public void setRequiredComponents(Set<URI> requiredComponents) {
-		this.requiredComponents = requiredComponents;
-	}
-	public Set<URI> getProvidedMethods() {
-		return providedMethods;
-	}
-	public void setProvidedMethods(Set<URI> providedMethods) {
-		this.providedMethods = providedMethods;
-	}
+	
 
-	public void addRequiredComponent(URI component) {
+	public void addRequiredComponent(String component) {
 		requiredComponents.add(component);
 	}
 
-	public void addProvidedMethod(URI method) {
+	public void addProvidedMethod(String method) {
 		providedMethods.add(method);
 	}
+
+	public Set<String> getRequiredComponents() {
+		return requiredComponents;
+	}
+
+	public void setRequiredComponents(Set<String> requiredComponents) {
+		this.requiredComponents = requiredComponents;
+	}
+
+	public Set<String> getProvidedMethods() {
+		return providedMethods;
+	}
+
+	public void setProvidedMethods(Set<String> providedMethods) {
+		this.providedMethods = providedMethods;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -57,6 +62,7 @@ public class InternalComponent extends Component {
 						.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,13 +84,13 @@ public class InternalComponent extends Component {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "InternalComponent [requiredComponents=" + requiredComponents
-				+ ", providedMethods=" + providedMethods + "]";
+				+ ", providedMethods=" + providedMethods + ", getType()="
+				+ getType() + ", getId()=" + getId() + "]";
 	}
-
 	
 	
 

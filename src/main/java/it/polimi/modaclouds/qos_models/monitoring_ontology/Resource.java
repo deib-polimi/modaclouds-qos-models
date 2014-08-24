@@ -16,9 +16,8 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
 
-public class Resource extends KBEntity {
+public class Resource  {
 	
 	private String type;
 	private String id;
@@ -42,7 +41,7 @@ public class Resource extends KBEntity {
 
 	@Override
 	public String toString() {
-		return "MonitorableResource [type=" + type + ", id=" + id + "]";
+		return "Resource [type=" + type + ", id=" + id + "]";
 	}
 
 	@Override

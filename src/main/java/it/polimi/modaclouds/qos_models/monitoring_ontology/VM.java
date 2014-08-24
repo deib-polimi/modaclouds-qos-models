@@ -16,12 +16,11 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URI;
 
 public class VM extends ExternalComponent {
 	
 	private int numberOfCPUs;
-	private URI location;
+	private String location;
 	
 	public int getNumberOfCPUs() {
 		return numberOfCPUs;
@@ -29,10 +28,10 @@ public class VM extends ExternalComponent {
 	public void setNumberOfCPUs(int numberOfCPUs) {
 		this.numberOfCPUs = numberOfCPUs;
 	}
-	public URI getLocation() {
+	public String getLocation() {
 		return location;
 	}
-	public void setLocation(URI location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 	@Override
@@ -66,7 +65,8 @@ public class VM extends ExternalComponent {
 	@Override
 	public String toString() {
 		return "VM [numberOfCPUs=" + numberOfCPUs + ", location=" + location
-				+ "]";
+				+ ", getCloudProvider()=" + getCloudProvider() + ", getType()="
+				+ getType() + ", getId()=" + getId() + "]";
 	}
 
 	

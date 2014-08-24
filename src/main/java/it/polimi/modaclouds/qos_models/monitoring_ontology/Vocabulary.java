@@ -38,6 +38,8 @@ public class Vocabulary {
     public static final String type = "type";
     public static final String id = "id";
     
+    public static final String resourceIdParameterName = id;
+    
     // temporary here .... sda stuff
 	public static final String timeStep = "timeStep";
 	public static final String timeWindow = "timeWindow";

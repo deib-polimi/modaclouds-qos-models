@@ -16,8 +16,6 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import it.polimi.modaclouds.monitoring.kb.api.KBEntity;
-
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
@@ -27,8 +25,9 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class MO {
 	
-	public static final String URI = KBEntity.uriBase;
-    public static String prefix = KBEntity.uriPrefix;
+	// TODO URI and Prefix are both here and in kb-api
+	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/entities#";
+    public static String prefix = "modaent";
 
 	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
 	
