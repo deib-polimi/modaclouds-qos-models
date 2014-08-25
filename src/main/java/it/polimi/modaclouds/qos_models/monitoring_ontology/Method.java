@@ -18,8 +18,11 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class Method extends Resource {
 
+	public Method() {
+	}
+
 	public Method(String applicationId, String methodType) {
-		setId(applicationId+"-"+methodType);
+		setId(applicationId + "-" + methodType);
 		setType(methodType);
 	}
 
@@ -27,5 +30,5 @@ public class Method extends Resource {
 	public String toString() {
 		return "Method [getType()=" + getType() + ", getId()=" + getId() + "]";
 	}
-	
+
 }

@@ -19,6 +19,11 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class Resource  {
 	
+	@Override
+	public String toString() {
+		return "Resource [type=" + type + ", id=" + id + "]";
+	}
+
 	private String type;
 	private String id;
 
@@ -39,10 +44,6 @@ public class Resource  {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Resource [type=" + type + ", id=" + id + "]";
-	}
 
 	@Override
 	public int hashCode() {

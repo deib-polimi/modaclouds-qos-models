@@ -19,6 +19,11 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class ExternalComponent extends Component {
 
+	@Override
+	public String toString() {
+		return "ExternalComponent [cloudProvider=" + cloudProvider + "]";
+	}
+
 	private String cloudProvider;
 
 	public String getCloudProvider() {
@@ -55,11 +60,6 @@ public class ExternalComponent extends Component {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "ExternalComponent [cloudProvider=" + cloudProvider
-				+ ", getType()=" + getType() + ", getId()=" + getId() + "]";
-	}
 
 	
 	
