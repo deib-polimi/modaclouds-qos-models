@@ -46,6 +46,7 @@ public class MO {
 	public static Property providedMethods = makeProperty(Vocabulary.providedMethods);
 	public static Property name = makeProperty(Vocabulary.name);
 	public static Property type = makeProperty(Vocabulary.type);
+	public static Property id = makeProperty(Vocabulary.id);
 	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
 
 	public static OntClass Resource = makeClass(Vocabulary.Resource);
