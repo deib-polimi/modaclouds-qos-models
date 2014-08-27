@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<constraints xmlns="http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema C:/Users/GiovanniPaolo/git/modaclouds-qos-models/metamodels/qosconstraints/qos_constraints_schema.xsd">
+
+	<constraint id="a1" name="Tier1Util">
+		<targetResourceIDRef>_W057YAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>CPUUtilization</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>80</hasMaxValue>
+		</range>
+		<priority>1</priority>
+	</constraint>
+
+	<constraint id="a2" name="Tier2Util">
+		<targetResourceIDRef>_W6tBYAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>CPUUtilization</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>80</hasMaxValue>
+		</range>
+		<priority>1</priority>
+	</constraint>
+
+	<constraint id="a4" name="Tier1RAM">
+		<targetResourceIDRef>_W057YAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>RAM</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMinValue>2000</hasMinValue>
+		</range>
+		<priority>1</priority>
+	</constraint>
+
+
+	<constraint id="c1" name="function1RT">
+		<targetResourceIDRef>_Cbw_YAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>100</hasMaxValue>
+		</range>
+		<priority>1</priority>
+	</constraint>
+
+	<constraint id="c2" name="function2RT">
+		<targetResourceIDRef>_Cb2e8AwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>100</hasMaxValue>
+		</range>
+	</constraint>
+
+	<constraint id="c3" name="function3RT">
+		<targetResourceIDRef>_Cb4UIAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>115</hasMaxValue>
+		</range>
+	</constraint>
+
+	<constraint id="c4" name="function1RTperc">
+		<targetResourceIDRef>_Cbw_YAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Percentile">
+			<parameter name="thPercentile">65</parameter>
+		</metricAggregation>
+		<range>
+			<hasMaxValue>150</hasMaxValue>
+		</range>
+		<priority>1</priority>
+	</constraint>
+
+	<constraint id="c5" name="fontEndCompRT">
+		<targetResourceIDRef>_BLVSQAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>ResponseTime</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>1000</hasMaxValue>
+		</range>
+	</constraint>
+
+	<constraint id="a6" name="Tier2Replicas">
+		<targetResourceIDRef>_W6tBYAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<metric>Replication</metric>
+		<metricAggregation aggregateFunction="Average" />
+		<range>
+			<hasMaxValue>8</hasMaxValue>
+			<hasMinValue>8</hasMinValue>
+		</range>
+		<priority>1</priority>
+	</constraint>
+
+
+
+</constraints>

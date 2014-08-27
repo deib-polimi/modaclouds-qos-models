@@ -23,11 +23,13 @@
 	<metric name="CPUUtilization" />
 	<metric name="ResponseTime" />
 	<metric name="Replication" />
-	<metric name="Ram" />
+	<metric name="RAM" />
+	<!-- Not yet supported
 	<metric name="Availability" />
 	<metric name="Cores" />
 	<metric name="ResourceType" />
 	<metric name="ServiceName" />
 	<metric name="Provider" />
-	<metric name="WorkloadDistribution" />
+	<metric name="WorkloadDistribution" /> 
+	-->
 </metrics>
