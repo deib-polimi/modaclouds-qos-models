@@ -305,12 +305,12 @@ public class Validator {
 						"target class is required"));
 				break;
 			}
-			if (target.getId() == null) {
-				problems.add(new Problem(rule.getId(),
-						EnumErrorType.MISSING_FIELD, "monitoredTargets",
-						"target id is required"));
-				break;
-			}
+//			if (target.getId() == null) {
+//				problems.add(new Problem(rule.getId(),
+//						EnumErrorType.MISSING_FIELD, "monitoredTargets",
+//						"target id is required"));
+//				break;
+//			}
 			found = false;
 			for (GroupingCategory clazz : config.getGroupingCategories()
 					.getGroupingCategories()) {
