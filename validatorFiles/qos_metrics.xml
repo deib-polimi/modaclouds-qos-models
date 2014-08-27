@@ -19,15 +19,17 @@
 -->
 <metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema ../commons/metrics_schema.xsd">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema ../../../metamodels/commons/metrics_schema.xsd">
 	<metric name="CPUUtilization" />
 	<metric name="ResponseTime" />
 	<metric name="Replication" />
-	<metric name="Ram" />
+	<metric name="RAM" />
+	<!-- Not yet supported
 	<metric name="Availability" />
 	<metric name="Cores" />
 	<metric name="ResourceType" />
 	<metric name="ServiceName" />
 	<metric name="Provider" />
-	<metric name="WorkloadDistribution" />
+	<metric name="WorkloadDistribution" /> 
+	-->
 </metrics>
