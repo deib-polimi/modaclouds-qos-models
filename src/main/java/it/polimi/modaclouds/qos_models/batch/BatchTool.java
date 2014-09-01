@@ -92,10 +92,6 @@ public class BatchTool {
 		} catch (JAXBException | SAXException e) {
 			System.err.println("Input file could not be parsed: ");			
 			e.printStackTrace();
-		} catch (ValidationException e) {
-			System.err
-			.println("Error while creating monitoring rules from qos constraints: ");
-			e.printStackTrace();
 		}
 		catch (Exception e) {
 			System.err

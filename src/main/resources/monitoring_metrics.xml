@@ -25,6 +25,9 @@
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
+	<metric name="ResponseTime">
+		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+	</metric>
 	<metric name="Availability">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
@@ -233,9 +236,6 @@
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>		
-	<metric name="ExecutionTime">
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
-	</metric>
 	<metric name="GeneralCost">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>

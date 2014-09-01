@@ -50,10 +50,16 @@ public class MonitoringRuleFactory {
 	}
 
 	public MonitoringRules makeRulesFromQoSConstraints(
-			Constraints qosConstraints) throws ValidationException {
+			Constraints qosConstraints) {
 		MonitoringRules rules = new MonitoringRules();
 		for (Constraint c : qosConstraints.getConstraints()) {
-			rules.getMonitoringRules().add(makeRuleFromConstraint(c));
+			try {
+				rules.getMonitoringRules().add(makeRuleFromConstraint(c));
+			} catch (Exception e) {
+				logger.warn(
+						"Constraint {} could not be translated to a monitoring rule: {}",
+						c.getId(), e.getMessage());
+			}
 		}
 		return rules;
 	}
