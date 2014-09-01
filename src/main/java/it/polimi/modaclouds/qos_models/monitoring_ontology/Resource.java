@@ -16,28 +16,40 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.util.Set;
 
-public class SDAFactory extends DataAnalyzer {
+public class Resource  {
 	
-	private Set<StatisticalDataAnalyzer> instantiatedSDAs;
+	@Override
+	public String toString() {
+		return "Resource [type=" + type + ", id=" + id + "]";
+	}
+
 	private String type;
+	private String id;
 
-	public Set<StatisticalDataAnalyzer> getInstantiatedSDAs() {
-		return instantiatedSDAs;
+	public String getType() {
+		return type;
 	}
 
-	public void setInstantiatedSDAs(Set<StatisticalDataAnalyzer> instantiatedSDAs) {
-		this.instantiatedSDAs = instantiatedSDAs;
+	public void setType(String type) {
+		this.type = type;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((instantiatedSDAs == null) ? 0 : instantiatedSDAs.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -50,11 +62,11 @@ public class SDAFactory extends DataAnalyzer {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SDAFactory other = (SDAFactory) obj;
-		if (instantiatedSDAs == null) {
-			if (other.instantiatedSDAs != null)
+		Resource other = (Resource) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!instantiatedSDAs.equals(other.instantiatedSDAs))
+		} else if (!id.equals(other.id))
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -64,12 +76,7 @@ public class SDAFactory extends DataAnalyzer {
 		return true;
 	}
 
-	public String getType() {
-		return type;
-	}
+	
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
+	
 }

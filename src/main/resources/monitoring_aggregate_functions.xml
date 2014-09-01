@@ -21,72 +21,63 @@
 	xmlns="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema 
-	../commons/aggregate_functions_schema.xsd">
-	<aggregateFunction name="Average" computedBy="DeterministicDataAnalyzer">
+	../../../metamodels/commons/aggregate_functions_schema.xsd">
+	<aggregateFunction name="Average" computedBy="DDA">
 	</aggregateFunction>
-	<aggregateFunction name="Percentile" computedBy="DeterministicDataAnalyzer">
+	<aggregateFunction name="Percentile" computedBy="DDA">
 		<requiredParameter>thPercentile</requiredParameter>
 	</aggregateFunction>
-	<aggregateFunction name="Max" computedBy="DeterministicDataAnalyzer">
+	<aggregateFunction name="Max" computedBy="DDA">
 	</aggregateFunction>
-	<aggregateFunction name="Min" computedBy="DeterministicDataAnalyzer">
+	<aggregateFunction name="Min" computedBy="DDA">
 	</aggregateFunction>
-	<aggregateFunction name="ForecastingML" computedBy="JAVAStatisticalDataAnalyzer">
+	<aggregateFunction name="ForecastingTimeSeriesAR"
+		computedBy="MATLAB_SDA">
+		<requiredParameter>order</requiredParameter>
+		<requiredParameter>forecastPeriod</requiredParameter>
+	</aggregateFunction>
+	<aggregateFunction name="ForecastingML" computedBy="JAVA_SDA">
 		<requiredParameter>otherTarget1</requiredParameter>
 		<requiredParameter>otherMetric1</requiredParameter>
 		<requiredParameter>method</requiredParameter>
-		<requiredParameter>predictionStep</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="ForecastingTimeSeriesAR"
-		computedBy="MATLABStatisticalDataAnalyzer">
-		<requiredParameter>order</requiredParameter>
 		<requiredParameter>forecastPeriod</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
 	<aggregateFunction name="ForecastingTimeSeriesARMA"
-		computedBy="MATLABStatisticalDataAnalyzer">
+		computedBy="MATLAB_SDA">
 		<requiredParameter>autoregressive</requiredParameter>
 		<requiredParameter>movingAverage</requiredParameter>
 		<requiredParameter>forecastPeriod</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
 		<aggregateFunction name="ForecastingTimeSeriesARIMA"
-		computedBy="MATLABStatisticalDataAnalyzer">
+		computedBy="MATLAB_SDA">
 		<requiredParameter>autoregressive</requiredParameter>
 		<requiredParameter>integrated</requiredParameter>
 		<requiredParameter>movingAverage</requiredParameter>
 		<requiredParameter>forecastPeriod</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-	<aggregateFunction name="EstimationCI" computedBy="MATLABStatisticalDataAnalyzer">
+	<aggregateFunction name="EstimationCI" computedBy="MATLAB_SDA">
 		<requiredParameter>window</requiredParameter>
 		<requiredParameter>nCPU</requiredParameter>
 		<requiredParameter>CPUUtilTarget</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-	<aggregateFunction name="EstimationFCFS" computedBy="MATLABStatisticalDataAnalyzer">
+	<aggregateFunction name="EstimationFCFS" computedBy="MATLAB_SDA">
 		<requiredParameter>window</requiredParameter>
 		<requiredParameter>nCPU</requiredParameter>
 		<requiredParameter>CPUUtilTarget</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-		<aggregateFunction name="EstimationUBO" computedBy="MATLABStatisticalDataAnalyzer">
+		<aggregateFunction name="EstimationUBO" computedBy="MATLAB_SDA">
 		<requiredParameter>window</requiredParameter>
 		<requiredParameter>CPUUtilTarget</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-		<aggregateFunction name="EstimationUBR" computedBy="MATLABStatisticalDataAnalyzer">
+		<aggregateFunction name="EstimationUBR" computedBy="MATLAB_SDA">
 		<requiredParameter>window</requiredParameter>
 		<requiredParameter>nCPU</requiredParameter>
 		<requiredParameter>CPUUtilTarget</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
-	<aggregateFunction name="Correlation" computedBy="JAVAStatisticalDataAnalyzer">
+	<aggregateFunction name="Correlation" computedBy="JAVA_SDA">
 		<requiredParameter>otherTarget1</requiredParameter>
 		<requiredParameter>otherMetric1</requiredParameter>
 		<requiredParameter>method</requiredParameter>
 		<requiredParameter>isTraining</requiredParameter>
-		<requiredParameter>returnedMetric</requiredParameter>
 	</aggregateFunction>
 </aggregateFunctions>

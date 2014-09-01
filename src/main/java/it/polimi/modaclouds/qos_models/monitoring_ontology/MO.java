@@ -16,8 +16,6 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-import java.net.URL;
-
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
@@ -27,15 +25,14 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class MO {
 	
-	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/monitoring/";
-//    public static final String streamsURI = "http://www.modaclouds.eu/monitoring/streams/";
-    public static final String kbURLSuffix = "/modaclouds/kb";
-    private static String knowledgeBaseURL = "http://localhost:3030" + kbURLSuffix;
-    public static String prefix = "mo";
+	// TODO URI and Prefix are both here and in kb-api
+	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/entities#";
+    public static String prefix = "modaent";
 
 	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
-	// *** System *** //
+	
 	public static OntClass Component = makeClass(Vocabulary.Component);
+	public static OntClass CloudProvider = makeClass(Vocabulary.CloudProvider);
 	public static OntClass VM = makeClass(Vocabulary.VM);
 	public static OntClass PaaSService = makeClass(Vocabulary.PaaSService);
 	public static OntClass Location = makeClass(Vocabulary.Location);
@@ -44,43 +41,15 @@ public class MO {
 	public static OntClass Method = makeClass(Vocabulary.Method);
 
 	public static Property cloudProvider = makeProperty(Vocabulary.cloudProvider);
-	public static Property requiredComponent = makeProperty(Vocabulary.requiredComponent);
+	public static Property requiredComponents = makeProperty(Vocabulary.requiredComponents);
 	public static Property location = makeProperty(Vocabulary.location);
-	public static Property providedMethod = makeProperty(Vocabulary.providedMethod);
-	public static Property calledMethod = makeProperty(Vocabulary.calledMethod);
-	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
+	public static Property providedMethods = makeProperty(Vocabulary.providedMethods);
 	public static Property name = makeProperty(Vocabulary.name);
-	public static Property path = makeProperty(Vocabulary.path);
 	public static Property type = makeProperty(Vocabulary.type);
-	public static Property url = makeProperty(Vocabulary.url);
 	public static Property id = makeProperty(Vocabulary.id);
+	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
 
-	// *** Monitoring *** /
-	public static OntClass MonitoringComponent = makeClass(Vocabulary.MonitoringComponent);
-	public static OntClass MonitorableResource = makeClass(Vocabulary.MonitorableResource);
-	public static OntClass StatisticalDataAnalyzer = makeClass(Vocabulary.StatisticalDataAnalyzer);
-	public static OntClass DataCollector = makeClass(Vocabulary.DataCollector);
-	public static OntClass Parameter = makeClass(Vocabulary.Parameter);
-	public static OntClass MonitoringDatum = makeClass(Vocabulary.MonitoringDatum);
-	public static OntClass SDAFactory = makeClass(Vocabulary.SDAFactory);
-	public static OntClass DCFactory = makeClass(Vocabulary.DCFactory);
-
-	public static Property aboutResource = makeProperty(Vocabulary.aboutResource);
-	public static Property parameter = makeProperty(Vocabulary.parameter);
-	public static Property targetResource = makeProperty(Vocabulary.targetResource);
-	public static Property instantiatedDC = makeProperty(Vocabulary.instantiatedDC);
-	public static Property instantiatedSDA = makeProperty(Vocabulary.instantiatedSDA);
-	public static Property metric = makeProperty(Vocabulary.metric);
-	public static Property value = makeProperty(Vocabulary.value);
-	public static Property timestamp = makeProperty(Vocabulary.timestamp);
-	public static Property period = makeProperty(Vocabulary.period);
-	public static Property method = makeProperty(Vocabulary.method);
-	public static Property returnedMetric = makeProperty(Vocabulary.returnedMetric);
-	public static Property targetMetric = makeProperty(Vocabulary.targetMetric);
-	public static Property started = makeProperty(Vocabulary.started);
-	public static Property enabled = makeProperty(Vocabulary.enabled);
-	public static Property collectedMetric = makeProperty(Vocabulary.collectedMetric);
-	public static Property dataCollector = makeProperty(Vocabulary.dataCollector);
+	public static OntClass Resource = makeClass(Vocabulary.Resource);
 	
 
 	static {
@@ -88,25 +57,11 @@ public class MO {
 		ExternalComponent.addProperty(RDFS.subClassOf, Component);
 		VM.addProperty(RDFS.subClassOf, ExternalComponent);
 		PaaSService.addProperty(RDFS.subClassOf, ExternalComponent);
-		VM.addProperty(location, Location);
-		Location.addProperty(location, Location);
-		Component.addProperty(RDFS.subClassOf, MonitorableResource);
-		MonitoringDatum.addProperty(aboutResource, MonitorableResource);
-		MonitoringDatum.addProperty(dataCollector, DataCollector);
-		InternalComponent.addProperty(requiredComponent, Component);
+		Component.addProperty(RDFS.subClassOf, Resource);
 		InternalComponent.addProperty(RDFS.subClassOf, Component);
-		InternalComponent.addProperty(providedMethod, Method);
-		Method.addProperty(calledMethod, Method);
-		Method.addProperty(RDFS.subClassOf, MonitorableResource);
-		MonitoringComponent.addProperty(RDFS.subClassOf, InternalComponent);
-		SDAFactory.addProperty(RDFS.subClassOf, MonitoringComponent);
-		DCFactory.addProperty(RDFS.subClassOf, MonitoringComponent);
-		SDAFactory.addProperty(instantiatedSDA, StatisticalDataAnalyzer);
-		StatisticalDataAnalyzer.addProperty(targetResource, MonitorableResource);
-		StatisticalDataAnalyzer.addProperty(parameter, Parameter);
-		DCFactory.addProperty(instantiatedDC, DataCollector);
-		DataCollector.addProperty(targetResource, MonitorableResource);
-		DataCollector.addProperty(parameter, Parameter);
+		Method.addProperty(RDFS.subClassOf, Resource);
+		CloudProvider.addProperty(RDFS.subClassOf, Resource);
+		Location.addProperty(RDFS.subClassOf, Resource);
 	}
 
 	private static Property makeProperty(String string) {
@@ -117,26 +72,7 @@ public class MO {
 		return model.createClass(URI + string);
 	}
 
-    public static String getKnowledgeBaseURL() {
-        return knowledgeBaseURL;
-    }
     
-    public static void setKnowledgeBaseURL(URL url) {
-    	knowledgeBaseURL = url.toString() + kbURLSuffix;
-    }
-    
-    public static String getKnowledgeBaseDataURL() {
-        return knowledgeBaseURL + "/data";
-    }
-
-	public static String getKnowledgeBaseUpdateURL() {
-		return knowledgeBaseURL + "/update";
-	}
-	
-	public static String getKnowledgeBaseQueryURL() {
-		return knowledgeBaseURL + "/query";
-	}
-
 	public static String shortForm(Property property) {
 		return prefix+":"+property.getLocalName();
 	}

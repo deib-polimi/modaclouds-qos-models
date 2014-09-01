@@ -19,37 +19,35 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InternalComponent extends Component{
+public class InternalComponent extends Component {
+	
+	private Set<String> requiredComponents = new HashSet<String>();
+	private Set<String> providedMethods = new HashSet<String>();
+	
+	
 
-	private Set<Component> requiredComponents;
-	private Set<Method> providedMethods;
-
-	public Set<Component> getRequiredComponents() {
-		return requiredComponents;
-	}
-
-	public void setRequiredComponents(Set<Component> requiredComponents) {
-		this.requiredComponents = requiredComponents;
-	}
-
-	public Set<Method> getProvidedMethods() {
-		return providedMethods;
-	}
-
-	public void setProvidedMethods(Set<Method> providedMethods) {
-		this.providedMethods = providedMethods;
-	}
-
-	public void addRequiredComponent(Component component) {
-		if (requiredComponents == null)
-			requiredComponents = new HashSet<Component>();
+	public void addRequiredComponent(String component) {
 		requiredComponents.add(component);
 	}
 
-	public void addProvidedMethod(Method method) {
-		if (providedMethods == null)
-			providedMethods = new HashSet<Method>();
+	public void addProvidedMethod(String method) {
 		providedMethods.add(method);
+	}
+
+	public Set<String> getRequiredComponents() {
+		return requiredComponents;
+	}
+
+	public void setRequiredComponents(Set<String> requiredComponents) {
+		this.requiredComponents = requiredComponents;
+	}
+
+	public Set<String> getProvidedMethods() {
+		return providedMethods;
+	}
+
+	public void setProvidedMethods(Set<String> providedMethods) {
+		this.providedMethods = providedMethods;
 	}
 
 	@Override
@@ -86,6 +84,14 @@ public class InternalComponent extends Component{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "InternalComponent [requiredComponents=" + requiredComponents
+				+ ", providedMethods=" + providedMethods + ", getType()="
+				+ getType() + ", getId()=" + getId() + "]";
+	}
+	
 	
 
 	

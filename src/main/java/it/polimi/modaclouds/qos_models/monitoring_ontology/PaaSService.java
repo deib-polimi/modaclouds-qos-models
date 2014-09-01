@@ -16,6 +16,13 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+
 public class PaaSService extends ExternalComponent {
+
+	@Override
+	public String toString() {
+		return "PaaSService [getCloudProvider()=" + getCloudProvider()
+				+ ", getType()=" + getType() + ", getId()=" + getId() + "]";
+	}
 
 }

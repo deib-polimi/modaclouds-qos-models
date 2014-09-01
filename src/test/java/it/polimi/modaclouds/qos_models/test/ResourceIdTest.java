@@ -14,12 +14,27 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package it.polimi.modaclouds.qos_models.monitoring_ontology;
+package it.polimi.modaclouds.qos_models.test;
 
+import static org.junit.Assert.fail;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.Resource;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.Vocabulary;
 
-public class MonitoringComponent extends InternalComponent {
-	
-	
-	
+import org.apache.commons.beanutils.BeanUtils;
+import org.junit.Test;
+
+public class ResourceIdTest {
+
+	@Test
+	public void test() {
+		
+		try {
+			BeanUtils.getProperty(new Resource(), Vocabulary.resourceIdParameterName);
+		} catch (Exception e) {
+			System.out.println("Vacabulary is not aligned with Resource");
+			fail();
+		}
+		
+	}
 
 }

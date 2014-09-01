@@ -20,10 +20,18 @@
 <metrics xmlns="http://www.modaclouds.eu/xsd/1.0/metrics_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema
-	../commons/metrics_schema.xsd">
+	../../../metamodels/commons/metrics_schema.xsd">
 	<metric name="CPUUtilization">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+	</metric>
+	<metric name="Availability">
+		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
+		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+		<requiredParameter defaultValue="app">type</requiredParameter>
+		<requiredParameter defaultValue="3">retryPeriod</requiredParameter>
+		<requiredParameter defaultValue="http://109.231.122.88:8080/ecommerce">publicIP</requiredParameter>
+		<requiredParameter defaultValue="/data/log.txt">logFile</requiredParameter>
 	</metric>
 	<metric name="CPUStolen">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
@@ -225,7 +233,7 @@
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>		
-	<metric name="ResponseTime">
+	<metric name="ExecutionTime">
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
 	<metric name="GeneralCost">
@@ -233,7 +241,7 @@
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 		<requiredParameter defaultValue="">accessKey</requiredParameter>
 		<requiredParameter defaultValue="">secretKey</requiredParameter>
-	</metric>		
+	</metric>
 	<metric name="EC2-spotprice">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
@@ -256,7 +264,7 @@
 		<requiredParameter defaultValue="">secretKey</requiredParameter>
 		<requiredParameter defaultValue="costdailyreport">bucket</requiredParameter>
 		<requiredParameter defaultValue="/data/">filePath</requiredParameter>		
-	</metric>	
+	</metric>
 	<metric name="StartupTime">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
@@ -276,12 +284,4 @@
 		<requiredParameter defaultValue="ubuntu">user</requiredParameter>
 		<requiredParameter defaultValue="123456">password</requiredParameter>	
 	</metric>	
-	<metric name="Availability">
-		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
-		<requiredParameter defaultValue="app">type</requiredParameter>
-		<requiredParameter defaultValue="3">retryPeriod</requiredParameter>
-		<requiredParameter defaultValue="http://109.231.122.88:8080/ecommerce">publicIP</requiredParameter>
-		<requiredParameter defaultValue="/data/log.txt">logFile</requiredParameter>	
-	</metric>		
 </metrics>

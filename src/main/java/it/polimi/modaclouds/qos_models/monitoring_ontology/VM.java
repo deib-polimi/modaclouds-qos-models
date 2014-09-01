@@ -16,37 +16,33 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+
 public class VM extends ExternalComponent {
-
-	private int numberOfCpus;
-	private Location location;
-
-	public int getNumberOfCpus() {
-		return numberOfCpus;
+	
+	private int numberOfCPUs;
+	private String location;
+	
+	public int getNumberOfCPUs() {
+		return numberOfCPUs;
 	}
-
-	public void setNumberOfCpus(int numberOfCpus) {
-		this.numberOfCpus = numberOfCpus;
+	public void setNumberOfCPUs(int numberOfCPUs) {
+		this.numberOfCPUs = numberOfCPUs;
 	}
-
-	public Location getLocation() {
+	public String getLocation() {
 		return location;
 	}
-
-	public void setLocation(Location location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((location == null) ? 0 : location.hashCode());
-		result = prime * result + numberOfCpus;
+		result = prime * result + numberOfCPUs;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -61,9 +57,18 @@ public class VM extends ExternalComponent {
 				return false;
 		} else if (!location.equals(other.location))
 			return false;
-		if (numberOfCpus != other.numberOfCpus)
+		if (numberOfCPUs != other.numberOfCPUs)
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "VM [numberOfCPUs=" + numberOfCPUs + ", location=" + location
+				+ ", getCloudProvider()=" + getCloudProvider() + ", getType()="
+				+ getType() + ", getId()=" + getId() + "]";
+	}
+
+	
 
 }
