@@ -1,8 +1,7 @@
 <monitoringRules
 	xmlns="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema
-	https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/monitoringrules/monitoring_rules_schema.xsd">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema">
 	<monitoringRule timeWindow="60" timeStep="60" id="cpuRule">
 		<monitoredTargets>
 			<monitoredTarget class="VM" id="WinVM" />
