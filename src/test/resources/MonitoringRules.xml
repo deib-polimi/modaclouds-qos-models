@@ -18,20 +18,20 @@
 			</action>
 		</actions>
 	</monitoringRule>
-	<monitoringRule timeWindow="30" timeStep="30" id="execTimeRule">
+	<monitoringRule timeWindow="30" timeStep="30" id="respTimeRule">
 		<monitoredTargets>
 			<monitoredTarget class="Method" id="answerQuestions" />
 			<monitoredTarget class="Method" id="saveAnswers" />
 			<monitoredTarget class="Method" id="register" />
 		</monitoredTargets>
-		<collectedMetric metricName="ExecutionTime">
+		<collectedMetric metricName="ResponseTime">
 			<parameter name="samplingProbability">1</parameter>
 		</collectedMetric>
 		<metricAggregation aggregateFunction="Average"
 			groupingClass="Method" />
 		<actions>
 			<action name="OutputMetric">
-				<parameter name="name">AverageExecTime</parameter>
+				<parameter name="name">AverageRespTime</parameter>
 			</action>
 		</actions>
 	</monitoringRule>
