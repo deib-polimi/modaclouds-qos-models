@@ -19,6 +19,7 @@ package it.polimi.modaclouds.qos_models.test;
 import it.polimi.modaclouds.qos_models.monitoring_rules.ConfigurationException;
 import it.polimi.modaclouds.qos_models.monitoring_rules.Problem;
 import it.polimi.modaclouds.qos_models.monitoring_rules.Validator;
+import it.polimi.modaclouds.qos_models.schema.Constraints;
 import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
@@ -28,6 +29,7 @@ import java.util.Set;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ValidatorTest {
@@ -35,11 +37,25 @@ public class ValidatorTest {
 	
 
 	@Test
-	public void test() throws JAXBException, ConfigurationException  {
+	public void rulesTest() throws JAXBException, ConfigurationException  {
 		InputStream testRulesStream = getClass().getResourceAsStream("/MonitoringRules.xml");
 		MonitoringRules rules = XMLHelper.deserialize(testRulesStream, MonitoringRules.class);
 		Validator validator = new Validator();
 		Set<Problem> problems = validator.validateAllRules(rules);
+		if (!problems.isEmpty()) {
+			for (Problem problem : problems) {
+				System.out.println(problem.toString());
+			}
+			fail();
+		}
+	}
+	
+	@Test
+	public void constraintsTest() throws JAXBException, ConfigurationException  {
+		InputStream testRulesStream = getClass().getResourceAsStream("/constraints.xml");
+		Constraints constraints = XMLHelper.deserialize(testRulesStream, Constraints.class);
+		Validator validator = new Validator();
+		Set<Problem> problems = validator.validateAllConstraints(constraints);
 		if (!problems.isEmpty()) {
 			for (Problem problem : problems) {
 				System.out.println(problem.toString());

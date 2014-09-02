@@ -555,6 +555,10 @@ public class Validator {
 
 
 	private boolean softEquals(String name1, String name2) {
+		if (name1 == null && name2 == null)
+			return true;
+		if (name1 == null || name2 == null)
+			return false;
 		return name1.toLowerCase().equals(name2.toLowerCase());
 	}
 

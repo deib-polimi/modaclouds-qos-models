@@ -23,6 +23,7 @@
 
 	<constraint id="a1" name="Tier1Util">
 		<targetResourceIDRef>_W057YAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>VM</targetClass>
 		<metric>CPUUtilization</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -33,6 +34,7 @@
 
 	<constraint id="a2" name="Tier2Util">
 		<targetResourceIDRef>_W6tBYAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>VM</targetClass>
 		<metric>CPUUtilization</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -43,6 +45,7 @@
 
 	<constraint id="a4" name="Tier1RAM">
 		<targetResourceIDRef>_W057YAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>VM</targetClass>
 		<metric>RAM</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -54,6 +57,7 @@
 
 	<constraint id="c1" name="function1RT">
 		<targetResourceIDRef>_Cbw_YAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>Method</targetClass>
 		<metric>ResponseTime</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -64,6 +68,7 @@
 
 	<constraint id="c2" name="function2RT">
 		<targetResourceIDRef>_Cb2e8AwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>Method</targetClass>
 		<metric>ResponseTime</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -73,6 +78,7 @@
 
 	<constraint id="c3" name="function3RT">
 		<targetResourceIDRef>_Cb4UIAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>Method</targetClass>
 		<metric>ResponseTime</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -82,6 +88,7 @@
 
 	<constraint id="c4" name="function1RTperc">
 		<targetResourceIDRef>_Cbw_YAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>Method</targetClass>
 		<metric>ResponseTime</metric>
 		<metricAggregation aggregateFunction="Percentile">
 			<parameter name="thPercentile">65</parameter>
@@ -94,6 +101,7 @@
 
 	<constraint id="c5" name="fontEndCompRT">
 		<targetResourceIDRef>_BLVSQAwmEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>Method</targetClass>
 		<metric>ResponseTime</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
@@ -103,6 +111,7 @@
 
 	<constraint id="a6" name="Tier2Replicas">
 		<targetResourceIDRef>_W6tBYAwpEeSMaZkt-OKzxA</targetResourceIDRef>
+		<targetClass>VM</targetClass>
 		<metric>Replication</metric>
 		<metricAggregation aggregateFunction="Average" />
 		<range>
