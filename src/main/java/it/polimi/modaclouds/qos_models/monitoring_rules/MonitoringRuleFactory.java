@@ -49,40 +49,55 @@ public class MonitoringRuleFactory {
 		config = Config.getInstance();
 	}
 
+	/**
+	 * 
+	 * @param qosConstraints
+	 * @return all monitoring rules that can be built from the constraints
+	 */
 	public MonitoringRules makeRulesFromQoSConstraints(
 			Constraints qosConstraints) {
 		MonitoringRules rules = new MonitoringRules();
 		for (Constraint c : qosConstraints.getConstraints()) {
-			try {
-				rules.getMonitoringRules().add(makeRuleFromConstraint(c));
-			} catch (Exception e) {
-				logger.warn(
-						"Constraint {} could not be translated to a monitoring rule: {}",
-						c.getId(), e.getMessage());
-			}
+			MonitoringRule rule = makeRuleFromConstraint(c);
+			if (rule != null)
+				rules.getMonitoringRules().add(rule);
 		}
 		return rules;
 	}
 
+	/**
+	 * 
+	 * @param qosConstraint
+	 * @param ruleID
+	 * @return the monitoring rule built from the constraint, {@code null} if no
+	 *         monitoring rule can be constructed from the constraint
+	 */
 	public MonitoringRule makeRuleFromConstraint(Constraint qosConstraint,
-			String ruleID) throws ValidationException {
+			String ruleID) {
 		MonitoringRule monitoringRule = new MonitoringRule();
 		monitoringRule.setId(ruleID);
 		monitoringRule.setRelatedQosConstraintId(qosConstraint.getId());
 		monitoringRule.setTimeStep("60");
 		monitoringRule.setTimeWindow("60");
-
 		CollectedMetric collectedMetric = makeCollectedMetric(qosConstraint);
-		if (collectedMetric == null)
-			throw new ValidationException(qosConstraint.getMetric()
-					+ " is not a valid monitoring metric");
+		if (collectedMetric == null) {
+			logger.warn(
+					"Constraint {} could not be translated to a monitoring rule: "
+							+ "{} is not a valid monitoring metric",
+					qosConstraint.getId(), qosConstraint.getMetric());
+			return null;
+		}
 		monitoringRule.setCollectedMetric(collectedMetric);
 
 		MonitoringMetricAggregation monitoringMetricAggregation = makeMetricAggregation(qosConstraint);
-		if (monitoringMetricAggregation == null)
-			throw new ValidationException(qosConstraint.getMetricAggregation()
-					.getAggregateFunction()
-					+ " is not a valid aggregate function");
+		if (monitoringMetricAggregation == null) {
+			logger.warn(
+					"Constraint {} could not be translated to a monitoring rule: "
+							+ "{} is not a valid aggregate function",
+					qosConstraint.getId(), qosConstraint.getMetricAggregation()
+							.getAggregateFunction());
+			return null;
+		}
 		monitoringRule.setMetricAggregation(monitoringMetricAggregation);
 
 		MonitoredTargets targets = new MonitoredTargets();
@@ -207,8 +222,13 @@ public class MonitoringRuleFactory {
 		return parameters;
 	}
 
-	public MonitoringRule makeRuleFromConstraint(Constraint relatedConstraint)
-			throws ValidationException {
+	/**
+	 * 
+	 * @param relatedConstraint
+	 * @return the monitoring rule built from the constraint, {@code null} if no
+	 *         monitoring rule can be constructed from the constraint
+	 */
+	public MonitoringRule makeRuleFromConstraint(Constraint relatedConstraint) {
 		return makeRuleFromConstraint(relatedConstraint, UUID.randomUUID()
 				.toString());
 	}
