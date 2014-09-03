@@ -18,7 +18,7 @@ package it.polimi.modaclouds.qos_models.test;
 
 import static org.junit.Assert.fail;
 import it.polimi.modaclouds.qos_models.monitoring_ontology.Resource;
-import it.polimi.modaclouds.qos_models.monitoring_ontology.Vocabulary;
+import it.polimi.modaclouds.qos_models.monitoring_ontology.MOVocabulary;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class ResourceIdTest {
 	public void test() {
 		
 		try {
-			BeanUtils.getProperty(new Resource(), Vocabulary.resourceIdParameterName);
+			BeanUtils.getProperty(new Resource(), MOVocabulary.resourceIdParameterName);
 		} catch (Exception e) {
 			System.out.println("Vacabulary is not aligned with Resource");
 			fail();

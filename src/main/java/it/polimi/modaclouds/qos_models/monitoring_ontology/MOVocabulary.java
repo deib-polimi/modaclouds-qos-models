@@ -16,10 +16,11 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
-public class Vocabulary {
+public class MOVocabulary {
 
-    
-	 public static final String Resource = "Resource";
+    public static final String MODEL_GRAPH_NAME="model";
+	
+	public static final String Resource = "Resource";
 	public static final String CloudProvider = "CloudProvider";
     public static final String Component = "Component";
     public static final String ExternalComponent = "ExternalComponent";

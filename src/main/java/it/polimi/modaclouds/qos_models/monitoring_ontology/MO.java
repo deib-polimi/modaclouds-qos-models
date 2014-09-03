@@ -31,25 +31,25 @@ public class MO {
 
 	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
 	
-	public static OntClass Component = makeClass(Vocabulary.Component);
-	public static OntClass CloudProvider = makeClass(Vocabulary.CloudProvider);
-	public static OntClass VM = makeClass(Vocabulary.VM);
-	public static OntClass PaaSService = makeClass(Vocabulary.PaaSService);
-	public static OntClass Location = makeClass(Vocabulary.Location);
-	public static OntClass InternalComponent = makeClass(Vocabulary.InternalComponent);
-	public static OntClass ExternalComponent = makeClass(Vocabulary.ExternalComponent);
-	public static OntClass Method = makeClass(Vocabulary.Method);
+	public static OntClass Component = makeClass(MOVocabulary.Component);
+	public static OntClass CloudProvider = makeClass(MOVocabulary.CloudProvider);
+	public static OntClass VM = makeClass(MOVocabulary.VM);
+	public static OntClass PaaSService = makeClass(MOVocabulary.PaaSService);
+	public static OntClass Location = makeClass(MOVocabulary.Location);
+	public static OntClass InternalComponent = makeClass(MOVocabulary.InternalComponent);
+	public static OntClass ExternalComponent = makeClass(MOVocabulary.ExternalComponent);
+	public static OntClass Method = makeClass(MOVocabulary.Method);
 
-	public static Property cloudProvider = makeProperty(Vocabulary.cloudProvider);
-	public static Property requiredComponents = makeProperty(Vocabulary.requiredComponents);
-	public static Property location = makeProperty(Vocabulary.location);
-	public static Property providedMethods = makeProperty(Vocabulary.providedMethods);
-	public static Property name = makeProperty(Vocabulary.name);
-	public static Property type = makeProperty(Vocabulary.type);
-	public static Property id = makeProperty(Vocabulary.id);
-	public static Property numberOfCPUs = makeProperty(Vocabulary.numberOfCPUs);
+	public static Property cloudProvider = makeProperty(MOVocabulary.cloudProvider);
+	public static Property requiredComponents = makeProperty(MOVocabulary.requiredComponents);
+	public static Property location = makeProperty(MOVocabulary.location);
+	public static Property providedMethods = makeProperty(MOVocabulary.providedMethods);
+	public static Property name = makeProperty(MOVocabulary.name);
+	public static Property type = makeProperty(MOVocabulary.type);
+	public static Property id = makeProperty(MOVocabulary.id);
+	public static Property numberOfCPUs = makeProperty(MOVocabulary.numberOfCPUs);
 
-	public static OntClass Resource = makeClass(Vocabulary.Resource);
+	public static OntClass Resource = makeClass(MOVocabulary.Resource);
 	
 
 	static {
