@@ -10,10 +10,12 @@ and monitoring ontology together with their java representation.
 Please refer to deliverable [D6.3.2](http://www.modaclouds.eu/publications/public-deliverables/) 
 to better understand the role of this component in the MODAClouds Monitoring Platform.
 
+Refer to the [Monitoring Platform Wiki](https://github.com/deib-polimi/modaclouds-monitoring-manager/wiki) for installation and usage of the whole platform.
+
 Additional Features:
 - Serialization and deserialization between XML and Java objects.
 - automatic generation of monitoring rules from qos constraints
-- validation of monitoring rules
+- validation of qos-constraints and monitoring rules
 
 ## Documentation
 

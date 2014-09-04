@@ -4,28 +4,16 @@
 
 ## The Monitoring Ontology
 
-The monitoring ontology defines concepts concerning the whole system deployment (cloud provider
-resources hosting the application, the MODAClouds runtime platform, the application) and their relations.
-It is stored and represent the schema of the MODAClouds Knowledge Base (refer to Deliverable 
-[D6.3.2](http://www.modaclouds.eu/publications/public-deliverables/) for details).
+The monitoring ontology defines concepts concerning the system deployment model (cloud provider
+resources hosting the application and the application) and their relations.
 
-Version 1 of the monitoring ontology expressed is formally defined in TURTLE format at the following [link](https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/monitoringontology/monitoring_ontology.ttl).
-Here is a graphical representation:
+Here is a graphical of the ontology representation:
 
 ![monitoring ontology](img/ontology.jpg "Monitoring Ontology").
 
 The ontology has been recently adapted to the ongoing development of [CloudML2.0](http://cloudml.org/)
 which is currently synchronizing with 
-[TOSCA](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca). Here is a short description of main entities:
-- a Component is whatever running artifact that can be located with an URL. 
-The type property is used so to describe the different types of instances 
-(e.g.: FrontendVM, BackendVM) according to the MODACloudsML language;
-- External Components are those components that are offered by the cloud provider;
-- Internal Components are those components that are hosted on external components;
-- Internal components provide Methods which are identified by a path (e.g.: /login);
-- SDA and DC Factories are the artifacts that are responsible of instantiating Statistical 
-Data Analyzers and Data Collectors;
-- both components and methods are Monitorable Components, i.e., they can be monitored by the platform.
+[TOSCA](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca).
 
 ## What is a QoS Constraint?
 
@@ -33,7 +21,7 @@ TODO
 
 ## What is a Monitoring Rule?
 
-A Monitoring Rule specify how incoming data have to be processed, what conditions have to be
+A Monitoring Rule specifies how incoming data have to be processed, what conditions have to be
  verified and what output should be produced by the monitoring platform.
 
 The metamodel of a monitoring rule is formally specified as an XML schema:
@@ -88,10 +76,6 @@ rule executing action *OutputMetric*.
 ### Available Actions
 
 - OutputMetric
-- EnableMonitoringRule
-- DisableMonitoringRule
-- SetSamplingProbability
-- SetSamplingTime
 
 ## Installation
 
@@ -105,18 +89,6 @@ Releases repository:
 	<repository>
         <id>deib-polimi-releases</id>
         <url>https://github.com/deib-polimi/deib-polimi-mvn-repo/raw/master/releases</url>
-	</repository>
-	...
-</repositories>
-```
-
-Snapshots repository:
-```xml
-<repositories>
-	...
-	<repository>
-        <id>deib-polimi-snapshots</id>
-        <url>https://github.com/deib-polimi/deib-polimi-mvn-repo/raw/master/snapshots</url>
 	</repository>
 	...
 </repositories>
