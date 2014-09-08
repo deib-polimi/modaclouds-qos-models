@@ -24,8 +24,7 @@ TODO
 A Monitoring Rule specifies how incoming data have to be processed, what conditions have to be
  verified and what output should be produced by the monitoring platform.
 
-The metamodel of a monitoring rule is formally specified as an XML schema:
-[http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema](https://raw.githubusercontent.com/deib-polimi/modaclouds-qos-models/master/metamodels/monitoringrules/monitoring_rules_schema.xsd).
+The metamodel of a monitoring rule is formally specified as an XML schema, available [here](https://github.com/deib-polimi/modaclouds-qos-models/blob/master/metamodels/monitoringrules/monitoring_rules_schema.xsd).
 
 Here is a graphical representation of the schema:
 
@@ -34,12 +33,10 @@ Here is a graphical representation of the schema:
 Here is a list of the attributes with a short description:
 - *metricName*: the name of the target metric
 - *monitoredTargets*: the list of targets resources targeted by the rule
-- *metricAggregation*: specifies if and how data should be transformed
+- *metricAggregation*: specifies how data should be transformed
 - *timeStep*: time interval in seconds between two consecutive evaluations of the rule
 - *timeWindow*: time range in seconds in which data should be considered to be aggregated at every time step
 - *startEnabled*: specifies whether the rule evaluation should start once installed
-- *samplingTime*: time interval in seconds between two consecutive collections (may be not applicable for some metrics)
-- *samplingProbability*: probability of collecting the metric (used to reduce the monitoring workload, may be not applicable for some metrics)
 - *relatedQosConstraintId*: if specified, identifies the id of the qos constraint from which the rule is generated
 - *parentMonitoringRuleId*: if specified, identifies the id of the parent monitoring rule
 - *condition*: the condition to be evaluated on the aggregated metric or, in case no aggregation is specified, on raw data
@@ -73,10 +70,6 @@ If a condition is specified the action is performed if and only if the condition
 rule executing action *OutputMetric*.
 - parentCondition can be used only if the monitoring rule whose condition is under evaluation has a parent rule
 
-### Available Actions
-
-- OutputMetric
-
 ## Installation
 
 You can download the jar from https://github.com/deib-polimi/modaclouds-qos-models/releases.
@@ -84,14 +77,10 @@ The project is also deployed on our Maven Repo.
 
 Releases repository:
 ```xml
-<repositories>
-	...
-	<repository>
-        <id>deib-polimi-releases</id>
-        <url>https://github.com/deib-polimi/deib-polimi-mvn-repo/raw/master/releases</url>
-	</repository>
-	...
-</repositories>
+<repository>
+	<id>deib-polimi-releases</id>
+	<url>https://github.com/deib-polimi/deib-polimi-mvn-repo/raw/master/releases</url>
+</repository>
 ```
 
 Dependency:
