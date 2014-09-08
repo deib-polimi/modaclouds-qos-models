@@ -30,6 +30,7 @@
 		</collectedMetric>
 		<metricAggregation aggregateFunction="Average"
 			groupingClass="VM" />
+		<condition>METRIC &gt;= 0.5</condition>
 		<actions>
 			<action name="OutputMetric">
 				<parameter name="name">FrontendCPUUtilization</parameter>
