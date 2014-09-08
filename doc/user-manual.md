@@ -70,6 +70,10 @@ If a condition is specified the action is performed if and only if the condition
 rule executing action *OutputMetric*.
 - parentCondition can be used only if the monitoring rule whose condition is under evaluation has a parent rule
 
+## Examples
+
+Examples of monitoring rules are available at [this link](https://github.com/deib-polimi/modaclouds-qos-models/blob/master/metamodels/examples/MonitoringRules.xml).
+
 ## Installation
 
 You can download the jar from https://github.com/deib-polimi/modaclouds-qos-models/releases.
