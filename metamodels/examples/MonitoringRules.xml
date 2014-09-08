@@ -19,7 +19,7 @@
 <monitoringRules
 	xmlns="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema ../monitoringrules/monitoring_rules_schema.xsd">
 	<monitoringRule timeWindow="30" timeStep="30" id="cpuRule">
 		<monitoredTargets>
 			<monitoredTarget class="VM" id="Frontend" />
