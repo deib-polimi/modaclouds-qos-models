@@ -21,8 +21,7 @@ TODO
 
 ## What is a Monitoring Rule?
 
-A Monitoring Rule specifies how incoming data have to be processed, what conditions have to be
- verified and what output should be produced by the monitoring platform.
+Monitoring rules are "recipes" that describe what and how the monitoring platform should monitor and how monitoring data should be aggregated. The user can also specify actions to be performed and conditions under which actions should be performed.
 
 The metamodel of a monitoring rule is formally specified as an XML schema, available [here](https://github.com/deib-polimi/modaclouds-qos-models/blob/master/metamodels/monitoringrules/monitoring_rules_schema.xsd).
 
