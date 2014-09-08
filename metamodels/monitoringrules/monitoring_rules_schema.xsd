@@ -138,15 +138,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="targetRuleID" type="xs:string" use="optional">
-			<!-- <xs:annotation>
-				<xs:appinfo>
-					<jaxb:property name="targetRule">
-						<jaxb:baseType name="MonitoringRule"/>
-					</jaxb:property>
-				</xs:appinfo>
-			</xs:annotation> -->
-		</xs:attribute>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 	</xs:complexType>
 </xs:schema>
