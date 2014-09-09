@@ -25,8 +25,8 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 v2.1.4:
 
-* monitoredTarget in monitoring rules had "id" renamed to "type" because of its ambiguity. From now on:
+* monitoredTarget in monitoring rules had "id" renamed to "type" because of its ambiguity. Look at the available examples. From now on:
   * "class" specify the resource according to the [ontology](https://github.com/deib-polimi/modaclouds-qos-models/blob/master/doc/user-manual.md#the-monitoring-ontology)
   * "type" is the name assigned to a resource during the design phase, univocally identifying the role of the resource
-  * "id" (currently not available in monitoring rules) is the unique identifier of a deployed instance
+  * "id" is the unique identifier of a deployed instance, currently used only in the deployment model
 * installation instructions updated (look at the documentation)
