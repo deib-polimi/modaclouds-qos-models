@@ -76,8 +76,20 @@ Examples of monitoring rules are available at [this link](https://github.com/dei
 
 ## Installation
 
-You can download the jar from https://github.com/deib-polimi/modaclouds-qos-models/releases.
-The project is also deployed on our Maven Repo.
+If you need the jar-with-dependencies run:
+
+```
+mvn package assembly:single
+```
+
+If you need to run the batch tool, build the jar-with-dependencies and then run:
+
+```
+java -cp qos-models-2.1.3-jar-with-dependencies.jar it.polimi.modaclouds.qos_models.batch.BatchTool
+```
+
+
+If you need to add qos-models as a maven dependency, here is the repo:
 
 Releases repository:
 ```xml

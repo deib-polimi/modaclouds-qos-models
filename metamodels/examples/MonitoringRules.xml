@@ -22,7 +22,7 @@
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/monitoring_rules_schema ../monitoringrules/monitoring_rules_schema.xsd">
 	<monitoringRule timeWindow="30" timeStep="30" id="cpuRule">
 		<monitoredTargets>
-			<monitoredTarget class="VM" id="Frontend" />
+			<monitoredTarget class="VM" type="Frontend" />
 		</monitoredTargets>
 		<collectedMetric metricName="CpuUtilization">
 			<parameter name="samplingProbability">1</parameter>
@@ -39,9 +39,9 @@
 	</monitoringRule>
 	<monitoringRule timeWindow="30" timeStep="30" id="respTimeRule">
 		<monitoredTargets>
-			<monitoredTarget class="Method" id="answerQuestions" />
-			<monitoredTarget class="Method" id="saveAnswers" />
-			<monitoredTarget class="Method" id="register" />
+			<monitoredTarget class="Method" type="answerQuestions" />
+			<monitoredTarget class="Method" type="saveAnswers" />
+			<monitoredTarget class="Method" type="register" />
 		</monitoredTargets>
 		<collectedMetric metricName="ResponseTime">
 			<parameter name="samplingProbability">1</parameter>

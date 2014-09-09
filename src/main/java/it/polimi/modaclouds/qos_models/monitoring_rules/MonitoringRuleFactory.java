@@ -102,7 +102,7 @@ public class MonitoringRuleFactory {
 
 		MonitoredTargets targets = new MonitoredTargets();
 		MonitoredTarget target = new MonitoredTarget();
-		target.setId(qosConstraint.getTargetResourceIDRef());
+		target.setType(qosConstraint.getTargetResourceIDRef());
 		target.setClazz(qosConstraint.getTargetClass());
 		targets.getMonitoredTargets().add(target);
 		monitoringRule.setMonitoredTargets(targets);
