@@ -4,12 +4,11 @@
 
 ## The Monitoring Ontology
 
-The monitoring ontology defines concepts concerning the system deployment model (cloud provider
-resources hosting the application and the application) and their relations.
+The monitoring ontology defines concepts concerning the system deployment model and their relations.
 
-Here is a graphical of the ontology representation:
+Here is a graphical representation of the ontology:
 
-![monitoring ontology](img/ontology.jpg "Monitoring Ontology").
+![monitoring ontology](img/ontology.jpg "Monitoring Ontology")
 
 The ontology has been recently adapted to the ongoing development of [CloudML2.0](http://cloudml.org/)
 which is currently synchronizing with 
