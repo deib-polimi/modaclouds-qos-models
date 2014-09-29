@@ -32,7 +32,7 @@ public class MOVocabulary {
     
     public static final String cloudProvider = "cloudProvider";
     public static final String requiredComponents = "requiredComponents";
-    public static final String providedMethods = "providedMethods";
+    public static final String requiredInternalComponent = "requiredInternalComponent";
     public static final String location = "location";
     public static final String name = "name";
     public static final String numberOfCPUs = "numberOfCPUs";

@@ -43,7 +43,7 @@ public class MO {
 	public static Property cloudProvider = makeProperty(MOVocabulary.cloudProvider);
 	public static Property requiredComponents = makeProperty(MOVocabulary.requiredComponents);
 	public static Property location = makeProperty(MOVocabulary.location);
-	public static Property providedMethods = makeProperty(MOVocabulary.providedMethods);
+	public static Property requiredInternalComponent = makeProperty(MOVocabulary.requiredInternalComponent);
 	public static Property name = makeProperty(MOVocabulary.name);
 	public static Property type = makeProperty(MOVocabulary.type);
 	public static Property id = makeProperty(MOVocabulary.id);

@@ -22,17 +22,16 @@ import java.util.Set;
 public class InternalComponent extends Component {
 	
 	private Set<String> requiredComponents = new HashSet<String>();
-	private Set<String> providedMethods = new HashSet<String>();
-	
+	//private Set<String> providedMethods = new HashSet<String>();
 	
 
 	public void addRequiredComponent(String component) {
 		requiredComponents.add(component);
 	}
 
-	public void addProvidedMethod(String method) {
-		providedMethods.add(method);
-	}
+	//public void addProvidedMethod(String method) {
+		//providedMethods.add(method);
+	//}
 
 	public Set<String> getRequiredComponents() {
 		return requiredComponents;
@@ -42,20 +41,20 @@ public class InternalComponent extends Component {
 		this.requiredComponents = requiredComponents;
 	}
 
-	public Set<String> getProvidedMethods() {
-		return providedMethods;
-	}
+	//public Set<String> getProvidedMethods() {
+	//	return providedMethods;
+	//}
 
-	public void setProvidedMethods(Set<String> providedMethods) {
-		this.providedMethods = providedMethods;
-	}
+	//public void setProvidedMethods(Set<String> providedMethods) {
+	//	this.providedMethods = providedMethods;
+	//}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((providedMethods == null) ? 0 : providedMethods.hashCode());
+		//result = prime * result
+			//	+ ((providedMethods == null) ? 0 : providedMethods.hashCode());
 		result = prime
 				* result
 				+ ((requiredComponents == null) ? 0 : requiredComponents
@@ -72,11 +71,12 @@ public class InternalComponent extends Component {
 		if (getClass() != obj.getClass())
 			return false;
 		InternalComponent other = (InternalComponent) obj;
-		if (providedMethods == null) {
-			if (other.providedMethods != null)
-				return false;
-		} else if (!providedMethods.equals(other.providedMethods))
-			return false;
+		//if (providedMethods == null) {
+		//	if (other.providedMethods != null)
+		//		return false;
+		//}
+	//if (!providedMethods.equals(other.providedMethods))
+		//	return false;
 		if (requiredComponents == null) {
 			if (other.requiredComponents != null)
 				return false;
@@ -88,7 +88,7 @@ public class InternalComponent extends Component {
 	@Override
 	public String toString() {
 		return "InternalComponent [requiredComponents=" + requiredComponents
-				+ ", providedMethods=" + providedMethods + ", getType()="
+				+ ", getType()="
 				+ getType() + ", getId()=" + getId() + "]";
 	}
 	
