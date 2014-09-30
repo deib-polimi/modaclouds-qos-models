@@ -36,7 +36,6 @@ Here is a list of the attributes with a short description:
 - *timeWindow*: time range in seconds in which data should be considered to be aggregated at every time step
 - *startEnabled*: specifies whether the rule evaluation should start once installed
 - *relatedQosConstraintId*: if specified, identifies the id of the qos constraint from which the rule is generated
-- *parentMonitoringRuleId*: if specified, identifies the id of the parent monitoring rule
 - *condition*: the condition to be evaluated on the aggregated metric or, in case no aggregation is specified, on raw data
 - *actions*: the list of actions to be executed for each monitoring datum (produced by aggregation or raw datum).
 If a condition is specified the action is performed if and only if the condition is verified.
@@ -55,7 +54,6 @@ If a condition is specified the action is performed if and only if the condition
 <atom> ::= <var> <operator> <var> 
 		| `maxOccurrence(' <metric_id> `,' <int> `)'
 		| `minOccurrence(' <metric_id> `,' <int> `)'
-		| `parentCondition'
 		
 <var> ::= `METRIC' | <decimal>
 
@@ -66,7 +64,6 @@ If a condition is specified the action is performed if and only if the condition
 
 - <metric_id> in maxOccurrence and minOccurrence must refer to a *returnedMetric* of an existing monitoring
 rule executing action *OutputMetric*.
-- parentCondition can be used only if the monitoring rule whose condition is under evaluation has a parent rule
 
 ## Examples
 
