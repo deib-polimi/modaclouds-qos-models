@@ -74,7 +74,7 @@
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="monitoredTarget">
-		<xs:attribute name="type" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="xs:string" use="optional"/>
 		<xs:attribute name="class" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="collectedMetric">
