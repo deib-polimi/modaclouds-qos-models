@@ -74,7 +74,7 @@ public class Validator {
 				otherRules.add(previousRule);
 			otherRules.remove(rule);
 
-			problems.addAll(validateParentRequired(rule));
+//			problems.addAll(validateParentRequired(rule));
 			problems.addAll(validateMissingFields(rule));
 			problems.addAll(validateMonitoredTargets(rule));
 			problems.addAll(validateCollectedMetric(rule, otherRules));
@@ -194,8 +194,8 @@ public class Validator {
 
 	private Set<Problem> validateMissingFields(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
-		if (rule.getParentMonitoringRuleId() != null)
-			return problems;
+//		if (rule.getParentMonitoringRuleId() != null)
+//			return problems;
 		if (rule.getTimeStep() == null)
 			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
 					"timeStep"));
@@ -205,28 +205,28 @@ public class Validator {
 		return problems;
 	}
 
-	private Set<Problem> validateParentRequired(MonitoringRule rule) {
-		Set<Problem> problems = new HashSet<Problem>();
-		if (rule.getParentMonitoringRuleId() != null)
-			return problems;
-		if (rule.getCollectedMetric().isInherited())
-			problems.add(new Problem(rule.getId(),
-					EnumErrorType.MISSING_REQUIRED_PARENT, "collectedMetric"));
-		if (rule.getCondition() != null && rule.getCondition().isInherited())
-			problems.add(new Problem(rule.getId(),
-					EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
-		if (rule.getMetricAggregation() != null
-				&& rule.getMetricAggregation().isInherited())
-			problems.add(new Problem(rule.getId(),
-					EnumErrorType.MISSING_REQUIRED_PARENT, "metricAggregation"));
-		if (rule.getActions().isInherited())
-			problems.add(new Problem(rule.getId(),
-					EnumErrorType.MISSING_REQUIRED_PARENT, "actions"));
-		if (rule.getMonitoredTargets().isInherited())
-			problems.add(new Problem(rule.getId(),
-					EnumErrorType.MISSING_REQUIRED_PARENT, "monitoredTargets"));
-		return problems;
-	}
+//	private Set<Problem> validateParentRequired(MonitoringRule rule) {
+//		Set<Problem> problems = new HashSet<Problem>();
+//		if (rule.getParentMonitoringRuleId() != null)
+//			return problems;
+//		if (rule.getCollectedMetric().isInherited())
+//			problems.add(new Problem(rule.getId(),
+//					EnumErrorType.MISSING_REQUIRED_PARENT, "collectedMetric"));
+//		if (rule.getCondition() != null && rule.getCondition().isInherited())
+//			problems.add(new Problem(rule.getId(),
+//					EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
+//		if (rule.getMetricAggregation() != null
+//				&& rule.getMetricAggregation().isInherited())
+//			problems.add(new Problem(rule.getId(),
+//					EnumErrorType.MISSING_REQUIRED_PARENT, "metricAggregation"));
+//		if (rule.getActions().isInherited())
+//			problems.add(new Problem(rule.getId(),
+//					EnumErrorType.MISSING_REQUIRED_PARENT, "actions"));
+//		if (rule.getMonitoredTargets().isInherited())
+//			problems.add(new Problem(rule.getId(),
+//					EnumErrorType.MISSING_REQUIRED_PARENT, "monitoredTargets"));
+//		return problems;
+//	}
 
 	private Set<Problem> validateMetricAggregation(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
@@ -526,11 +526,11 @@ public class Validator {
 		} else {
 			String occurenceMR_ID;
 			switch (tree.getText()) {
-			case "parentCondition":
-				if (rule.getParentMonitoringRuleId() == null)
-					problems.add(new Problem(rule.getId(),
-							EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
-				break;
+//			case "parentCondition":
+//				if (rule.getParentMonitoringRuleId() == null)
+//					problems.add(new Problem(rule.getId(),
+//							EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
+//				break;
 			case "maxOccurrence":
 			case "minOccurrence":
 				occurenceMR_ID = tree.getParent().getChild(2).getText();

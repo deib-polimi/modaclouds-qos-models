@@ -47,15 +47,6 @@
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="label" type="xs:string"/>
 		<xs:attribute name="relatedQosConstraintId" type="xs:string"/>
-		<xs:attribute name="parentMonitoringRuleId" type="xs:string">
-			<!-- <xs:annotation>
-				<xs:appinfo>
-					<jaxb:property name="parentMonitoringRule">
-						<jaxb:baseType name="MonitoringRule"/>
-					</jaxb:property>
-				</xs:appinfo>
-			</xs:annotation> -->
-		</xs:attribute>
 		<xs:attribute name="startEnabled" type="xs:boolean"/>
 		<xs:attribute name="timeStep" type="xs:string"/>
 		<xs:attribute name="timeWindow" type="xs:string"/>
@@ -76,13 +67,10 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="condition">
 		<xs:simpleContent>
-			<xs:extension base="xs:string">
-				<xs:attribute name="inherited" type="xs:boolean" default="false"/>
-			</xs:extension>
+			<xs:extension base="xs:string"/>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="monitoredTarget">
@@ -99,7 +87,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="metricName" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="monitoringMetricAggregation">
@@ -112,7 +99,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="groupingClass" type="xs:string"/>
 		<xs:attribute name="aggregateFunction" type="xs:string"/>
 	</xs:complexType>
@@ -126,7 +112,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="action">
 		<xs:sequence>

@@ -22,19 +22,20 @@
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/metrics_schema
 	../../../metamodels/commons/metrics_schema.xsd">
 	<metric name="CPUUtilization">
-		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+		<requiredParameter defaultValue="60">samplingTime</requiredParameter>
 	</metric>
 	<metric name="ResponseTime">
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
-	<metric name="Availability">
-		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
-		<requiredParameter defaultValue="app">type</requiredParameter>
-		<requiredParameter defaultValue="3">retryPeriod</requiredParameter>
-		<requiredParameter defaultValue="http://109.231.122.88:8080/ecommerce">publicIP</requiredParameter>
-		<requiredParameter defaultValue="/data/log.txt">logFile</requiredParameter>
+	<metric name="AppAvailable">
+		<requiredParameter defaultValue="60">samplingTime</requiredParameter>
+		<requiredParameter defaultValue="5">retryPeriod</requiredParameter>
+		<requiredParameter defaultValue="0">retryTimes</requiredParameter>
+		<requiredParameter defaultValue="8080">port</requiredParameter>
+		<requiredParameter defaultValue="/index.html">path</requiredParameter>
+	</metric>
+	<metric name="VMAvailable">
+		<requiredParameter defaultValue="60">samplingTime</requiredParameter>
 	</metric>
 	<metric name="CPUStolen">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>

@@ -29,6 +29,8 @@
 	</aggregateFunction>
 	<aggregateFunction name="Max" computedBy="DDA">
 	</aggregateFunction>
+	<aggregateFunction name="Sum" computedBy="DDA">
+	</aggregateFunction>
 	<aggregateFunction name="Min" computedBy="DDA">
 	</aggregateFunction>
 	<aggregateFunction name="ForecastingTimeSeriesAR"
