@@ -18,28 +18,28 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class Method extends Resource {
 	
-	private String requiredInternalComponent;
+	private String providedBy;
 
 		public Method() {
 	}
 
 	public Method(String applicationId, String methodType) {
 		setId(applicationId + "-" + methodType);
-		setRequiredInternalComponent(applicationId);
+		setProvidedBy(applicationId);
 		setType(methodType);
 	}
 
-	public void setRequiredInternalComponent(String requiredInternalComponent) {
-		this.requiredInternalComponent = requiredInternalComponent;
+	public void setProvidedBy(String providedBy) {
+		this.providedBy = providedBy;
 	}
 
-	public String getRequiredInternalComponent() {
-		return requiredInternalComponent;
+	public String getProvidedBy() {
+		return providedBy;
 	}
 
 	@Override
 	public String toString() {
-		return "Method [getType()=" + getType() + ", getId()=" + getId() + ", getRequiredInternalComponent()=" + getRequiredInternalComponent() + "]";
+		return "Method [getType()=" + getType() + ", getId()=" + getId() + ", getProvidedBy()=" + getProvidedBy() + "]";
 	}
 
 }
