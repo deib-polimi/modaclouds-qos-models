@@ -120,7 +120,7 @@ public class MonitoringRuleFactory {
 		}
 		Condition condition = new Condition();
 		condition.setValue(conditionValue);
-		condition.setInherited(false);
+//		condition.setInherited(false);
 		monitoringRule.setCondition(condition);
 
 		monitoringRule.setStartEnabled(true);
@@ -169,7 +169,7 @@ public class MonitoringRuleFactory {
 			if (qosConstraint.getMetric().equals(m.getName())) {
 				collectedMetric = new CollectedMetric();
 				collectedMetric.setMetricName(m.getName());
-				collectedMetric.setInherited(false);
+//				collectedMetric.setInherited(false);
 				collectedMetric.getParameters().addAll(getDefaultParameters(m));
 				break;
 			}

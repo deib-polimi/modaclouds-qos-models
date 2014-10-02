@@ -38,27 +38,18 @@
 	</xs:element>
 	<xs:complexType name="monitoringRule">
 		<xs:sequence>
-			<xs:element name="monitoredTargets" type="mo:monitoredTargets" minOccurs="0"/>
+			<xs:element name="monitoredTargets" type="mo:monitoredTargets"/>
 			<xs:element name="collectedMetric" type="mo:collectedMetric"/>
-			<xs:element name="metricAggregation" type="mo:monitoringMetricAggregation" minOccurs="0"/>
+			<xs:element name="metricAggregation" type="mo:monitoringMetricAggregation"/>
 			<xs:element name="condition" type="mo:condition" minOccurs="0"/>
-			<xs:element name="actions" type="mo:actions" minOccurs="0"/>
+			<xs:element name="actions" type="mo:actions"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 		<xs:attribute name="label" type="xs:string"/>
 		<xs:attribute name="relatedQosConstraintId" type="xs:string"/>
-		<xs:attribute name="parentMonitoringRuleId" type="xs:string">
-			<!-- <xs:annotation>
-				<xs:appinfo>
-					<jaxb:property name="parentMonitoringRule">
-						<jaxb:baseType name="MonitoringRule"/>
-					</jaxb:property>
-				</xs:appinfo>
-			</xs:annotation> -->
-		</xs:attribute>
 		<xs:attribute name="startEnabled" type="xs:boolean"/>
-		<xs:attribute name="timeStep" type="xs:string"/>
-		<xs:attribute name="timeWindow" type="xs:string"/>
+		<xs:attribute name="timeStep" type="xs:string" use="required"/>
+		<xs:attribute name="timeWindow" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="probability">
 		<xs:restriction base="xs:float">
@@ -68,7 +59,7 @@
 	</xs:simpleType>
 	<xs:complexType name="monitoredTargets">
 		<xs:sequence>
-			<xs:element name="monitoredTarget" type="mo:monitoredTarget" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="monitoredTarget" type="mo:monitoredTarget" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:appinfo>
 						<jaxb:property name="monitoredTargets"/>
@@ -76,17 +67,14 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="condition">
 		<xs:simpleContent>
-			<xs:extension base="xs:string">
-				<xs:attribute name="inherited" type="xs:boolean" default="false"/>
-			</xs:extension>
+			<xs:extension base="xs:string"/>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="monitoredTarget">
-		<xs:attribute name="type" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="xs:string" use="optional"/>
 		<xs:attribute name="class" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="collectedMetric">
@@ -99,7 +87,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="metricName" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="monitoringMetricAggregation">
@@ -112,13 +99,12 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="groupingClass" type="xs:string"/>
-		<xs:attribute name="aggregateFunction" type="xs:string"/>
+		<xs:attribute name="aggregateFunction" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="actions">
 		<xs:sequence>
-			<xs:element name="action" type="mo:action" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="action" type="mo:action" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:appinfo>
 						<jaxb:property name="actions"/>
@@ -126,7 +112,6 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="inherited" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="action">
 		<xs:sequence>

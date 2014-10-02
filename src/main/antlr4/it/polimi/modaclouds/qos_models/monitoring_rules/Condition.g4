@@ -32,7 +32,7 @@ NOT : '!';
 COMMA : ',';
 MAXTERMINAL : 'maxOccurrence';
 MINTERMINAL : 'minOccurrence';
-PARENTTERMINAL : 'parentCondition';
+//PARENTTERMINAL : 'parentCondition';
 METRICTERMINAL : 'METRIC';
 GTEQ : '>=';
 LTEQ : '<=';
@@ -55,7 +55,7 @@ term : factor | factor AND term;
 
 factor : atom | NOT factor | LPAR condition RPAR;
 
-atom : var operator var | MAXTERMINAL LPAR METRICNAME COMMA INT RPAR | MINTERMINAL LPAR METRICNAME COMMA INT RPAR | PARENTTERMINAL;
+atom : var operator var | MAXTERMINAL LPAR METRICNAME COMMA INT RPAR | MINTERMINAL LPAR METRICNAME COMMA INT RPAR; // | PARENTTERMINAL;
 
 var : METRICTERMINAL | DECIMAL | INT ;
 

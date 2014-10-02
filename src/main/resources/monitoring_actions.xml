@@ -23,13 +23,13 @@
 	<availableAction name="OutputMetric">
 		<requiredParameter>name</requiredParameter>
 	</availableAction>
-	<!-- <availableAction name="EnableMonitoringRule">
+	<availableAction name="EnableMonitoringRule">
 		<requiredParameter>ruleId</requiredParameter>
 	</availableAction>
 	<availableAction name="DisableMonitoringRule">
 		<requiredParameter>ruleId</requiredParameter>
 	</availableAction>
-	<availableAction name="RestCall">
+	<!-- TODO <availableAction name="RestCall">
 		<requiredParameter>probability</requiredParameter>
 	</availableAction> -->
 </availableActions>
