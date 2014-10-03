@@ -562,14 +562,14 @@ public class Validator {
 		return name1.toLowerCase().equals(name2.toLowerCase());
 	}
 
-	public String getRequiredDataAnalyzer(String aggregateFunction) {
-		for (AggregateFunction af: config.getMonitoringAggregateFunctions().getAggregateFunctions()) {
-			if (softEquals(aggregateFunction, af.getName())) {
-				return af.getComputedBy().value();
-			}
-		}
-		return null;
-	}
+//	public String getRequiredDataAnalyzer(String aggregateFunction) {
+//		for (AggregateFunction af: config.getMonitoringAggregateFunctions().getAggregateFunctions()) {
+//			if (softEquals(aggregateFunction, af.getName())) {
+//				return af.getComputedBy().value();
+//			}
+//		}
+//		return null;
+//	}
 
 
 }
