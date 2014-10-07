@@ -19,7 +19,6 @@ package it.polimi.modaclouds.qos_models.monitoring_rules;
 import it.polimi.modaclouds.qos_models.schema.Action;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunction;
 import it.polimi.modaclouds.qos_models.schema.AvailableAction;
-import it.polimi.modaclouds.qos_models.schema.CollectedMetric;
 import it.polimi.modaclouds.qos_models.schema.Constraint;
 import it.polimi.modaclouds.qos_models.schema.Constraints;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategory;
@@ -30,7 +29,6 @@ import it.polimi.modaclouds.qos_models.schema.MonitoringRule;
 import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
 import it.polimi.modaclouds.qos_models.schema.Parameter;
 import it.polimi.modaclouds.qos_models.util.Config;
-import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,7 +42,6 @@ import org.antlr.v4.runtime.FailedPredicateException;
 import org.antlr.v4.runtime.InputMismatchException;
 import org.antlr.v4.runtime.NoViableAltException;
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang.NullArgumentException;
 
 public class Validator {
@@ -73,16 +70,37 @@ public class Validator {
 			if (previousRule != null)
 				otherRules.add(previousRule);
 			otherRules.remove(rule);
-
-//			problems.addAll(validateParentRequired(rule));
-			problems.addAll(validateMissingFields(rule));
-			problems.addAll(validateMonitoredTargets(rule));
-			problems.addAll(validateCollectedMetric(rule, otherRules));
-			problems.addAll(validateMetricAggregation(rule));
-			problems.addAll(validateActions(rule));
-			problems.addAll(validateCondition(rule, otherRules));
-
+			problems.addAll(validateRule(rule, otherRules));
 			previousRule = rule;
+		}
+		return problems;
+	}
+
+	public Set<Problem> validateRule(MonitoringRule rule,
+			List<MonitoringRule> otherRules) {
+		Set<Problem> problems = new HashSet<Problem>();
+		problems.addAll(validateMissingFields(rule));
+		problems.addAll(validateIds(rule, otherRules));
+		problems.addAll(validateMonitoredTargets(rule));
+		problems.addAll(validateCollectedMetric(rule, otherRules));
+		problems.addAll(validateMetricAggregation(rule));
+		problems.addAll(validateActions(rule));
+		problems.addAll(validateCondition(rule));
+		return problems;
+	}
+
+	private Collection<? extends Problem> validateIds(MonitoringRule rule,
+			List<MonitoringRule> otherRules) {
+		Set<Problem> problems = new HashSet<Problem>();
+		if (otherRules != null) {
+			for (MonitoringRule otherRule : otherRules) {
+				if (rule.getId() != null && otherRule.getId() != null
+						&& rule.getId().equals(otherRule.getId())) {
+					problems.add(new Problem(rule.getId(),
+							EnumErrorType.ID_ALREADY_EXISTS, "id"));
+					return problems;
+				}
+			}
 		}
 		return problems;
 	}
@@ -184,7 +202,7 @@ public class Validator {
 					if (!found) {
 						problems.add(new Problem(rule.getId(),
 								EnumErrorType.MISSING_REQUIRED_PARAMETER,
-								"actions"));
+								"actions","Parameter \"" + reqP + "\" is missing."));
 					}
 				}
 			}
@@ -194,39 +212,26 @@ public class Validator {
 
 	private Set<Problem> validateMissingFields(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
-//		if (rule.getParentMonitoringRuleId() != null)
-//			return problems;
 		if (rule.getTimeStep() == null)
 			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
 					"timeStep"));
 		if (rule.getTimeWindow() == null)
 			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
 					"timeWindow"));
+		if (rule.getActions() == null)
+			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
+					"actions"));
+		if (rule.getCollectedMetric() == null)
+			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
+					"collectedMetric"));
+		if (rule.getId() == null)
+			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
+					"id"));
+		if (rule.getMonitoredTargets() == null)
+			problems.add(new Problem(rule.getId(), EnumErrorType.MISSING_FIELD,
+					"monitoredTargets"));
 		return problems;
 	}
-
-//	private Set<Problem> validateParentRequired(MonitoringRule rule) {
-//		Set<Problem> problems = new HashSet<Problem>();
-//		if (rule.getParentMonitoringRuleId() != null)
-//			return problems;
-//		if (rule.getCollectedMetric().isInherited())
-//			problems.add(new Problem(rule.getId(),
-//					EnumErrorType.MISSING_REQUIRED_PARENT, "collectedMetric"));
-//		if (rule.getCondition() != null && rule.getCondition().isInherited())
-//			problems.add(new Problem(rule.getId(),
-//					EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
-//		if (rule.getMetricAggregation() != null
-//				&& rule.getMetricAggregation().isInherited())
-//			problems.add(new Problem(rule.getId(),
-//					EnumErrorType.MISSING_REQUIRED_PARENT, "metricAggregation"));
-//		if (rule.getActions().isInherited())
-//			problems.add(new Problem(rule.getId(),
-//					EnumErrorType.MISSING_REQUIRED_PARENT, "actions"));
-//		if (rule.getMonitoredTargets().isInherited())
-//			problems.add(new Problem(rule.getId(),
-//					EnumErrorType.MISSING_REQUIRED_PARENT, "monitoredTargets"));
-//		return problems;
-//	}
 
 	private Set<Problem> validateMetricAggregation(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
@@ -273,7 +278,7 @@ public class Validator {
 						found = false;
 						for (Parameter ruleP : rule.getMetricAggregation()
 								.getParameters()) {
-							if (softEquals(reqP.getValue(),ruleP.getName())) {
+							if (softEquals(reqP.getValue(), ruleP.getName())) {
 								found = true;
 								break;
 							}
@@ -283,6 +288,7 @@ public class Validator {
 							problem.setElementId(rule.getId());
 							problem.setError(EnumErrorType.MISSING_REQUIRED_PARAMETER);
 							problem.setTagName("metricAggregation");
+							problem.setDescription("Parameter \"" + reqP.getValue() + "\" is missing.");
 							problems.add(problem);
 						}
 					}
@@ -305,16 +311,10 @@ public class Validator {
 						"target class is required"));
 				break;
 			}
-//			if (target.getId() == null) {
-//				problems.add(new Problem(rule.getId(),
-//						EnumErrorType.MISSING_FIELD, "monitoredTargets",
-//						"target id is required"));
-//				break;
-//			}
 			found = false;
 			for (GroupingCategory clazz : config.getGroupingCategories()
 					.getGroupingCategories()) {
-				if (softEquals(target.getClazz(),clazz.getName())) {
+				if (softEquals(target.getClazz(), clazz.getName())) {
 					found = true;
 					break;
 				}
@@ -338,27 +338,30 @@ public class Validator {
 		boolean found = false;
 		List<RequiredParameter> requiredParameters = null;
 		for (Metric metric : config.getMonitoringMetrics().getMetrics()) {
-			if (softEquals(metric.getName(), rule.getCollectedMetric().getMetricName())) {
+			if (softEquals(metric.getName(), rule.getCollectedMetric()
+					.getMetricName())) {
 				requiredParameters = metric.getRequiredParameters();
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			for (MonitoringRule otherRule : otherRules) {
-				for (Action action : otherRule.getActions().getActions()) {
-					if (softEquals(action.getName()
-							,MonitoringActions.OUTPUT_METRIC)) {
-						if (softEquals(rule.getCollectedMetric()
-								.getMetricName(),action.getParameters().get(0)
-										.getValue())) {
-							found = true;
-							break;
+			if (otherRules != null) {
+				for (MonitoringRule otherRule : otherRules) {
+					for (Action action : otherRule.getActions().getActions()) {
+						if (softEquals(action.getName(),
+								MonitoringActions.OUTPUT_METRIC)) {
+							if (softEquals(rule.getCollectedMetric()
+									.getMetricName(), action.getParameters()
+									.get(0).getValue())) {
+								found = true;
+								break;
+							}
 						}
 					}
+					if (found)
+						break;
 				}
-				if (found)
-					break;
 			}
 			if (!found) {
 				problems.add(new Problem(rule.getId(),
@@ -370,7 +373,7 @@ public class Validator {
 					found = false;
 					for (Parameter ruleP : rule.getCollectedMetric()
 							.getParameters()) {
-						if (softEquals(reqP.getValue(),ruleP.getName())) {
+						if (softEquals(reqP.getValue(), ruleP.getName())) {
 							found = true;
 							break;
 						}
@@ -380,6 +383,7 @@ public class Validator {
 						problem.setElementId(rule.getId());
 						problem.setError(EnumErrorType.MISSING_REQUIRED_PARAMETER);
 						problem.setTagName("collectedMetric");
+						problem.setDescription("Parameter \"" + reqP.getValue() + "\" is missing.");
 						problems.add(problem);
 					}
 				}
@@ -388,8 +392,7 @@ public class Validator {
 		return problems;
 	}
 
-	private Set<Problem> validateCondition(MonitoringRule rule,
-			List<MonitoringRule> otherRules) {
+	private Set<Problem> validateCondition(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
 		if (rule.getCondition() == null)
 			return problems;
@@ -403,10 +406,8 @@ public class Validator {
 			parser.removeErrorListeners();
 			lexer.removeErrorListeners();
 
-			ParseTree tree = null;
 			try {
-				tree = parser.expression();
-				problems.addAll(semanticValidation(tree, rule, otherRules));
+				parser.expression();
 			} catch (Exception e) {
 				Problem problem = new Problem();
 				problem.setElementId(rule.getId());
@@ -436,124 +437,6 @@ public class Validator {
 		return problems;
 	}
 
-	// /**
-	// * Validate the condition in the {@code targetRule}. {@code targetRule}
-	// must
-	// * not be part of the {@code existingMonitoringRules}. If the rule is
-	// * already part of {@code existingMonitoringRules} use
-	// * {@link #postvalidateCondition(MonitoringRule, MonitoringRules)}
-	// instead.
-	// *
-	// * @param targetRule
-	// * @param existingMonitoringRules
-	// * @throws RuleValidationException
-	// */
-	// public void prevalidateCondition(MonitoringRule targetRule,
-	// Collection<MonitoringRule> existingMonitoringRules)
-	// throws RuleValidationException {
-	// if (targetRule == null)
-	// throw new NullArgumentException("targetRule");
-	// if (existingMonitoringRules == null)
-	// throw new NullArgumentException("existingMonitoringRules");
-	// ParseTree tree = syntacticValidation(targetRule.getCondition()
-	// .getValue());
-	// assert tree != null;
-	// semanticValidation(tree, targetRule, existingMonitoringRules);
-	// }
-	//
-	// private MonitoringRule getActualRuleInstance(MonitoringRule targetRule,
-	// MonitoringRules monitoringRules) throws RuleValidationException {
-	// MonitoringRule actualRuleInstance = targetRule;
-	// if (!monitoringRules.getMonitoringRules().contains(targetRule)) {
-	// actualRuleInstance = XMLHelper.getElementByID(
-	// monitoringRules.getMonitoringRules(), targetRule.getId());
-	// if (actualRuleInstance == null)
-	// throw new RuleValidationException(
-	// "target rule is not contained in monitoring rules");
-	// if (!targetRule.equals(actualRuleInstance))
-	// throw new RuleValidationException(
-	// "monitoringRule with same id exists among monitoringRules, but is different in some part");
-	// }
-	// return actualRuleInstance;
-	// }
-
-	// private ParseTree syntacticValidation(String condition)
-	// throws RuleValidationException {
-	//
-	// ANTLRInputStream input = new ANTLRInputStream(condition);
-	// ConditionLexer lexer = new ConditionLexer(input);
-	// CommonTokenStream tokens = new CommonTokenStream(lexer);
-	// ConditionParser parser = new ConditionParser(tokens);
-	// parser.setErrorHandler(new ErrorStrategy());
-	// parser.removeErrorListeners();
-	// lexer.removeErrorListeners();
-	//
-	// String message;
-	//
-	// try {
-	// return parser.expression();
-	// } catch (Exception e) {
-	//
-	// if (e.getCause().toString().contains("NoViableAltException")) {
-	// Token token = ((NoViableAltException) (e.getCause()))
-	// .getOffendingToken();
-	// message = "Recognition error: '"
-	// + condition.substring(0, token.getCharPositionInLine())
-	// + " »"
-	// + condition.substring(token.getCharPositionInLine())
-	// + "'";
-	// } else if (e instanceof InputMismatchException) {
-	// message = "Input Mismatch Exception";
-	// } else if (e instanceof FailedPredicateException) {
-	// message = "Failed Predicate Exception";
-	// } else {
-	// message = "Unknown recognition error! Exception: "
-	// + e.getClass().getName();
-	// }
-	// throw new RuleValidationException(message);
-	// }
-	// }
-	//
-	private Set<Problem> semanticValidation(ParseTree tree,
-			MonitoringRule rule, Collection<MonitoringRule> otherRules) {
-		Set<Problem> problems = new HashSet<Problem>();
-		int childrenCount = tree.getChildCount();
-
-		if (childrenCount != 0) {
-			for (int i = 0; i < childrenCount; i++) {
-				semanticValidation(tree.getChild(i), rule, otherRules);
-			}
-		} else {
-			String occurenceMR_ID;
-			switch (tree.getText()) {
-//			case "parentCondition":
-//				if (rule.getParentMonitoringRuleId() == null)
-//					problems.add(new Problem(rule.getId(),
-//							EnumErrorType.MISSING_REQUIRED_PARENT, "condition"));
-//				break;
-			case "maxOccurrence":
-			case "minOccurrence":
-				occurenceMR_ID = tree.getParent().getChild(2).getText();
-				if (rule.getId().equals(occurenceMR_ID)) {
-					Problem problem = new Problem(rule.getId(),
-							EnumErrorType.CONDITION_SEMANTIC_ERROR, "condition");
-					problem.setDescription("A rule cannot check maxOccurrence on itself");
-					problems.add(problem);
-				}
-				if (!XMLHelper.containsId(otherRules, occurenceMR_ID)) {
-					Problem problem = new Problem(rule.getId(),
-							EnumErrorType.CONDITION_SEMANTIC_ERROR, "condition");
-					problem.setDescription("Rule " + occurenceMR_ID
-							+ " does not exist");
-					problems.add(problem);
-				}
-				break;
-			}
-		}
-		return problems;
-	}
-
-
 	private boolean softEquals(String name1, String name2) {
 		if (name1 == null && name2 == null)
 			return true;
@@ -561,15 +444,5 @@ public class Validator {
 			return false;
 		return name1.toLowerCase().equals(name2.toLowerCase());
 	}
-
-//	public String getRequiredDataAnalyzer(String aggregateFunction) {
-//		for (AggregateFunction af: config.getMonitoringAggregateFunctions().getAggregateFunctions()) {
-//			if (softEquals(aggregateFunction, af.getName())) {
-//				return af.getComputedBy().value();
-//			}
-//		}
-//		return null;
-//	}
-
 
 }

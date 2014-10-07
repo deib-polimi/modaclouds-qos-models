@@ -14,7 +14,9 @@
 			groupingClass="VM" />
 		<actions>
 			<action name="OutputMetric">
-				<parameter name="name">FrontendCPUUtilization</parameter>
+				<parameter name="metric">FrontendCPUUtilization</parameter>
+				<parameter name="value">METRIC</parameter>
+				<parameter name="resourceId">ID</parameter>
 			</action>
 		</actions>
 	</monitoringRule>
@@ -31,7 +33,9 @@
 			groupingClass="Method" />
 		<actions>
 			<action name="OutputMetric">
-				<parameter name="name">AverageRespTime</parameter>
+				<parameter name="metric">AverageRespTime</parameter>
+				<parameter name="value">METRIC</parameter>
+				<parameter name="resourceId">ID</parameter>
 			</action>
 		</actions>
 	</monitoringRule>
