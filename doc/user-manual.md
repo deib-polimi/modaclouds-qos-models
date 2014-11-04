@@ -51,9 +51,7 @@ If a condition is specified the action is performed if and only if the condition
 
 <factor> ::= <atom> | `!' <factor> | `(' <condition> `)'
 
-<atom> ::= <var> <operator> <var> 
-		| `maxOccurrence(' <metric_id> `,' <int> `)'
-		| `minOccurrence(' <metric_id> `,' <int> `)'
+<atom> ::= <var> <operator> <var>
 		
 <var> ::= `METRIC' | <decimal>
 

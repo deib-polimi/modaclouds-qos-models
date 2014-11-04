@@ -41,8 +41,11 @@ public class MOVocabulary {
     
     public static final String resourceIdParameterName = id;
     
-    // temporary here .... sda stuff
+    // temporary here
 	public static final String timeStep = "timeStep";
 	public static final String timeWindow = "timeWindow";
 	
+	public static final String metric = "metric";
+	public static final String resourceId = "resourceId";
+	public static final String value = "value";
 }

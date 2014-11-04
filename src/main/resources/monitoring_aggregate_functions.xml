@@ -22,64 +22,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/aggregate_functions_schema 
 	../../../metamodels/commons/aggregate_functions_schema.xsd">
-	<aggregateFunction name="Average" computedBy="DDA">
+	<aggregateFunction name="Average">
 	</aggregateFunction>
-	<aggregateFunction name="Percentile" computedBy="DDA">
+	<aggregateFunction name="Percentile">
 		<requiredParameter>thPercentile</requiredParameter>
 	</aggregateFunction>
-	<aggregateFunction name="Max" computedBy="DDA">
+	<aggregateFunction name="Max">
 	</aggregateFunction>
-	<aggregateFunction name="Sum" computedBy="DDA">
+	<aggregateFunction name="Sum">
 	</aggregateFunction>
-	<aggregateFunction name="Min" computedBy="DDA">
-	</aggregateFunction>
-	<aggregateFunction name="ForecastingTimeSeriesAR"
-		computedBy="MATLAB_SDA">
-		<requiredParameter>order</requiredParameter>
-		<requiredParameter>forecastPeriod</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="ForecastingML" computedBy="JAVA_SDA">
-		<requiredParameter>otherTarget1</requiredParameter>
-		<requiredParameter>otherMetric1</requiredParameter>
-		<requiredParameter>method</requiredParameter>
-		<requiredParameter>forecastPeriod</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="ForecastingTimeSeriesARMA"
-		computedBy="MATLAB_SDA">
-		<requiredParameter>autoregressive</requiredParameter>
-		<requiredParameter>movingAverage</requiredParameter>
-		<requiredParameter>forecastPeriod</requiredParameter>
-	</aggregateFunction>
-		<aggregateFunction name="ForecastingTimeSeriesARIMA"
-		computedBy="MATLAB_SDA">
-		<requiredParameter>autoregressive</requiredParameter>
-		<requiredParameter>integrated</requiredParameter>
-		<requiredParameter>movingAverage</requiredParameter>
-		<requiredParameter>forecastPeriod</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="EstimationCI" computedBy="MATLAB_SDA">
-		<requiredParameter>window</requiredParameter>
-		<requiredParameter>nCPU</requiredParameter>
-		<requiredParameter>CPUUtilTarget</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="EstimationFCFS" computedBy="MATLAB_SDA">
-		<requiredParameter>window</requiredParameter>
-		<requiredParameter>nCPU</requiredParameter>
-		<requiredParameter>CPUUtilTarget</requiredParameter>
-	</aggregateFunction>
-		<aggregateFunction name="EstimationUBO" computedBy="MATLAB_SDA">
-		<requiredParameter>window</requiredParameter>
-		<requiredParameter>CPUUtilTarget</requiredParameter>
-	</aggregateFunction>
-		<aggregateFunction name="EstimationUBR" computedBy="MATLAB_SDA">
-		<requiredParameter>window</requiredParameter>
-		<requiredParameter>nCPU</requiredParameter>
-		<requiredParameter>CPUUtilTarget</requiredParameter>
-	</aggregateFunction>
-	<aggregateFunction name="Correlation" computedBy="JAVA_SDA">
-		<requiredParameter>otherTarget1</requiredParameter>
-		<requiredParameter>otherMetric1</requiredParameter>
-		<requiredParameter>method</requiredParameter>
-		<requiredParameter>isTraining</requiredParameter>
+	<aggregateFunction name="Min">
 	</aggregateFunction>
 </aggregateFunctions>

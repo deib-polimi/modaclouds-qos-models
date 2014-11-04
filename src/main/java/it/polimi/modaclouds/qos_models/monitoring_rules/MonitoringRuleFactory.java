@@ -127,10 +127,18 @@ public class MonitoringRuleFactory {
 
 		Action action = new Action();
 		action.setName(MonitoringActions.OUTPUT_METRIC);
-		Parameter p = new Parameter();
-		p.setName("name");
-		p.setValue("qosConstraint_" + qosConstraint.getId() + "_Violated");
-		action.getParameters().add(p);
+		Parameter p1 = new Parameter();
+		p1.setName("metric");
+		p1.setValue("qosConstraint_" + qosConstraint.getId() + "_Violated");
+		action.getParameters().add(p1);
+		Parameter p2 = new Parameter();
+		p2.setName("value");
+		p2.setValue("METRIC");
+		action.getParameters().add(p2);
+		Parameter p3 = new Parameter();
+		p3.setName("resourceId");
+		p3.setValue("ID");
+		action.getParameters().add(p3);
 		Actions actions = new Actions();
 		actions.getActions().add(action);
 

@@ -21,7 +21,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/2.0/actions_schema ../../../metamodels/monitoringrules/actions_schema.xsd">
 	<availableAction name="OutputMetric">
-		<requiredParameter>name</requiredParameter>
+		<requiredParameter>metric</requiredParameter>
+		<requiredParameter>resourceId</requiredParameter>
+		<requiredParameter>value</requiredParameter>
 	</availableAction>
 	<availableAction name="EnableMonitoringRule">
 		<requiredParameter>ruleId</requiredParameter>

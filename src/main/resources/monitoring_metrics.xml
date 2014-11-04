@@ -39,11 +39,11 @@
 	</metric>
 	<metric name="CPUStolen">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
 	<metric name="MemUsed">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>
-		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+	</metric>
+	<metric name="Demand">
 	</metric>
 	<metric name="Threads_running">
 		<requiredParameter defaultValue="20">samplingTime</requiredParameter>

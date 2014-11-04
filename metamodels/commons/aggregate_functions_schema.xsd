@@ -60,13 +60,5 @@
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
-		<xs:attribute name="computedBy" type="af:aggregator" />
 	</xs:complexType>
-	<xs:simpleType name="aggregator">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="DDA" />
-			<xs:enumeration value="JAVA_SDA" />
-			<xs:enumeration value="MATLAB_SDA" />
-		</xs:restriction>
-	</xs:simpleType>
 </xs:schema>

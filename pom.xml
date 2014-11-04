@@ -21,7 +21,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.polimi.modaclouds.qos-models</groupId>
 	<artifactId>qos-models</artifactId>
-	<version>2.1.5-methods</version>
+	<version>2.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>MODAClouds QoS Models</name>
@@ -125,7 +125,6 @@
 	</dependencies>
 
 	<build>
-	<pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -334,7 +333,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		</pluginManagement>
 	</build>
 
 </project>
