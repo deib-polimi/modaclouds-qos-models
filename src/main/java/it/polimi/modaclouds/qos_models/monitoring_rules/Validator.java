@@ -238,6 +238,19 @@ public class Validator {
 		if (rule.getMetricAggregation() == null)
 			return problems;
 		boolean found = false;
+		
+		for (AggregateFunction aggregateF : config.getMonitoringAggregateFunctions().getAggregateFunctions()) {
+			if (softEquals(aggregateF.getName(), rule.getMetricAggregation().getAggregateFunction())) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			problems.add(new Problem(rule.getId(), EnumErrorType.INVALID_AGGREGATE_FUNCTION,
+					"aggregateFunction"));
+			return problems;
+		}
+		found = false;
 		if (rule.getMetricAggregation().getGroupingClass() != null) {
 			for (GroupingCategory clazz : config.getGroupingCategories()
 					.getGroupingCategories()) {
@@ -251,7 +264,7 @@ public class Validator {
 				Problem problem = new Problem();
 				problem.setElementId(rule.getId());
 				problem.setError(EnumErrorType.INVALID_CLASS);
-				problem.setTagName("metricAggregation");
+				problem.setTagName("groupingClass");
 				problems.add(problem);
 			}
 		}

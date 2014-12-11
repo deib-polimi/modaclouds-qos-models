@@ -33,4 +33,6 @@
 	</aggregateFunction>
 	<aggregateFunction name="Min">
 	</aggregateFunction>
+	<aggregateFunction name="Count">
+	</aggregateFunction>
 </aggregateFunctions>
