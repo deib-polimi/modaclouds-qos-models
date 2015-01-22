@@ -23,11 +23,12 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
-v2.1.7:
+v2.2:
 
 * validation improvements
 * metricAggregation is now optional
 * bug fixes
+* inserted two new xsd: performances and costs
 
 v2.1.4:
 
