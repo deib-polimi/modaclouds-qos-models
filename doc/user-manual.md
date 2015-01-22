@@ -31,7 +31,7 @@ Here is a graphical representation of the schema:
 Here is a list of the attributes with a short description:
 - *metricName*: the name of the target metric
 - *monitoredTargets*: the list of targets resources targeted by the rule
-- *metricAggregation*: specifies how data should be transformed
+- *metricAggregation*: specifies how data should be transformed (optional)
 - *timeStep*: time interval in seconds between two consecutive evaluations of the rule
 - *timeWindow*: time range in seconds in which data should be considered to be aggregated at every time step
 - *startEnabled*: specifies whether the rule evaluation should start once installed
@@ -40,9 +40,7 @@ Here is a list of the attributes with a short description:
 - *actions*: the list of actions to be executed for each monitoring datum (produced by aggregation or raw datum).
 If a condition is specified the action is performed if and only if the condition is verified.
 
-### Condition
-
-#### Syntax
+### Condition Syntax
 
 ```
 <condition> ::= <term> | <term> ` || ' <condition>
@@ -57,11 +55,6 @@ If a condition is specified the action is performed if and only if the condition
 
 <operator> ::= `>=' | `<=' | `=' | `<>' | `>' | `<'
 ```
-
-#### Semantics
-
-- <metric_id> in maxOccurrence and minOccurrence must refer to a *returnedMetric* of an existing monitoring
-rule executing action *OutputMetric*.
 
 ## Examples
 
@@ -143,6 +136,14 @@ MonitoringRuleFactory factory = new MonitoringRuleFactory();
 MonitoringRule monitoringRule = factory.makeRuleFromConstraint(constraint);
 ```
 
-### How to validate a monitoring rule
+### Validation and Configuration
 
 Use the RuleValidator class to validate rules.
+
+The default list of allowed metrics, grouping categories, aggregate functions and actions are the ones found under src/main/resources. If you need to change one or more of these lists use the following function call:
+
+```java
+Config.setDefaultConfiguration(...)
+```
+
+Use null on the list you don't need to modify with respect to the default one.

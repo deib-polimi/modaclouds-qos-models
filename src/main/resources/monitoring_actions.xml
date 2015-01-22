@@ -25,12 +25,6 @@
 		<requiredParameter>resourceId</requiredParameter>
 		<requiredParameter>value</requiredParameter>
 	</availableAction>
-	<availableAction name="EnableMonitoringRule">
-		<requiredParameter>ruleId</requiredParameter>
-	</availableAction>
-	<availableAction name="DisableMonitoringRule">
-		<requiredParameter>ruleId</requiredParameter>
-	</availableAction>
 	<!-- TODO <availableAction name="RestCall">
 		<requiredParameter>probability</requiredParameter>
 	</availableAction> -->

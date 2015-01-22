@@ -23,6 +23,12 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
+v2.1.7:
+
+* validation improvements
+* metricAggregation is now optional
+* bug fixes
+
 v2.1.4:
 
 * monitoredTarget in monitoring rules had "id" renamed to "type", so that the rules are now coherent with the deployment model terminology. Look at the available examples. From now on:
