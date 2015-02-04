@@ -32,10 +32,10 @@ import org.junit.Test;
 public class Constraint2RuleTest {
 
 	@Test
-	public void test() {
+	public void rulesFromQoSConstraintsShouldValidate() {
 		try {
 			InputStream testRulesStream = getClass().getResourceAsStream(
-					"/constraints.xml");
+					"/qosConstraints.xml");
 			Constraints constraints = XMLHelper.deserialize(testRulesStream,
 					Constraints.class);
 			MonitoringRuleFactory factory = new MonitoringRuleFactory();
@@ -49,6 +49,30 @@ public class Constraint2RuleTest {
 				}
 				fail();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	@Test
+	public void rulesFromArchitecturalConstraintsShouldNotValidate() {
+		try {
+			InputStream testRulesStream = getClass().getResourceAsStream(
+					"/architecturalConstraints.xml");
+			Constraints constraints = XMLHelper.deserialize(testRulesStream,
+					Constraints.class);
+			MonitoringRuleFactory factory = new MonitoringRuleFactory();
+			MonitoringRules rules = factory
+					.makeRulesFromQoSConstraints(constraints);
+			Validator validator = new Validator();
+			Set<Problem> problems = validator.validateAllRules(rules);
+
+			for (Problem problem : problems) {
+				System.out.println(problem.toString());
+			}
+			
+			assertFalse(problems.isEmpty());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

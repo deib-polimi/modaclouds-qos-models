@@ -23,6 +23,9 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
+v2.2.1:
+* rules are now generated from constraints even though the metric is not listed among the valid monitoring metrics, a warning message is simply shown
+
 v2.2:
 
 * validation improvements

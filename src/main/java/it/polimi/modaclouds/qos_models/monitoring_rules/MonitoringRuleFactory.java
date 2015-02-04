@@ -79,15 +79,8 @@ public class MonitoringRuleFactory {
 		monitoringRule.setRelatedQosConstraintId(qosConstraint.getId());
 		monitoringRule.setTimeStep("60");
 		monitoringRule.setTimeWindow("60");
-		CollectedMetric collectedMetric = makeCollectedMetric(qosConstraint);
-		if (collectedMetric == null) {
-			logger.warn(
-					"Constraint {} could not be translated to a monitoring rule: "
-							+ "{} is not a valid monitoring metric",
-					qosConstraint.getId(), qosConstraint.getMetric());
-			return null;
-		}
-		monitoringRule.setCollectedMetric(collectedMetric);
+			
+		monitoringRule.setCollectedMetric(makeCollectedMetric(qosConstraint));
 
 		MonitoringMetricAggregation monitoringMetricAggregation = makeMetricAggregation(qosConstraint);
 		if (monitoringMetricAggregation == null) {
@@ -120,7 +113,7 @@ public class MonitoringRuleFactory {
 		}
 		Condition condition = new Condition();
 		condition.setValue(conditionValue);
-//		condition.setInherited(false);
+		// condition.setInherited(false);
 		monitoringRule.setCondition(condition);
 
 		monitoringRule.setStartEnabled(true);
@@ -147,6 +140,26 @@ public class MonitoringRuleFactory {
 		return monitoringRule;
 	}
 
+	private CollectedMetric makeCollectedMetric(Constraint qosConstraint) {
+		CollectedMetric collectedMetric = null;
+		List<Metric> availableMetrics = config.getMonitoringMetrics()
+				.getMetrics();
+		for (Metric metric: availableMetrics){
+			if (qosConstraint.getMetric().equals(metric.getName())){
+				collectedMetric = buildCollectedMetric(metric.getName(), getDefaultParameters(metric));
+			}					
+		}
+		
+		if (collectedMetric == null) {
+			logger.warn(
+					"Metric {} in Constraint {} is not listed among the available monitoring metrics. "
+							+ "Installation of the generated monitoring rule may fail.",
+					qosConstraint.getMetric(), qosConstraint.getId());
+			collectedMetric = buildCollectedMetric(qosConstraint.getMetric(), null);
+		}
+		return collectedMetric;
+	}
+
 	private MonitoringMetricAggregation makeMetricAggregation(
 			Constraint qosConstraint) {
 		List<AggregateFunction> availableAggregateFunctions = config
@@ -169,19 +182,12 @@ public class MonitoringRuleFactory {
 		return monitoringMetricAggregation;
 	}
 
-	private CollectedMetric makeCollectedMetric(Constraint qosConstraint) {
-		List<Metric> availableMetrics = config.getMonitoringMetrics()
-				.getMetrics();
-		CollectedMetric collectedMetric = null;
-		for (Metric m : availableMetrics) {
-			if (qosConstraint.getMetric().equals(m.getName())) {
-				collectedMetric = new CollectedMetric();
-				collectedMetric.setMetricName(m.getName());
-//				collectedMetric.setInherited(false);
-				collectedMetric.getParameters().addAll(getDefaultParameters(m));
-				break;
-			}
-		}
+	private CollectedMetric buildCollectedMetric(String metricName,
+			List<Parameter> parameters) {
+		CollectedMetric collectedMetric = new CollectedMetric();
+		collectedMetric.setMetricName(metricName);
+		if (parameters != null)
+			collectedMetric.getParameters().addAll(parameters);
 		return collectedMetric;
 	}
 

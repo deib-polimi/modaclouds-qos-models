@@ -43,17 +43,7 @@
 		<priority>1</priority>
 	</constraint>
 
-	<constraint id="a4" name="Tier1RAM">
-		<targetResourceIDRef>_W057YAwpEeSMaZkt-OKzxA</targetResourceIDRef>
-		<targetClass>VM</targetClass>
-		<metric>RAM</metric>
-		<metricAggregation aggregateFunction="Average" />
-		<range>
-			<hasMinValue>2000</hasMinValue>
-		</range>
-		<priority>1</priority>
-	</constraint>
-
+	
 
 	<constraint id="c1" name="function1RT">
 		<targetResourceIDRef>_Cbw_YAwmEeSMaZkt-OKzxA</targetResourceIDRef>
@@ -107,18 +97,6 @@
 		<range>
 			<hasMaxValue>1000</hasMaxValue>
 		</range>
-	</constraint>
-
-	<constraint id="a6" name="Tier2Replicas">
-		<targetResourceIDRef>_W6tBYAwpEeSMaZkt-OKzxA</targetResourceIDRef>
-		<targetClass>VM</targetClass>
-		<metric>Replication</metric>
-		<metricAggregation aggregateFunction="Average" />
-		<range>
-			<hasMaxValue>8</hasMaxValue>
-			<hasMinValue>8</hasMinValue>
-		</range>
-		<priority>1</priority>
 	</constraint>
 
 
