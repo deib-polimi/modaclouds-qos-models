@@ -51,8 +51,22 @@ public class ValidatorTest {
 	}
 	
 	@Test
-	public void constraintsTest() throws JAXBException, ConfigurationException  {
-		InputStream testRulesStream = getClass().getResourceAsStream("/constraints.xml");
+	public void qosConstraintsShouldValidate() throws JAXBException, ConfigurationException  {
+		InputStream testRulesStream = getClass().getResourceAsStream("/qosConstraints.xml");
+		Constraints constraints = XMLHelper.deserialize(testRulesStream, Constraints.class);
+		Validator validator = new Validator();
+		Set<Problem> problems = validator.validateAllConstraints(constraints);
+		if (!problems.isEmpty()) {
+			for (Problem problem : problems) {
+				System.out.println(problem.toString());
+			}
+			fail();
+		}
+	}
+	
+	@Test
+	public void architecturalConstraintsShouldValidate() throws JAXBException, ConfigurationException  {
+		InputStream testRulesStream = getClass().getResourceAsStream("/architecturalConstraints.xml");
 		Constraints constraints = XMLHelper.deserialize(testRulesStream, Constraints.class);
 		Validator validator = new Validator();
 		Set<Problem> problems = validator.validateAllConstraints(constraints);
