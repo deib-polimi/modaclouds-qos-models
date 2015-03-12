@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:resex="http://www.modaclouds.eu/xsd/2013/6/data-size-extension" targetNamespace="http://www.modaclouds.eu/xsd/2013/6/data-size-extension" elementFormDefault="qualified">
+	<!--The root-->
+	<xs:element name="dataSizeExtension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="component" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:string" use="required"/>
+						<xs:attribute name="size" type="xs:int" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
