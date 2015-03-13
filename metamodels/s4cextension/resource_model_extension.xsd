@@ -27,13 +27,14 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="iaasService">
+	<xs:complexType name="cloudService">
 		<xs:sequence>
 			<xs:element name="resourceSizeID" type="xs:string" minOccurs="0" maxOccurs="1"/>
 			<!--The name of specific IaaS resource (e.g. On-Demand Extra Large Instance) should we list them all with an enumeration?-->
 			<xs:element name="location" type="resex:location" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="replicas" type="resex:replica" minOccurs="0"/>
 		</xs:sequence>
+		<xs:attribute name="serviceCategory" type="xs:string" use="required"/>
 		<xs:attribute name="serviceType" type="xs:string" use="required"/>
 		<xs:attribute name="serviceName" type="xs:string" use="optional"/>
 	</xs:complexType>
@@ -53,8 +54,7 @@
 		<xs:sequence>
 			<xs:choice>
 				<!--Either a PaaS or a IaaS-->
-				<xs:element name="cloudPlatform" type="resex:paasService"/>
-				<xs:element name="cloudResource" type="resex:iaasService"/>
+				<xs:element name="cloudElement" type="resex:cloudService"/>
 			</xs:choice>
 			<xs:element name="randomEnviroment" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
