@@ -38,10 +38,6 @@
 		<xs:attribute name="serviceType" type="xs:string" use="required"/>
 		<xs:attribute name="serviceName" type="xs:string" use="optional"/>
 	</xs:complexType>
-	<xs:complexType name="paasService">
-		<xs:attribute name="serviceType" type="xs:string" use="required"/>
-		<xs:attribute name="serviceName" type="xs:string" use="optional"/>
-	</xs:complexType>
 	<xs:complexType name="location">
 		<xs:attribute name="region" type="xs:string" use="optional"/>
 	</xs:complexType>
