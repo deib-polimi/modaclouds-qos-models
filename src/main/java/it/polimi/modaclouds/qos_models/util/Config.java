@@ -18,12 +18,8 @@ package it.polimi.modaclouds.qos_models.util;
 
 import it.polimi.modaclouds.qos_models.monitoring_rules.ConfigurationException;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
-import it.polimi.modaclouds.qos_models.schema.AvailableActions;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategories;
 import it.polimi.modaclouds.qos_models.schema.Metrics;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Config {
 
@@ -32,21 +28,18 @@ public class Config {
 	private static AggregateFunctions defaultQosAggregateFunctions;
 	private static Metrics defaultMonitoringMetrics;
 	private static Metrics defaultQosMetrics;
-	private static AvailableActions defaultMonitoringActions;
 
 	private static String groupingCategoriesFileName = "/monitoring_grouping_categories.xml";
 	private static String monitoringAggregateFunctionsFileName = "/monitoring_aggregate_functions.xml";
 	private static String qosAggregateFunctionsFileName = "/qos_aggregate_functions.xml";
 	private static String monitoringMetricsFileName = "/monitoring_metrics.xml";
 	private static String qosMetricsFileName = "/qos_metrics.xml";
-	private static String monitoringActionsFileName = "/monitoring_actions.xml";
 
 	private GroupingCategories groupingCategories;
 	private AggregateFunctions monitoringAggregateFunctions;
 	private AggregateFunctions qosAggregateFunctions;
 	private Metrics monitoringMetrics;
 	private Metrics qosMetrics;
-	private AvailableActions monitoringActions;
 
 	private static Config _instance = null;
 
@@ -76,10 +69,6 @@ public class Config {
 					.deserialize(getClass().getResourceAsStream(
 							qosMetricsFileName),
 							Metrics.class) : defaultQosMetrics;
-			this.monitoringActions = defaultMonitoringActions == null ? XMLHelper
-					.deserialize(getClass().getResourceAsStream(
-							monitoringActionsFileName),
-							AvailableActions.class) : defaultMonitoringActions;
 		} catch (Exception e) {
 			throw new ConfigurationException(
 					"Error while loading configuration files", e);
@@ -90,9 +79,8 @@ public class Config {
 			AggregateFunctions qosAggregateFunctions,
 			GroupingCategories groupingCategories,
 			AggregateFunctions monitoringAggregateFunctions,
-			Metrics monitoringMetrics, AvailableActions monitoringActions) {
+			Metrics monitoringMetrics) {
 		defaultGroupingCategories = groupingCategories;
-		defaultMonitoringActions = monitoringActions;
 		defaultMonitoringAggregateFunctions = monitoringAggregateFunctions;
 		defaultMonitoringMetrics = monitoringMetrics;
 		defaultQosMetrics = qosMetrics;
@@ -127,9 +115,6 @@ public class Config {
 		return qosMetrics;
 	}
 
-	public AvailableActions getMonitoringActions() {
-		return monitoringActions;
-	}
 
 	
 }

@@ -16,6 +16,8 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_rules;
 
+import it.polimi.modaclouds.qos_models.monitoring_rules.actions.OutputMetric;
+
 import it.polimi.modaclouds.qos_models.schema.Action;
 import it.polimi.modaclouds.qos_models.schema.Actions;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunction;
@@ -119,7 +121,7 @@ public class MonitoringRuleFactory {
 		monitoringRule.setStartEnabled(true);
 
 		Action action = new Action();
-		action.setName(MonitoringActions.OUTPUT_METRIC);
+		action.setName(OutputMetric.ID);
 		Parameter p1 = new Parameter();
 		p1.setName("metric");
 		p1.setValue("qosConstraint_" + qosConstraint.getId() + "_Violated");

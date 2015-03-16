@@ -16,9 +16,10 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_rules;
 
+import it.polimi.modaclouds.qos_models.monitoring_rules.actions.AbstractAction;
+import it.polimi.modaclouds.qos_models.monitoring_rules.actions.OutputMetric;
 import it.polimi.modaclouds.qos_models.schema.Action;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunction;
-import it.polimi.modaclouds.qos_models.schema.AvailableAction;
 import it.polimi.modaclouds.qos_models.schema.Constraint;
 import it.polimi.modaclouds.qos_models.schema.Constraints;
 import it.polimi.modaclouds.qos_models.schema.GroupingCategory;
@@ -43,6 +44,7 @@ import org.antlr.v4.runtime.InputMismatchException;
 import org.antlr.v4.runtime.NoViableAltException;
 import org.antlr.v4.runtime.Token;
 import org.apache.commons.lang.NullArgumentException;
+import org.reflections.Reflections;
 
 public class Validator {
 
@@ -84,7 +86,7 @@ public class Validator {
 		problems.addAll(validateMonitoredTargets(rule));
 		problems.addAll(validateCollectedMetric(rule, otherRules));
 		problems.addAll(validateMetricAggregation(rule));
-		problems.addAll(validateActions(rule));
+		problems.addAll(validateActions(rule, otherRules));
 		problems.addAll(validateCondition(rule));
 		return problems;
 	}
@@ -170,45 +172,44 @@ public class Validator {
 		return problems;
 	}
 
-	private Set<Problem> validateActions(MonitoringRule rule) {
+	private Set<Problem> validateActions(MonitoringRule rule,
+			List<MonitoringRule> otherRules) {
 		Set<Problem> problems = new HashSet<Problem>();
 		if (rule.getActions() == null)
 			return problems;
-		boolean found;
-		List<String> requiredParameters = null;
-		for (Action ruleAction : rule.getActions().getActions()) {
-			found = false;
-			for (AvailableAction availableAction : config
-					.getMonitoringActions().getAvailableActions()) {
-				if (softEquals(ruleAction.getName(), availableAction.getName())) {
-					requiredParameters = availableAction
-							.getRequiredParameters();
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
+		for (Action action : rule.getActions().getActions()) {
+			AbstractAction actionInstance = getActionInstance(action);
+			if (actionInstance == null) {
 				problems.add(new Problem(rule.getId(),
-						EnumErrorType.INVALID_ACTION, "actions"));
-			} else if (requiredParameters != null) {
-				for (String reqP : requiredParameters) {
-					found = false;
-					for (Parameter ruleP : ruleAction.getParameters()) {
-						if (softEquals(reqP, ruleP.getName())) {
-							found = true;
-							break;
-						}
-					}
-					if (!found) {
-						problems.add(new Problem(rule.getId(),
-								EnumErrorType.MISSING_REQUIRED_PARAMETER,
-								"actions","Parameter \"" + reqP + "\" is missing."));
-					}
-				}
+						EnumErrorType.INVALID_ACTION, action.getName(),
+						"There's no such action"));
+			} else {
+				problems.addAll(actionInstance.validateRule(rule, otherRules));
+
 			}
 		}
 		return problems;
 	}
+	
+	private static AbstractAction getActionInstance(Action action) {
+		Reflections reflections = new Reflections(AbstractAction.class
+				.getPackage().getName());
+		Set<Class<? extends AbstractAction>> actionClasses = reflections
+				.getSubTypesOf(AbstractAction.class);
+		for (Class<? extends AbstractAction> actionClass : actionClasses) {
+			try {
+				AbstractAction actionInstance = actionClass.getConstructor()
+						.newInstance();
+				if (actionInstance.getId().equals(action.getName()))
+					return actionInstance;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return null;
+	}
+
+
 
 	private Set<Problem> validateMissingFields(MonitoringRule rule) {
 		Set<Problem> problems = new HashSet<Problem>();
@@ -239,14 +240,18 @@ public class Validator {
 			return problems;
 		boolean found = false;
 		
-		for (AggregateFunction aggregateF : config.getMonitoringAggregateFunctions().getAggregateFunctions()) {
-			if (softEquals(aggregateF.getName(), rule.getMetricAggregation().getAggregateFunction())) {
+
+		for (AggregateFunction aggregateF : config
+				.getMonitoringAggregateFunctions().getAggregateFunctions()) {
+			if (softEquals(aggregateF.getName(), rule.getMetricAggregation()
+					.getAggregateFunction())) {
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			problems.add(new Problem(rule.getId(), EnumErrorType.INVALID_AGGREGATE_FUNCTION,
+			problems.add(new Problem(rule.getId(),
+					EnumErrorType.INVALID_AGGREGATE_FUNCTION,
 					"aggregateFunction"));
 			return problems;
 		}
@@ -261,11 +266,8 @@ public class Validator {
 				}
 			}
 			if (!found) {
-				Problem problem = new Problem();
-				problem.setElementId(rule.getId());
-				problem.setError(EnumErrorType.INVALID_CLASS);
-				problem.setTagName("groupingClass");
-				problems.add(problem);
+				problems.add(new Problem(rule.getId(),
+						EnumErrorType.INVALID_CLASS, "groupingClass"));
 			}
 		}
 		List<it.polimi.modaclouds.qos_models.schema.AggregateFunction.RequiredParameter> requiredParameters = null;
@@ -280,11 +282,9 @@ public class Validator {
 				}
 			}
 			if (!found) {
-				Problem problem = new Problem();
-				problem.setElementId(rule.getId());
-				problem.setError(EnumErrorType.INVALID_AGGREGATE_FUNCTION);
-				problem.setTagName("metricAggregation");
-				problems.add(problem);
+				problems.add(new Problem(rule.getId(),
+						EnumErrorType.INVALID_AGGREGATE_FUNCTION,
+						"metricAggregation"));
 			} else {
 				if (requiredParameters != null) {
 					for (it.polimi.modaclouds.qos_models.schema.AggregateFunction.RequiredParameter reqP : requiredParameters) {
@@ -297,12 +297,11 @@ public class Validator {
 							}
 						}
 						if (!found) {
-							Problem problem = new Problem();
-							problem.setElementId(rule.getId());
-							problem.setError(EnumErrorType.MISSING_REQUIRED_PARAMETER);
-							problem.setTagName("metricAggregation");
-							problem.setDescription("Parameter \"" + reqP.getValue() + "\" is missing.");
-							problems.add(problem);
+							problems.add(new Problem(rule.getId(),
+									EnumErrorType.MISSING_REQUIRED_PARAMETER,
+									"metricAggregation", "Parameter \""
+											+ reqP.getValue()
+											+ "\" is missing."));
 						}
 					}
 				}
@@ -333,11 +332,7 @@ public class Validator {
 				}
 			}
 			if (!found) {
-				Problem problem = new Problem();
-				problem.setElementId(rule.getId());
-				problem.setError(EnumErrorType.INVALID_CLASS);
-				problem.setTagName("monitoredTargets");
-				problems.add(problem);
+				problems.add(new Problem(rule.getId(),EnumErrorType.INVALID_CLASS,"monitoredTargets"));
 			}
 		}
 		return problems;
@@ -362,11 +357,11 @@ public class Validator {
 			if (otherRules != null) {
 				for (MonitoringRule otherRule : otherRules) {
 					for (Action action : otherRule.getActions().getActions()) {
-						if (softEquals(action.getName(),
-								MonitoringActions.OUTPUT_METRIC)) {
-							if (softEquals(rule.getCollectedMetric()
-									.getMetricName(), action.getParameters()
-									.get(0).getValue())) {
+						if (softEquals(action.getName(), OutputMetric.ID)) {
+							if (softEquals(
+									rule.getCollectedMetric().getMetricName(),
+									AbstractAction.getParameters(action).get(
+											OutputMetric.metric))) {
 								found = true;
 								break;
 							}
@@ -396,7 +391,8 @@ public class Validator {
 						problem.setElementId(rule.getId());
 						problem.setError(EnumErrorType.MISSING_REQUIRED_PARAMETER);
 						problem.setTagName("collectedMetric");
-						problem.setDescription("Parameter \"" + reqP.getValue() + "\" is missing.");
+						problem.setDescription("Parameter \"" + reqP.getValue()
+								+ "\" is missing.");
 						problems.add(problem);
 					}
 				}
@@ -455,7 +451,7 @@ public class Validator {
 			return true;
 		if (name1 == null || name2 == null)
 			return false;
-		return name1.toLowerCase().equals(name2.toLowerCase());
+		return name1.equalsIgnoreCase(name2);
 	}
 
 }
