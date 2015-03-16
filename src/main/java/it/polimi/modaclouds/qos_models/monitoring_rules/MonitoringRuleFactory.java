@@ -166,21 +166,21 @@ public class MonitoringRuleFactory {
 			Constraint qosConstraint) {
 		List<AggregateFunction> availableAggregateFunctions = config
 				.getMonitoringAggregateFunctions().getAggregateFunctions();
-		MonitoringMetricAggregation monitoringMetricAggregation = null;
+		MonitoringMetricAggregation monitoringMetricAggregation = new MonitoringMetricAggregation();
+		monitoringMetricAggregation.setAggregateFunction(qosConstraint.getMetricAggregation().getAggregateFunction());
+		List<Parameter> defaultParameters = qosConstraint
+				.getMetricAggregation().getParameters();
 		for (AggregateFunction af : availableAggregateFunctions) {
 			if (qosConstraint.getMetricAggregation().getAggregateFunction()
 					.equals(af.getName())) {
-				monitoringMetricAggregation = new MonitoringMetricAggregation();
-				monitoringMetricAggregation.setAggregateFunction(af.getName());
-				List<Parameter> defaultParameters = getDefaultParameters(af);
 				defaultParameters = mergeParameters(qosConstraint
 						.getMetricAggregation().getParameters(),
-						defaultParameters);
-				monitoringMetricAggregation.getParameters().addAll(
-						defaultParameters);
+						getDefaultParameters(af));
 				break;
 			}
 		}
+		monitoringMetricAggregation.getParameters().addAll(
+				defaultParameters);
 		return monitoringMetricAggregation;
 	}
 

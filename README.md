@@ -23,6 +23,15 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
+v2.3:
+* removed any validation check during constraint to rule translation
+* added EffectiveResponseTime to metrics lists
+* only qos constraints and monitoring rules metrics list is now left configurable through `setDefaultConfiguration`
+* monitoring rules actions are now validated through (and soon implemented as) classes extending the AbstractAction class
+
+v2.2.2:
+* removed the concept of zones in resource container extension to be coherent with cloudML
+
 v2.2.1:
 * rules are now generated from constraints even though the metric is not listed among the valid monitoring metrics, a warning message is simply shown
 

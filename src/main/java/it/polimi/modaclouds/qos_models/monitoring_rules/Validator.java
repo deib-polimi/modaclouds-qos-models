@@ -192,6 +192,7 @@ public class Validator {
 	}
 	
 	private static AbstractAction getActionInstance(Action action) {
+		Reflections.log=null;
 		Reflections reflections = new Reflections(AbstractAction.class
 				.getPackage().getName());
 		Set<Class<? extends AbstractAction>> actionClasses = reflections

@@ -21,29 +21,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema C:/Users/GiovanniPaolo/git/modaclouds-qos-models/metamodels/qosconstraints/qos_constraints_schema.xsd">
 
-	
-
-	<constraint id="a4" name="Tier1RAM">
-		<targetResourceIDRef>_W057YAwpEeSMaZkt-OKzxA</targetResourceIDRef>
-		<targetClass>VM</targetClass>
-		<metric>RAM</metric>
-		<metricAggregation aggregateFunction="Average" />
+	<constraint id="notValidValues4Rules" name="notValidValues4Rules">
+		<targetResourceIDRef>whateverResourceID</targetResourceIDRef>
+		<targetClass>SomeClass</targetClass>
+		<metric>SomeMetric</metric>
+		<metricAggregation aggregateFunction="SomeAggregation">
+			<parameter name="randomParameter1">65</parameter>
+			<parameter name="randomParameter2">ciao</parameter>
+		</metricAggregation>
 		<range>
-			<hasMinValue>2000</hasMinValue>
+			<hasMaxValue>1000</hasMaxValue>
 		</range>
-		<priority>1</priority>
-	</constraint>
-
-	<constraint id="a6" name="Tier2Replicas">
-		<targetResourceIDRef>_W6tBYAwpEeSMaZkt-OKzxA</targetResourceIDRef>
-		<targetClass>VM</targetClass>
-		<metric>Replication</metric>
-		<metricAggregation aggregateFunction="Average" />
-		<range>
-			<hasMaxValue>8</hasMaxValue>
-			<hasMinValue>8</hasMinValue>
-		</range>
-		<priority>1</priority>
 	</constraint>
 
 </constraints>

@@ -27,6 +27,9 @@
 	<metric name="ResponseTime">
 		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
 	</metric>
+	<metric name="EffectiveResponseTime">
+		<requiredParameter defaultValue="1">samplingProbability</requiredParameter>
+	</metric>
 	<metric name="AppAvailable">
 		<requiredParameter defaultValue="60">samplingTime</requiredParameter>
 		<requiredParameter defaultValue="5">retryPeriod</requiredParameter>

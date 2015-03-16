@@ -45,29 +45,24 @@ public class Config {
 
 	private Config() throws ConfigurationException {
 		try {
-			this.groupingCategories = defaultGroupingCategories == null ? XMLHelper
+			this.groupingCategories = XMLHelper.deserialize(getClass()
+					.getResourceAsStream(groupingCategoriesFileName),
+					GroupingCategories.class);
+			this.monitoringAggregateFunctions = XMLHelper.deserialize(
+					getClass().getResourceAsStream(
+							monitoringAggregateFunctionsFileName),
+							AggregateFunctions.class);
+					this.qosAggregateFunctions = XMLHelper.deserialize(getClass()
+							.getResourceAsStream(qosAggregateFunctionsFileName),
+							AggregateFunctions.class);
+			this.monitoringMetrics = defaultMonitoringMetrics == null ? XMLHelper
 					.deserialize(
 							getClass().getResourceAsStream(
-									groupingCategoriesFileName),
-							GroupingCategories.class)
-					: defaultGroupingCategories;
-			this.monitoringAggregateFunctions = defaultMonitoringAggregateFunctions == null ? XMLHelper
-					.deserialize(getClass().getResourceAsStream(
-							monitoringAggregateFunctionsFileName),
-							AggregateFunctions.class)
-					: defaultMonitoringAggregateFunctions;
-			this.qosAggregateFunctions = defaultQosAggregateFunctions == null ? XMLHelper
-					.deserialize(getClass().getResourceAsStream(
-							qosAggregateFunctionsFileName),
-							AggregateFunctions.class)
-					: defaultMonitoringAggregateFunctions;
-			this.monitoringMetrics = defaultMonitoringMetrics == null ? XMLHelper
-					.deserialize(getClass().getResourceAsStream(
-							monitoringMetricsFileName),
-							Metrics.class) : defaultMonitoringMetrics;
+									monitoringMetricsFileName), Metrics.class)
+					: defaultMonitoringMetrics;
 			this.qosMetrics = defaultQosMetrics == null ? XMLHelper
-					.deserialize(getClass().getResourceAsStream(
-							qosMetricsFileName),
+					.deserialize(
+							getClass().getResourceAsStream(qosMetricsFileName),
 							Metrics.class) : defaultQosMetrics;
 		} catch (Exception e) {
 			throw new ConfigurationException(
@@ -76,15 +71,9 @@ public class Config {
 	}
 
 	public static void setDefaultConfiguration(Metrics qosMetrics,
-			AggregateFunctions qosAggregateFunctions,
-			GroupingCategories groupingCategories,
-			AggregateFunctions monitoringAggregateFunctions,
 			Metrics monitoringMetrics) {
-		defaultGroupingCategories = groupingCategories;
-		defaultMonitoringAggregateFunctions = monitoringAggregateFunctions;
 		defaultMonitoringMetrics = monitoringMetrics;
 		defaultQosMetrics = qosMetrics;
-		defaultQosAggregateFunctions = qosAggregateFunctions;
 	}
 
 	public static Config getInstance() throws ConfigurationException {

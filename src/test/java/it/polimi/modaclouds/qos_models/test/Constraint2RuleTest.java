@@ -78,5 +78,28 @@ public class Constraint2RuleTest {
 			fail();
 		}
 	}
+	
+	@Test
+	public void randomConstraintsShouldBeTranslatedButNotValidated() {
+		try {
+			InputStream testRulesStream = getClass().getResourceAsStream(
+					"/RandomConstraints.xml");
+			Constraints constraints = XMLHelper.deserialize(testRulesStream,
+					Constraints.class);
+			MonitoringRuleFactory factory = new MonitoringRuleFactory();
+			MonitoringRules rules = factory
+					.makeRulesFromQoSConstraints(constraints);
+			Validator validator = new Validator();
+			Set<Problem> problems = validator.validateAllRules(rules);
+
+			for (Problem problem : problems) {
+				System.out.println(problem.toString());
+			}
+			assertFalse(problems.isEmpty());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
 }
