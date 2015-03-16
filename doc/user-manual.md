@@ -14,10 +14,6 @@ The ontology has been recently adapted to the ongoing development of [CloudML2.0
 which is currently synchronizing with 
 [TOSCA](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=tosca).
 
-## What is a QoS Constraint?
-
-TODO
-
 ## What is a Monitoring Rule?
 
 Monitoring rules are "recipes" that describe what and how the monitoring platform should monitor and how monitoring data should be aggregated. The user can also specify actions to be performed and conditions under which actions should be performed.
@@ -60,18 +56,12 @@ If a condition is specified the action is performed if and only if the condition
 
 Examples of monitoring rules are available at [this link](https://github.com/deib-polimi/modaclouds-qos-models/blob/master/metamodels/examples/MonitoringRules.xml).
 
-## Installation
+## Usage
 
-If you need the jar-with-dependencies run:
-
-```
-mvn package assembly:single
-```
-
-If you need to run the batch tool, build the jar-with-dependencies and then run:
+If you need to run the batch tool run:
 
 ```
-java -cp qos-models-2.1.3-jar-with-dependencies.jar it.polimi.modaclouds.qos_models.batch.BatchTool
+java -cp qos-models-VERSION.jar it.polimi.modaclouds.qos_models.batch.BatchTool
 ```
 
 
@@ -96,10 +86,7 @@ Dependency:
 </dependencies>
 ```
 
-
-##Usage
-
-Have a look at test classes for more examples on the usage.
+Have a look at test classes for examples on the usage.
 
 ### Convert XML to Java Object
 
@@ -140,7 +127,7 @@ MonitoringRule monitoringRule = factory.makeRuleFromConstraint(constraint);
 
 Use the RuleValidator class to validate rules.
 
-The default list of allowed metrics, grouping categories, aggregate functions and actions are the ones found under src/main/resources. If you need to change one or more of these lists use the following function call:
+The default list of allowed qos constraints nad monitoring rules metrics are the ones found under src/main/resources. If you need to change one or more of these lists use the following function call:
 
 ```java
 Config.setDefaultConfiguration(...)
