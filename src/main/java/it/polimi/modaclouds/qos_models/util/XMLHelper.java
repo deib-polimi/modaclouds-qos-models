@@ -16,24 +16,16 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
-import it.polimi.modaclouds.qos_models.schema.Constraints;
-import it.polimi.modaclouds.qos_models.schema.MultiCloudExtensions;
-import it.polimi.modaclouds.qos_models.schema.ResourceModelExtension;
-import it.polimi.modaclouds.qos_models.schema.UsageModelExtensions;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Collection;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.xml.sax.SAXException;

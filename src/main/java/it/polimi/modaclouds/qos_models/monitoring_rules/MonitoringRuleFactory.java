@@ -121,7 +121,7 @@ public class MonitoringRuleFactory {
 		monitoringRule.setStartEnabled(true);
 
 		Action action = new Action();
-		action.setName(OutputMetric.ID);
+		action.setName(OutputMetric.class.getSimpleName());
 		Parameter p1 = new Parameter();
 		p1.setName("metric");
 		p1.setValue("qosConstraint_" + qosConstraint.getId() + "_Violated");
