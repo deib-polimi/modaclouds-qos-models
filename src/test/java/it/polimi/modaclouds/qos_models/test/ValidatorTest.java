@@ -29,6 +29,7 @@ import java.util.Set;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 import static org.junit.Assert.*;
 
@@ -37,7 +38,7 @@ public class ValidatorTest {
 	
 
 	@Test
-	public void rulesTest() throws JAXBException, ConfigurationException  {
+	public void rulesTest() throws JAXBException, ConfigurationException, SAXException  {
 		InputStream testRulesStream = getClass().getResourceAsStream("/MonitoringRules.xml");
 		MonitoringRules rules = XMLHelper.deserialize(testRulesStream, MonitoringRules.class);
 		Validator validator = new Validator();
@@ -51,7 +52,7 @@ public class ValidatorTest {
 	}
 	
 	@Test
-	public void qosConstraintsShouldValidate() throws JAXBException, ConfigurationException  {
+	public void qosConstraintsShouldValidate() throws JAXBException, ConfigurationException, SAXException  {
 		InputStream testRulesStream = getClass().getResourceAsStream("/qosConstraints.xml");
 		Constraints constraints = XMLHelper.deserialize(testRulesStream, Constraints.class);
 		Validator validator = new Validator();
@@ -65,7 +66,7 @@ public class ValidatorTest {
 	}
 	
 	@Test
-	public void architecturalConstraintsShouldValidate() throws JAXBException, ConfigurationException  {
+	public void architecturalConstraintsShouldValidate() throws JAXBException, ConfigurationException, SAXException  {
 		InputStream testRulesStream = getClass().getResourceAsStream("/architecturalConstraints.xml");
 		Constraints constraints = XMLHelper.deserialize(testRulesStream, Constraints.class);
 		Validator validator = new Validator();

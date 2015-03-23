@@ -23,6 +23,10 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
+v2.4:
+* Framework setup for easily extension with new actions, see the dev manual
+* RestCall action implemented, see the user manual
+
 v2.3:
 * removed any validation check during constraint to rule translation
 * added EffectiveResponseTime to metrics lists

@@ -24,12 +24,13 @@ import java.io.InputStream;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 
 public class UnmarshalTest {
 
 	@Test
-	public void test() throws JAXBException {
+	public void test() throws JAXBException, SAXException {
 		InputStream testRulesStream = getClass().getResourceAsStream("/MonitoringRules.xml");
 		XMLHelper.deserialize(testRulesStream, MonitoringRules.class);
 	}
