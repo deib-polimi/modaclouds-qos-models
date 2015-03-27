@@ -16,9 +16,16 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+public class Resource {
 
-public class Resource  {
-	
+	public Resource(String id) {
+		this.id = id;
+	}
+
+	public Resource() {
+		
+	}
+
 	@Override
 	public String toString() {
 		return "Resource [type=" + type + ", id=" + id + "]";
@@ -42,8 +49,6 @@ public class Resource  {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -76,7 +81,4 @@ public class Resource  {
 		return true;
 	}
 
-	
-
-	
 }

@@ -19,6 +19,14 @@ package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
 public class Component extends Resource{
 
+	public Component(String id) {
+		super(id);
+	}
+
+	public Component() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "Component [getType()=" + getType() + ", getId()=" + getId()

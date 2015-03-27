@@ -23,6 +23,10 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
+v2.4.1:
+* Added Throughput metric for validation
+* Minor changes
+
 v2.4:
 * Framework setup for easily extension with new actions, see the dev manual
 * RestCall action implemented, see the user manual

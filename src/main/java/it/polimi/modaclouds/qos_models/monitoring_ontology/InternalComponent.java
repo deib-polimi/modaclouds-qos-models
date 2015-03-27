@@ -24,7 +24,13 @@ public class InternalComponent extends Component {
 	private Set<String> requiredComponents = new HashSet<String>();
 	private Set<String> providedMethods = new HashSet<String>();
 	
+	public InternalComponent() {
+		super();
+	}
 	
+	public InternalComponent(String id) {
+		super(id);
+	}
 
 	public void addRequiredComponent(String component) {
 		requiredComponents.add(component);
