@@ -22,10 +22,13 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.Collection;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.xml.sax.SAXException;
@@ -47,38 +50,27 @@ public class XMLHelper {
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(URL xmlUrl, Class<T> targetClass)
 			throws JAXBException, SAXException {
-//		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//		Schema schema = schemaFactory.newSchema(); 
+		// SchemaFactory schemaFactory =
+		// SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		// Schema schema = schemaFactory.newSchema();
 		Unmarshaller unmarshaller = JAXBContext.newInstance(targetClass)
 				.createUnmarshaller();
-//		unmarshaller.setSchema(schema);
+		// unmarshaller.setSchema(schema);
 		T object = (T) unmarshaller.unmarshal(xmlUrl);
 		return object;
 	}
 
-
-
 	@SuppressWarnings("unchecked")
-	public static <T> T deserialize(FileInputStream xmlPath, Class<T> targetClass)
-			throws JAXBException, SAXException {
-//		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//		Schema schema = schemaFactory.newSchema(); 
+	public static <T> T deserialize(FileInputStream xmlPath,
+			Class<T> targetClass) throws JAXBException, SAXException {
+		// SchemaFactory schemaFactory =
+		// SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		// Schema schema = schemaFactory.newSchema();
 		Unmarshaller unmarshaller = JAXBContext.newInstance(targetClass)
 				.createUnmarshaller();
-//		unmarshaller.setSchema(schema);
+		// unmarshaller.setSchema(schema);
 		T object = (T) unmarshaller.unmarshal(xmlPath);
 		return object;
-	}
-
-
-
-
-	public static <T> void serialize(T object, Class<T> sourceClass, OutputStream resultStream)
-			throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(sourceClass);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		jaxbMarshaller.marshal(object, resultStream);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -87,6 +79,106 @@ public class XMLHelper {
 		T object = (T) JAXBContext.newInstance(targetClass)
 				.createUnmarshaller().unmarshal(resourceAsStream);
 		return object;
+	}
+
+	public static <T> void serialize(T object, Class<T> sourceClass,
+			OutputStream resultStream) throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(sourceClass);
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		jaxbMarshaller.marshal(object, resultStream);
+	}
+
+	public static <T> ValidationResult validate(URL xmlUrl, Class<T> targetClass) {
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Unmarshaller unmarshaller;
+		ValidationResult result;
+		try {
+			Schema schema = schemaFactory.newSchema();
+			unmarshaller = JAXBContext.newInstance(targetClass)
+					.createUnmarshaller();
+			unmarshaller.setSchema(schema);
+		} catch (SAXException | JAXBException e) {
+			result = new ValidationResult(false);
+			result.addMessage("Error occured in creating the schema");
+			result.addMessage(e.getLocalizedMessage());
+			return result;
+		}
+		try {
+			unmarshaller.unmarshal(xmlUrl);
+		} catch (JAXBException e) {
+			result = new ValidationResult(false);
+			if(e.getMessage() != null)
+				result.addMessage(e.getLocalizedMessage());
+			if(e.getLinkedException() != null && e.getLinkedException().getLocalizedMessage() != null)
+				result.addMessage(e.getLinkedException().getLocalizedMessage());
+			return result;
+		}
+		return new ValidationResult(true);
+
+	}
+
+	public static <T> ValidationResult validate(FileInputStream xmlPath,
+			Class<T> targetClass) {
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Unmarshaller unmarshaller;
+		ValidationResult result;
+		try {
+			Schema schema = schemaFactory.newSchema();
+			unmarshaller = JAXBContext.newInstance(targetClass)
+					.createUnmarshaller();
+			unmarshaller.setSchema(schema);
+		} catch (SAXException | JAXBException e) {
+			result = new ValidationResult(false);
+			result.addMessage("Error occured in creating the schema");
+			result.addMessage(e.getLocalizedMessage());
+			return result;
+		}
+		try {
+			unmarshaller.unmarshal(xmlPath);
+		} catch (JAXBException e) {
+			result = new ValidationResult(false);
+			if(e.getMessage() != null)
+				result.addMessage(e.getLocalizedMessage());
+			if(e.getLinkedException() != null && e.getLinkedException().getLocalizedMessage() != null)
+				result.addMessage(e.getLinkedException().getLocalizedMessage());
+			return result;
+		}
+		return new ValidationResult(true);
+
+	}
+
+	public static <T> ValidationResult validate(InputStream xmlStream,
+			Class<T> targetClass) {
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Unmarshaller unmarshaller;
+		ValidationResult result;
+		try {
+			Schema schema = schemaFactory.newSchema();
+			unmarshaller = JAXBContext.newInstance(targetClass)
+					.createUnmarshaller();
+			unmarshaller.setSchema(schema);
+		} catch (SAXException | JAXBException e) {
+			result = new ValidationResult(false);
+			result.addMessage("Error occured in creating the schema");
+			result.addMessage(e.getLocalizedMessage());
+			return result;
+		}
+		try {
+			unmarshaller.unmarshal(xmlStream);
+		} catch (JAXBException e) {
+			result = new ValidationResult(false);			
+			if(e.getMessage() != null)
+				result.addMessage(e.getLocalizedMessage());
+			if(e.getLinkedException() != null && e.getLinkedException().getLocalizedMessage() != null)
+				result.addMessage(e.getLinkedException().getLocalizedMessage());			
+			return result;
+		}
+		return new ValidationResult(true);
+
 	}
 
 	// /**

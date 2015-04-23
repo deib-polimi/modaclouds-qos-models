@@ -19,7 +19,7 @@
 -->
 <constraints xmlns="http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema C:/Users/GiovanniPaolo/git/modaclouds-qos-models/metamodels/qosconstraints/qos_constraints_schema.xsd">
+	xsi:schemaLocation="http://www.modaclouds.eu/xsd/1.0/qos_constraints_schema /metamodels/qosconstraints/qos_constraints_schema.xsd">
 
 	
 
