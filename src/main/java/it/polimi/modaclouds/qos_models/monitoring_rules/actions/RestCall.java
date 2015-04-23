@@ -28,8 +28,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.validator.routines.UrlValidator;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -37,7 +35,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 public class RestCall extends AbstractAction {
@@ -111,14 +108,10 @@ public class RestCall extends AbstractAction {
 				getLogger().error("Unknown method {}", method);
 				return;
 			}
-
+			request.setHeader("Cache-Control", "no-cache");
 			CloseableHttpResponse response = client.execute(request);
-			try {
-				getLogger().info("Rest call executed. Response: {}",
-						response.getEntity());
-			} finally {
-				response.close();
-			}
+			getLogger().info("Rest call executed");
+			response.close();
 		} catch (Exception e) {
 			getLogger().error("Error executing rest call", e);
 		}
