@@ -84,7 +84,16 @@ public class XMLHelper {
 	public static <T> void serialize(T object, Class<T> sourceClass,
 			OutputStream resultStream) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(sourceClass);
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();		
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		jaxbMarshaller.marshal(object, resultStream);
+	}
+	
+	public static <T> void serialize(T object, Class<T> sourceClass,
+			OutputStream resultStream, String schemaLocation) throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(sourceClass);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLocation);
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.marshal(object, resultStream);
 	}
