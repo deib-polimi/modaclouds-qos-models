@@ -23,6 +23,10 @@ Take a look at the [documentation table of contents](doc/TOC.md).
 
 ## Change List
 
+v2.4.2:
+* Added validation method for xml extension files
+
+
 v2.4.1:
 * Added Throughput metric for validation
 * Minor changes
