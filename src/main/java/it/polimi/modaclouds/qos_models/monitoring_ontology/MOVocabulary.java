@@ -30,6 +30,7 @@ public class MOVocabulary {
     public static final String Method = "Method";
     public static final String Location = "Location";
     
+    public static final String IDRef = "IDRef";
     public static final String cloudProvider = "cloudProvider";
     public static final String requiredComponents = "requiredComponents";
     public static final String providedMethods = "providedMethods";
@@ -44,4 +45,6 @@ public class MOVocabulary {
     // temporary here
 	public static final String timeStep = "timeStep";
 	public static final String timeWindow = "timeWindow";
+
+	
 }

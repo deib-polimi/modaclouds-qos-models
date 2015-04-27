@@ -16,6 +16,10 @@
  */
 package it.polimi.modaclouds.qos_models.monitoring_ontology;
 
+import java.io.StringWriter;
+import java.io.Writer;
+
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
@@ -27,7 +31,7 @@ public class MO {
 	
 	// TODO URI and Prefix are both here and in kb-api
 	public static final String URI = "http://www.modaclouds.eu/rdfs/1.0/entities#";
-    public static String prefix = "modaent";
+    public static String prefix = "mo";
 
 	public static OntModel model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
 	
@@ -40,11 +44,12 @@ public class MO {
 	public static OntClass ExternalComponent = makeClass(MOVocabulary.ExternalComponent);
 	public static OntClass Method = makeClass(MOVocabulary.Method);
 
+	public static Property IDRef = makeProperty(MOVocabulary.IDRef);
 	public static Property cloudProvider = makeProperty(MOVocabulary.cloudProvider);
 	public static Property requiredComponents = makeProperty(MOVocabulary.requiredComponents);
 	public static Property location = makeProperty(MOVocabulary.location);
 	public static Property providedMethods = makeProperty(MOVocabulary.providedMethods);
-	public static Property name = makeProperty(MOVocabulary.name);
+//	public static Property name = makeProperty(MOVocabulary.name);
 	public static Property type = makeProperty(MOVocabulary.type);
 	public static Property id = makeProperty(MOVocabulary.id);
 	public static Property numberOfCPUs = makeProperty(MOVocabulary.numberOfCPUs);
@@ -54,6 +59,7 @@ public class MO {
 
 	static {
 		model.setNsPrefix(prefix, URI);
+		
 		ExternalComponent.addProperty(RDFS.subClassOf, Component);
 		VM.addProperty(RDFS.subClassOf, ExternalComponent);
 		PaaSService.addProperty(RDFS.subClassOf, ExternalComponent);
@@ -62,6 +68,28 @@ public class MO {
 		Method.addProperty(RDFS.subClassOf, Resource);
 		CloudProvider.addProperty(RDFS.subClassOf, Resource);
 		Location.addProperty(RDFS.subClassOf, Resource);
+		
+		IDRef.addProperty(RDFS.domain, Resource);
+		IDRef.addProperty(RDFS.range, RDFS.Literal);
+		cloudProvider.addProperty(RDFS.domain, ExternalComponent);
+		cloudProvider.addProperty(RDFS.range, CloudProvider);
+		requiredComponents.addProperty(RDFS.domain, InternalComponent);
+		requiredComponents.addProperty(RDFS.range, Component);
+		location.addProperty(RDFS.domain, VM);
+		location.addProperty(RDFS.range, Location);
+		providedMethods.addProperty(RDFS.domain, InternalComponent);
+		providedMethods.addProperty(RDFS.range, Method);
+		type.addProperty(RDFS.domain, Resource);
+		type.addProperty(RDFS.range, RDFS.Literal);
+		id.addProperty(RDFS.domain, Resource);
+		id.addProperty(RDFS.range, RDFS.Literal);
+		numberOfCPUs.addProperty(RDFS.domain, VM);
+		numberOfCPUs.addProperty(RDFS.range, RDFS.Literal);
+		
+		cloudProvider.addProperty(RDFS.subPropertyOf, IDRef);
+		requiredComponents.addProperty(RDFS.subPropertyOf, IDRef);
+		location.addProperty(RDFS.subPropertyOf, IDRef);
+		providedMethods.addProperty(RDFS.subPropertyOf, IDRef);
 	}
 
 	private static Property makeProperty(String string) {
