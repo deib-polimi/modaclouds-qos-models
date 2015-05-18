@@ -16,7 +16,7 @@
  */
 package it.polimi.modaclouds.qos_models.test;
 
-import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
+import it.polimi.modaclouds.qos_models.schema.Constraints;
 import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
 import java.io.InputStream;
@@ -31,8 +31,8 @@ public class UnmarshalTest {
 
 	@Test
 	public void test() throws JAXBException, SAXException {
-		InputStream testRulesStream = getClass().getResourceAsStream("/MonitoringRules.xml");
-		XMLHelper.deserialize(testRulesStream, MonitoringRules.class);
+		InputStream testConstraintsStream = getClass().getResourceAsStream("/qosConstraints.xml");
+		XMLHelper.deserialize(testConstraintsStream, Constraints.class);
 	}
 
 }

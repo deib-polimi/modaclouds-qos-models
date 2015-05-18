@@ -14,15 +14,10 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package it.polimi.modaclouds.qos_models.monitoring_ontology;
+package it.polimi.modaclouds.qos_models;
 
-
-public class PaaSService extends ExternalComponent {
-
-	@Override
-	public String toString() {
-		return "PaaSService [getCloudProvider()=" + getCloudProvider()
-				+ ", getType()=" + getType() + ", getId()=" + getId() + "]";
-	}
+public enum EnumErrorType {
+	INVALID_CLASS, INVALID_METRIC, MISSING_REQUIRED_PARAMETER, INVALID_AGGREGATE_FUNCTION,
+	MISSING_FIELD, INVALID_ACTION, CONDITION_LEXICAL_ERROR, CONDITION_SEMANTIC_ERROR, ID_ALREADY_EXISTS
 
 }

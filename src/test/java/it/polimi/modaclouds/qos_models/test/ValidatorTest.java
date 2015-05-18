@@ -16,15 +16,11 @@
  */
 package it.polimi.modaclouds.qos_models.test;
 
-import it.polimi.modaclouds.qos_models.monitoring_rules.ConfigurationException;
-import it.polimi.modaclouds.qos_models.monitoring_rules.Problem;
-import it.polimi.modaclouds.qos_models.monitoring_rules.Validator;
+import static org.junit.Assert.fail;
+import it.polimi.modaclouds.qos_models.ConfigurationException;
+import it.polimi.modaclouds.qos_models.Problem;
+import it.polimi.modaclouds.qos_models.QoSValidator;
 import it.polimi.modaclouds.qos_models.schema.Constraints;
-import it.polimi.modaclouds.qos_models.schema.MonitoringRules;
-import it.polimi.modaclouds.qos_models.schema.MultiCloudExtensions;
-import it.polimi.modaclouds.qos_models.schema.ResourceModelExtension;
-import it.polimi.modaclouds.qos_models.schema.UsageModelExtensions;
-import it.polimi.modaclouds.qos_models.util.ValidationResult;
 import it.polimi.modaclouds.qos_models.util.XMLHelper;
 
 import java.io.InputStream;
@@ -35,26 +31,7 @@ import javax.xml.bind.JAXBException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import static org.junit.Assert.*;
-
 public class ValidatorTest {
-
-	@Test
-	public void rulesTest() throws JAXBException, ConfigurationException,
-			SAXException {
-		InputStream testRulesStream = getClass().getResourceAsStream(
-				"/MonitoringRules.xml");
-		MonitoringRules rules = XMLHelper.deserialize(testRulesStream,
-				MonitoringRules.class);
-		Validator validator = new Validator();
-		Set<Problem> problems = validator.validateAllRules(rules);
-		if (!problems.isEmpty()) {
-			for (Problem problem : problems) {
-				System.out.println(problem.toString());
-			}
-			fail();
-		}
-	}
 
 	@Test
 	public void qosConstraintsShouldValidate() throws JAXBException,
@@ -63,7 +40,7 @@ public class ValidatorTest {
 				"/qosConstraints.xml");
 		Constraints constraints = XMLHelper.deserialize(testRulesStream,
 				Constraints.class);
-		Validator validator = new Validator();
+		QoSValidator validator = new QoSValidator();
 		Set<Problem> problems = validator.validateAllConstraints(constraints);
 		if (!problems.isEmpty()) {
 			for (Problem problem : problems) {
@@ -81,7 +58,7 @@ public class ValidatorTest {
 				"/architecturalConstraints.xml");
 		Constraints constraints = XMLHelper.deserialize(testRulesStream,
 				Constraints.class);
-		Validator validator = new Validator();
+		QoSValidator validator = new QoSValidator();
 		Set<Problem> problems = validator.validateAllConstraints(constraints);
 		if (!problems.isEmpty()) {
 			for (Problem problem : problems) {

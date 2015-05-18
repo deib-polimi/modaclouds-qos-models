@@ -16,64 +16,27 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
-import it.polimi.modaclouds.qos_models.monitoring_rules.ConfigurationException;
+import it.polimi.modaclouds.qos_models.ConfigurationException;
 import it.polimi.modaclouds.qos_models.schema.AggregateFunctions;
-import it.polimi.modaclouds.qos_models.schema.GroupingCategories;
-import it.polimi.modaclouds.qos_models.schema.Metrics;
 
 public class Config {
 
-	private static GroupingCategories defaultGroupingCategories;
-	private static AggregateFunctions defaultMonitoringAggregateFunctions;
-	private static AggregateFunctions defaultQosAggregateFunctions;
-	private static Metrics defaultMonitoringMetrics;
-	private static Metrics defaultQosMetrics;
-
-	private static String groupingCategoriesFileName = "/monitoring_grouping_categories.xml";
-	private static String monitoringAggregateFunctionsFileName = "/monitoring_aggregate_functions.xml";
 	private static String qosAggregateFunctionsFileName = "/qos_aggregate_functions.xml";
-	private static String monitoringMetricsFileName = "/monitoring_metrics.xml";
-	private static String qosMetricsFileName = "/qos_metrics.xml";
 
-	private GroupingCategories groupingCategories;
-	private AggregateFunctions monitoringAggregateFunctions;
 	private AggregateFunctions qosAggregateFunctions;
-	private Metrics monitoringMetrics;
-	private Metrics qosMetrics;
 
 	private static Config _instance = null;
 
 	private Config() throws ConfigurationException {
 		try {
-			this.groupingCategories = XMLHelper.deserialize(getClass()
-					.getResourceAsStream(groupingCategoriesFileName),
-					GroupingCategories.class);
-			this.monitoringAggregateFunctions = XMLHelper.deserialize(
-					getClass().getResourceAsStream(
-							monitoringAggregateFunctionsFileName),
-							AggregateFunctions.class);
-					this.qosAggregateFunctions = XMLHelper.deserialize(getClass()
-							.getResourceAsStream(qosAggregateFunctionsFileName),
-							AggregateFunctions.class);
-			this.monitoringMetrics = defaultMonitoringMetrics == null ? XMLHelper
-					.deserialize(
-							getClass().getResourceAsStream(
-									monitoringMetricsFileName), Metrics.class)
-					: defaultMonitoringMetrics;
-			this.qosMetrics = defaultQosMetrics == null ? XMLHelper
-					.deserialize(
-							getClass().getResourceAsStream(qosMetricsFileName),
-							Metrics.class) : defaultQosMetrics;
+
+			this.qosAggregateFunctions = XMLHelper.deserialize(getClass()
+					.getResourceAsStream(qosAggregateFunctionsFileName),
+					AggregateFunctions.class);
 		} catch (Exception e) {
 			throw new ConfigurationException(
 					"Error while loading configuration files", e);
 		}
-	}
-
-	public static void setDefaultConfiguration(Metrics qosMetrics,
-			Metrics monitoringMetrics) {
-		defaultMonitoringMetrics = monitoringMetrics;
-		defaultQosMetrics = qosMetrics;
 	}
 
 	public static Config getInstance() throws ConfigurationException {
@@ -83,27 +46,8 @@ public class Config {
 		return _instance;
 	}
 
-
-	public GroupingCategories getGroupingCategories() {
-		return groupingCategories;
-	}
-
-	public AggregateFunctions getMonitoringAggregateFunctions() {
-		return monitoringAggregateFunctions;
-	}
-
 	public AggregateFunctions getQosAggregateFunctions() {
 		return qosAggregateFunctions;
 	}
 
-	public Metrics getMonitoringMetrics() {
-		return monitoringMetrics;
-	}
-
-	public Metrics getQosMetrics() {
-		return qosMetrics;
-	}
-
-
-	
 }
