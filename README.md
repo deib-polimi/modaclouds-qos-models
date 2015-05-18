@@ -4,24 +4,17 @@ MODAClouds QoS Models
 In the context of MODAClouds European project (www.modaclouds.eu), Politecnico was
 one of the partners involved in the development of the QoS Analysis and Monitoring Tools.
 
-The QoS Models is a library containing all metamodels necessary to describe qos-constraints, monitoring rules
-and monitoring ontology together with their java representation.
-
-Please refer to deliverable [D6.3.2](http://www.modaclouds.eu/publications/public-deliverables/) 
-to better understand the role of this component in the MODAClouds Monitoring Platform.
-
-Refer to the [Monitoring Platform Wiki](https://github.com/deib-polimi/modaclouds-monitoring-manager/wiki) for installation and usage of the whole platform.
+The QoS Models is a library containing all metamodels necessary to describe qos-constraints together with their java representation.
 
 Additional Features:
-- Serialization and deserialization between XML and Java objects.
-- automatic generation of monitoring rules from qos constraints
-- validation of qos-constraints and monitoring rules
-
-## Documentation
-
-Take a look at the [documentation table of contents](doc/TOC.md).
+- Serialization and deserialization between XML and Java objects
+- validation of qos-constraints
 
 ## Change List
+
+v3.0:
+
+* Separated from monitoring rules, this library is only about qos-costraints now. Rules are now integrated in [Tower4Clouds](https://github.com/deib-polimi/tower4clouds).
 
 v2.4.2:
 * Added validation method for xml extension files
