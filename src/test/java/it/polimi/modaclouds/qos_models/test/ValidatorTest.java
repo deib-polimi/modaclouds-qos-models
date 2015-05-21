@@ -29,6 +29,7 @@ import java.util.Set;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 public class ValidatorTest {

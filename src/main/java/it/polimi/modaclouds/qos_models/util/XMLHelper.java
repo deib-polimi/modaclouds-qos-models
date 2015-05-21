@@ -16,6 +16,7 @@
  */
 package it.polimi.modaclouds.qos_models.util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -80,22 +81,41 @@ public class XMLHelper {
 				.createUnmarshaller().unmarshal(resourceAsStream);
 		return object;
 	}
+	
+	@Deprecated
+	public static <T> void serialize(T object, Class<T> objectClass, OutputStream resultStream)
+			throws JAXBException {
+		serialize(object, resultStream);
+	}
+	
+	@Deprecated
+	public static <T> void serialize(T object, Class<T> objectClass, OutputStream resultStream, String schemaLocation)
+			throws JAXBException {
+		serialize(object, resultStream, schemaLocation);
+	}
 
-	public static <T> void serialize(T object, Class<T> sourceClass,
-			OutputStream resultStream) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(sourceClass);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();		
+	public static <T> void serialize(T object, OutputStream resultStream)
+			throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.marshal(object, resultStream);
 	}
-	
-	public static <T> void serialize(T object, Class<T> sourceClass,
-			OutputStream resultStream, String schemaLocation) throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(sourceClass);
+
+	public static <T> void serialize(T object, OutputStream resultStream,
+			String schemaLocation) throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, schemaLocation);
+		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION,
+				schemaLocation);
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.marshal(object, resultStream);
+	}
+
+	public static <T> String serialize(T object) throws JAXBException {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		serialize(object, outputStream);
+		return outputStream.toString();
 	}
 
 	public static <T> ValidationResult validate(URL xmlUrl, Class<T> targetClass) {
@@ -118,9 +138,10 @@ public class XMLHelper {
 			unmarshaller.unmarshal(xmlUrl);
 		} catch (JAXBException e) {
 			result = new ValidationResult(false);
-			if(e.getMessage() != null)
+			if (e.getMessage() != null)
 				result.addMessage(e.getLocalizedMessage());
-			if(e.getLinkedException() != null && e.getLinkedException().getLocalizedMessage() != null)
+			if (e.getLinkedException() != null
+					&& e.getLinkedException().getLocalizedMessage() != null)
 				result.addMessage(e.getLinkedException().getLocalizedMessage());
 			return result;
 		}
@@ -149,9 +170,10 @@ public class XMLHelper {
 			unmarshaller.unmarshal(xmlPath);
 		} catch (JAXBException e) {
 			result = new ValidationResult(false);
-			if(e.getMessage() != null)
+			if (e.getMessage() != null)
 				result.addMessage(e.getLocalizedMessage());
-			if(e.getLinkedException() != null && e.getLinkedException().getLocalizedMessage() != null)
+			if (e.getLinkedException() != null
+					&& e.getLinkedException().getLocalizedMessage() != null)
 				result.addMessage(e.getLinkedException().getLocalizedMessage());
 			return result;
 		}
@@ -179,11 +201,12 @@ public class XMLHelper {
 		try {
 			unmarshaller.unmarshal(xmlStream);
 		} catch (JAXBException e) {
-			result = new ValidationResult(false);			
-			if(e.getMessage() != null)
+			result = new ValidationResult(false);
+			if (e.getMessage() != null)
 				result.addMessage(e.getLocalizedMessage());
-			if(e.getLinkedException() != null && e.getLinkedException().getLocalizedMessage() != null)
-				result.addMessage(e.getLinkedException().getLocalizedMessage());			
+			if (e.getLinkedException() != null
+					&& e.getLinkedException().getLocalizedMessage() != null)
+				result.addMessage(e.getLinkedException().getLocalizedMessage());
 			return result;
 		}
 		return new ValidationResult(true);
