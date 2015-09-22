@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+    Copyright 2014 deib-polimi
+    Contact: deib-polimi <marco.miglierina@polimi.it>
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:s4cops="http://www.modaclouds.eu/xsd/2015/9/space4cloudsOps"
-    targetNamespace="http://www.modaclouds.eu/xsd/2015/9/space4cloudsOps"
+    xmlns:s4cops="http://www.modaclouds.eu/xsd/2015/9/s4c_ops"
+    targetNamespace="http://www.modaclouds.eu/xsd/2015/9/s4c_ops"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
@@ -9,7 +27,7 @@
         <xs:appinfo>
             <jaxb:schemaBindings>
                 <jaxb:package
-                    name="it.polimi.modaclouds.space4clouds_ops.model" />
+                    name="it.polimi.modaclouds.qos_models.schema.space4clouds_ops" />
             </jaxb:schemaBindings>
         </xs:appinfo>
     </xs:annotation>
